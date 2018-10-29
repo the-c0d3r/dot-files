@@ -1,3 +1,6 @@
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+
 - defaults:
     link:
       relink: true
@@ -7,7 +10,12 @@
 - link:
     ~/.dotfiles: ''
     ~/.zshrc: zsh/.zshrc
+    ~/.config/i3/config:
+      create: true
+      path: i3/config
+    ~/.config/polybar/:
+      create: true
+      glob: true
+      path: polybar/*
 
-- shell:
-  - [git submodule update --init --recursive, Installing submodules]
 
