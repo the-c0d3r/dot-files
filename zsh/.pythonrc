@@ -1,0 +1,45 @@
+# Python Development functions & Aliases
+
+function sc() {
+    # Source into a local .venv folder or env folder
+    if [ -d "$PWD/.venv" ]; then
+        source $PWD/.venv/bin/activate
+        return
+    elif [ -d "$PWD/env" ]; then
+        source $PWD/env/bin/activate
+        return
+    else
+        echo "No '.venv' or 'env' found to source"
+        return
+    fi
+}
+
+# disables above virtualenv sc
+alias de="deactivate"
+
+alias pipr="pip install -r requirements.txt"
+
+function pyenv2() {
+    # setup python2 environment
+    echo "setting up python2 -q venv";
+    virtualenv -p python2 .venv 2>/dev/null
+    sc
+    pipup
+}
+
+function pyenv3() {
+    # setup python3 environment
+    echo "setting up python3 venv";
+    virtualenv -p python3 -q .venv
+    sc
+    pipup
+}
+
+function pipup() {
+    # upgrade pip version, default version has ssl cert errors
+    echo "Downloading & Upgrading Pip"
+    wget https://bootstrap.pypa.io/get-pip.py --quiet
+    python get-pip.py
+    rm get-pip.py
+    echo "Pip has been upgraded"
+}

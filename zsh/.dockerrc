@@ -1,0 +1,19 @@
+# Docker functions & Aliases
+
+function dkrdeb() {
+    # loads the reversing docker with the current path mount as volume
+    sudo docker run -it --rm -v $(pwd):/tmp/data --name reversing reversing bash;
+}
+
+function savedevos() {
+    # to save my developmental docker that is named "mydocker"
+    commit_id=$(docker ps -a | tail -n 1 | awk '{print $1}')
+    echo "Saving changes from $commit_id to mycentos";
+    docker commit $commit_id mycentos 2>/dev/null;
+    docker rm $commit_id;
+    echo "MyCentOS updated";
+}
+
+alias torproxy="sudo docker run -it -p 8118:8118 -p 9050:9050 -d dperson/torproxy"
+alias openvas="sudo docker run -d -p 443:443 -p 9390:9390 -p 9391:9391 --name openvas mikesplain/openvas"
+alias sniper="docker run --rm -ti menzo/sn1per-docker sniper"

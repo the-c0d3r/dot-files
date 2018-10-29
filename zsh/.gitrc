@@ -1,0 +1,14 @@
+# GIT functions & Aliases
+
+# git aliases
+# the following git aliases are additions for zsh's git plugin
+alias gign="git config --add core.filemode false"
+alias gs="git status"
+alias ga="git add"
+alias gdh="git diff head"
+alias gp="git push"
+
+function gtdy() {
+    # git statistics counter
+    git log --shortstat --since yesterday | grep 'changed, ' | awk '{files+=$1; inserted+=$4; deleted+=$6} END {print "files changed:", files, "; lines inserted:", inserted, "; lines deleted:",deleted}'
+}

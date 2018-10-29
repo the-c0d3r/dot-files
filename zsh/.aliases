@@ -1,0 +1,19 @@
+# file related aliases
+alias todo="vi ~/todo.md"
+
+# System Aliases
+alias vi="nvim"
+alias vim="nvim"
+alias ll="ls -alFr --color=auto"
+alias l="ls -lah --color=auto"
+alias lsh="ls -d .* --color=auto"
+alias lsd="ls -ld */ --color=auto"
+alias la="ls -A --color=auto"
+
+# Custom stuff
+alias fzf="fzf --preview 'head -n 100 {}'"
+alias vif="vi \$(fzf)"
+
+# Custom tools
+alias weather="curl http://wttr.in/singapore"
+

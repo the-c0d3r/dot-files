@@ -1,0 +1,42 @@
+#--------------- FUNCTIONS --------------------
+function ununzip() {
+    # Undo Unzip
+    unzip -t $1 | awk '{print $2}' | tail -n +2 | xargs rm -fr
+}
+
+function cat() {
+    # Cat the file if the line length is lower than screen size, else 'less'
+    if [ -f $1 ]; then
+        terminal_height=$(tput lines)
+        file_lines=$(wc -l < $1 | awk '{print $1}')
+
+        if (( $file_lines > $terminal_height )); then
+            less $1
+        else
+            /bin/cat $1
+        fi
+    else
+        echo "File: '$1' not found"
+    fi
+}
+
+function bkp() {
+    # backup file
+    if [ -z "$1" ]; then
+        echo "Usage: bkp filename to backup"
+        return
+    fi
+    cp "$1" "$1.bkp"
+    echo "Successfully backed up to $1.bkp"
+}
+
+function rst() {
+    # restore backup file
+    if [ -z "$1" ]; then
+        echo "Usage: rst filename (without .bkp) to restore"
+        return
+    fi
+    cp "$1.bkp" "$1"
+    rm "$1.bkp"
+    echo "Successfully restored to $1"
+}

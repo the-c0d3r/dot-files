@@ -1,0 +1,14 @@
+# LINUX functions & aliases
+
+
+# If the following is not at the end of the file, then it will show the annoying
+# xmodmap:  please release the following keys within 2 seconds:
+xmodmap -e 'clear Lock'
+xmodmap -e 'keycode 0x42=Escape'
+xmodmap -e 'keycode 0x9=Caps_Lock'
+
+alias pacmandep="sudo pacman -Rs \$(pacman -Qqtd)"
+
+# to use tmux on i3 termite shell
+export TERM=xterm
+export EDITOR="vi"
