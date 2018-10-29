@@ -20,6 +20,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 source ~/.dotfiles/zsh/.aliases
+source ~/.dotfiles/zsh/.functionsrc
 source ~/.dotfiles/zsh/.linuxrc
 source ~/.dotfiles/zsh/.dockerrc
 source ~/.dotfiles/zsh/.gitrc
