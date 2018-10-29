@@ -1,0 +1,60 @@
+#### General Colors
+
+[colors]
+bg = ${xrdb:color8:#0f2536}
+fg = ${xrdb:color15:#b9fafc}
+
+active = #0c977f
+inactive  = #086757
+
+black1= ${xrdb:color0:#071017}
+red1 = ${xrdb:color1:#497B5A}
+green1 = ${xrdb:color2:#25C66E}
+yellow1 = ${xrdb:color3:#1C6565}
+blue1 = ${xrdb:color4:#196D6D}
+magenta1 = ${xrdb:color5:#1B5C62}
+cyan1 = ${xrdb:color6:#148A76}
+white1 = ${xrdb:color7:#87b6b7}
+
+black2 = ${xrdb:color8:#0f2536}
+red2 = ${xrdb:color9:#52ac70}
+green2 = ${xrdb:color10:#20ff8d}
+yellow2 = ${xrdb:color11:#1b8b8b}
+blue2 = ${xrdb:color12:#179696}
+magenta2 = ${xrdb:color13:#1a7e87}
+cyan2 = ${xrdb:color14:#0fbda0}
+white2 = ${xrdb:color15:#b9fafc}
+
+
+#### Bottom bar
+
+[bar/bottombar]
+include = top.bar
+enable-ipc = true
+bottom = true
+width = 100%
+height = 18
+fixed-center = true
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+background = ${colors.bg}
+
+border-top-size = 5
+border-right-size = 5
+border-left-size = 5
+border-bottom-size = 5
+border-color = ${colors.black2}
+
+line-size = 2
+
+font-0 = "Source Code Pro:pixelsize=11;1"
+font-1 = TerminessTTF Nerd Font Mono:pixelsize=16:antialias=true;4
+font-2 = unifont:fontformat=truetype:size=8:antialias=true;0 ;BARS
+font-3 = "Noto Sans CJK JP:size=7:antialias=false;2"
+font-4 = Wuncon Siji:pixelsize=8:antialias=false;2
+
+modules-left = previous playpause next spotify
+modules-center = date2
+modules-right = wlan2 temperature audio2 memory cpu
+
