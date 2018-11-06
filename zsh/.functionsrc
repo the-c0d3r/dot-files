@@ -40,3 +40,23 @@ function rst() {
     rm "$1.bkp"
     echo "Successfully restored to $1"
 }
+
+## Encryption & Decryption
+
+function encrypt() {
+    # encrypts the given file with password prompt
+    # parameters $1: input file, $2: output file
+    usage="Usage: encrypt infile outfile"
+    [ ! -z "$1" ] && [ ! -z "$2" ] || echo "$usage"; return
+
+    openssl enc -aes-256-cbc -a -salt -in $1 -out $2
+}
+
+function decrypt() {
+    # decrypts the given file with password prompt
+    # parameters $1: input file, $2: output file
+    usage="Usage: decrypt infile outfile"
+    [ ! -z "$1" ] && [ ! -z "$2" ] || echo "$usage"; return
+
+    openssl enc -aes-256-cbc -d -salt -in $1 -out $2
+}
