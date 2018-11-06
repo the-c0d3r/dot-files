@@ -49,91 +49,6 @@ modules-center = i32
 modules-right = powermenu
 
 
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <label>
-format-warn = <ramp> <label-warn>
-format-prefix = %{B#0fbda0 F#0f2536}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}
-format-suffix = %{B#148A76 F#0f2536}%{B- F-}
-
-label-foreground = ${colors.fg}
-label-background = ${colors.cyan1}
-label = TMP %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.cyan1}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.fg}
-
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = %{B#0fbda0 F#0f2536}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}
-format-suffix = %{B#148A76 F#0f2536}%{B- F-}
-label-foreground = ${colors.fg}
-label-background = ${colors.cyan1}
-label = CPU %percentage%%
-
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = %{B#0fbda0 F#0f2536}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}
-format-suffix = %{B#148A76 F#0f2536}%{B- F-}
-label-foreground = ${colors.fg}
-label-background = ${colors.cyan1}
-label = RAM %percentage_used%%
-
-
-[module/previous]
-type = custom/script
-interval = 86400
-format = "%{T3}<label>"
-format-padding = 0
-exec = echo ""
-line-size = 1
-click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
-
-format-prefix = %{B#0c977f F#0f2536}%{B- F-}%{B#0c977f F#b9fafc}%{B- F-}%{B#0c977f F#0f2536}%{B- F-}
-format-suffix = %{B#148A76 F#0f2536}%{B- F-}
-label-foreground = ${colors.fg}
-label-background = ${colors.cyan1}
-
-
-[module/next]
-type = custom/script
-interval = 86400
-format = "%{T3}<label>"
-format-padding = 0
-exec = echo ""
-line-size = 1
-click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
-format-prefix = %{B#0c977f F#0f2536}%{B- F-}%{B#0c977f F#b9fafc}%{B- F-}%{B#0c977f F#0f2536}%{B- F-}
-format-suffix = %{B#148A76 F#0f2536}%{B- F-}
-label-foreground = ${colors.fg}
-label-background = ${colors.cyan1}
-
-
-[module/playpause]
-type = custom/script
-exec = if [[ "$(playerctl status)" = "Playing" ]]; then echo -n "☐"; else echo -n ""; fi
-exec-if = [[ "$(playerctl status)" = "Playing" || "$(playerctl status)" = "Paused" ]] && echo "0"
-interval = 1
-format = <label>
-click-left = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
-
-format-prefix = %{B#0c977f F#0f2536}%{B- F-}%{B#0c977f F#b9fafc}%{B- F-}%{B#0c977f F#0f2536}%{B- F-}
-format-suffix = %{B#148A76 F#0f2536}%{B- F-}
-label-foreground = ${colors.fg}
-label-background = ${colors.cyan1}
-
-
 [module/lock]
 type = custom/script
 exec = echo "[🔒]"
@@ -145,15 +60,6 @@ format-prefix = %{B#0c977f F#0f2536}%{B- F-}%{B#0c977f F#b9fafc}%{B- F-}%{B#0
 format-suffix = %{B#148A76 F#0f2536}%{B- F-}
 label-foreground = ${colors.fg}
 label-background = ${colors.cyan1}
-
-
-[module/spotify]
-type = custom/script
-interval = 1
-format-prefix = "  "
-format = <label>
-exec = python /home/zack/programming/programs/polybar-spotify/spotify_status.py -f '{song} - {artist}'
-format-underline = #1db954
 
 
 [module/powermenu]
@@ -191,56 +97,6 @@ menu-2-0 = power off
 menu-2-0-exec = poweroff
 #menu-2-1 = cancel
 #menu-2-1-exec = menu-open-0
-
-
-[module/wlan2]
-type = internal/network
-interface = enp0s31f6
-interval = 1.0
-udspeed-minwidth = 3
-
-format-connected = <label-connected>
-format-disconnected = <label-disconnected>
-label-connected = %{A2:nm-connection-editor:}%downspeed%%{B#0fbda0 F#148A76}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}%{B#148A76 F#b9fafc}%upspeed%%{B- F-}%{A}
-label-disconnected =  disconnected 
-format-connected-prefix = %{B#0fbda0 F#0f2536}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}
-format-connected-suffix = %{B#148A76 F#0f2536}%{B- F-}
-format-disconnected-prefix = %{B#0fbda0 F#0f2536}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}
-format-disconnected-suffix = %{B#148A76 F#0f2536}%{B- F-}
-label-connected-foreground = ${colors.fg}
-label-connected-background = ${colors.cyan1}
-label-disconnected-foreground = ${colors.fg}
-label-disconnected-background = ${colors.cyan1}
-
-
-[module/date2]
-type = internal/date
-interval = 1
-label = %{A3:gnome-calculator:}%date%%time%%{A}
-time = %I:%M %p
-time-alt = %H:%M:%S
-date-alt = "%a %d.%m.%Y "
-format-underline = #1db954
-#format-prefix = %{B#52ac70 F#0f2536}%{B- F-}%{B#52ac70 F#0f2536}%{B- F-}%{B#497B5A F#52ac70}%{B- F-}
-#format-suffix = %{B#497B5A F#0f2536}%{B- F-}
-
-
-[module/audio2]
-type = internal/pulseaudio
-sink = alsa_output.pci-0000_00_1f.3.analog-stereo
-format-volume = %{A2:pavucontrol:}<label-volume>%{A}
-label-volume = VOL %percentage:2%%
-label-muted = MUTE
-format-volume-prefix = %{B#0fbda0 F#0f2536}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}
-format-volume-suffix = %{B#148A76 F#0f2536}%{B- F-}
-format-muted-prefix = %{B#0fbda0 F#0f2536}%{B- F-}%{B#0fbda0 F#0f2536}%{B- F-}%{B#148A76 F#0fbda0}%{B- F-}
-format-muted-suffix = %{B#148A76 F#0f2536}%{B- F-}
-
-label-volume-foreground = ${colors.fg}
-label-volume-background = ${colors.cyan1}
-label-muted-foreground = ${colors.fg}
-label-muted-background = ${colors.cyan1}
-label = VOL
 
 
 [module/i32]
