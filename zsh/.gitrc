@@ -5,7 +5,7 @@
 alias gign="git config --add core.filemode false"
 alias gs="git status"
 alias ga="git add"
-alias gdh="git diff head"
+alias gdh="git diff HEAD"
 alias gp="git push"
 
 function gtdy() {
