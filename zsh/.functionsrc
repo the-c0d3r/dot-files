@@ -47,16 +47,27 @@ function encrypt() {
     # encrypts the given file with password prompt
     # parameters $1: input file, $2: output file
     usage="Usage: encrypt infile outfile"
-    [ ! -z "$1" ] && [ ! -z "$2" ] || echo "$usage"; return
+    if [ -z "$1" ] && [ -z "$2" ]; then
+        echo "$usage"
+        return
+    fi
 
-    openssl enc -aes-256-cbc -a -salt -in $1 -out $2
+    echo -n "Enter encryption password: "
+    read -s password
+    echo "$password"
+    openssl enc -aes-256-cbc -a -salt -in $1 -out $2 -k $password
 }
 
 function decrypt() {
     # decrypts the given file with password prompt
     # parameters $1: input file, $2: output file
     usage="Usage: decrypt infile outfile"
-    [ ! -z "$1" ] && [ ! -z "$2" ] || echo "$usage"; return
+    if [ -z "$1" ] && [ -z "$2" ]; then
+        echo "$usage"
+        return
+    fi
 
-    openssl enc -aes-256-cbc -d -salt -in $1 -out $2
+    echo -n "Enter decryption password: "
+    read -s password
+    openssl enc -aes-256-cbc -a -d -salt -in $1 -out $2 -k $password
 }
