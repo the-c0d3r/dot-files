@@ -56,7 +56,7 @@ font-4 = Wuncon Siji:pixelsize=8:antialias=false;2
 
 modules-left = previous playpause next spotify
 modules-center = date2
-modules-right = wlan2 temperature audio2 memory cpu
+modules-right = audio2 wlan2 temperature memory cpu
 
 #### --------------------------------------------
 [module/temperature]
