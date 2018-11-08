@@ -54,7 +54,7 @@ function encrypt() {
 
     echo -n "Enter encryption password: "
     read -s password
-    openssl enc -aes-256-cbc -pbkdf2 -a -salt -in $1 -out $2 -k $password
+    openssl enc -aes-256-cbc -a -salt -in $1 -out $2 -k $password
 }
 
 function decrypt() {
@@ -68,5 +68,5 @@ function decrypt() {
 
     echo -n "Enter decryption password: "
     read -s password
-    openssl enc -aes-256-cbc -pbkdf2 -a -d -salt -in $1 -out $2 -k $password
+    openssl enc -aes-256-cbc -a -d -salt -in $1 -out $2 -k $password
 }
