@@ -25,4 +25,3 @@ source ~/.dotfiles/zsh/.linuxrc
 source ~/.dotfiles/zsh/.dockerrc
 source ~/.dotfiles/zsh/.gitrc
 source ~/.dotfiles/zsh/.pythonrc
-source ~/.dotfiles/zsh/.sensitiverc
