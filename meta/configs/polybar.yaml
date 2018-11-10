@@ -1,0 +1,4 @@
+- link:
+    ~/.config/polybar/top.bar: ui/polybar/top.bar
+    ~/.config/polybar/bottom.bar: ui/polybar/bottom.bar
+    ~/.config/polybar/polybar.sh: ui/polybar/polybar.sh
