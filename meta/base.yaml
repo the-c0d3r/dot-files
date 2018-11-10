@@ -1,6 +1,9 @@
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
 
+- link:
+    ~/.dotfiles: ''
+
 - defaults:
     link:
       relink: true
