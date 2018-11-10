@@ -17,3 +17,7 @@ alias vif="vi \$(fzf)"
 # Custom tools
 alias weather="curl http://wttr.in/singapore"
 
+# Tmux Aliases
+alias tmls="tmux ls"
+alias tmat="tmux attach -t"
+alias tmns="tmux new -s"
