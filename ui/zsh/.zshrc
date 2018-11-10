@@ -19,9 +19,9 @@ plugins=(
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source $ZSH/oh-my-zsh.sh
-source ~/.dotfiles/zsh/.aliases
-source ~/.dotfiles/zsh/.functionsrc
-source ~/.dotfiles/zsh/.linuxrc
-source ~/.dotfiles/zsh/.dockerrc
-source ~/.dotfiles/zsh/.gitrc
-source ~/.dotfiles/zsh/.pythonrc
+source ~/.dotfiles/ui/zsh/.aliases
+source ~/.dotfiles/ui/zsh/.functionsrc
+source ~/.dotfiles/ui/zsh/.linuxrc
+source ~/.dotfiles/ui/zsh/.dockerrc
+source ~/.dotfiles/ui/zsh/.gitrc
+source ~/.dotfiles/ui/zsh/.pythonrc
