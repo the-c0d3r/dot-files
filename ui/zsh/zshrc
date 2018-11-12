@@ -8,6 +8,7 @@ DISABLE_UPDATE_PROMPT="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(
+  autojump
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
