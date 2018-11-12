@@ -1,2 +1,8 @@
 - link:
-    ~/.zshrc: ui/zsh/.zshrc
+    ~/.aliases: ui/zsh/aliases
+    ~/.dockerrc: ui/zsh/dockerrc
+    ~/.functionsrc: ui/zsh/functionsrc
+    ~/.gitrc: ui/zsh/gitrc
+    ~/.linuxrc: ui/zsh/linuxrc
+    ~/.pythonrc: ui/zsh/pythonrc
+    ~/.zshrc: ui/zsh/zshrc

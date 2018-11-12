@@ -17,6 +17,7 @@ plugins=(
 )
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.secrets ] && source ~/.secrets
 
 LINUX=$(uname -a | grep -i 'linux')
 if [ ! -z $LINUX ]; then
@@ -25,8 +26,8 @@ if [ ! -z $LINUX ]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-source ~/.dotfiles/ui/zsh/.aliases
-source ~/.dotfiles/ui/zsh/.functionsrc
-source ~/.dotfiles/ui/zsh/.dockerrc
-source ~/.dotfiles/ui/zsh/.gitrc
-source ~/.dotfiles/ui/zsh/.pythonrc
+source ~/.aliases
+source ~/.functionsrc
+source ~/.dockerrc
+source ~/.gitrc
+source ~/.pythonrc
