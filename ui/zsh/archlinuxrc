@@ -1,4 +1,4 @@
-# LINUX functions & aliases
+# ARCH LINUX functions & aliases
 
 
 # If the following is not at the end of the file, then it will show the annoying
@@ -11,4 +11,3 @@ alias pacmandep="sudo pacman -Rs \$(pacman -Qqtd)"
 
 # to use tmux on i3 termite shell
 export TERM=xterm
-export EDITOR="vi"

@@ -24,10 +24,10 @@ function file_source() {
 }
 
 
-LINUX=$(uname -a | grep -i 'linux')
-if [ ! -z $LINUX ]; then
+ARCH=$(cat /etc/os-release | grep 'ID_LIKE' | cut -d'=' -f2)
+if [ ! -z $ARCH]; then
     # linux only
-    source ~/.linuxrc
+    source ~/.archlinuxrc
 fi
 
 source $ZSH/oh-my-zsh.sh

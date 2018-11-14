@@ -1,8 +1,8 @@
 - link:
     ~/.aliases: ui/zsh/aliases
+    ~/.archlinuxrc: ui/zsh/archlinuxrc
     ~/.dockerrc: ui/zsh/dockerrc
     ~/.functionsrc: ui/zsh/functionsrc
     ~/.gitrc: ui/zsh/gitrc
-    ~/.linuxrc: ui/zsh/linuxrc
     ~/.pythonrc: ui/zsh/pythonrc
     ~/.zshrc: ui/zsh/zshrc
