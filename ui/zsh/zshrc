@@ -23,11 +23,12 @@ function file_source() {
     [ -f $1 ] && source $1
 }
 
-
-ARCH=$(cat /etc/os-release | grep 'ID_LIKE' | cut -d'=' -f2)
-if [ ! -z $ARCH ]; then
-    # linux only
-    source ~/.archlinuxrc
+if [ -f /etc/os-release ]; then
+    ARCH=$(cat /etc/os-release | grep 'ID_LIKE' | cut -d'=' -f2)
+    if [ ! -z $ARCH ]; then
+        # linux only
+        source ~/.archlinuxrc
+    fi
 fi
 
 source $ZSH/oh-my-zsh.sh
