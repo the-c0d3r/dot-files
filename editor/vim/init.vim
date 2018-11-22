@@ -1,7 +1,4 @@
 
-"colorscheme = [gruvbox, molokai, colorsbox-material, dracula, srcery, koe]
-colorscheme gruvbox
-let g:gruvbox_contrast_dark="hard"
 
 syntax enable
 " set lazyredraw
@@ -37,6 +34,7 @@ Plug 'gmarik/Vundle.vim'
 " Plug 'davidhalter/jedi-vim'
 
 " Aesthetics
+Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'            " File explorer
 Plug 'scrooloose/nerdcommenter'       " commenting plugin
 Plug 'ryanoasis/vim-devicons'         " nerdTree icons
@@ -79,6 +77,9 @@ Plug 'kien/ctrlp.vim'                 " Fuzzy search
 
 call plug#end()
 
+"colorscheme = [gruvbox, molokai, colorsbox-material, dracula, srcery, koe]
+colorscheme gruvbox
+let g:gruvbox_contrast_dark="hard"
 
 "---------------------------------
 " NERDTree config
@@ -202,8 +203,8 @@ let python_highlight_all=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_exclude_preview = 1
-let g:airline_theme = 'atomic'
-let g:airline_section_z = '%3p%% %l:%L %{strftime("%I:%M%p")}}' " %{battery#component()}'
+let g:airline_theme = 'base16_atelierforest'
+let g:airline_section_z = '%3p%% %l:%L %{strftime("%I:%M%p")}' " %{battery#component()}'
 let g:airline_section_warning = ""
 " airline themes = molokai, powerlineish, gruvbox, dracula, hybrid, luna, zenburn
 " statusbar functions = '%{battery#component()}', '%{strftime("%I:%M%p")}', '%{wifi#component()}'
