@@ -81,8 +81,10 @@ shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
 shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
 
 # focus monitor
-alt - up : chunkc tiling::monitor -f 2
-alt - down : chunkc tiling::monitor -f 1
+# alt - up : chunkc tiling::monitor -f 2
+# alt - down : chunkc tiling::monitor -f 1
+cmd - up : chunkc tiling::monitor -f 2
+cmd - down : chunkc tiling::monitor -f 1
 ctrl + alt - 1  : chunkc tiling::monitor -f 1
 ctrl + alt - 2  : chunkc tiling::monitor -f 2
 ctrl + alt - 3  : chunkc tiling::monitor -f 3
