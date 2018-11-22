@@ -1,5 +1,5 @@
 # file related aliases
-alias todo="vi ~/todo.md"
+alias todo="vi ~/programming/todo.md"
 
 # System Aliases
 alias vi="nvim"
