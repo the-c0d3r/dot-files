@@ -27,7 +27,7 @@ function file_source() {
 
 if [ -f /etc/os-release ]; then
     ARCH=$(cat /etc/os-release | grep 'ID_LIKE' | cut -d'=' -f2)
-    if [ ! -z $ARCH ]; then
+    if [ "$ARCH" = "arch" ]; then
         # linux only
         source ~/.archlinuxrc
     fi
