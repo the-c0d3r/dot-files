@@ -132,3 +132,4 @@ chunkc tiling::rule --owner DaisyDisk --state float
 chunkc tiling::rule --owner uTorrent --state float
 # chunkc tiling::rule --owner Chrome --state float
 # chunkc tiling::rule --owner \"IntelliJ IDEA\" --state float
+chunkc tiling::rule --owner \"CLion\" --state float
