@@ -1,36 +1,33 @@
 
 
 syntax enable
-" set lazyredraw
-set cursorline background=dark backspace=indent,eol,start
-set nu    " Line Numbering
-set list    " set list and listchar is used to show the space as trails
+"set lazyredraw
+"set cursorline background=dark backspace=indent,eol,start
+set nocursorline
+set background=dark backspace=indent,eol,start
+set nu                                            " Line Numbering
+set list                                          " set list and listchar is used to show the space as trails
 set listchars=tab:»\ ,extends:›,precedes:‹,trail:·
 " set listchars=tab:→\ ,trail:␣,extends:…,eol:⏎
 set incsearch ignorecase smartcase hlsearch
 set mouse=a
-" Always show statusline
-set laststatus=2
-" Use 256 colors
-set t_Co=256
-" To enable cross session vim copy-pasting
-set clipboard=unnamed
-" to keep the terminal open after switching tabs
-set hidden
-" to disable line numbering for terminal
-au TermOpen * setlocal nonumber norelativenumber
+set laststatus=2                                  " Always show statusline
+set t_Co=256                                      " Use 256 colors
+set clipboard=unnamed                             " To enable cross session vim copy-pasting
+set hidden                                        " to keep the terminal open after switching tabs
+au TermOpen * setlocal nonumber norelativenumber  " to disable line numbering for terminal
 
 call plug#begin()
 Plug 'gmarik/Vundle.vim'
 " Disabled plugins
-" Plug 'w0rp/ale'                      " The linter
-" Plug 'roxma/nvim-completion-manager' " for autocompletion
+" Plug 'w0rp/ale'                       " The linter
+" Plug 'roxma/nvim-completion-manager'  " for autocompletion
 " Plug 'lambdalisue/wifi.vim'           " wifi widget
 " Plug 'lambdalisue/battery.vim'        " battery widget
 " Plug 'zchee/deoplete-clang'           " c completion
-" Plugin 'scrooloose/syntastic'
-" Plugin 'nvie/vim-flake8'
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'scrooloose/syntastic'
+" Plug 'nvie/vim-flake8'
+" Plug 'Valloric/YouCompleteMe'
 " Plug 'davidhalter/jedi-vim'
 
 " Aesthetics
@@ -73,7 +70,7 @@ Plug 'ervandew/supertab'              " use tab for autocompletion prompts
 
 " Search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'kien/ctrlp.vim'                 " Fuzzy search
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -100,11 +97,11 @@ autocmd InsertLeave * silent! pclose!
 " Highlight line
 "---------------------------------
 
-augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-augroup END
+" augroup CursorLine
+"     au!
+"     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"     au WinLeave * setlocal nocursorline
+" augroup END
 
 " function to strip whitespace on save
 augroup vimrc
@@ -233,7 +230,7 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
+nnoremap <c-p> :FZF<cr>
 
 "---------------------------------
 " Strip Trailing Spaces on save
@@ -248,11 +245,11 @@ endfunction
 "---------------------------------
 " Highlight line
 "---------------------------------
-highlight Pmenu ctermbg=white ctermfg=black cterm=bold
-highlight Comment gui=bold
-highlight Normal gui=none
-highlight NonText guibg=none
-highlight CursorLine cterm=NONE ctermbg=black gui=NONE
+" highlight Pmenu ctermbg=white ctermfg=black cterm=bold
+" highlight Comment gui=bold
+" highlight Normal gui=none
+" highlight NonText guibg=none
+" highlight CursorLine cterm=NONE ctermbg=black gui=NONE
 
 "---------------------------------
 " Quote selection
