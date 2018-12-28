@@ -64,7 +64,7 @@ Plug 'sheerun/vim-polyglot'           " vim extra language packs
 Plug 'vim-scripts/a.vim'              " for switching to header file and source cmd :A
 
 " Autocompletes/linters
-Plug 'Shougo/deoplete.nvim'           " completion manager
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion manager
 Plug 'zchee/deoplete-jedi'            " completion manager for deoplete using jedi
 Plug 'ervandew/supertab'              " use tab for autocompletion prompts
 
@@ -89,9 +89,15 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+"---------------------------------
+" Deoplete config
+"---------------------------------
 " To close deoplete preview on completion and insertion
 autocmd CompleteDone * silent! pclose!
 autocmd InsertLeave * silent! pclose!
+let g:deoplete#enable_at_startup = 1
+" Disable documentation window
+set completeopt-=preview
 
 "---------------------------------
 " Highlight line
@@ -161,15 +167,16 @@ let g:NERDTrimTrailingWhitespace = 1
 filetype plugin indent on
 let g:SimpylFold_docstring_preview=0
 " set foldlevel=1
-" set foldmethod=indent
+set foldmethod=syntax
 " Folding with spacebar
 nnoremap <space> za
 " Autocmd for unfolding at start
 autocmd BufWinEnter * let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v:val)'))
 
+
 " set smartindent
 " PEP8 Indentation
-au BufNewFile, BufRead *.py
+au BufNewFile, BufRead *.py,*.c,*.h
     \ set tabstop=4
     \ set softtabstop=4
     \ set shiftwidth=4
