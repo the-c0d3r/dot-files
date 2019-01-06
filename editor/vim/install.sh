@@ -8,10 +8,15 @@ mkdir -p ~/.config/nvim
 
 # Install virtualenv to containerize dependencies
 python3 -m pip install virtualenv
-python3 -m virtualenv -p python3 ~/.config/nvim/env
+python3 -m virtualenv -p python2 ~/.config/nvim/.p2
+python3 -m virtualenv -p python3 ~/.config/nvim/.p3
 
 # Install pip modules for Neovim within the virtual environment created
-source ~/.config/nvim/env/bin/activate
+source ~/.config/nvim/.p2/bin/activate
+pip install neovim jedi psutil setproctitle yapf
+deactivate
+
+source ~/.config/nvim/.p3/bin/activate
 pip install neovim jedi psutil setproctitle yapf
 deactivate
 
