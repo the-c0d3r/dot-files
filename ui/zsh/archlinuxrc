@@ -10,4 +10,4 @@ xmodmap -e 'keycode 0x9=Caps_Lock'
 alias pacmandep="sudo pacman -Rs \$(pacman -Qqtd)"
 
 # to use tmux on i3 termite shell
-export TERM=xterm
+export TERM="xterm-256color"
