@@ -24,7 +24,6 @@ Plug 'gmarik/Vundle.vim'
 " Plug 'roxma/nvim-completion-manager'  " for autocompletion
 " Plug 'lambdalisue/wifi.vim'           " wifi widget
 " Plug 'lambdalisue/battery.vim'        " battery widget
-" Plug 'zchee/deoplete-clang'           " c completion
 " Plug 'scrooloose/syntastic'
 " Plug 'nvie/vim-flake8'
 " Plug 'Valloric/YouCompleteMe'
@@ -62,10 +61,12 @@ Plug 'Yggdroot/indentLine'            " to show the indent lines
 Plug 'mbbill/undotree'                " to undo to the original point
 Plug 'sheerun/vim-polyglot'           " vim extra language packs
 Plug 'vim-scripts/a.vim'              " for switching to header file and source cmd :A
+Plug 'easymotion/vim-easymotion'      " Easy Motion
 
 " Autocompletes/linters
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion manager
 Plug 'zchee/deoplete-jedi'            " completion manager for deoplete using jedi
+Plug 'zchee/deoplete-clang'           " c completion
 Plug 'ervandew/supertab'              " use tab for autocompletion prompts
 
 " Search
@@ -98,6 +99,8 @@ autocmd InsertLeave * silent! pclose!
 let g:deoplete#enable_at_startup = 1
 " Disable documentation window
 set completeopt-=preview
+let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/7.0.1/lib/libclang.dylib"
+let g:deoplete#sources#clang#clang_header = "/usr/local/opt/llvm/lib/clang"
 
 "---------------------------------
 " Highlight line
@@ -143,6 +146,36 @@ nnoremap \ :nohlsearch<CR><CR>:<backspace> " Clear previous search term by press
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+"---------------------------------
+" Easy Motion
+"---------------------------------
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
+" For searching
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
 
 "---------------------------------
 " NERDCommenter configs
