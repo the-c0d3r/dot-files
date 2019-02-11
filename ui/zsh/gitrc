@@ -6,6 +6,7 @@ alias gign="git config --add core.filemode false"
 alias gs="git status"
 alias ga="git add"
 alias gdh="git diff HEAD"
+alias gdm="git diff master"
 alias gp="git push"
 alias gcan="git commit --amend --no-edit"
 
