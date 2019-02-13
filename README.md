@@ -15,9 +15,10 @@ Second way is to use `install-standalone` scrip to install individually. You can
 
 ## Mac OS & Linux
 - vim : actually neovim configs
+    - Requires `python3`, `pip`, and `virtualenv` to be installed
 - tmux : terminal multiplexer. Config from https://github.com/gpakosz/.tmux
 - zsh : oh-my-zsh shell config
-
+    - Requires `oh-my-zsh` to be preinstalled first, then `~/.zshrc` to be deleted
 
 ## Linux
 - i3 : tiling window manager
