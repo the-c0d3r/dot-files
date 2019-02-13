@@ -34,6 +34,8 @@ tmux_conf_new_pane_reconnect_ssh=false
 #   - true
 #   - false (default)
 tmux_conf_new_session_prompt=false
+set -g pane-border-status top
+set -g pane-border-format "#P: #{pane_current_command}"
 
 
 # -- display -------------------------------------------------------------------
