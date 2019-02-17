@@ -9,8 +9,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-#font = Iosevka Regular 11
-font = SauceCodePro Nerd Font 11
+font = SFMono Nerd Font 11
 scrollback_lines = 5000
 search_wrap = true
 
