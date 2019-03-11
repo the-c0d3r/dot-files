@@ -4,7 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="nvim"
 export LANG="en_US.UTF-8"
 
- #Themes = agnoster, abaykan
+# Themes = agnoster, abaykan
 ZSH_THEME="agnoster"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 DISABLE_UPDATE_PROMPT="true"
@@ -25,13 +25,6 @@ function file_source() {
     [ -f $1 ] && source $1
 }
 
-if [ -f /etc/os-release ]; then
-    ARCH=$(cat /etc/os-release | grep 'ID_LIKE' | cut -d'=' -f2)
-    if [ "$ARCH" = "arch" ]; then
-        # linux only
-        source ~/.archlinuxrc
-    fi
-fi
 
 source $ZSH/oh-my-zsh.sh
 source ~/.aliases
@@ -43,3 +36,12 @@ source ~/.pythonrc
 file_source ~/.secrets
 file_source ~/.fzf.zsh
 unsetopt share_history
+
+## xmodmap messages will display if the xmodmap is not set at the end
+if [ -f /etc/os-release ]; then
+    ARCH=$(cat /etc/os-release | grep 'ID_LIKE' | cut -d'=' -f2)
+    if [ "$ARCH" = "arch" ]; then
+        # linux only
+        source ~/.archlinuxrc
+    fi
+fi
