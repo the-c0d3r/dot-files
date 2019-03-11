@@ -9,7 +9,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = SFMono Nerd Font 11
+font = SFMono NerdFont 11
 scrollback_lines = 5000
 search_wrap = true
 
@@ -24,7 +24,7 @@ cursor_shape = block
 
 [colors]
 # hard contrast: background = #1d2021
-background = #282828
+background = rgba(28, 28, 28, 0.9)
 # soft contrast: background = #32302f
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
