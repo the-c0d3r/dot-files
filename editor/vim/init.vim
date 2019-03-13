@@ -14,6 +14,7 @@ set mouse=a
 set laststatus=2                                  " Always show statusline
 set t_Co=256                                      " Use 256 colors
 set clipboard=unnamed                             " To enable cross session vim copy-pasting
+set clipboard+=unnamedplus                        " To enable cross session vim copy-pasting between tmux
 set hidden                                        " to keep the terminal open after switching tabs
 au TermOpen * setlocal nonumber norelativenumber  " to disable line numbering for terminal
 
@@ -166,16 +167,6 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-
-" For searching
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
 
 "---------------------------------
 " NERDCommenter configs
