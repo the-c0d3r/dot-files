@@ -63,7 +63,6 @@ Plug 'mbbill/undotree'                " to undo to the original point
 Plug 'sheerun/vim-polyglot'           " vim extra language packs
 Plug 'vim-scripts/a.vim'              " for switching to header file and source cmd :A
 Plug 'easymotion/vim-easymotion'      " Easy Motion
-Plug 'christoomey/vim-tmux-navigator' " same navigation between tmux and vim, use ctrl + <hjkl>
 
 " Autocompletes/linters
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion manager
