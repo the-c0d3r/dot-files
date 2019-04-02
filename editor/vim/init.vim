@@ -100,8 +100,8 @@ autocmd InsertLeave * silent! pclose!
 let g:deoplete#enable_at_startup = 1
 " Disable documentation window
 set completeopt-=preview
-let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/7.0.1/lib/libclang.dylib"
-let g:deoplete#sources#clang#clang_header = "/usr/local/opt/llvm/lib/clang"
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
 
 "---------------------------------
 " Highlight line
