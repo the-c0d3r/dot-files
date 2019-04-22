@@ -47,7 +47,7 @@ Plug 'junegunn/limelight.vim'         " for paragraph coloring to use with goyo
 Plug 'junegunn/vim-easy-align'        " alignments
 Plug 'sbdchd/neoformat'               " to pretty print
 Plug 'liuchengxu/space-vim-dark'      " Space Vim Dark color scheme
-
+Plug 'kshenoy/vim-signature'          " displays the marks on the sidebar
 " Tools
 Plug 'junegunn/vim-easy-align'        " code alignment gaip+keyword, gaip=, gaip*
 Plug 'tpope/vim-surround'             " quote surround
