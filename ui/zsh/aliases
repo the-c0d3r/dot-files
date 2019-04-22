@@ -13,6 +13,7 @@ alias la="ls -A --color=auto"
 # Custom stuff
 alias fzf="fzf --preview 'head -n 100 {}'"
 alias vif="vi \$(fzf)"
+alias psgr="ps -aux | grep "
 
 # Custom tools
 alias weather="curl http://wttr.in/singapore"
