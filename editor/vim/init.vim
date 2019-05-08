@@ -5,7 +5,7 @@ syntax enable
 "set cursorline background=dark backspace=indent,eol,start
 set nocursorline
 set background=dark backspace=indent,eol,start
-set nu                                            " Line Numbering
+set number                                        " Line Numbering
 set list                                          " set list and listchar is used to show the space as trails
 set listchars=tab:»\ ,extends:›,precedes:‹,trail:·
 " set listchars=tab:→\ ,trail:␣,extends:…,eol:⏎
@@ -18,8 +18,6 @@ set clipboard+=unnamedplus                        " To enable cross session vim 
 set hidden                                        " to keep the terminal open after switching tabs
 au TermOpen * setlocal nonumber norelativenumber  " to disable line numbering for terminal
 
-call plug#begin()
-Plug 'gmarik/Vundle.vim'
 " Disabled plugins
 " Plug 'w0rp/ale'                       " The linter
 " Plug 'roxma/nvim-completion-manager'  " for autocompletion
@@ -30,6 +28,8 @@ Plug 'gmarik/Vundle.vim'
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'davidhalter/jedi-vim'
 
+call plug#begin()
+Plug 'gmarik/Vundle.vim'
 " Aesthetics
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'            " File explorer
@@ -46,15 +46,21 @@ Plug 'junegunn/goyo.vim'              " distraction free writing
 Plug 'junegunn/limelight.vim'         " for paragraph coloring to use with goyo
 Plug 'junegunn/vim-easy-align'        " alignments
 Plug 'sbdchd/neoformat'               " to pretty print
+
+" Themes
+Plug 'NLKNguyen/papercolor-theme'     " Papercolor theme
 Plug 'liuchengxu/space-vim-dark'      " Space Vim Dark color scheme
 Plug 'kshenoy/vim-signature'          " displays the marks on the sidebar
+Plug 'justinmk/vim-syntax-extra'      " extra syntax highlighting
+Plug 'dracula/vim'                    " The dracula theme
+Plug 'hdima/python-syntax'            " Plugin for python syntax
+
 " Tools
 Plug 'junegunn/vim-easy-align'        " code alignment gaip+keyword, gaip=, gaip*
 Plug 'tpope/vim-surround'             " quote surround
 Plug 'christoomey/vim-conflicted'     " Vim git merge conflict resolving tool
 Plug 'qpkorr/vim-bufkill'             " to kill buffer without closing the vim
 Plug 'moll/vim-bbye'                  " buffer kill
-Plug 'dracula/vim'                    " The dracula theme
 Plug 'majutsushi/tagbar'              " the functions, globals, tagbar <F8>
 Plug 'terryma/vim-multiple-cursors'   " multiple cursor locations
 Plug 'elzr/vim-json'                  " json syntax highlighting
@@ -76,9 +82,25 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-"colorscheme = [gruvbox, molokai, colorsbox-material, dracula, srcery, koe]
-colorscheme gruvbox
-let g:gruvbox_contrast_dark="hard"
+"---------------------------------
+" Color Theme Configuration
+"---------------------------------
+"colorscheme = [gruvbox, molokai, colorsbox-material, dracula, srcery, koe,PaperColor]
+"let g:gruvbox_contrast_dark="hard"
+colorscheme PaperColor
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
 
 "---------------------------------
 " NERDTree config
@@ -106,12 +128,11 @@ let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
 "---------------------------------
 " Highlight line
 "---------------------------------
-
-" augroup CursorLine
-"     au!
-"     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"     au WinLeave * setlocal nocursorline
-" augroup END
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
 
 " function to strip whitespace on save
 augroup vimrc
@@ -231,10 +252,10 @@ let python_highlight_all=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_exclude_preview = 1
-let g:airline_theme = 'base16_atelierforest'
+let g:airline_theme = 'powerlineish'
 let g:airline_section_z = '%3p%% %l:%L %{strftime("%I:%M%p")}' " %{battery#component()}'
 let g:airline_section_warning = ""
-" airline themes = molokai, powerlineish, gruvbox, dracula, hybrid, luna, zenburn
+" themes = molokai, powerlineish, gruvbox, dracula, hybrid, luna, zenburn, base16_atelierforest
 " statusbar functions = '%{battery#component()}', '%{strftime("%I:%M%p")}', '%{wifi#component()}'
 
 let g:python_host_prog = expand("~/.config/nvim/.p2/bin/python")
@@ -297,3 +318,4 @@ function! QuickWrap(wrapper)
   execute "normal i" . escape(w, '\')
   normal `<
 endfunction
+
