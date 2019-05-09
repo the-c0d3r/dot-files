@@ -1,3 +1,6 @@
+- shell:
+  - [bash ui/zsh/install.sh, Installing oh-my-zsh]
+
 - link:
     ~/.aliases: ui/zsh/aliases
     ~/.archlinuxrc: ui/zsh/archlinuxrc
