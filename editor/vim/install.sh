@@ -25,6 +25,6 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 
 # Enter Neovim and install plugins using a temporary init.vim, which avoids warnings about missing colorschemes, functions, etc
 sed '/call plug#end/q' $BASE_PATH/init.vim > $BASE_PATH/temp.vim
-nvim -u $BASE_PATH/temp.vim -c ':PlugInstall' -c ':qall'
+nvim -u $BASE_PATH/temp.vim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall'
 rm $BASE_PATH/temp.vim
 
