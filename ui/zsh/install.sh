@@ -8,7 +8,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # install auto suggestion plugin
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # install autojump program
-git clone https://github.com/wting/autojump /tmp
+git clone https://github.com/wting/autojump /tmp/autojump
 cd /tmp/autojump
 python install.py
 cd -
