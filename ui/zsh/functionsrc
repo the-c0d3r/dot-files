@@ -70,3 +70,11 @@ function decrypt() {
     read -s password
     openssl enc -aes-256-cbc -a -d -salt -in $1 -out $2 -k $password
 }
+
+# fbr - checkout git branch
+fbr() {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //")
+}
