@@ -71,6 +71,8 @@ Plug 'mbbill/undotree'                " to undo to the original point
 Plug 'sheerun/vim-polyglot'           " vim extra language packs
 Plug 'vim-scripts/a.vim'              " for switching to header file and source cmd :A
 Plug 'easymotion/vim-easymotion'      " Easy Motion
+Plug 'SirVer/ultisnips'               " Snippet engine
+Plug 'honza/vim-snippets'             " Sinppets for ^
 
 " Autocompletes/linters
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion manager
@@ -130,6 +132,15 @@ let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " use tab to backward cycle
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+
+"---------------------------------
+" UltiSnips config
+"---------------------------------
+" Ctrl J to expand on macro, and to jump to next trigger
+" Usage: select on the popup macro, press ExpandTrigger
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
 "---------------------------------
 " Highlight line
