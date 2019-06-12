@@ -80,6 +80,7 @@ Plug 'zchee/deoplete-clang'           " c completion
 " Search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'dkprice/vim-easygrep'           " easy grep
 
 call plug#end()
 
