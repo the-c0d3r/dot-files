@@ -1,8 +1,7 @@
-
-
 syntax enable
 "set lazyredraw
 "set cursorline background=dark backspace=indent,eol,start
+set conceallevel=0                                " disable vim hiding the markdown characters
 set nocursorline
 set background=dark backspace=indent,eol,start
 set number                                        " Line Numbering
@@ -45,6 +44,7 @@ Plug 'vim-airline/vim-airline-themes' " new airline themes
 Plug 'junegunn/goyo.vim'              " distraction free writing
 Plug 'junegunn/limelight.vim'         " for paragraph coloring to use with goyo
 Plug 'junegunn/vim-easy-align'        " alignments
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'sbdchd/neoformat'               " to pretty print
 
 " Themes
@@ -124,6 +124,10 @@ let g:deoplete#enable_at_startup = 1
 set completeopt-=preview
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
+" use tab to forward cycle
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" use tab to backward cycle
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
 "---------------------------------
 " Highlight line
