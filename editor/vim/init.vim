@@ -26,6 +26,8 @@ au TermOpen * setlocal nonumber norelativenumber  " to disable line numbering fo
 " Plug 'nvie/vim-flake8'
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'davidhalter/jedi-vim'
+" Plug 'ervandew/supertab'              " use tab for autocompletion prompts.
+" Note: Conflicts with deoplete tab direction
 
 call plug#begin()
 Plug 'gmarik/Vundle.vim'
@@ -74,7 +76,6 @@ Plug 'easymotion/vim-easymotion'      " Easy Motion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion manager
 Plug 'zchee/deoplete-jedi'            " completion manager for deoplete using jedi
 Plug 'zchee/deoplete-clang'           " c completion
-Plug 'ervandew/supertab'              " use tab for autocompletion prompts
 
 " Search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
