@@ -13,7 +13,7 @@ alias la="ls -A --color=auto"
 # Custom stuff
 alias fzf="fzf --preview 'head -n 100 {}'"
 alias vif="vi \$(fzf)"
-alias psgr="ps -aux | grep "
+alias psgr="ps -aux | grep -v 'grep' | grep "
 alias 7zc="7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on" # destination.7z source
 
 # Custom tools
