@@ -39,6 +39,10 @@ file_source ~/.secrets
 file_source ~/.fzf.zsh
 unsetopt share_history
 
+if [ "$(uname -s)" = "Darwin" ]; then
+    source ~/.macrc
+fi
+
 ## xmodmap messages will display if the xmodmap is not set at the end
 if [ -f /etc/os-release ]; then
     ARCH=$(cat /etc/os-release | grep 'ID_LIKE' | cut -d'=' -f2)
