@@ -1,9 +1,20 @@
-**/.idea
+
+# IDE related
 .idea
+**/.idea
+
+# Project logs
+logs/*/
 logs/*.log
 logs/*.log.*
+
+# Python specific stuff
 __pycache__
 **/__pycache__
 env/
 .venv/
-logs/*/
+
+# Mac related
+.DS_Store
+**/.DS_Store
+
