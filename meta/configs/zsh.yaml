@@ -9,3 +9,4 @@
     ~/.gitrc: ui/zsh/gitrc
     ~/.pythonrc: ui/zsh/pythonrc
     ~/.zshrc: ui/zsh/zshrc
+    ~/.gitignore_global: ui/zsh/gitignore_global

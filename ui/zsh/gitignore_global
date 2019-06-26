@@ -1,0 +1,9 @@
+**/.idea
+.idea
+logs/*.log
+logs/*.log.*
+__pycache__
+**/__pycache__
+env/
+.venv/
+logs/*/
