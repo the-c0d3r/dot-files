@@ -9,6 +9,7 @@ alias gdh="git diff HEAD"
 alias gdm="git diff master"
 alias gp="git push"
 alias gcan="git commit --amend --no-edit"
+alias gamd="git commit --amend"
 
 function gtdy() {
     # git statistics counter
