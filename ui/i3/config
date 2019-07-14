@@ -155,11 +155,11 @@ exec_always --no-startup-id xandr --output HDMI1 --scale 1.2x1.2
 
 # feh - wallpaper setting
 # ~/.wallpaper/arch.jpg
-exec_always --no-startup-id feh --bg-fill ~/.wallpaper/manjaro-organic.jpg
+exec_always --no-startup-id feh --bg-fill ~/.wallpaper/eclipse-1k.jpg
 
 # compton - Compositing Manager for Shadows and Opactiy
 exec_always --no-startup-id compton -b --config ~/.config/compton/compton.conf
 
 # polybar - customizable menu bar
 # ~/.config/polybar/polybar.sh
-exec_always --no-startup-id ~/.config/polybar/polybar-themes/polybar-3/launch.sh
+exec_always --no-startup-id ~/.config/polybar/polybar-themes/polybar-5/launch.sh
