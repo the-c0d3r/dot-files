@@ -275,6 +275,7 @@ let python_highlight_all=1
 " Airline settings
 "---------------------------------
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_exclude_preview = 1
 let g:airline_theme = 'powerlineish'
