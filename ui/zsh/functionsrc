@@ -26,7 +26,7 @@ function bkp() {
         echo "Usage: bkp filename to backup"
         return
     fi
-    cp "$1" "$1.bkp" -r
+    cp -r "$1" "$1.bkp"
     echo "Successfully backed up to $1.bkp"
 }
 
@@ -36,7 +36,7 @@ function rst() {
         echo "Usage: rst filename (without .bkp) to restore"
         return
     fi
-    cp "$1.bkp" "$1" -r
+    cp -r "$1.bkp" "$1"
     rm "$1.bkp"
     echo "Successfully restored to $1"
 }
