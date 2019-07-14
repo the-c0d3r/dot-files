@@ -1,7 +1,8 @@
 i3
 vim
 zsh
-tmux
 rofi
+tmux
+fonts
 polybar
 termite
