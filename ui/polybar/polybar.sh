@@ -1,8 +1,13 @@
-#!/bin/env sh
+#!/usr/bin/env sh
 
-pkill -f bottombar
-pkill -f topbar
-sleep 1;
+## Add this to your wm startup file.
 
-polybar -c ~/.config/polybar/bottom.bar bottombar &
-polybar -c ~/.config/polybar/top.bar topbar &
+# Terminate already running bar instances
+killall -q polybar
+
+# Wait until the processes have been shut down
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+
+# Launch Polybar
+polybar -c ~/.config/polybar/config.ini top &
+polybar -c ~/.config/polybar/config.ini bottom &
