@@ -1,17 +1,21 @@
 # Python Development functions & Aliases
 
 function sc() {
-    # Source into a local .venv folder or env folder
-    if [ -d "$PWD/.venv" ]; then
-        source $PWD/.venv/bin/activate
-        return
-    elif [ -d "$PWD/env" ]; then
-        source $PWD/env/bin/activate
-        return
-    else
-        echo "No '.venv' or 'env' found to source"
-        return
-    fi
+    # Source into a local predefined virtualenv folders
+    VENV_PATHS=( ".venv" "venv" ".env" "env" "$1" )
+
+    for VENV_PATH in "${VENV_PATHS[@]}"
+    do
+        VENV="$PWD/$VENV_PATH/bin/activate"
+        if [ -f "$VENV" ]; then
+            echo "$VENV_PATH found, sourcing"
+            source $VENV
+            return
+        fi
+    done
+
+    echo "No virtualenv found to source: ${VENV_PATHS[@]}"
+    return
 }
 
 # disables above virtualenv sc
@@ -29,9 +33,15 @@ function pyenv2() {
 
 function pyenv3() {
     # setup python3 environment
-    echo "setting up python3 venv";
-    virtualenv -p python3 -q .venv
-    sc
+    if [ ! -z "$1" ]; then
+        echo "setting up python3 @ $1";
+        virtualenv -p python3 -q $1;
+    else
+        echo "setting up python3 @ .venv";
+        virtualenv -p python3 -q .venv
+    fi
+
+    sc $1
     pipup
 }
 
