@@ -25,9 +25,15 @@ alias pipr="pip install -r requirements.txt"
 
 function pyenv2() {
     # setup python2 environment
-    echo "setting up python2 -q venv";
-    virtualenv -p python2 .venv 2>/dev/null
-    sc
+    if [ ! -z "$1" ]; then
+        echo "setting up python2 @ $1";
+        virtualenv -p python2 -q $1;
+    else
+        echo "setting up python2 @ .venv";
+        virtualenv -p python2 -q .venv
+    fi
+
+    sc $1
     pipup
 }
 
