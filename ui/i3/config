@@ -26,7 +26,7 @@ bindsym Control+q kill
 
 # start dmenu (a program launcher)
 # Options : $(rofi -show drun), $(dmenu_run)
-bindsym Mod1+space exec --no-startup-id rofi -show drun -modi calc drun
+bindsym Mod1+space exec --no-startup-id rofi -show drun
 
 bindsym Control+space exec --no-startup-id rofi -show window
 bindsym Control+Shift+d exec --no-startup-id ~/programming/programs/zzzfoo -e="-mime:message/rfc822" -o xdg-open
