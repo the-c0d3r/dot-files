@@ -32,7 +32,6 @@ au TermOpen * setlocal nonumber norelativenumber  " to disable line numbering fo
 call plug#begin()
 Plug 'gmarik/Vundle.vim'
 " Aesthetics
-Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'            " File explorer
 Plug 'scrooloose/nerdcommenter'       " commenting plugin
 Plug 'ryanoasis/vim-devicons'         " nerdTree icons
@@ -50,6 +49,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'sbdchd/neoformat'               " to pretty print
 
 " Themes
+Plug 'morhetz/gruvbox'                " Gruvbox theme
 Plug 'NLKNguyen/papercolor-theme'     " Papercolor theme
 Plug 'liuchengxu/space-vim-dark'      " Space Vim Dark color scheme
 Plug 'kshenoy/vim-signature'          " displays the marks on the sidebar
