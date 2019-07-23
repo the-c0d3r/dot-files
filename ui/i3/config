@@ -26,7 +26,8 @@ bindsym Control+q kill
 
 # start dmenu (a program launcher)
 # Options : $(rofi -show drun), $(dmenu_run)
-bindsym Mod1+space exec --no-startup-id rofi -show drun
+bindsym Mod1+space exec --no-startup-id rofi -show drun -modi calc drun
+
 bindsym Control+space exec --no-startup-id rofi -show window
 bindsym Control+Shift+d exec --no-startup-id ~/programming/programs/zzzfoo -e="-mime:message/rfc822" -o xdg-open
 
@@ -123,7 +124,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # execute i3 lock
-bindsym Control+Mod4+l exec --no-startup-id "/usr/bin/i3lock-fancy"
+bindsym Control+Mod4+l exec --no-startup-id "/usr/bin/betterlockscreen --text 'Authorized Personnel Only!' --lock blur"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -150,8 +151,6 @@ gaps outer 20
 
 
 # Autostartup ---------------------------------------------------------------
-# Automatic resolution switching
-exec_always --no-startup-id xandr --output HDMI1 --scale 1.2x1.2
 
 # feh - wallpaper setting
 exec_always --no-startup-id feh --bg-fill ~/.wallpaper/eclipse-1k.jpg
@@ -161,4 +160,11 @@ exec_always --no-startup-id compton -b --config ~/.config/compton/compton.conf
 
 # polybar - customizable menu bar
 exec_always --no-startup-id ~/.config/polybar/polybar.sh
+
+# set workspace 1 to tabbed
+for_window [workspace=1] layout tabbed
+
+# set franz to be in scratchpad
+for_window [instance="franz"] move window to scratchpad
+for_window [instance="spotify"] move to workspace 2
 
