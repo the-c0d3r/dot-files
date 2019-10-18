@@ -186,6 +186,9 @@ tnoremap <Esc> <C-\><C-n>  " terminal escape
 nmap <F8> :TagbarToggle<CR> " Toggle tab bar
 nnoremap \ :nohlsearch<CR><CR>:<backspace> " Clear previous search term by pressing enter
 
+" Command mapping for the case to write as sudo when opened as non sudo
+cmap w!! w !sudo /usr/bin/tee > /dev/null %
+
 "---------------------------------
 " EasyAlign
 "---------------------------------
@@ -231,6 +234,9 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+" Comment on command mode and visual mode with Ctrl + / (IDE type shortcut)
+nnoremap <C-_> :call NERDComment(0,"toggle")<CR>
+vnoremap <C-_> :call NERDComment(0,"toggle")<CR>
 
 
 " Enable code folding
