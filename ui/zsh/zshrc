@@ -19,6 +19,7 @@ plugins=(
     git
     hacker-quotes
     vi-mode
+    zsh-cmd-architect
     zsh-syntax-highlighting
     zsh-autosuggestions
 )
@@ -54,4 +55,6 @@ if [ -f /etc/os-release ]; then
     fi
 fi
 
+# Zsh Cmd Architect shortcut
+bindkey '^T' zca-widget
 autoload zmv

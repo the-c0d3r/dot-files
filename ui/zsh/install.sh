@@ -8,7 +8,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # install auto suggestion plugin
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # install hacker quote
-git clone https://github.com/oldratlee/hacker-quotes.git ~/.oh-my-zsh/custom/plugins/hacker-quotes
+git clone https://github.com/oldratlee/hacker-quotes.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/hacker-quotes
+# install zsh command architect
+git clone https://github.com/psprint/zsh-cmd-architect.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-cmd-architect
+
 
 rm ~/.zshrc
 
