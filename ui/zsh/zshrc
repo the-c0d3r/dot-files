@@ -13,12 +13,14 @@ DISABLE_UPDATE_PROMPT="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(
-  autojump
-  vi-mode
-  git
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-  colored-man-pages
+    archlinux
+    autojump
+    colored-man-pages
+    git
+    hacker-quotes
+    vi-mode
+    zsh-syntax-highlighting
+    zsh-autosuggestions
 )
 
 function file_source() {
@@ -51,3 +53,5 @@ if [ -f /etc/os-release ]; then
         source ~/.archlinuxrc
     fi
 fi
+
+autoload zmv
