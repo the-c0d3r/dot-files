@@ -11,6 +11,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/oldratlee/hacker-quotes.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/hacker-quotes
 # install zsh command architect
 git clone https://github.com/psprint/zsh-cmd-architect.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-cmd-architect
+# install alias-tips
+git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/alias-tips
 
 
 rm ~/.zshrc
