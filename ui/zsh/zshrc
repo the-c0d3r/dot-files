@@ -1,11 +1,26 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
 
+# === History related options
+export HISTSIZE=999999999
+# amount of history to keep in memory
+export SAVEHIST=999999999
+# amount of history to save
+setopt hist_ignore_all_dups
+# ignore all the duplicated command consecutively
+setopt hist_ignore_space
+# ignore the history items starting with space
+setopt hist_expire_dups_first
+# expire duplicates when trimming history
+unsetopt share_history
+# disable shared history for multiple zsh sessions
+
+# === General exports
 export EDITOR="nvim"
 export TERM="xterm-256color"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+# === oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 # Themes = agnoster, abaykan
 ZSH_THEME="agnoster"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -25,23 +40,25 @@ plugins=(
     zsh-autosuggestions
 )
 
+# Zsh Cmd Architect shortcut
+bindkey '^T' zca-widget
+autoload zmv
+
 function file_source() {
     # check file exists and source
     # parameter 1: the file name
     [ -f $1 ] && source $1
 }
 
-
+# === Extra files to be sourced
 source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 source ~/.functionsrc
 source ~/.dockerrc
 source ~/.gitrc
 source ~/.pythonrc
-
 file_source ~/.secrets
 file_source ~/.fzf.zsh
-unsetopt share_history
 
 if [ "$(uname -s)" = "Darwin" ]; then
     source ~/.macrc
@@ -56,6 +73,3 @@ if [ -f /etc/os-release ]; then
     fi
 fi
 
-# Zsh Cmd Architect shortcut
-bindkey '^T' zca-widget
-autoload zmv
