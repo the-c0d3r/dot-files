@@ -5,15 +5,14 @@ alias todo="vi ~/programming/todo.md"
 alias vi="nvim"
 alias vim="nvim"
 alias ll="ls -alFr --color=auto"
-alias l="ls -lah --color=auto"
-alias lsh="ls -d .* --color=auto"
-alias lsd="ls -ld */ --color=auto"
-alias la="ls -A --color=auto"
+alias l="ls -lah"
+alias lsh="ls -d .*"
+alias lsd="ls -ld */"
+alias la="ls -A"
 
 # Custom stuff
-alias fz="fzf --preview 'bat --style=numbers --color=always {} || head -n 100 {}'"
-alias vif="vi \$(fzf --preview 'bat --style=numbers --color=always {} || head -n 100 {}')"
-alias psgr="ps -aux | grep -v 'grep' | grep "
+alias vf="vi \$(fzf --preview 'bat --style=numbers --color=always {} || head -n 100 {}')"
+alias pg="ps -aux | grep -v 'grep' | grep "
 alias 7zc="7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on" # destination.7z source
 
 # Custom tools
