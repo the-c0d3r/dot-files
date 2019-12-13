@@ -23,6 +23,14 @@ alias de="deactivate"
 
 alias pipr="pip install -r requirements.txt"
 
+function lineprof() {
+    if [  -z "$1" ]; then
+        echo "Usage: lineprof test.py"
+    else
+        kernprof -l "$1" && python -m line_profiler "$1.lprof"
+    fi;
+}
+
 function pyenv2() {
     # setup python2 environment
     if [ ! -z "$1" ]; then
