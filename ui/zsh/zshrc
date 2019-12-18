@@ -1,18 +1,4 @@
 
-# === History related options
-export HISTSIZE=999999999
-# amount of history to keep in memory
-export SAVEHIST=999999999
-# amount of history to save
-setopt hist_ignore_all_dups
-# ignore all the duplicated command consecutively
-setopt hist_ignore_space
-# ignore the history items starting with space
-setopt hist_expire_dups_first
-# expire duplicates when trimming history
-unsetopt share_history
-# disable shared history for multiple zsh sessions
-
 # === General exports
 export EDITOR="nvim"
 export TERM="xterm-256color"
@@ -73,3 +59,16 @@ if [ -f /etc/os-release ]; then
     fi
 fi
 
+# === History related options
+export HISTSIZE=999999999
+# amount of history to keep in memory
+export SAVEHIST=999999999
+# amount of history to save
+setopt hist_ignore_all_dups
+# ignore all the duplicated command consecutively
+setopt hist_ignore_space
+# ignore the history items starting with space
+setopt hist_expire_dups_first
+# expire duplicates when trimming history
+unsetopt share_history
+# disable shared history for multiple zsh sessions
