@@ -294,6 +294,13 @@ let g:python_host_prog = expand("~/.config/nvim/.p2/bin/python")
 let g:python3_host_prog = expand("~/.config/nvim/.p3/bin/python")
 
 "---------------------------------
+" Indentline
+"---------------------------------
+" disable hiding of markdown characters
+let g:indentLine_concealcursor = ""
+let g:indentLine_conceallevel = 0
+
+"---------------------------------
 " fzf-vim
 "---------------------------------
 let g:fzf_action = {
