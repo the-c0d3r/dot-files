@@ -10,6 +10,10 @@ alias lsh="ls -d .*"
 alias lsd="ls -ld */"
 alias la="ls -A"
 
+# prevent zsh's globbing for remote scp
+alias scp='noglob scp'
+
+
 # Custom stuff
 alias vf="vi \$(fzf --preview 'bat --style=numbers --color=always {} || head -n 100 {}')"
 alias pg="ps -aux | grep -v 'grep' | grep "
