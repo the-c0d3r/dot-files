@@ -26,10 +26,6 @@ plugins=(
     zsh-autosuggestions
 )
 
-# Zsh Cmd Architect shortcut
-bindkey '^T' zca-widget
-autoload zmv
-
 function file_source() {
     # check file exists and source
     # parameter 1: the file name
@@ -45,6 +41,10 @@ source ~/.gitrc
 source ~/.pythonrc
 file_source ~/.secrets
 file_source ~/.fzf.zsh
+
+# Zsh Cmd Architect shortcut
+bindkey '^T' zca-widget
+autoload zmv
 
 if [ "$(uname -s)" = "Darwin" ]; then
     source ~/.macrc
