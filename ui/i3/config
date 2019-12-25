@@ -151,8 +151,8 @@ bindsym $mod+r mode "resize"
 # i3-gaps
 for_window [class="^.*"] border pixel 3
 #smart_gaps off
-gaps inner 20
-gaps outer 20
+gaps inner 10
+gaps outer 10
 
 # Autostartup ---------------------------------------------------------------
 
