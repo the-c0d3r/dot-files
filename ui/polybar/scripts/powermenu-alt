@@ -2,10 +2,10 @@
 
 ## Created By Aditya Shakya
 
-MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 12 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<< " Lock| Logout| Reboot| Shutdown")"
+MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 12 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<< " Lock| Logout|Z Suspend| Reboot| Shutdown")"
             case "$MENU" in
                 *Lock) /usr/bin/betterlockscreen --text 'Authorized Personnel Only!' --lock blur;;
-                *Suspend) systemctl suspend;;
+                *Suspend) /usr/bin/betterlockscreen --text 'Authorized Personnel Only!' --lock blur& systemctl suspend;;
                 *Logout) i3-msg 'exit';;
                 *Reboot) systemctl reboot ;;
                 *Shutdown) systemctl -i poweroff
