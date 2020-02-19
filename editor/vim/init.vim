@@ -1,88 +1,76 @@
-syntax enable
-"set lazyredraw
-"set cursorline background=dark backspace=indent,eol,start
-set conceallevel=0                                " disable vim hiding the markdown characters
-set nocursorline
-set background=dark backspace=indent,eol,start
-set number                                        " Line Numbering
-set list                                          " set list and listchar is used to show the space as trails
+"--------------------------------
+" GENERAL CONFIG
+"--------------------------------
+syntax enable                                      " enable syntax highlighting
+set conceallevel=0                                 " force vim to show all markdown characters
+set cursorline                                     " show highlight on cursor line
+set background=dark                                " dark background
+set backspace=indent,eol,start                     " backspace behavior to allow over indent, over eol, over start
+set number                                         " line Numbering
+set list                                           " set list and listchar is used to show the space as trails
 set listchars=tab:»\ ,extends:›,precedes:‹,trail:·
-" set listchars=tab:→\ ,trail:␣,extends:…,eol:⏎
-set incsearch ignorecase smartcase hlsearch
-set mouse=a
-set laststatus=2                                  " Always show statusline
-set t_Co=256                                      " Use 256 colors
-set clipboard=unnamed                             " To enable cross session vim copy-pasting
-set clipboard+=unnamedplus                        " To enable cross session vim copy-pasting between tmux
-set hidden                                        " to keep the terminal open after switching tabs
-au TermOpen * setlocal nonumber norelativenumber  " to disable line numbering for terminal
-
-" Disabled plugins
-" Plug 'w0rp/ale'                       " The linter
-" Plug 'roxma/nvim-completion-manager'  " for autocompletion
-" Plug 'lambdalisue/wifi.vim'           " wifi widget
-" Plug 'lambdalisue/battery.vim'        " battery widget
-" Plug 'scrooloose/syntastic'
-" Plug 'nvie/vim-flake8'
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'davidhalter/jedi-vim'
-" Plug 'ervandew/supertab'              " use tab for autocompletion prompts.
-" Note: Conflicts with deoplete tab direction
+set incsearch ignorecase smartcase hlsearch        " incremental search, highlight search, smart case
+set mouse=a                                        " all mouse modes
+set laststatus=2                                   " Always show statusline
+set clipboard^=unnamed,unnamedplus                 " Cross session vim copy-pasting, cross program copy-pasting
 
 call plug#begin()
-Plug 'gmarik/Vundle.vim'
+"---------------------------
 " Aesthetics
-Plug 'scrooloose/nerdtree'            " File explorer
-Plug 'scrooloose/nerdcommenter'       " commenting plugin
-Plug 'ryanoasis/vim-devicons'         " nerdTree icons
-Plug 'vim-python/python-syntax'       " For better python syntax highlighting
-Plug 'tmhedberg/SimpylFold'           " Folding helper
-Plug 'jistr/vim-nerdtree-tabs'        " Tab explorer
-Plug 'tpope/vim-fugitive'             " Airline git branch
-Plug 'airblade/vim-gitgutter'         " git indicator
-Plug 'vim-airline/vim-airline'        " status bar theme
-Plug 'vim-airline/vim-airline-themes' " new airline themes
-Plug 'junegunn/goyo.vim'              " distraction free writing
-Plug 'junegunn/limelight.vim'         " for paragraph coloring to use with goyo
-Plug 'junegunn/vim-easy-align'        " alignments
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'sbdchd/neoformat'               " to pretty print
+"---------------------------
+Plug 'scrooloose/nerdtree'                                        " File explorer
+Plug 'scrooloose/nerdcommenter'                                   " commenting plugin
+Plug 'ryanoasis/vim-devicons'                                     " nerdTree icons
+Plug 'vim-python/python-syntax'                                   " For better python syntax highlighting
+Plug 'tmhedberg/SimpylFold'                                       " Folding helper
+Plug 'tpope/vim-fugitive'                                         " Airline git branch
+Plug 'airblade/vim-gitgutter'                                     " git indicator
+Plug 'vim-airline/vim-airline'                                    " status bar theme
+Plug 'vim-airline/vim-airline-themes'                             " new airline themes
+Plug 'junegunn/rainbow_parentheses.vim'                           " Rainbow parentheses color
+Plug 'sakshamgupta05/vim-todo-highlight'                          " Highlights TODO FIXME
+Plug 'kshenoy/vim-signature'                                      " displays the marks on the sidebar
 
+"---------------------------
 " Themes
-Plug 'morhetz/gruvbox'                " Gruvbox theme
-Plug 'NLKNguyen/papercolor-theme'     " Papercolor theme
-Plug 'liuchengxu/space-vim-dark'      " Space Vim Dark color scheme
-Plug 'kshenoy/vim-signature'          " displays the marks on the sidebar
-Plug 'justinmk/vim-syntax-extra'      " extra syntax highlighting
-Plug 'dracula/vim'                    " The dracula theme
-Plug 'hdima/python-syntax'            " Plugin for python syntax
+"---------------------------
+Plug 'morhetz/gruvbox'                                            " Gruvbox theme
+Plug 'NLKNguyen/papercolor-theme'                                 " Papercolor theme
+Plug 'octol/vim-cpp-enhanced-highlight'                           " c/c++ syntax highlight
+Plug 'elzr/vim-json'                                              " json syntax highlighting
 
+"---------------------------
 " Tools
-Plug 'junegunn/vim-easy-align'        " code alignment gaip+keyword, gaip=, gaip*
-Plug 'tpope/vim-surround'             " quote surround
-Plug 'christoomey/vim-conflicted'     " Vim git merge conflict resolving tool
-Plug 'qpkorr/vim-bufkill'             " to kill buffer without closing the vim
-Plug 'moll/vim-bbye'                  " buffer kill
-Plug 'majutsushi/tagbar'              " the functions, globals, tagbar <F8>
-Plug 'terryma/vim-multiple-cursors'   " multiple cursor locations
-Plug 'elzr/vim-json'                  " json syntax highlighting
-Plug 'Yggdroot/indentLine'            " to show the indent lines
-Plug 'mbbill/undotree'                " to undo to the original point
-Plug 'sheerun/vim-polyglot'           " vim extra language packs
-Plug 'vim-scripts/a.vim'              " for switching to header file and source cmd :A
-Plug 'easymotion/vim-easymotion'      " Easy Motion
-Plug 'SirVer/ultisnips'               " Snippet engine
-Plug 'honza/vim-snippets'             " Sinppets for ^
+"---------------------------
+Plug 'junegunn/vim-easy-align'                                    " code alignment gaip+keyword, gaip=, gaip*
+Plug 'tpope/vim-surround'                                         " quote surround
+Plug 'christoomey/vim-conflicted'                                 " Vim git merge conflict resolving tool
+Plug 'qpkorr/vim-bufkill'                                         " to kill buffer without closing the vim
+Plug 'moll/vim-bbye'                                              " buffer kill
+Plug 'majutsushi/tagbar'                                          " the functions, globals, tagbar <F8>
+Plug 'terryma/vim-multiple-cursors'                               " multiple cursor locations
+Plug 'Yggdroot/indentLine'                                        " to show the indent lines
+Plug 'mbbill/undotree'                                            " to undo to the original point
+Plug 'vim-scripts/a.vim'                                          " for switching to header file and source cmd :A
+Plug 'easymotion/vim-easymotion'                                  " Easy Motion
+Plug 'SirVer/ultisnips'                                           " Snippet engine
+Plug 'honza/vim-snippets'                                         " Sinppets for ^
 
+"---------------------------
 " Autocompletes/linters
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " completion manager
-Plug 'zchee/deoplete-jedi'            " completion manager for deoplete using jedi
-Plug 'zchee/deoplete-clang'           " c completion
+"---------------------------
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }     " completion manager
+Plug 'zchee/deoplete-jedi'                                        " completion manager for deoplete using jedi
+Plug 'zchee/deoplete-clang'                                       " c completion
 
+"---------------------------
 " Search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"---------------------------
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fzf binary
 Plug 'junegunn/fzf.vim'
-Plug 'dkprice/vim-easygrep'           " easy grep
+Plug 'dkprice/vim-easygrep'                                       " easy grep
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }     " clap file manager
+Plug 'wsdjeg/FlyGrep.vim'                                         " Asynchronyous grepping on the fly
 
 call plug#end()
 
@@ -115,7 +103,7 @@ let NERDTreeWinSize=31
 " autocmd VimEnter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "---------------------------------
 " Deoplete config
@@ -126,8 +114,17 @@ autocmd InsertLeave * silent! pclose!
 let g:deoplete#enable_at_startup = 1
 " Disable documentation window
 set completeopt-=preview
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
+
+" To detect the OS and change clang header accordingly
+let uname = substitute(system('uname'), '\n', '', '')
+if uname == 'Linux'
+    let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
+    let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
+elseif uname == 'Darwin'
+    let g:deoplete#sources#clang#libclang_path = "/Library/Developer/CommandLineTools/usr/lib/libclang.dylib"
+    let g:deoplete#sources#clang#clang_header = "/Library/Developer/CommandLineTools/usr/lib/clang"
+endif
+
 " use tab to forward cycle
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " use tab to backward cycle
@@ -234,10 +231,13 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+
 " Comment on command mode and visual mode with Ctrl + / (IDE type shortcut)
+" FIXME: this doesn't work on mac
 nnoremap <C-_> :call NERDComment(0,"toggle")<CR>
 vnoremap <C-_> :call NERDComment(0,"toggle")<CR>
-
+" nmap <C-_>   <Plug>NERDCommenterToggle
+" vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 
 " Enable code folding
 filetype plugin indent on
@@ -276,6 +276,26 @@ set autoindent
 set encoding=utf-8
 " python highlighting
 let python_highlight_all=1
+
+
+"---------------------------------
+" VIM TODO HIGHLIGHT
+"---------------------------------
+let g:todo_highlight_config = {
+      \   'REVIEW': {},
+      \   'NOTE': {
+      \     'gui_fg_color': '#ffffff',
+      \     'gui_bg_color': '#ffbd2a',
+      \     'cterm_fg_color': 'white',
+      \     'cterm_bg_color': '214'
+      \   }
+      \ }
+
+"---------------------------------
+" Clap settings
+"---------------------------------
+let g:clap_theme = 'material_design_dark'
+nnoremap <Leader>t :Clap<CR>
 
 "---------------------------------
 " Airline settings
@@ -336,11 +356,11 @@ endfunction
 "---------------------------------
 " Highlight line
 "---------------------------------
-" highlight Pmenu ctermbg=white ctermfg=black cterm=bold
-" highlight Comment gui=bold
-" highlight Normal gui=none
-" highlight NonText guibg=none
-" highlight CursorLine cterm=NONE ctermbg=black gui=NONE
+highlight Pmenu ctermbg=white ctermfg=black cterm=bold
+highlight Comment gui=bold
+highlight Normal gui=none
+highlight NonText guibg=none
+highlight CursorLine cterm=NONE ctermbg=black gui=NONE
 
 "---------------------------------
 " Quote selection
