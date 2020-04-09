@@ -6,7 +6,9 @@
 # Mod2 = ModLock
 # Mod4 = Super/WindowKey
 
+set $alt Mod1
 set $mod Mod4
+
 # Macro Keys
 set $m1 XF86Tools
 set $m2 XF86Launch5
@@ -106,6 +108,7 @@ bindsym $mod+0 workspace 10
 # scratchpad manipulation
 bindsym $mod+shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
+bindsym $mod+b scratchpad show
 
 # Switch to next/prev workspace
 bindsym Control+Left workspace prev
