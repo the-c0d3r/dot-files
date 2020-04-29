@@ -3,7 +3,7 @@
 
 - link:
     ~/.aliases: ui/zsh/aliases
-    ~/.archlinuxrc: ui/zsh/archlinuxrc
+    ~/.linuxrc: ui/zsh/linuxrc
     ~/.dockerrc: ui/zsh/dockerrc
     ~/.functionsrc: ui/zsh/functionsrc
     ~/.gitrc: ui/zsh/gitrc
@@ -11,3 +11,4 @@
     ~/.zshrc: ui/zsh/zshrc
     ~/.macrc: ui/zsh/macrc
     ~/.gitignore_global: ui/zsh/gitignore_global
+    ~/.p10k: ui/zsh/p10k.zsh
