@@ -13,6 +13,8 @@ git clone https://github.com/oldratlee/hacker-quotes.git ${ZSH_CUSTOM:-~/.oh-my-
 git clone https://github.com/psprint/zsh-cmd-architect.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-cmd-architect
 # install alias-tips
 git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/alias-tips
+# install powerlevel 10k theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 
 rm ~/.zshrc
