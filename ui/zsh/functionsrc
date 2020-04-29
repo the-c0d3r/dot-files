@@ -4,8 +4,15 @@ function ununzip() {
     unzip -t $1 | awk '{print $2}' | tail -n +2 | xargs rm -fr
 }
 
+function file_source() {
+    # check file exists and source
+    # parameter 1: the file name
+    [ -f $1 ] && source $1
+}
+
 function bkp() {
     # backup file
+    # parameter 1: the filename
     if [ -z "$1" ]; then
         echo "Usage: bkp filename to backup"
         return
@@ -16,6 +23,7 @@ function bkp() {
 
 function rst() {
     # restore backup file
+    # parameter 1: the filename without .bkp
     if [ -z "$1" ]; then
         echo "Usage: rst filename (without .bkp) to restore"
         return
@@ -55,10 +63,10 @@ function decrypt() {
     openssl enc -aes-256-cbc -a -d -salt -in $1 -out $2 -k $password
 }
 
-# fbr - checkout git branch
 fbr() {
-  local branches branch
-  branches=$(git branch) &&
-  branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //")
+    # checkout git branch
+    local branches branch
+    branches=$(git branch) &&
+    branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
+    git checkout $(echo "$branch" | sed "s/.* //")
 }
