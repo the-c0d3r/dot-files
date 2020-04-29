@@ -30,6 +30,7 @@ Plug 'vim-airline/vim-airline-themes'                             " new airline 
 Plug 'junegunn/rainbow_parentheses.vim'                           " Rainbow parentheses color
 Plug 'sakshamgupta05/vim-todo-highlight'                          " Highlights TODO FIXME
 Plug 'kshenoy/vim-signature'                                      " displays the marks on the sidebar
+Plug 'ap/vim-css-color'                                           " displays color for color code
 
 "---------------------------
 " Themes
