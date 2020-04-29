@@ -11,4 +11,4 @@
     ~/.zshrc: ui/zsh/zshrc
     ~/.macrc: ui/zsh/macrc
     ~/.gitignore_global: ui/zsh/gitignore_global
-    ~/.p10k: ui/zsh/p10k.zsh
+    ~/.p10k.zsh: ui/zsh/p10k.zsh
