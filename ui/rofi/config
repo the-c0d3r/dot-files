@@ -22,3 +22,7 @@ rofi.color-window:	#A60f2536,	#00000000,	#87b6b7
 rofi.color-normal:	#00000000,	#87b6b7,	#00000000,	#00000000,	#b9fafc
 rofi.color-active:	#00000000,	#b9fafc,	#00000000,	#00000000,	#b9fafc
 rofi.color-urgent:	#00000000,	#b9fafc,	#00000000,	#00000000,	#b9fafc
+
+! rofi.theme: /usr/share/rofi/themes/Pop-Dark.rasi
+rofi.theme: ~/.local/share/rofi/themes/slate.rasi
+
