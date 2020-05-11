@@ -1,2 +1,3 @@
 - link:
     ~/.config/rofi/config: ui/rofi/config
+    ~/.local/share/rofi/themes: ui/rofi/themes
