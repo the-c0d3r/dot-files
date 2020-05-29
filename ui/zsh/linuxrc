@@ -1,5 +1,10 @@
 # Linux functions
 
+# Keyboard key repeat speed
+# xset r rate [delay] [rate]
+xset r rate 250 50
+
+
 # If the following is not at the end of the file, then it will show the annoying
 # xmodmap:  please release the following keys within 2 seconds:
 xmodmap -e 'clear Lock'
