@@ -1,15 +1,13 @@
 # file related aliases
-alias todo="vi ~/programming/todo.md"
+alias todo="vi ~/work/todo.md"
 
 # System Aliases
+alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias ll="ls -alFr --color=auto"
-alias l="ls -lah --color=auto"
-alias lsh="ls -d .* --color=auto"
-alias lsd="ls -ld */ --color=auto"
-alias ls="ls --color=auto"
-alias la="ls -A --color=auto"
+alias l="ls -lah --color=auto"       # show all
+alias lh="ls -ld .* --color=auto"    # show all hidden files/dir
+alias lsd="ls -ld */ --color=auto"   # show all directories
 
 # prevent zsh's globbing for remote scp
 alias scp='noglob scp'
