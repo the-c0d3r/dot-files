@@ -274,9 +274,12 @@ tmux_conf_copy_to_os_clipboard=true
 
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
+#
+set -g default-terminal "xterm-256color" # colors!
+
 
 # increase history size
-set -g history-limit 100000
+set -g history-limit 999999999            # unlimited history (close enough)
 
 # start with mouse mode enabled
 set -g mouse on
@@ -296,5 +299,93 @@ set -g mouse on
 # move status line to top
 #set -g status-position top
 
-set -g default-terminal "xterm-256color" # colors!
+
+# Disable the auto cancel on select
+bind-key    -T copy-mode    C-w               send-keys -X copy-selection
+bind-key    -T copy-mode    MouseDragEnd1Pane send-keys -X copy-selection
+bind-key    -T copy-mode    M-w               send-keys -X copy-selection
+bind-key    -T copy-mode-vi C-j               send-keys -X copy-selection
+bind-key    -T copy-mode-vi Enter             send-keys -X copy-selection
+bind-key    -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection
+
+# Fix the -r on switching
+unbind h
+unbind j
+unbind k
+unbind l
+# pane navigation (removed -r to only make it activate once)
+bind h select-pane -L  # move left
+bind j select-pane -D  # move down
+bind k select-pane -U  # move up
+bind l select-pane -R  # move right
+
+# unbind unused stuff
+unbind -n C-l  # clear history
+unbind C-f     # search session
+unbind C-c     # create new session
+unbind m       # toggle mouse
+
+
+# # disable "release mouse drag to copy and exit copy-mode", ref: https://github.com/tmux/tmux/issues/140
+# unbind-key -T copy-mode-vi MouseDragEnd1Pane
+#
+# # since MouseDragEnd1Pane neither exit copy-mode nor clear selection now,
+# # let single click do selection clearing for us.
+# bind-key -T copy-mode-vi MouseDown1Pane select-pane\; send-keys -X clear-selection
+#
+# # this line changes the default binding of MouseDrag1Pane, the only difference
+# # is that we use `copy-mode -eM` instead of `copy-mode -M`, so that WheelDownPane
+# # can trigger copy-mode to exit when copy-mode is entered by MouseDrag1Pane
+# bind -n MouseDrag1Pane if -Ft= '#{mouse_any_flag}' 'if -Ft= \"#{pane_in_mode}\" \"copy-mode -eM\" \"send-keys -M\"' 'copy-mode -eM'
+
+
+# -- Plugin support ------------------------------------------------------------
+
+# -----------------------
+# Plugins
+# -----------------------
+set -g @plugin 'tmux-plugins/tpm'
+# TPM plugin manager
+# <prefix> shift + i : to reload tmux and install new plugins
+
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+# Restore the previous tmux content
+# <prefix> ctrl + s : save the session
+# <prefix> ctrl + r : restore the session
+
+set -g @plugin 'tmux-plugins/tmux-sessionist'
+# Plugin for easier handling of sessions
+# <prefix> g : prompts for session name to switch to
+# <prefix> shift + c : prompt for name and create new session
+# <prefix> shift + s : switch to last session
+# <prefix> + @ : promote current pane into new session
+
+set -g @plugin 'tmux-plugins/tmux-logging'
+# Logging plugin for tmux
+# <prefix> alt + p : to screen capture
+# <prefix> shift + p : to start/stop logging
+# <prefix> alt + shift + p : save all the pane history
+
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
+# enables the usage of mouse to scroll and adjust speed etc
+
+set -g @plugin 'Morantron/tmux-fingers'
+# Shows hints for easier copy
+# <prefix> shift + f : trigger hints, press the key to copy
+
+
+# -----------------------
+# Plugin configuration
+# -----------------------
+#set -g @resurrect-capture-pane-contents 'on'
+# Restoring shell history
+set -g @resurrect-save-shell-history 'on'
+# restore all programs that are running inside tmux
+set -g @resurrect-processes ':all:'
+# restore the session automatically on create
+# activates mouse scrolling for programs like vi, less, more, etc
+set -g @emulate-scroll-for-no-mouse-alternate-buffer on
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
 
