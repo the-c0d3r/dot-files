@@ -2,11 +2,11 @@
 
 # Keyboard key repeat speed
 # xset r rate [delay] [rate]
-xset r rate 250 50
+[ -x "$(command -v xset)" ] && xset r rate 250 50
 
 
 # If the following is not at the end of the file, then it will show the annoying
 # xmodmap:  please release the following keys within 2 seconds:
-xmodmap -e 'clear Lock'
-xmodmap -e 'keycode 0x42=Escape'
-xmodmap -e 'keycode 0x9=Caps_Lock'
+[ -x "$(command -v xmodmap)" ] && xmodmap -e 'clear Lock'
+[ -x "$(command -v xmodmap)" ] && xmodmap -e 'keycode 0x42=Escape'
+[ -x "$(command -v xmodmap)" ] && xmodmap -e 'keycode 0x9=Caps_Lock'
