@@ -31,6 +31,7 @@ Plug 'junegunn/rainbow_parentheses.vim'                           " Rainbow pare
 Plug 'sakshamgupta05/vim-todo-highlight'                          " Highlights TODO FIXME
 Plug 'kshenoy/vim-signature'                                      " displays the marks on the sidebar
 Plug 'ap/vim-css-color'                                           " displays color for color code
+Plug 'sainnhe/sonokai'                                            " sonokai color scheme
 
 "---------------------------
 " Themes
@@ -75,25 +76,17 @@ Plug 'wsdjeg/FlyGrep.vim'                                         " Asynchronyou
 
 call plug#end()
 
+
 "---------------------------------
 " Color Theme Configuration
 "---------------------------------
 "colorscheme = [gruvbox, molokai, colorsbox-material, dracula, srcery, koe,PaperColor]
-"let g:gruvbox_contrast_dark="hard"
-colorscheme PaperColor
-let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 1
-  \     },
-  \     'cpp': {
-  \       'highlight_standard_library': 1
-  \     },
-  \     'c': {
-  \       'highlight_builtins' : 1
-  \     }
-  \   }
-  \ }
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+let g:sonokai_transparent_background=1
+
+colorscheme sonokai
 
 "---------------------------------
 " NERDTree config
@@ -305,7 +298,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_exclude_preview = 1
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'sonokai'
 let g:airline_section_z = '%3p%% %l:%L %{strftime("%I:%M%p")}' " %{battery#component()}'
 let g:airline_section_warning = ""
 " themes = molokai, powerlineish, gruvbox, dracula, hybrid, luna, zenburn, base16_atelierforest
