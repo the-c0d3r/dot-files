@@ -32,6 +32,7 @@ Plug 'sakshamgupta05/vim-todo-highlight'                          " Highlights T
 Plug 'kshenoy/vim-signature'                                      " displays the marks on the sidebar
 Plug 'ap/vim-css-color'                                           " displays color for color code
 Plug 'sainnhe/sonokai'                                            " sonokai color scheme
+Plug 'miyakogi/conoline.vim'                                      " highlight current line
 
 "---------------------------
 " Themes
