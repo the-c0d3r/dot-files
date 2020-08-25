@@ -65,6 +65,7 @@ Plug 'honza/vim-snippets'                                         " Sinppets for
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }     " completion manager
 Plug 'zchee/deoplete-jedi'                                        " completion manager for deoplete using jedi
 Plug 'zchee/deoplete-clang'                                       " c completion
+Plug 'zxqfl/tabnine-vim'                                          " AI based code completion
 
 "---------------------------
 " Search
