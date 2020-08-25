@@ -5,7 +5,8 @@
 alias gign="git config --add core.filemode false"
 alias gs="git status"
 alias ga="git add"
-alias gdh="git diff HEAD"
+alias gdh="git diff HEAD"     # see what's the uncommited changes
+alias gdhp="git diff HEAD^"   # see what's the previous commit changes
 alias gdm="git diff master"
 alias gp="git push"
 alias gcan="git commit --amend --no-edit"
