@@ -291,6 +291,7 @@ let g:todo_highlight_config = {
 "---------------------------------
 let g:clap_theme = 'material_design_dark'
 nnoremap <Leader>t :Clap<CR>
+nnoremap <Leader>f :Clap grep2<CR>
 
 "---------------------------------
 " Airline settings
