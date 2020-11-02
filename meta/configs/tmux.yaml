@@ -3,4 +3,7 @@
     ~/.tmux.conf.local: ui/tmux/tmux.conf.local
 
 - shell:
-  - [git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm]
+    # clone TPM tmux plugin manager
+  - [git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm, cloning Tmux Plugin Manager]
+    # install the plugins
+  - [bash ~/.tmux/plugins/tpm/bin/install_plugins, Installing Tmux Plugins]

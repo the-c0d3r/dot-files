@@ -24,6 +24,7 @@ alias weather="curl http://wttr.in/singapore"
 alias tmls="tmux ls"
 alias tmat="tmux attach -t"
 alias tmns="tmux new -s"
+alias tmkl="tmux kill-session -t"
 
 # ArchLinux
 alias pacmandep="sudo pacman -Rs \$(pacman -Qqtd)"  # remove the whole dependency chain
