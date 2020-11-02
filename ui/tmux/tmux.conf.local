@@ -376,16 +376,16 @@ unbind m       # toggle mouse
 # # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 # run -b '~/.tmux/plugins/tpm/tpm'
 
-
 # List of plugins
  set -g @tpm_plugins '                  \
    tmux-plugins/tpm                     \
    tmux-plugins/tmux-resurrect          \
    tmux-plugins/tmux-sessionist         \
    tmux-plugins/tmux-logging            \
-   nhdaly/tmux-better-mouse-mode  \
+   nhdaly/tmux-better-mouse-mode        \
    Morantron/tmux-fingers               \
- '
+'
+
 # -----------------------
 # Plugin configuration
 # -----------------------
@@ -397,6 +397,9 @@ set -g @resurrect-processes ':all:'
 # restore the session automatically on create
 # activates mouse scrolling for programs like vi, less, more, etc
 set -g @emulate-scroll-for-no-mouse-alternate-buffer on
+# configure logging path for the tmux-logging
+set -g @logging-path '$HOME/logs'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
+
