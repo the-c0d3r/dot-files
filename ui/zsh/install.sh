@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 # installs oh-my-zsh plugin manager
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 

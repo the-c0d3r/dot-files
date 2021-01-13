@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # The base path for the dotfile's vim directory
 BASE_PATH=editor/vim
 
