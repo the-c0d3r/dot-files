@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 mkdir -p $HOME/programming/programs/
 
 # Install a spotify dependency
