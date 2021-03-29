@@ -33,6 +33,7 @@ Plug 'kshenoy/vim-signature'                                      " displays the
 Plug 'ap/vim-css-color'                                           " displays color for color code
 Plug 'sainnhe/sonokai'                                            " sonokai color scheme
 Plug 'miyakogi/conoline.vim'                                      " highlight current line
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}            " better syntax highlighting for python
 
 "---------------------------
 " Themes
@@ -56,8 +57,10 @@ Plug 'Yggdroot/indentLine'                                        " to show the 
 Plug 'mbbill/undotree'                                            " to undo to the original point
 Plug 'vim-scripts/a.vim'                                          " for switching to header file and source cmd :A
 Plug 'easymotion/vim-easymotion'                                  " Easy Motion
-Plug 'SirVer/ultisnips'                                           " Snippet engine
-Plug 'honza/vim-snippets'                                         " Sinppets for ^
+" Plug 'SirVer/ultisnips'                                           " Snippet engine
+" Plug 'honza/vim-snippets'                                         " Sinppets for ^
+Plug 'wellle/context.vim'
+let g:context_nvim_no_redraw = 1
 
 "---------------------------
 " Autocompletes/linters
@@ -131,17 +134,17 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 "---------------------------------
 " Enter to expand on macro, and to jump to next trigger
 " Usage: select on the popup macro, press ExpandTrigger
-let g:UltiSnipsExpandTrigger="<C-R>"
-let g:UltiSnipsJumpForwardTrigger='<c-j>'
-let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-
-" Function to allow pressing enter for the expand
-let g:ulti_expand_or_jump_res = 0 " default value, just set once
-function! Ulti_ExpandOrJump_and_getRes()
-    call UltiSnips#ExpandSnippetOrJump()
-    return g:ulti_expand_or_jump_res
-endfunction
-inoremap <CR> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":"\n"<CR>
+" let g:UltiSnipsExpandTrigger="<C-R>"
+" let g:UltiSnipsJumpForwardTrigger='<c-j>'
+" let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+"
+" " Function to allow pressing enter for the expand
+" let g:ulti_expand_or_jump_res = 0 " default value, just set once
+" function! Ulti_ExpandOrJump_and_getRes()
+"     call UltiSnips#ExpandSnippetOrJump()
+"     return g:ulti_expand_or_jump_res
+" endfunction
+" inoremap <CR> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":"\n"<CR>
 
 "---------------------------------
 " Highlight line
@@ -245,24 +248,18 @@ nnoremap <space> za
 " Autocmd for unfolding at start
 autocmd BufWinEnter * let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v:val)'))
 
-
 " set smartindent
 " PEP8 Indentation
-au BufNewFile, BufRead *.py,*.c,*.h
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=80
-    \ set expandtab
-    \ set autoindent
-    \ fileformat=unix
-
 au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$\
     \ set tabstop=4
     \ set softtabstop=4
     \ set shiftwidth=4
     \ set expandtab
     \ set autoindent
+    \ fileformat=unix
+
+autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
 
 set tabstop=4
 set softtabstop=4
