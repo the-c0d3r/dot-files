@@ -57,28 +57,20 @@ Plug 'Yggdroot/indentLine'                                        " to show the 
 Plug 'mbbill/undotree'                                            " to undo to the original point
 Plug 'vim-scripts/a.vim'                                          " for switching to header file and source cmd :A
 Plug 'easymotion/vim-easymotion'                                  " Easy Motion
-" Plug 'SirVer/ultisnips'                                           " Snippet engine
-" Plug 'honza/vim-snippets'                                         " Sinppets for ^
 Plug 'wellle/context.vim'
 let g:context_nvim_no_redraw = 1
 
 "---------------------------
 " Autocompletes/linters
 "---------------------------
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }     " completion manager
-Plug 'zchee/deoplete-jedi'                                        " completion manager for deoplete using jedi
-Plug 'zchee/deoplete-clang'                                       " c completion
-Plug 'zxqfl/tabnine-vim'                                          " AI based code completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'zxqfl/tabnine-vim'                                          " AI based code completion
 
 "---------------------------
 " Search
 "---------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fzf binary
 Plug 'junegunn/fzf.vim'
-Plug 'dkprice/vim-easygrep'                                       " easy grep
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }     " clap file manager
-Plug 'wsdjeg/FlyGrep.vim'                                         " Asynchronyous grepping on the fly
-
 call plug#end()
 
 
@@ -104,47 +96,10 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-"---------------------------------
-" Deoplete config
-"---------------------------------
-" To close deoplete preview on completion and insertion
-autocmd CompleteDone * silent! pclose!
-autocmd InsertLeave * silent! pclose!
-let g:deoplete#enable_at_startup = 1
-" Disable documentation window
-set completeopt-=preview
-
-" To detect the OS and change clang header accordingly
-let uname = substitute(system('uname'), '\n', '', '')
-if uname == 'Linux'
-    let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
-    let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
-elseif uname == 'Darwin'
-    let g:deoplete#sources#clang#libclang_path = "/Library/Developer/CommandLineTools/usr/lib/libclang.dylib"
-    let g:deoplete#sources#clang#clang_header = "/Library/Developer/CommandLineTools/usr/lib/clang"
-endif
-
 " use tab to forward cycle
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " use tab to backward cycle
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-
-"---------------------------------
-" UltiSnips config
-"---------------------------------
-" Enter to expand on macro, and to jump to next trigger
-" Usage: select on the popup macro, press ExpandTrigger
-" let g:UltiSnipsExpandTrigger="<C-R>"
-" let g:UltiSnipsJumpForwardTrigger='<c-j>'
-" let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-"
-" " Function to allow pressing enter for the expand
-" let g:ulti_expand_or_jump_res = 0 " default value, just set once
-" function! Ulti_ExpandOrJump_and_getRes()
-"     call UltiSnips#ExpandSnippetOrJump()
-"     return g:ulti_expand_or_jump_res
-" endfunction
-" inoremap <CR> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":"\n"<CR>
 
 "---------------------------------
 " Highlight line
@@ -235,8 +190,6 @@ let g:NERDTrimTrailingWhitespace = 1
 " FIXME: this doesn't work on mac
 nnoremap <C-_> :call NERDComment(0,"toggle")<CR>
 vnoremap <C-_> :call NERDComment(0,"toggle")<CR>
-" nmap <C-_>   <Plug>NERDCommenterToggle
-" vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 
 " Enable code folding
 filetype plugin indent on
@@ -284,12 +237,6 @@ let g:todo_highlight_config = {
       \   }
       \ }
 
-"---------------------------------
-" Clap settings
-"---------------------------------
-let g:clap_theme = 'material_design_dark'
-nnoremap <Leader>t :Clap<CR>
-nnoremap <Leader>f :Clap grep2<CR>
 
 "---------------------------------
 " Airline settings
@@ -321,21 +268,11 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'Type'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Character'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+
+" FZF file search
 nnoremap <c-p> :FZF<cr>
+" FZF Ag search similar to grep
+nnoremap <Leader> :Ag<CR>
 
 "---------------------------------
 " Strip Trailing Spaces on save
@@ -346,15 +283,6 @@ function! s:StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l:l, l:c)
 endfunction
-
-"---------------------------------
-" Highlight line
-"---------------------------------
-highlight Pmenu ctermbg=white ctermfg=black cterm=bold
-highlight Comment gui=bold
-highlight Normal gui=none
-highlight NonText guibg=none
-highlight CursorLine cterm=NONE ctermbg=black gui=NONE
 
 "---------------------------------
 " Quote selection
