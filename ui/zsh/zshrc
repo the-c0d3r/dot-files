@@ -19,9 +19,7 @@ plugins=(
     autojump
     colored-man-pages
     git
-    hacker-quotes
     vi-mode
-    zsh-cmd-architect
     zsh-syntax-highlighting
     zsh-autosuggestions
 )
@@ -38,10 +36,6 @@ file_source ~/.secrets
 file_source ~/.fzf.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 file_source ~/.p10k.zsh
-
-# Zsh Cmd Architect shortcut
-bindkey '^T' zca-widget
-autoload zmv
 
 
 # === History related options
