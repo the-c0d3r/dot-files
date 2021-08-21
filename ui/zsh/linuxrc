@@ -2,7 +2,7 @@
 
 # Keyboard key repeat speed
 # xset r rate [delay] [rate]
-[ -x "$(command -v xset)" ] && xset r rate 250 50
+[ -x "$(command -v xset)" ] && xset r rate 300 15
 
 
 # If the following is not at the end of the file, then it will show the annoying
