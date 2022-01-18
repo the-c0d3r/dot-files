@@ -4,6 +4,16 @@ function ununzip() {
     unzip -t $1 | awk '{print $2}' | tail -n +2 | xargs rm -fr
 }
 
+function tile() {
+    brew services start yabai
+    brew services start skhd
+}
+
+function untile() {
+    brew services stop yabai
+    brew services stop skhd
+}
+
 function file_source() {
     # check file exists and source
     # parameter 1: the file name
