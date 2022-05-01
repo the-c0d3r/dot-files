@@ -1,5 +1,5 @@
 - shell:
-  - [bash ui/polybar/install.sh, Installing polybar stuff]
+  - [bash files/polybar/install.sh, Installing polybar stuff]
 
 - link:
-    ~/.config/polybar: ui/polybar
+    ~/.config/polybar: files/polybar

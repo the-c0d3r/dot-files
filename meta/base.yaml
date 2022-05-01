@@ -1,6 +1,6 @@
 - link:
     ~/.dotfiles: ''
-    ~/.wallpaper: ui/wallpaper
+    ~/.wallpaper: files/wallpaper
 
 - defaults:
     link:

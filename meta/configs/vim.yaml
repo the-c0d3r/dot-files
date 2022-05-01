@@ -1,5 +1,0 @@
-- shell:
-  - [/bin/bash editor/vim/install.sh, Installing neovim configuration]
-
-- link:
-    ~/.config/nvim/init.vim: editor/vim/init.vim
