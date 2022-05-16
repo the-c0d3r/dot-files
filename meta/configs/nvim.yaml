@@ -2,4 +2,4 @@
   - [/bin/bash files/nvim/install.sh, Installing neovim configuration]
 
 - link:
-    ~/.config/nvim/init.vim: files/nvim/init.vim
+    ~/.config/nvim/init.lua: files/nvim/init.lua
