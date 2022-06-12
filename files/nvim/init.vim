@@ -57,8 +57,6 @@ Plug 'Yggdroot/indentLine'                                        " to show the 
 Plug 'mbbill/undotree'                                            " to undo to the original point
 Plug 'vim-scripts/a.vim'                                          " for switching to header file and source cmd :A
 Plug 'easymotion/vim-easymotion'                                  " Easy Motion
-Plug 'wellle/context.vim'
-let g:context_nvim_no_redraw = 1
 
 "---------------------------
 " Autocompletes/linters
@@ -71,6 +69,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "---------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fzf binary
 Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 
