@@ -169,7 +169,10 @@ exec_always --no-startup-id feh --bg-fill ~/.wallpaper/drowning-in-space.jpg
 exec_always --no-startup-id compton -b --config ~/.config/compton/compton.conf
 
 # polybar - customizable menu bar
-exec_always --no-startup-id ~/.config/polybar/polybar.sh
+exec_always --no-startup-id ~/.config/polybar/launch.sh --cuts
+
+# picom window compositor
+exec_always --no-startup-id /usr/bin/picom
 
 # set workspace 1 to tabbed
 for_window [workspace=1] layout tabbed
