@@ -80,3 +80,76 @@ fbr() {
     branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
     git checkout $(echo "$branch" | sed "s/.* //")
 }
+
+function s() {
+    # shortname for "ssh", defaults username to root
+    # parameters $1: host number, $2: (optional) username, default root
+
+    usage="Usage: s host_number username (optional, default root)"
+
+    USERNAMES=( contextus vanguard )
+
+    if [ -z "$1" ] && [ -z "$2" ]; then
+        echo "$usage"
+        return
+    fi
+
+    HOST=$1
+    SSH_USER=$2
+
+    if [ -z "$SSH_USER" ]; then
+        SSH_USER="root"
+        echo "[?] Trying username: $SSH_USER\n"
+    fi
+
+    ssh "192.168.1.$HOST" -l "$SSH_USER"
+
+    if [ $? -ne "0" ]; then
+        for UNAME in "${USERNAMES[@]}"
+        do 
+            echo "[?] Trying username: $UNAME\n"
+            ssh "192.168.1.$HOST" -l "$UNAME"
+
+            if [ $? -eq "0" ]; then
+                return
+            fi
+        done
+    fi
+}
+
+function x() {
+    # xxh: https://github.com/xxh/xxh
+    # shortname for "xxh", defaults username to root
+    # parameters $1: host number, $2: (optional) username, default root
+
+    usage="Usage: s host_number username (optional, default root)"
+    USERNAMES=( contextus vanguard )
+
+    if [ -z "$1" ] && [ -z "$2" ]; then
+        echo "$usage"
+        return
+    fi
+
+    HOST=$1
+    SSH_USER=$2
+
+    if [ -z "$SSH_USER" ]; then
+        SSH_USER="root"
+        echo "[?] Trying username: $SSH_USER\n"
+    fi
+
+    xxh "192.168.1.$HOST" -l "$SSH_USER"
+
+    if [ $? -ne "0" ]; then
+        for UNAME in "${USERNAMES[@]}"
+        do 
+            echo "[?] Trying username: $UNAME\n"
+            xxh "192.168.1.$HOST" -l "$UNAME"
+
+            if [ $? -eq "0" ]; then
+                return
+            fi
+        done
+    fi
+}
+
