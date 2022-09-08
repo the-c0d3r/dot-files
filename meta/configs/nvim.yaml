@@ -1,5 +1,5 @@
 - shell:
-  - [/bin/bash files/nvim/install.sh, Installing neovim configuration]
+  - [git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1, Installing NvChad configuration]
 
 - link:
-    ~/.config/nvim/init.vim: files/nvim/init.vim
+    ~/.config/nvim/lua/custom/: files/nvim/custom/
