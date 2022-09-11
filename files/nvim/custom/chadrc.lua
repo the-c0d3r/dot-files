@@ -1,4 +1,3 @@
-
 local M = {}
 
 M.ui = {
@@ -7,7 +6,7 @@ M.ui = {
 
 M.plugins = {
   override = {
-     ["NvChad/ui"] = {
+    ["NvChad/ui"] = {
       statusline = {
         separator_style = "arrow", -- default/round/block/arrow
         overriden_modules = nil,
@@ -18,19 +17,9 @@ M.plugins = {
         enabled = true,
         lazyload = false,
         overriden_modules = nil,
-       },
-     },
-  },
+      },
+    },
 
-  user = {
-    -- dashboard
-    ["goolord/alpha-nvim"] = {
-      disable = false,
-    },
-    -- key hint prompt
-    ["folke/which-key.nvim"] = {
-      disable = false,
-    },
     ["williamboman/mason.nvim"] = {
       ensure_installed = {
         -- lua stuff
@@ -42,6 +31,10 @@ M.plugins = {
         "ansible-language-server",
         "lua-language-server",
         "stylua",
+        "json-lsp",
+        "html-lsp",
+        "cmake-language-server",
+        "bash-language-server",
 
         -- web dev
         "css-lsp",
@@ -52,6 +45,17 @@ M.plugins = {
         "shfmt",
         "shellcheck",
       },
+    },
+  },
+
+  user = {
+    -- dashboard
+    ["goolord/alpha-nvim"] = {
+      disable = false,
+    },
+    -- key hint prompt
+    ["folke/which-key.nvim"] = {
+      disable = false,
     },
 
     -- outline for symbols
@@ -81,6 +85,21 @@ M.plugins = {
     ['karb94/neoscroll.nvim'] = {
       config = function()
         require('neoscroll').setup()
+      end,
+    },
+
+    -- source code analysis and navigation tool
+    ['ray-x/guihua.lua'] = {},
+    ['ray-x/navigator.lua'] = {
+      after = "nvim-lspconfig",
+      config = function()
+        require('navigator').setup({
+          lsp = {
+            -- need to disable lsp here, as mason will install and handle it
+            disable_lsp = { 'all' },
+          },
+          mason = true,
+        })
       end,
     },
   },
