@@ -1,5 +1,8 @@
 # file related aliases
 alias todo="vi ~/work/todo.md"
+export ANSIBLE_FORCE_COLOR=true
+export ANSIBLE_STDOUT_CALLBACK=yaml
+
 
 # System Aliases
 alias v="nvim"
@@ -8,6 +11,17 @@ alias vim="nvim"
 alias l="ls -lah --color=auto"       # show all
 alias lh="ls -ld .* --color=auto"    # show all hidden files/dir
 alias lsd="ls -ld */ --color=auto"   # show all directories
+alias ex="exit"
+
+# Vagrant
+alias vg="vagrant"
+alias vgs="vagrant ssh"
+
+# ctags
+alias ctags="`brew --prefix`/bin/ctags"
+
+# docker
+alias dockerclean="docker ps -a | grep 'Exited' | rev | cut -d' ' -f1 | rev | xargs -I{} docker rm -f {};"
 
 # prevent zsh's globbing for remote scp
 alias scp='noglob scp'
