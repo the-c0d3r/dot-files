@@ -89,7 +89,9 @@ M.plugins = {
     },
 
     -- source code analysis and navigation tool
-    ['ray-x/guihua.lua'] = {},
+    ['ray-x/guihua.lua'] = {
+      run = 'cd lua/fzy && make'
+    },
     ['ray-x/navigator.lua'] = {
       after = "nvim-lspconfig",
       config = function()
