@@ -1,3 +1,6 @@
 
 alias hidedesktop="defaults write com.apple.finder CreateDesktop false && killall Finder"
 alias unhidedesktop="defaults write com.apple.finder CreateDesktop true && killall Finder"
+
+# ctags
+alias ctags="`brew --prefix`/bin/ctags"

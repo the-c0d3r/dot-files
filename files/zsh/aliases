@@ -17,9 +17,6 @@ alias ex="exit"
 alias vg="vagrant"
 alias vgs="vagrant ssh"
 
-# ctags
-alias ctags="`brew --prefix`/bin/ctags"
-
 # docker
 alias dockerclean="docker ps -a | grep 'Exited' | rev | cut -d' ' -f1 | rev | xargs -I{} docker rm -f {};"
 
