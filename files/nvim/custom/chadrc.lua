@@ -72,12 +72,8 @@ M.plugins = {
       end,
     },
 
-    -- display marks on the sidebar
-    ['kshenoy/vim-signature'] = {},
     -- code alignment gaip+keyword, gaip=, gaip*
     ['junegunn/vim-easy-align'] = {},
-    -- switches between source and header file
-    ['vim-scripts/a.vim'] = {},
     -- multiple cursor location
     -- ['terryma/vim-multiple-cursors'] = {},
     ['easymotion/vim-easymotion'] = {},
@@ -85,6 +81,30 @@ M.plugins = {
     ['karb94/neoscroll.nvim'] = {
       config = function()
         require('neoscroll').setup()
+      end,
+    },
+
+    -- show marks
+    ['chentoast/marks.nvim'] = {
+      config = function()
+        require('marks').setup()
+      end,
+    },
+
+    -- cursorline highlight
+    ['RRethy/vim-illuminate'] = {},
+
+    -- prettify folded code
+    ['anuvyklack/pretty-fold.nvim'] = {
+      config = function()
+        require('pretty-fold').setup()
+      end,
+    },
+    -- fold provider
+    ['kevinhwang91/promise-async'] = {},
+    ['kevinhwang91/nvim-ufo'] = {
+      config = function()
+        require('ufo').setup()
       end,
     },
 
