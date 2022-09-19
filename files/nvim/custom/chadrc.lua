@@ -108,6 +108,16 @@ M.plugins = {
       end,
     },
 
+    -- auto session
+    ['rmagatti/auto-session'] = {
+      config = function()
+        require('auto-session').setup({
+          log_level = "error",
+          auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+        })
+      end,
+    },
+
     -- source code analysis and navigation tool
     ['ray-x/guihua.lua'] = {
       run = 'cd lua/fzy && make'
