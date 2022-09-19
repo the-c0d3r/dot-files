@@ -100,11 +100,29 @@ M.plugins = {
         require('pretty-fold').setup()
       end,
     },
+
     -- fold provider
     ['kevinhwang91/promise-async'] = {},
     ['kevinhwang91/nvim-ufo'] = {
       config = function()
         require('ufo').setup()
+      end,
+    },
+
+    -- diff view
+    ['sindrets/diffview.nvim'] = {
+      requires = { 'nvim-lua/plenary.nvim' },
+      after = 'plenary.nvim',
+      config = function()
+        require('diffview').setup()
+      end,
+    },
+
+    -- show diagnostics, references, quick fixes
+    ['folke/trouble.nvim'] = {
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require('trouble').setup()
       end,
     },
 
