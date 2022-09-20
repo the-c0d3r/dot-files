@@ -4,6 +4,15 @@ M.ui = {
   theme = "onedark",
 }
 
+M.mappings = {
+  keys = {
+    n = {
+      ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope" },
+      ["<C-x>"] = { "q", "Open Telescope" }
+    }
+  }
+}
+
 M.plugins = {
   override = {
     ["NvChad/ui"] = {
