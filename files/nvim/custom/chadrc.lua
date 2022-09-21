@@ -8,7 +8,8 @@ M.mappings = {
   keys = {
     n = {
       ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
-      ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" }
+      ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
+      ["<C-h>"] = { "<cmd> HopLine<CR>", "Hop to Line" }
     }
   }
 }
@@ -85,7 +86,11 @@ M.plugins = {
     ['junegunn/vim-easy-align'] = {},
     -- multiple cursor location
     -- ['terryma/vim-multiple-cursors'] = {},
-    ['easymotion/vim-easymotion'] = {},
+    ['phaazon/hop.nvim'] = {
+      config = function()
+        require('hop').setup()
+      end,
+    },
     -- smooth scrolling
     ['karb94/neoscroll.nvim'] = {
       config = function()
