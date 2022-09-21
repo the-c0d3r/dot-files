@@ -346,7 +346,7 @@ tmux_conf_copy_to_os_clipboard=true
 
 # increase history size
 #set -g history-limit 10000
-set -g history-limit 999999999            # unlimited history (close enough)
+set -g history-limit 99999            # unlimited history (close enough)
 
 # start with mouse mode enabled
 set -g mouse on
@@ -365,6 +365,9 @@ set -g mouse on
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind v new-window -c #{pane_current_path} #!important
+
+# shortcut for editing my dotfiles from anywhere
+bind n new-window -n "dotfiles" sh -c 'cd ~/.dotfiles/ && nvim'
 
 # move status line to top
 set -g status-position top
