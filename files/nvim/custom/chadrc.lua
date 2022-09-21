@@ -7,8 +7,8 @@ M.ui = {
 M.mappings = {
   keys = {
     n = {
-      ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope" },
-      ["<C-x>"] = { "q", "Open Telescope" }
+      ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
+      ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" }
     }
   }
 }
@@ -120,7 +120,7 @@ M.plugins = {
 
     -- diff view
     ['sindrets/diffview.nvim'] = {
-      requires = { 'nvim-lua/plenary.nvim' },
+      requires = "nvim-lua/plenary.nvim",
       after = 'plenary.nvim',
       config = function()
         require('diffview').setup()
