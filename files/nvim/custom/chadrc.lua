@@ -9,7 +9,7 @@ M.mappings = {
     n = {
       ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
       ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
-      ["<C-h>"] = { "<cmd> HopLine<CR>", "Hop to Line" }
+      ["<C-,>"] = { "<cmd> HopLine<CR>", "Hop to Line" }
     }
   }
 }
@@ -161,6 +161,8 @@ M.plugins = {
           lsp = {
             -- need to disable lsp here, as mason will install and handle it
             disable_lsp = { 'all' },
+            -- format on save will cause issues if the code is not compatible, like windows c programs
+            format_on_save = false,
           },
           mason = true,
         })
