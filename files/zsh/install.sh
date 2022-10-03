@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-rm ~/.zshrc
+rm -rf ~/.zshrc || true
 rm -rf ~/.oh-my-zsh
 
 # installs oh-my-zsh plugin manager
@@ -15,6 +15,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/oldratlee/hacker-quotes.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/hacker-quotes
 # install powerlevel 10k theme
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+# install fzf plugin
+git clone https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
 
 rm ~/.zshrc
 

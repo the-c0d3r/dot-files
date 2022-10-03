@@ -14,14 +14,14 @@ DISABLE_UPDATE_PROMPT="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(
-    alias-tips
-    archlinux
-    autojump
-    colored-man-pages
     git
     vi-mode
-    zsh-syntax-highlighting
+    autojump
+    archlinux
+    fzf-zsh-plugin
+    colored-man-pages
     zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 
