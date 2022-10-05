@@ -5,6 +5,11 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
+-- vim tab width to 4 spaces
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+
 -- show invisible characters
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', extends = '›', precedes = '‹', trail = '·' }
