@@ -15,9 +15,9 @@ M.mappings = {
         n = {
             ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
             ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
-            ["<C-,>"] = { "<cmd> HopLine<CR>", "Hop to Line" },
-            ["<C-g>"] = { "<cmd> PackerSync<CR>", "Hop to Line" },
-            ["<C-x>"] = { "<cmd> qa<CR>", "quit all" }
+            ["<C-p>"] = { "<cmd> Telescope project<CR>", "project menu" },
+            ["<C-g>"] = { "<cmd> HopLine<CR>", "Hop to Line" },
+            ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
         }
     }
 }
@@ -27,14 +27,10 @@ M.plugins = {
         ["NvChad/ui"] = {
             statusline = {
                 separator_style = "arrow", -- default/round/block/arrow
-                overriden_modules = nil,
             },
-
-            -- lazyload it when there are 1+ buffers
             tabufline = {
                 enabled = true,
                 lazyload = false,
-                overriden_modules = nil,
             },
         },
 
@@ -91,6 +87,16 @@ M.plugins = {
         },
         -- code alignment gaip+keyword, gaip=, gaip*
         ['junegunn/vim-easy-align'] = {},
+
+        -- telescope project selection
+        ['nvim-telescope/telescope-project.nvim'] = {
+            requires = 'nvim-telescope/telescope.nvim',
+            after = 'telescope.nvim',
+            config = function()
+                require 'telescope'.load_extension('project')
+            end,
+        },
+
         -- multiple cursor location
         -- ['terryma/vim-multiple-cursors'] = {},
         ['phaazon/hop.nvim'] = {
