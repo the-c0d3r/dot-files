@@ -1,7 +1,13 @@
 local M = {}
 
 M.ui = {
-    theme = "onedark",
+    hl_override = {
+        Comment = { italic = true },
+
+        -- highlight current line
+        CursorLine = { bg = "one_bg", },
+    },
+    theme = "ayu-dark",
 }
 
 M.mappings = {
@@ -9,7 +15,9 @@ M.mappings = {
         n = {
             ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
             ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
-            ["<C-,>"] = { "<cmd> HopLine<CR>", "Hop to Line" }
+            ["<C-,>"] = { "<cmd> HopLine<CR>", "Hop to Line" },
+            ["<C-g>"] = { "<cmd> PackerSync<CR>", "Hop to Line" },
+            ["<C-x>"] = { "<cmd> qa<CR>", "quit all" }
         }
     }
 }
@@ -81,7 +89,6 @@ M.plugins = {
                 require "custom.plugins.lspconfig"
             end,
         },
-
         -- code alignment gaip+keyword, gaip=, gaip*
         ['junegunn/vim-easy-align'] = {},
         -- multiple cursor location
@@ -97,15 +104,13 @@ M.plugins = {
                 require('neoscroll').setup()
             end,
         },
-
         -- show marks
         ['chentoast/marks.nvim'] = {
             config = function()
                 require('marks').setup()
             end,
         },
-
-        -- cursorline highlight
+        -- cursorline highlight, highlight same keywords as cursor
         ['RRethy/vim-illuminate'] = {},
 
         -- prettify folded code
@@ -114,7 +119,6 @@ M.plugins = {
                 require('pretty-fold').setup()
             end,
         },
-
         -- fold provider
         ['kevinhwang91/promise-async'] = {},
         ['kevinhwang91/nvim-ufo'] = {
