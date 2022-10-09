@@ -158,6 +158,14 @@ M.plugins = {
         -- tabnine AI assisted code completion
         ["tzachar/cmp-tabnine"] = {
             after = "nvim-cmp",
+            requires = {
+                { 'hrsh7th/cmp-buffer' },
+                { 'hrsh7th/cmp-calc' },
+                { 'hrsh7th/cmp-path' },
+                { 'f3fora/cmp-spell' },
+                { 'hrsh7th/cmp-emoji' },
+                { 'octaltree/cmp-look' },
+            },
             run = "./install.sh",
             config = function()
                 require "custom.plugins.tabnine"

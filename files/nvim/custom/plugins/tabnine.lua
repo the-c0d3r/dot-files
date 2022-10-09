@@ -16,7 +16,11 @@ local sources = {
     { name = "cmdline" },
     { name = "treesitter" },
     { name = "plugins" },
-    { name = 'cmp_tabnine' },
+    { name = "cmp_tabnine" },
+    { name = "calc" },
+    { name = "spell" },
+    { name = "emoji" },
+    { name = "look" },
 }
 
 tabnine.setup({
@@ -80,6 +84,12 @@ cmp.setup {
             behavior = cmp.SelectBehavior.Select
         }), { 'i' }),
         ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({
+            behavior = cmp.SelectBehavior.Select
+        }), { 'i' }),
+        ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item({
+            behavior = cmp.SelectBehavior.Select
+        }), { 'i' }),
+        ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item({
             behavior = cmp.SelectBehavior.Select
         }), { 'i' }),
     }
