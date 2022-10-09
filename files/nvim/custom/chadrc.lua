@@ -85,8 +85,6 @@ M.plugins = {
                 require "custom.plugins.lspconfig"
             end,
         },
-        -- code alignment gaip+keyword, gaip=, gaip*
-        ['junegunn/vim-easy-align'] = {},
 
         -- telescope project selection
         ['nvim-telescope/telescope-project.nvim'] = {
@@ -99,11 +97,14 @@ M.plugins = {
 
         -- multiple cursor location
         -- ['terryma/vim-multiple-cursors'] = {},
+
+        -- jump to character
         ['phaazon/hop.nvim'] = {
             config = function()
                 require('hop').setup()
             end,
         },
+
         -- smooth scrolling
         ['karb94/neoscroll.nvim'] = {
             config = function()
