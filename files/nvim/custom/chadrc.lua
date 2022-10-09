@@ -16,7 +16,6 @@ M.mappings = {
             ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
             ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
             ["<C-p>"] = { "<cmd> Telescope project<CR>", "project menu" },
-            ["<C-g>"] = { "<cmd> HopLine<CR>", "Hop to Line" },
             ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
         }
     }
@@ -96,12 +95,15 @@ M.plugins = {
         },
 
         -- multiple cursor location
-        -- ['terryma/vim-multiple-cursors'] = {},
+        ['mg979/vim-visual-multi'] = {},
 
-        -- jump to character
-        ['phaazon/hop.nvim'] = {
+        -- jump to match
+        ['ggandor/leap.nvim'] = {
             config = function()
-                require('hop').setup()
+                require('leap').setup({
+                    highlight_unlabeled = true,
+                })
+                require('leap').set_default_keymaps()
             end,
         },
 
