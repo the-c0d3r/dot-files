@@ -92,7 +92,7 @@ font:
     #   - (Linux) monospace
     #   - (Windows) Consolas
     #family: monospace
-    family: MonoLisa
+    family: SFMono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -152,32 +152,37 @@ draw_bold_text_with_bright_colors: true
 
 # Colors (Tomorrow Night Bright)
 colors:
-  # Default colors
+  cursor:
+    text: '#fefff2'
+    cursor: '#f0cc09'
+
+  selection:
+    text: '#b5b5b5'
+    background: '#18354f'
+
   primary:
-    background: '0x1b182c'
-    foreground: '0xcbe3e7'
+    background: '#132738'
+    foreground: '#ffffff'
 
-  # Normal colors
   normal:
-    black: '0x100e23'
-    red: '0xff8080'
-    green: '0x95ffa4'
-    yellow: '0xffe9aa'
-    blue: '0x91ddff'
-    magenta: '0xc991e1'
-    cyan: '0xaaffe4'
-    white: '0xcbe3e7'
+    black: '#000000'
+    red: '#ff0000'
+    green: '#38de21'
+    yellow: '#ffe50a'
+    blue: '#1460d2'
+    magenta: '#ff005d'
+    cyan: '#00bbbb'
+    white: '#bbbbbb'
 
-  # Bright colors
   bright:
-    black: '0x565575'
-    red: '0xff5458'
-    green: '0x62d196'
-    yellow: '0xffb378'
-    blue: '0x65b2ff'
-    magenta: '0x906cff'
-    cyan: '0x63f2f1'
-    white: '0xa6b3cc'
+    black: '#555555'
+    red: '#f40e17'
+    green: '#3bd01d'
+    yellow: '#edc809'
+    blue: '#5555ff'
+    magenta: '#ff55ff'
+    cyan: '#6ae3fa'
+    white: '#ffffff'
 
 # Visual Bell
 #
@@ -555,4 +560,4 @@ key_bindings:
   - { key: F11, mods: Super, chars: "\e[23;3~" }
   - { key: F12, mods: Super, chars: "\e[24;3~" }
   - { key: NumpadEnter, chars: "\n" }
-theme: Challenger-Deep
+theme: Cobalt-2
