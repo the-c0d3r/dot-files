@@ -2,12 +2,12 @@ local M = {}
 
 M.ui = {
     hl_override = {
-        Comment = { italic = true },
+        -- Comment = { italic = true },
 
         -- highlight current line
         CursorLine = { bg = "one_bg", },
     },
-    theme = "ayu-dark",
+    theme = "onedark",
 }
 
 M.mappings = {
@@ -70,13 +70,6 @@ M.plugins = {
         ["folke/which-key.nvim"] = {
             disable = false,
         },
-
-        -- outline for symbols
-        ["simrat39/symbols-outline.nvim"] = {
-            config = function()
-                require("symbols-outline").setup()
-            end,
-        },
         -- LSP configuration
         ["neovim/nvim-lspconfig"] = {
             config = function()
@@ -84,6 +77,14 @@ M.plugins = {
                 require "custom.plugins.lspconfig"
             end,
         },
+
+        -- outline for symbols
+        ["simrat39/symbols-outline.nvim"] = {
+            config = function()
+                require("symbols-outline").setup()
+            end,
+        },
+
 
         -- telescope project selection
         ['nvim-telescope/telescope-project.nvim'] = {
@@ -204,6 +205,7 @@ M.plugins = {
                         disable_lsp = { 'all' },
                         -- format on save will cause issues if the code is not compatible, like windows c programs
                         format_on_save = false,
+                        document_highlight = false,
                     },
                     mason = true,
                 })
