@@ -343,6 +343,7 @@ tmux_conf_copy_to_os_clipboard=true
 # increase history size
 #set -g history-limit 10000
 set -g history-limit 99999            # unlimited history (close enough)
+set -g default-terminal "tmux-256color"
 
 # start with mouse mode enabled
 set -g mouse on
