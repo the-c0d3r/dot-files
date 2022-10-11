@@ -2,7 +2,7 @@ local M = {}
 
 M.ui = {
     hl_override = {
-        -- Comment = { italic = true },
+        Comment = { italic = true },
 
         -- highlight current line
         CursorLine = { bg = "one_bg", },
@@ -16,6 +16,7 @@ M.mappings = {
             ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
             ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
             ["<C-p>"] = { "<cmd> Telescope project<CR>", "project menu" },
+            ["<C-h>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
             ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
         }
     }
@@ -96,7 +97,7 @@ M.plugins = {
         },
 
         -- multiple cursor location
-        ['mg979/vim-visual-multi'] = {},
+        -- ['mg979/vim-visual-multi'] = {},
 
         -- jump to match
         ['ggandor/leap.nvim'] = {
@@ -105,6 +106,13 @@ M.plugins = {
                     highlight_unlabeled = true,
                 })
                 require('leap').set_default_keymaps()
+            end,
+        },
+
+        -- jump between lines
+        ['phaazon/hop.nvim'] = {
+            config = function()
+                require('hop').setup()
             end,
         },
 
