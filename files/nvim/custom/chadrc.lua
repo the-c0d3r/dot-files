@@ -18,6 +18,18 @@ M.mappings = {
             ["<C-p>"] = { "<cmd> Telescope project<CR>", "project menu" },
             ["<C-h>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
             ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
+            ["<leader>dh"] = {
+                function()
+                    vim.diagnostics.hide()
+                end,
+                "hide diagnostics",
+            },
+            ["<leader>ds"] = {
+                function()
+                    vim.diagnostics.show()
+                end,
+                "hide diagnostics",
+            },
         }
     }
 }
