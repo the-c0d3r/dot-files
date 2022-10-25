@@ -98,7 +98,6 @@ M.plugins = {
             end,
         },
 
-
         -- telescope project selection
         ['nvim-telescope/telescope-project.nvim'] = {
             requires = 'nvim-telescope/telescope.nvim',
@@ -143,17 +142,18 @@ M.plugins = {
         -- cursorline highlight, highlight same keywords as cursor
         ['RRethy/vim-illuminate'] = {},
 
-        -- prettify folded code
-        ['anuvyklack/pretty-fold.nvim'] = {
-            config = function()
-                require('pretty-fold').setup()
-            end,
-        },
         -- fold provider
         ['kevinhwang91/promise-async'] = {},
         ['kevinhwang91/nvim-ufo'] = {
             config = function()
                 require('ufo').setup()
+            end,
+        },
+        -- prettify folded code
+        ['anuvyklack/pretty-fold.nvim'] = {
+            after = 'nvim-ufo',
+            config = function()
+                require('pretty-fold').setup()
             end,
         },
 
