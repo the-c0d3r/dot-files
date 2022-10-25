@@ -223,6 +223,7 @@ M.plugins = {
                         -- format on save will cause issues if the code is not compatible, like windows c programs
                         format_on_save = false,
                         document_highlight = false,
+                        disply_diagnostic_qf = false,
                     },
                     mason = true,
                 })
