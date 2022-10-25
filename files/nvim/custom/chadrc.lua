@@ -185,6 +185,15 @@ M.plugins = {
             end,
         },
 
+        -- cheatsheet for built-in commands, plugins, etc
+        ["sudormrfbin/cheatsheet.nvim"] = {
+            requires = {
+                { 'nvim-telescope/telescope.nvim' },
+                { 'nvim-lua/popup.nvim' },
+                { 'nvim-lua/plenary.nvim' },
+            },
+        },
+
         -- tabnine AI assisted code completion
         ["tzachar/cmp-tabnine"] = {
             after = "nvim-cmp",
