@@ -213,6 +213,13 @@ M.plugins = {
         ['ray-x/guihua.lua'] = {
             run = 'cd lua/fzy && make'
         },
+        -- show lsp signature while typing functions and arguments
+        ['ray-x/lsp_signature.nvim'] = {
+            config = function()
+                require('lsp_signature').setup({})
+            end
+        },
+        -- lsp references/definitions navigator
         ['ray-x/navigator.lua'] = {
             after = "nvim-lspconfig",
             config = function()
@@ -227,6 +234,35 @@ M.plugins = {
                     },
                     mason = true,
                 })
+            end,
+        },
+
+        -- new UI stuff, like popup cmdline window, and notifications
+        ['folke/noice.nvim'] = {
+            requires = {
+                "MunifTanjim/nui.nvim",
+                "rcarriga/nvim-notify",
+            },
+            after = {
+                "nui.nvim",
+                "nvim-notify",
+                "nvim-lspconfig",
+            },
+            config = function()
+                require("noice").setup({
+                    lsp = {
+                        signature = { enabled = false },
+                        hover = { enabled = false },
+                    }
+                })
+            end,
+        },
+
+        -- highlights for TODO: and stuff
+        ['folke/todo-comments.nvim'] = {
+            requires = 'nvim-lua/plenary.nvim',
+            config = function()
+                require("todo-comments").setup {}
             end,
         },
     },
