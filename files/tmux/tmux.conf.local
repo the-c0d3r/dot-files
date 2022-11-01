@@ -428,6 +428,9 @@ set -g @plugin 'tmux-plugins/tmux-logging'
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 set -g @plugin 'Morantron/tmux-fingers'
 
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @yank_action 'copy-pipe' # or 'copy-pipe-and-cancel' for the default
+
 
 # -- custom variables ----------------------------------------------------------
 
