@@ -9,4 +9,3 @@
 # xmodmap:  please release the following keys within 2 seconds:
 [ -x "$(command -v xmodmap)" ] && xmodmap -e 'clear Lock'
 [ -x "$(command -v xmodmap)" ] && xmodmap -e 'keycode 0x42=Escape'
-[ -x "$(command -v xmodmap)" ] && xmodmap -e 'keycode 0x9=Escape'
