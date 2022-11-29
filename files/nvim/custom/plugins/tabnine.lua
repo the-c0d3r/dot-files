@@ -12,15 +12,15 @@ local sources = {
     { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
-    { name = "copilot" },
+    -- { name = "copilot" },
     { name = "cmdline" },
     { name = "treesitter" },
     { name = "plugins" },
     { name = "cmp_tabnine" },
     { name = "calc" },
-    { name = "spell" },
-    { name = "emoji" },
-    { name = "look" },
+    -- { name = "spell" },
+    -- { name = "emoji" },
+    -- { name = "look" },
 }
 
 tabnine.setup({

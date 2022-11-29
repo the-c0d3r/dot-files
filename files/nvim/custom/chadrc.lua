@@ -7,7 +7,8 @@ M.ui = {
         -- highlight current line
         CursorLine = { bg = "one_bg", },
     },
-    theme = "onedark",
+    theme = "tokyonight",
+    theme_toggle = { "tokyonight", "gruvbox_light" },
 }
 
 M.mappings = {
@@ -15,9 +16,28 @@ M.mappings = {
         n = {
             ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
             ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
-            ["<C-p>"] = { "<cmd> Telescope project<CR>", "project menu" },
-            ["<C-h>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
+            -- ["<C-p>"] = { "<cmd> Telescope project<CR>", "Project menu" },
+            ["<C-p>"] = { "<cmd> PackerSync<CR>", "Packer Sync" },
+            -- ["<C-h>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
             ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
+            ["<C-t>"] = { "<cmd> SymbolsOutline<CR>", "Open symbols outline" },
+            ["<C-s>"] = { "<cmd> :w<CR>", "save" },
+
+            -- hop plugin keymapping
+            ["f"] = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
+                "Forward search" },
+            ["F"] = {
+                "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
+                "Backward search"
+            },
+            ["t"] = {
+                "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
+                "Forward Search until"
+            },
+            ["T"] = {
+                "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
+                "Backward Search until"
+            },
         }
     }
 }
@@ -26,7 +46,7 @@ M.plugins = {
     override = {
         ["NvChad/ui"] = {
             statusline = {
-                separator_style = "arrow", -- default/round/block/arrow
+                separator_style = "block", -- default/round/block/arrow
             },
             tabufline = {
                 enabled = true,
@@ -82,16 +102,9 @@ M.plugins = {
         -- outline for symbols
         ["simrat39/symbols-outline.nvim"] = {
             config = function()
-                require("symbols-outline").setup()
-            end,
-        },
-
-        -- telescope project selection
-        ['nvim-telescope/telescope-project.nvim'] = {
-            requires = 'nvim-telescope/telescope.nvim',
-            after = 'telescope.nvim',
-            config = function()
-                require 'telescope'.load_extension('project')
+                require("symbols-outline").setup({
+                    lsp_blacklist = { 'jsonls', 'yamlls' },
+                })
             end,
         },
 
@@ -130,20 +143,20 @@ M.plugins = {
         -- cursorline highlight, highlight same keywords as cursor
         ['RRethy/vim-illuminate'] = {},
 
-        -- fold provider
-        ['kevinhwang91/promise-async'] = {},
-        ['kevinhwang91/nvim-ufo'] = {
-            config = function()
-                require('ufo').setup()
-            end,
-        },
-        -- prettify folded code
-        ['anuvyklack/pretty-fold.nvim'] = {
-            after = 'nvim-ufo',
-            config = function()
-                require('pretty-fold').setup()
-            end,
-        },
+        -- -- fold provider
+        -- ['kevinhwang91/promise-async'] = {},
+        -- ['kevinhwang91/nvim-ufo'] = {
+        --     config = function()
+        --         require('ufo').setup()
+        --     end,
+        -- },
+        -- -- prettify folded code
+        -- ['anuvyklack/pretty-fold.nvim'] = {
+        --     after = 'nvim-ufo',
+        --     config = function()
+        --         require('pretty-fold').setup()
+        --     end,
+        -- },
 
         -- diff view
         ['sindrets/diffview.nvim'] = {
@@ -216,7 +229,9 @@ M.plugins = {
         -- show lsp signature while typing functions and arguments
         ['ray-x/lsp_signature.nvim'] = {
             config = function()
-                require('lsp_signature').setup({})
+                require('lsp_signature').setup({
+                    floating_window_above_cur_line = false,
+                })
             end
         },
         -- lsp references/definitions navigator
@@ -229,8 +244,11 @@ M.plugins = {
                         disable_lsp = { 'all' },
                         -- format on save will cause issues if the code is not compatible, like windows c programs
                         format_on_save = false,
-                        document_highlight = false,
+                        document_highlight = false, -- LSP reference highlight
                         disply_diagnostic_qf = false,
+                        tsserver = {
+                            filetypes = { 'json', 'yaml' } -- Disable for Json as the lsp does not have codelens
+                        },
                     },
                     mason = true,
                 })
@@ -253,7 +271,8 @@ M.plugins = {
                     lsp = {
                         signature = { enabled = false },
                         hover = { enabled = false },
-                    }
+                    },
+                    notify = { enabled = false },
                 })
             end,
         },
@@ -263,6 +282,17 @@ M.plugins = {
             requires = 'nvim-lua/plenary.nvim',
             config = function()
                 require("todo-comments").setup {}
+            end,
+        },
+
+        ['EdenEast/nightfox.nvim'] = {},
+
+        -- context
+        ['nvim-treesitter/nvim-treesitter-context'] = {
+            requires = 'nvim-treesitter/nvim-treesitter',
+            after = "nvim-treesitter",
+            config = function()
+                require("treesitter-context").setup {}
             end,
         },
     },
