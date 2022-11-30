@@ -18,7 +18,6 @@ plugins=(
     vi-mode
     autojump
     archlinux
-    fzf-zsh-plugin
     colored-man-pages
     zsh-autosuggestions
     zsh-syntax-highlighting
@@ -33,7 +32,6 @@ source ~/.dockerrc
 source ~/.gitrc
 source ~/.pythonrc
 file_source ~/.secrets
-file_source ~/.fzf.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 file_source ~/.p10k.zsh
 
@@ -58,3 +56,9 @@ if [ "$(uname -s)" = "Darwin" ]; then
 elif [ "$(uname -s)" = "Linux" ]; then
     source ~/.linuxrc
 fi
+
+# --- McFly's configuration
+export MCFLY_FUZZY=2
+export MCFLY_DISABLE_MENU=FALSE
+export MCFLY_KEY_SCHEME=vim
+eval "$(mcfly init zsh)"
