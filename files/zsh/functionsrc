@@ -1,4 +1,9 @@
 #--------------- FUNCTIONS --------------------
+function cdf() {
+    # $1 path to search
+    cd $(fd $1)
+}
+
 function ununzip() {
     # Undo Unzip
     unzip -t $1 | awk '{print $2}' | tail -n +2 | xargs rm -fr
