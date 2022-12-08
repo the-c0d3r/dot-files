@@ -259,11 +259,9 @@ M.plugins = {
         ['folke/noice.nvim'] = {
             requires = {
                 "MunifTanjim/nui.nvim",
-                "rcarriga/nvim-notify",
             },
             after = {
                 "nui.nvim",
-                "nvim-notify",
                 "nvim-lspconfig",
             },
             config = function()
@@ -272,7 +270,6 @@ M.plugins = {
                         signature = { enabled = false },
                         hover = { enabled = false },
                     },
-                    notify = { enabled = false },
                 })
             end,
         },
