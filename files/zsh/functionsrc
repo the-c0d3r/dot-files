@@ -1,7 +1,12 @@
 #--------------- FUNCTIONS --------------------
 function cdf() {
     # $1 path to search
-    cd $(fd $1)
+    folderpath=$(fd $1 | head -n1)
+    if [ -z "$folderpath" ]; then
+        echo "$folderpath is not found"
+    else
+        cd "$folderpath"
+    fi
 }
 
 function ununzip() {
