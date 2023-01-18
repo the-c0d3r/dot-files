@@ -16,7 +16,6 @@ M.mappings = {
         n = {
             ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
             ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
-            -- ["<C-p>"] = { "<cmd> Telescope project<CR>", "Project menu" },
             ["<C-p>"] = { "<cmd> PackerSync<CR>", "Packer Sync" },
             -- ["<C-h>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
             ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
