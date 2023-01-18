@@ -22,6 +22,9 @@ M.mappings = {
             ["<C-t>"] = { "<cmd> SymbolsOutline<CR>", "Open symbols outline" },
             ["<C-s>"] = { "<cmd> :w<CR>", "save" },
 
+            [";"] = { ":", "enter cmdline", opts = { nowait = true } },
+            ["<leader>re"] = { ":IncRename ", "Trigger rename window" },
+
             -- hop plugin keymapping
             ["f"] = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
                 "Forward search" },
@@ -104,19 +107,6 @@ M.plugins = {
                 require("symbols-outline").setup({
                     lsp_blacklist = { 'jsonls', 'yamlls' },
                 })
-            end,
-        },
-
-        -- multiple cursor location
-        -- ['mg979/vim-visual-multi'] = {},
-
-        -- jump to match
-        ['ggandor/leap.nvim'] = {
-            config = function()
-                require('leap').setup({
-                    highlight_unlabeled = true,
-                })
-                require('leap').set_default_keymaps()
             end,
         },
 
@@ -265,6 +255,7 @@ M.plugins = {
             },
             config = function()
                 require("noice").setup({
+                    presets = { inc_rename = true },
                     lsp = {
                         signature = { enabled = false },
                         hover = { enabled = false },
@@ -289,6 +280,13 @@ M.plugins = {
             after = "nvim-treesitter",
             config = function()
                 require("treesitter-context").setup {}
+            end,
+        },
+
+        -- rename
+        ['smjonas/inc-rename.nvim'] = {
+            config = function()
+                require("inc_rename").setup {}
             end,
         },
     },
