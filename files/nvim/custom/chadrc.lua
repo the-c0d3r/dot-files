@@ -14,18 +14,22 @@ M.ui = {
 M.mappings = {
     keys = {
         n = {
-            ["<C-o>"] = { "<cmd> Telescope find_files <CR>", "Open Telescope find files" },
+            -- ctrl keys
+            -- ctrl + o and ctrl + i is reserved for default jumplist jumps
             ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
-            ["<C-p>"] = { "<cmd> PackerSync<CR>", "Packer Sync" },
-            -- ["<C-h>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
             ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
             ["<C-t>"] = { "<cmd> SymbolsOutline<CR>", "Open symbols outline" },
             ["<C-s>"] = { "<cmd> :w<CR>", "save" },
-
-            [";"] = { ":", "enter cmdline", opts = { nowait = true } },
+            -- Packer keymaps
+            ["<leader>ps"] = { "<cmd> PackerSync<CR>", "Packer sync" },
+            ["<leader>pc"] = { "<cmd> PackerCompile<CR>", "Packer compile" },
+            -- rename
             ["<leader>re"] = { ":IncRename ", "Trigger rename window" },
-
+            -- misc
+            ["<leader>o"] = { "<cmd> Telescope find_files <CR>", "Telescope find files" },
+            [";"] = { ":", "enter cmdline", opts = { nowait = true } },
             -- hop plugin keymapping
+            ["<C-g>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
             ["f"] = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
                 "Forward search" },
             ["F"] = {
@@ -53,6 +57,9 @@ M.plugins = {
             tabufline = {
                 enabled = true,
                 lazyload = false,
+                overriden_modules = function()
+                    return require "custom.buttons"
+                end,
             },
         },
 
