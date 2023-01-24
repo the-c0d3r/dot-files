@@ -1,6 +1,11 @@
 local M = {}
 
 M.ui = {
+    hl_add = {
+        custom_btns = {
+            bg = "blue", fg = "black"
+        }
+    },
     hl_override = {
         Comment = { italic = true },
 
