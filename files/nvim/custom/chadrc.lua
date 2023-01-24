@@ -11,42 +11,7 @@ M.ui = {
     theme_toggle = { "tokyonight", "gruvbox_light" },
 }
 
-M.mappings = {
-    keys = {
-        n = {
-            -- ctrl keys
-            -- ctrl + o and ctrl + i is reserved for default jumplist jumps
-            ["<C-q>"] = { "<cmd> Telescope live_grep <CR>", "Open Telescope find string" },
-            ["<C-x>"] = { "<cmd> qa<CR>", "quit all" },
-            ["<C-t>"] = { "<cmd> SymbolsOutline<CR>", "Open symbols outline" },
-            ["<C-s>"] = { "<cmd> :w<CR>", "save" },
-            -- Packer keymaps
-            ["<leader>ps"] = { "<cmd> PackerSync<CR>", "Packer sync" },
-            ["<leader>pc"] = { "<cmd> PackerCompile<CR>", "Packer compile" },
-            -- rename
-            ["<leader>re"] = { ":IncRename ", "Trigger rename window" },
-            -- misc
-            ["<leader>o"] = { "<cmd> Telescope find_files <CR>", "Telescope find files" },
-            [";"] = { ":", "enter cmdline", opts = { nowait = true } },
-            -- hop plugin keymapping
-            ["<C-g>"] = { "<cmd> HopLineStart<CR>", "Hop to Line" },
-            ["f"] = { "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
-                "Forward search" },
-            ["F"] = {
-                "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
-                "Backward search"
-            },
-            ["t"] = {
-                "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>",
-                "Forward Search until"
-            },
-            ["T"] = {
-                "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>",
-                "Backward Search until"
-            },
-        }
-    }
-}
+M.mappings = require "custom.mappings"
 
 M.plugins = {
     override = {
@@ -291,6 +256,7 @@ M.plugins = {
             end,
         },
 
+        -- themes
         ['EdenEast/nightfox.nvim'] = {},
 
         -- context
@@ -308,6 +274,9 @@ M.plugins = {
                 require("inc_rename").setup {}
             end,
         },
+
+        -- lazygit
+        ['kdheepak/lazygit.nvim'] = {},
     },
 }
 
