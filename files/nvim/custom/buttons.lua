@@ -5,8 +5,8 @@ vim.cmd "function! JumpForward(a,b,c,d) \n lua vim.cmd(vim.api.nvim_replace_term
 
 return {
     buttons = function()
-        local jmp_fwd_btn = "%@JumpForward@%#TblineTabNewBtn#" .. " › " .. "%X"
-        local jmp_bwd_btn = "%@JumpBackward@%#TblineTabNewBtn#" .. " ‹ " .. "%X"
+        local jmp_fwd_btn = "%@JumpForward@%#custom_btns#" .. " › " .. "%X"
+        local jmp_bwd_btn = "%@JumpBackward@%#custom_btns#" .. " ‹ " .. "%X"
         return jmp_bwd_btn .. jmp_fwd_btn .. tabufline_modules.buttons()
     end,
 }
