@@ -71,6 +71,8 @@ cmp.setup {
             return vim_item
         end,
     },
+
+    -- keyboard mappings for cmp
     mapping = {
         -- Confirm selections with right arrow
         ['<Right>'] = cmp.mapping(function(fallback)
