@@ -94,82 +94,82 @@ M.plugins = {
         ["simrat39/symbols-outline.nvim"] = {
             config = function()
                 require("symbols-outline").setup({
-                    lsp_blacklist = { 'jsonls', 'yamlls' },
+                    lsp_blacklist = { "jsonls", "yamlls" },
                 })
             end,
         },
 
         -- jump between lines
-        ['phaazon/hop.nvim'] = {
+        ["phaazon/hop.nvim"] = {
             config = function()
-                require('hop').setup()
+                require("hop").setup()
             end,
         },
 
         -- smooth scrolling
-        ['karb94/neoscroll.nvim'] = {
+        ["karb94/neoscroll.nvim"] = {
             config = function()
-                require('neoscroll').setup()
+                require("neoscroll").setup()
             end,
         },
         -- show marks
-        ['chentoast/marks.nvim'] = {
+        ["chentoast/marks.nvim"] = {
             config = function()
-                require('marks').setup()
+                require("marks").setup()
             end,
         },
         -- cursorline highlight, highlight same keywords as cursor
-        ['RRethy/vim-illuminate'] = {},
+        ["RRethy/vim-illuminate"] = {},
 
         -- -- fold provider
-        -- ['kevinhwang91/promise-async'] = {},
-        -- ['kevinhwang91/nvim-ufo'] = {
+        -- ["kevinhwang91/nvim-ufo"] = {
+        --     requires = "kevinhwang91/promise-async",
         --     config = function()
-        --         require('ufo').setup()
+        --         require("ufo").setup()
         --     end,
         -- },
         -- -- prettify folded code
-        -- ['anuvyklack/pretty-fold.nvim'] = {
-        --     after = 'nvim-ufo',
+        -- ["anuvyklack/pretty-fold.nvim"] = {
+        --     after = "nvim-ufo",
         --     config = function()
-        --         require('pretty-fold').setup()
+        --         require("pretty-fold").setup()
         --     end,
         -- },
 
         -- diff view
-        ['sindrets/diffview.nvim'] = {
+        ["sindrets/diffview.nvim"] = {
             requires = {
-                { 'nvim-lua/plenary.nvim' },
-                { 'kyazdani42/nvim-web-devicons' }
+                { "nvim-lua/plenary.nvim" },
+                { "kyazdani42/nvim-web-devicons" }
             },
-            after = 'plenary.nvim',
+            after = "plenary.nvim",
             cmd = {
-                'DiffviewOpen',
-                'DiffviewFileHistory',
-                'DiffviewClose',
-                'DiffviewToggleFiles',
-                'DiffviewFocusFiles',
-                'DiffviewRefresh'
+                "DiffviewOpen",
+                "DiffviewFileHistory",
+                "DiffviewClose",
+                "DiffviewToggleFiles",
+                "DiffviewFocusFiles",
+                "DiffviewRefresh"
             },
             config = function()
-                require('diffview').setup()
+                require("diffview").setup()
             end,
         },
 
         -- show diagnostics, references, quick fixes
-        ['folke/trouble.nvim'] = {
+        ["folke/trouble.nvim"] = {
             requires = "kyazdani42/nvim-web-devicons",
             config = function()
-                require('trouble').setup()
+                require("trouble").setup()
             end,
         },
 
         -- cheatsheet for built-in commands, plugins, etc
         ["sudormrfbin/cheatsheet.nvim"] = {
             requires = {
-                { 'nvim-telescope/telescope.nvim' },
-                { 'nvim-lua/popup.nvim' },
-                { 'nvim-lua/plenary.nvim' },
+                { "nvim-telescope/telescope.nvim" },
+                { "nvim-lua/popup.nvim" },
+                { "nvim-lua/plenary.nvim" },
             },
         },
 
@@ -177,12 +177,12 @@ M.plugins = {
         ["tzachar/cmp-tabnine"] = {
             after = "nvim-cmp",
             requires = {
-                { 'hrsh7th/cmp-buffer' },
-                { 'hrsh7th/cmp-calc' },
-                { 'hrsh7th/cmp-path' },
-                { 'f3fora/cmp-spell' },
-                { 'hrsh7th/cmp-emoji' },
-                { 'octaltree/cmp-look' },
+                { "hrsh7th/cmp-buffer" },
+                { "hrsh7th/cmp-calc" },
+                { "hrsh7th/cmp-path" },
+                { "f3fora/cmp-spell" },
+                { "hrsh7th/cmp-emoji" },
+                { "octaltree/cmp-look" },
             },
             run = "./install.sh",
             config = function()
@@ -191,9 +191,9 @@ M.plugins = {
         },
 
         -- auto session
-        ['rmagatti/auto-session'] = {
+        ["rmagatti/auto-session"] = {
             config = function()
-                require('auto-session').setup({
+                require("auto-session").setup({
                     log_level = "error",
                     auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
                 })
@@ -201,31 +201,31 @@ M.plugins = {
         },
 
         -- source code analysis and navigation tool
-        ['ray-x/guihua.lua'] = {
-            run = 'cd lua/fzy && make'
+        ["ray-x/guihua.lua"] = {
+            run = "cd lua/fzy && make"
         },
         -- show lsp signature while typing functions and arguments
-        ['ray-x/lsp_signature.nvim'] = {
+        ["ray-x/lsp_signature.nvim"] = {
             config = function()
-                require('lsp_signature').setup({
+                require("lsp_signature").setup({
                     floating_window_above_cur_line = false,
                 })
             end
         },
         -- lsp references/definitions navigator
-        ['ray-x/navigator.lua'] = {
+        ["ray-x/navigator.lua"] = {
             after = "nvim-lspconfig",
             config = function()
-                require('navigator').setup({
+                require("navigator").setup({
                     lsp = {
                         -- need to disable lsp here, as mason will install and handle it
-                        disable_lsp = { 'all' },
+                        disable_lsp = { "all" },
                         -- format on save will cause issues if the code is not compatible, like windows c programs
                         format_on_save = false,
                         document_highlight = false, -- LSP reference highlight
                         disply_diagnostic_qf = false,
                         tsserver = {
-                            filetypes = { 'json', 'yaml' } -- Disable for Json as the lsp does not have codelens
+                            filetypes = { "json", "yaml" } -- Disable for Json as the lsp does not have codelens
                         },
                     },
                     mason = true,
@@ -234,7 +234,7 @@ M.plugins = {
         },
 
         -- new UI stuff, like popup cmdline window, and notifications
-        ['folke/noice.nvim'] = {
+        ["folke/noice.nvim"] = {
             requires = {
                 "MunifTanjim/nui.nvim",
             },
@@ -254,19 +254,19 @@ M.plugins = {
         },
 
         -- highlights for TODO: and stuff
-        ['folke/todo-comments.nvim'] = {
-            requires = 'nvim-lua/plenary.nvim',
+        ["folke/todo-comments.nvim"] = {
+            requires = "nvim-lua/plenary.nvim",
             config = function()
                 require("todo-comments").setup {}
             end,
         },
 
         -- themes
-        ['EdenEast/nightfox.nvim'] = {},
+        ["EdenEast/nightfox.nvim"] = {},
 
         -- context
-        ['nvim-treesitter/nvim-treesitter-context'] = {
-            requires = 'nvim-treesitter/nvim-treesitter',
+        ["nvim-treesitter/nvim-treesitter-context"] = {
+            requires = "nvim-treesitter/nvim-treesitter",
             after = "nvim-treesitter",
             config = function()
                 require("treesitter-context").setup {}
@@ -274,21 +274,31 @@ M.plugins = {
         },
 
         -- rename
-        ['smjonas/inc-rename.nvim'] = {
+        ["smjonas/inc-rename.nvim"] = {
             config = function()
                 require("inc_rename").setup {}
             end,
         },
 
         -- lazygit
-        ['kdheepak/lazygit.nvim'] = {},
+        ["kdheepak/lazygit.nvim"] = {},
 
         -- sidebar cursor animation
-        ['gen740/SmoothCursor.nvim'] = {
+        ["gen740/SmoothCursor.nvim"] = {
             config = function()
                 require("smoothcursor").setup({
                     fancy = { enable = true, },
                 })
+            end,
+        },
+
+        -- hex editor
+        ["RaafatTurki/hex.nvim"] = {},
+
+        -- file management
+        ["stevearc/oil.nvim"] = {
+            config = function()
+                require("oil").setup()
             end,
         },
     },
