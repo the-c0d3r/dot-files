@@ -282,6 +282,15 @@ M.plugins = {
 
         -- lazygit
         ['kdheepak/lazygit.nvim'] = {},
+
+        -- sidebar cursor animation
+        ['gen740/SmoothCursor.nvim'] = {
+            config = function()
+                require("smoothcursor").setup({
+                    fancy = { enable = true, },
+                })
+            end,
+        },
     },
 }
 
