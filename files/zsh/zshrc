@@ -12,7 +12,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_AUTO_UPDATE="true"
-HIST_STAMPS="dd/mm/yyyy"
+HIST_STAMPS="%d/%m/%y %T"
 
 plugins=(
     git
