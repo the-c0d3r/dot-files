@@ -293,7 +293,11 @@ M.plugins = {
         },
 
         -- hex editor
-        ["RaafatTurki/hex.nvim"] = {},
+        ["RaafatTurki/hex.nvim"] = {
+            config = function()
+                require("hex").setup()
+            end,
+        },
 
         -- file management
         ["stevearc/oil.nvim"] = {
