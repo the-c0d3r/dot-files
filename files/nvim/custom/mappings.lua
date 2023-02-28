@@ -5,6 +5,14 @@ local M = {}
 -- <C-x>    = Ctrl + x
 -- <S-x>    = Shift + x
 
+
+-- plugin keybindings
+-- sibling swap
+-- ['<C-.>'] = 'swap_with_right',
+-- ['<C-,>'] = 'swap_with_left',
+-- ['<space>.'] = 'swap_with_right_with_opp',
+-- ['<space>,'] = 'swap_with_left_with_opp',
+
 M.general = {
     n = {
         -- ctrl keys
@@ -22,8 +30,9 @@ M.general = {
         -- mason keymaps
         ["<leader>pm"] = { "<cmd>Mason<CR>", "Mason Installer" },
 
-        -- rename
+        -- refactoring
         ["<leader>re"] = { ":IncRename ", "Trigger rename window" },
+
 
         -- misc
         ["<leader>o"] = { "<cmd>Telescope find_files <CR>", "Telescope find files" },
