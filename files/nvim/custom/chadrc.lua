@@ -301,6 +301,25 @@ M.plugins = {
                 require("oil").setup()
             end,
         },
+
+        -- pets
+        ["giusgad/pets.nvim"] = {
+            requires = {
+                { "MunifTanjim/nui.nvim" },
+                { "giusgad/hologram.nvim" },
+            },
+            config = function()
+                require("pets").setup()
+            end,
+        },
+
+        -- refactoring
+        ["Wansmer/sibling-swap.nvim"] = {
+            requires = { "nvim-treesitter" },
+            config = function()
+                require("sibling-swap").setup()
+            end,
+        },
     },
 }
 
