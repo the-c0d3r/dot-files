@@ -1,3 +1,4 @@
+---@type MappingsTable
 local M = {}
 
 -- Legends
@@ -13,8 +14,9 @@ local M = {}
 -- ['<space>.'] = 'swap_with_right_with_opp',
 -- ['<space>,'] = 'swap_with_left_with_opp',
 
+
 M.general = {
-    n = {
+  n = {
         -- ctrl keys
         -- ctrl + o and ctrl + i is reserved for default jumplist jumps
         ["<C-q>"] = { "<cmd>Telescope live_grep <CR>", "Open Telescope find string" },
@@ -23,10 +25,6 @@ M.general = {
         ["<C-s>"] = { "<cmd>w<CR>", "save" },
         ["<C-/>"] = { "<cmd>nohl<CR>", "Remove current search highlight" },
 
-        -- Packer keymaps
-        ["<leader>ps"] = { "<cmd>PackerSync<CR>", "Packer sync" },
-        ["<leader>pc"] = { "<cmd>PackerCompile<CR>", "Packer compile" },
-        ["<leader>pS"] = { "<cmd>PackerStatus<CR>", "Packer status" },
         -- mason keymaps
         ["<leader>pm"] = { "<cmd>Mason<CR>", "Mason Installer" },
 
@@ -75,6 +73,8 @@ M.general = {
             "Backward Search until"
         },
     }
-}
+  }
+
+-- more keybinds!
 
 return M
