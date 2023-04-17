@@ -25,6 +25,9 @@ M.general = {
         ["<C-s>"] = { "<cmd>w<CR>", "save" },
         ["<C-/>"] = { "<cmd>nohl<CR>", "Remove current search highlight" },
 
+        -- Packer keymaps
+        ["<leader>ls"] = { "<cmd>Lazy sync<CR>", "Lazy sync" },
+        ["<leader>lS"] = { "<cmd>Lazy show<CR>", "Lazy show" },
         -- mason keymaps
         ["<leader>pm"] = { "<cmd>Mason<CR>", "Mason Installer" },
 
