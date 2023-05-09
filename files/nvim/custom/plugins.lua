@@ -109,10 +109,11 @@ local plugins = {
             { "f3fora/cmp-spell" },
             { "hrsh7th/cmp-emoji" },
             { "octaltree/cmp-look" },
+            { "hrsh7th/nvim-cmp" },
         },
         build = "./install.sh",
         config = function()
-            require "custom.configs.tabnine"
+            require("custom.configs.tabnine")
         end,
     },
 
@@ -249,6 +250,7 @@ local plugins = {
     -- file management
     {
         "stevearc/oil.nvim",
+        lazy = false,
         config = function()
             require("oil").setup()
         end,
