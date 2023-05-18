@@ -49,6 +49,10 @@ cmp.setup {
         },
     },
     experimental = { ghost_text = true }, -- show autocomplete suggestions in grey text
+    preselect = 'none',
+    completion = {
+        completeopt = 'menu,menuone,noinsert,noselect'
+    },
 
     -- adds symbols for tabnine
     formatting = {
