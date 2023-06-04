@@ -14,7 +14,6 @@ local servers = {
     "jsonls",
     "luau_lsp",
     "pylsp",
-    "pyright",
 }
 
 for _, lsp in ipairs(servers) do
