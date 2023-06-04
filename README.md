@@ -1,12 +1,12 @@
 # dot-files
-My dot-files repository which uses dotbot to deploy the dots
+My dot-files repository which uses dotbot to deploy the dots.
 
 # Usage
-There are 2 ways to install the configurations. First way is to install with profiles. Profiles are under `/meta/profiles`, every program inside the profile file will be installed.
+There are 2 ways to install the configurations. First way is to install with profiles. Profiles are under `meta/profiles`, every program inside the profile file will be installed.
 
 `./install-profile mac`
 
-Second way is to use `install-standalone` scrip to install individually. You can look at what configs/programs are available to install under `/meta/configs`.
+Second way is to use `install-standalone` scrip to install individually. You can look at what configs/programs are available to install under `meta/configs`.
 
 `./install-standalone zsh`
 
@@ -14,17 +14,15 @@ Second way is to use `install-standalone` scrip to install individually. You can
 # Programs & configs
 
 ## Mac OS & Linux
-- vim : actually neovim configs
-    - Requires `python3`, `pip`, and `virtualenv` to be installed
-- tmux : terminal multiplexer. Config from https://github.com/gpakosz/.tmux
-- zsh : oh-my-zsh shell config (WARNING: this will remove your existing ~/.zshrc file)
-- alacritty : fast terminal powered by GPU
+- neovim : vim but better
+- tmux : terminal multiplexer. Config from https://github.com/gpakosz/.tmux and customised
+- zsh : oh-my-zsh shell config (WARNING: this will remove your existing ~/.zshrc file) with powerlevel10k configuration.
+- kitty: fast terminal powered by CPU
 
 ## Linux
 - i3 : tiling window manager
 - rofi : spotlight app search thing for linux
 - polybar : the menu bar replacement for tiling window managers
-- termite : a terminal emulator, color configs
 - dunst : simple, configurable notification daemon
 
 ## Mac OS

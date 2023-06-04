@@ -65,7 +65,7 @@ tmux_conf_24b_colour=auto
 #   - tmux_conf_theme_mouse
 #   - tmux_conf_theme_root
 #   - tmux_conf_theme_synchronized
-tmux_conf_theme=enabled
+tmux_conf_theme=disabled
 
 # default theme
 tmux_conf_theme_colour_1="#080808"    # dark gray
@@ -252,8 +252,6 @@ tmux_conf_theme_right_separator_sub=' '
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 tmux_conf_theme_status_left="  #S "
 tmux_conf_theme_status_right=", #{prefix}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} ,  %R  %Y-%m-%d |  #{loadavg} | #{username}#{root} | #{hostname} "
 
@@ -349,7 +347,7 @@ tmux_conf_theme_clock_style="24"
 #   - disabled
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel, xclip or wl-copy
-tmux_conf_copy_to_os_clipboard=false
+tmux_conf_copy_to_os_clipboard=true
 
 
 # -- user customizations -------------------------------------------------------
@@ -361,7 +359,7 @@ set -g history-limit 99999            # unlimited history (close enough)
 set -g default-terminal "tmux-256color"
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
@@ -382,7 +380,7 @@ set -g default-terminal "tmux-256color"
 bind n new-window -n "dotfiles" sh -c 'cd ~/.dotfiles/ && nvim'
 
 # move status line to top
-set -g status-position top
+set -g status-position bottom
 
 # Fix the -r on switching
 unbind h
@@ -442,9 +440,37 @@ set -g @plugin 'tmux-plugins/tmux-sessionist'
 set -g @plugin 'tmux-plugins/tmux-logging'
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 set -g @plugin 'Morantron/tmux-fingers'
+set -g @plugin 'tmux-plugins/tmux-cpu'
 
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @yank_action 'copy-pipe' # or 'copy-pipe-and-cancel' for the default
+
+
+# tmux-nova theme ---
+set -g @plugin 'o0th/tmux-nova'
+
+set -g @nova-nerdfonts true
+set -g @nova-nerdfonts-left 
+set -g @nova-nerdfonts-right 
+
+set -g @nova-segment-whoami "#(whoami)@#h"
+set -g @nova-segment-whoami-colors "#50fa7b #282a36"
+
+set -g @nova-pane "#I#{?pane_in_mode,  #{pane_mode},}  #W"
+
+set -g @cpu_percentage_format "%5.1f%%"
+set -g @nova-segment-cpu " #(~/.tmux/plugins/tmux-cpu/scripts/cpu_percentage.sh)"
+set -g @nova-segment-cpu-colors "#282a36 #f8f8f2"
+
+set -g @nova-segment-session "#{session_name}"
+set -g @nova-segment-session-colors "#282a36 #f8f8f2"
+
+set -g @nova-segment-novatime "%I:%M"
+set -g @nova-segment-novatime-colors "#282a36 #f8f8f2"
+
+set -g @nova-segments-0-left "session"
+set -g @nova-segments-0-right "cpu novatime"
+# --- tmux-nova theme
 
 
 # -- custom variables ----------------------------------------------------------
