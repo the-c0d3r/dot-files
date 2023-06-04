@@ -20,7 +20,7 @@ local plugins = {
         opts = overrides.ui,
     },
 
-    -- plugins
+    -- lsp for syntax highlight
     {
         "neovim/nvim-lspconfig",
         config = function()
@@ -57,6 +57,7 @@ local plugins = {
             require("neoscroll").setup()
         end,
     },
+
     -- show marks
     {
         "chentoast/marks.nvim",
@@ -65,6 +66,7 @@ local plugins = {
             require("marks").setup()
         end,
     },
+
     -- cursorline highlight, highlight same keywords as cursor
     { "RRethy/vim-illuminate", },
 
@@ -85,15 +87,6 @@ local plugins = {
         },
         config = function()
             require("diffview").setup()
-        end,
-    },
-
-    -- show diagnostics, references, quick fixes
-    {
-        "folke/trouble.nvim",
-        lazy = false,
-        config = function()
-            require("trouble").setup()
         end,
     },
 
@@ -123,8 +116,17 @@ local plugins = {
         config = function()
             require("auto-session").setup({
                 log_level = "error",
-                auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+                auto_session_suppress_dirs = { "~/Downloads", "/" },
             })
+        end,
+    },
+
+    -- pretty fold
+    {
+        "anuvyklack/pretty-fold.nvim",
+        lazy = false,
+        config = function()
+            require("pretty-fold").setup()
         end,
     },
 
@@ -160,8 +162,12 @@ local plugins = {
                     tsserver = {
                         filetypes = { "json", "yaml" } -- Disable for Json as the lsp does not have codelens
                     },
+                    diagnostic = {
+                        underline = true,
+                        virtual_text = true, -- show virtual for diagnostic message
+                        update_in_insert = false, -- update diagnostic message in insert mode
+                    },
                 },
-                -- mason = true,
             })
         end,
     },
