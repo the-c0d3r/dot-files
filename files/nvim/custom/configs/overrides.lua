@@ -34,7 +34,6 @@ M.mason = {
         "html-lsp",
         "json-lsp",
         "lua-language-server",
-        "pyright",
         "python-lsp-server",
         "stylua",
         "yaml-language-server",
