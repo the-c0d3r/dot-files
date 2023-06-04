@@ -23,7 +23,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec /usr/bin/alacritty
+bindsym $mod+Return exec /usr/bin/kitty
 
 # kill focused window
 bindsym Control+q kill
