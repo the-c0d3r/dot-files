@@ -6,7 +6,6 @@ local M = {}
 -- <C-x>    = Ctrl + x
 -- <S-x>    = Shift + x
 
-
 -- plugin keybindings
 -- sibling swap
 -- ['<C-.>'] = 'swap_with_right',
@@ -25,7 +24,7 @@ M.general = {
         ["<C-s>"] = { "<cmd>w<CR>", "save" },
         ["<C-/>"] = { "<cmd>nohl<CR>", "Remove current search highlight" },
 
-        -- Packer keymaps
+        -- Lazy package manager
         ["<leader>ls"] = { "<cmd>Lazy sync<CR>", "Lazy sync" },
         ["<leader>lS"] = { "<cmd>Lazy show<CR>", "Lazy show" },
         -- mason keymaps
@@ -33,7 +32,6 @@ M.general = {
 
         -- refactoring
         ["<leader>re"] = { ":IncRename ", "Trigger rename window" },
-
 
         -- misc
         ["<leader>o"] = { "<cmd>Telescope find_files <CR>", "Telescope find files" },
@@ -77,7 +75,5 @@ M.general = {
         },
     }
   }
-
--- more keybinds!
 
 return M
