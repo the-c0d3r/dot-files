@@ -113,6 +113,7 @@ local plugins = {
     -- auto session
     {
         "rmagatti/auto-session",
+        lazy = false,
         config = function()
             require("auto-session").setup({
                 log_level = "error",
@@ -283,6 +284,14 @@ local plugins = {
             require("sibling-swap").setup()
         end,
     },
+
+    -- annotation, doxygen generator
+    {
+        "danymat/neogen",
+        lazy = false,
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true,
+    }
 }
 
 return plugins
