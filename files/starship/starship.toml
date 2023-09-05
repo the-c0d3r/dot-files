@@ -65,6 +65,6 @@ style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [python]
-symbol = '🐍 '
+symbol = " "
 python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
