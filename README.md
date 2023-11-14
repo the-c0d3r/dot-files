@@ -10,6 +10,12 @@ Second way is to use `install-standalone` scrip to install individually. You can
 
 `./install-standalone zsh`
 
+# OS installers
+
+```
+curl -L https://github.com/the-c0d3r/dot-files/blob/master/scripts/install-centos.sh | bash
+```
+
 
 # Programs & configs
 
@@ -18,6 +24,7 @@ Second way is to use `install-standalone` scrip to install individually. You can
 - tmux : terminal multiplexer. Config from https://github.com/gpakosz/.tmux and customised
 - zsh : oh-my-zsh shell config (WARNING: this will remove your existing ~/.zshrc file) with powerlevel10k configuration.
 - kitty: fast terminal powered by CPU
+- starship : fast cross shell prompt
 
 ## Linux
 - i3 : tiling window manager
@@ -26,17 +33,16 @@ Second way is to use `install-standalone` scrip to install individually. You can
 - dunst : simple, configurable notification daemon
 
 ## Mac OS
-- chunkwm : tiling window manager for Mac
-- skhd : keyboard hotkey daemon for chunkwm
+- karabiner : key remapping program
 
 # Profiles
 
 ## arch
-- installs all the archlinux i3 setup.
+- install all the archlinux i3 setup
 
 ## linux
 - install only terminal apps like vim, zsh, tmux
 
 ## mac
-- installs mac related tools like chunkwm, skhd
+- install linux tools + mac related tools
 
