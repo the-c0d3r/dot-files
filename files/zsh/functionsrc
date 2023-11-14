@@ -1,27 +1,20 @@
 #--------------- FUNCTIONS --------------------
-function cdf() {
-    # $1 path to search
-    folderpath=$(fd $1 | head -n1)
-    if [ -z "$folderpath" ]; then
-        echo "$folderpath is not found"
-    else
-        cd "$folderpath"
+function wsyncd() {
+    usage="Usage: wsyncd dirname sshpath"
+    if [ -z "$1" ] && [ -z "$2" ]; then
+        echo "$usage"
+        return
     fi
+
+    dirname="$1"
+    sshpath="$2"
+
+    fswatch -o "$dirname" | while read f; do rsync -av "$dirname/" "$sshpath/"; done;
 }
 
 function ununzip() {
     # Undo Unzip
     unzip -t $1 | awk '{print $2}' | tail -n +2 | xargs rm -fr
-}
-
-function tile() {
-    brew services start yabai
-    brew services start skhd
-}
-
-function untile() {
-    brew services stop yabai
-    brew services stop skhd
 }
 
 function file_source() {
@@ -83,21 +76,11 @@ function decrypt() {
     openssl enc -aes-256-cbc -a -d -salt -in $1 -out $2 -k $password
 }
 
-fbr() {
-    # checkout git branch
-    local branches branch
-    branches=$(git branch) &&
-    branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
-    git checkout $(echo "$branch" | sed "s/.* //")
-}
-
 function s() {
     # shortname for "ssh", defaults username to root
     # parameters $1: host number, $2: (optional) username, default root
 
     usage="Usage: s host_number username (optional, default root)"
-
-    USERNAMES=( contextus vanguard )
 
     if [ -z "$1" ] && [ -z "$2" ]; then
         echo "$usage"
@@ -105,26 +88,9 @@ function s() {
     fi
 
     HOST=$1
-    SSH_USER=$2
-
-    if [ -z "$SSH_USER" ]; then
-        SSH_USER="root"
-        echo "[?] Trying username: $SSH_USER\n"
-    fi
+    SSH_USER=${2:-root}
 
     ssh "192.168.1.$HOST" -l "$SSH_USER"
-
-    if [ $? -ne "0" ]; then
-        for UNAME in "${USERNAMES[@]}"
-        do 
-            echo "[?] Trying username: $UNAME\n"
-            ssh "192.168.1.$HOST" -l "$UNAME"
-
-            if [ $? -eq "0" ]; then
-                return
-            fi
-        done
-    fi
 }
 
 function x() {
@@ -133,7 +99,6 @@ function x() {
     # parameters $1: host number, $2: (optional) username, default root
 
     usage="Usage: s host_number username (optional, default root)"
-    USERNAMES=( contextus vanguard )
 
     if [ -z "$1" ] && [ -z "$2" ]; then
         echo "$usage"
@@ -141,26 +106,9 @@ function x() {
     fi
 
     HOST=$1
-    SSH_USER=$2
-
-    if [ -z "$SSH_USER" ]; then
-        SSH_USER="root"
-        echo "[?] Trying username: $SSH_USER\n"
-    fi
+    SSH_USER=${2:-root}
 
     xxh "192.168.1.$HOST" -l "$SSH_USER"
-
-    if [ $? -ne "0" ]; then
-        for UNAME in "${USERNAMES[@]}"
-        do 
-            echo "[?] Trying username: $UNAME\n"
-            xxh "192.168.1.$HOST" -l "$UNAME"
-
-            if [ $? -eq "0" ]; then
-                return
-            fi
-        done
-    fi
 }
 
 # the following is the fix for blinking cursor in tmux with kitty
@@ -176,3 +124,4 @@ function zle-keymap-select zle-line-init zle-line-finish
 zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
+
