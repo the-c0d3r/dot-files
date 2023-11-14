@@ -54,28 +54,6 @@ cmp.setup {
         completeopt = 'menu,menuone,noinsert,noselect'
     },
 
-    -- adds symbols for tabnine
-    formatting = {
-        format = function(entry, vim_item)
-            local icons = require("nvchad_ui.icons").lspkind
-            vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
-            if entry.source.name == "cmp_tabnine" then
-                local detail = (entry.completion_item.data or {}).detail
-                vim_item.kind = "  TabNine"
-                if detail and detail:find('.*%%.*') then
-                    vim_item.kind = vim_item.kind .. '  ' .. detail
-                end
-
-                if (entry.completion_item.data or {}).multiline then
-                    vim_item.kind = vim_item.kind .. '  ' .. '[ML]'
-                end
-            end
-            local maxwidth = 80
-            vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
-            return vim_item
-        end,
-    },
-
     -- keyboard mappings for cmp
     mapping = {
         -- Confirm selections with right arrow
