@@ -13,7 +13,7 @@ Second way is to use `install-standalone` scrip to install individually. You can
 # OS installers
 
 ```
-curl -L https://github.com/the-c0d3r/dot-files/blob/master/scripts/install-centos.sh | bash
+curl -L https://raw.githubusercontent.com/the-c0d3r/dot-files/master/scripts/install-centos.sh | bash
 ```
 
 
