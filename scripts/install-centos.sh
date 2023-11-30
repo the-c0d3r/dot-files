@@ -5,6 +5,7 @@ set -Eeuo pipefail
 # configure the repos to be online
 find /etc/yum.repos.d -name '*.repo' -type f -exec sed -i "s@#baseurl=http://mirror.@baseurl=http://vault.@g" {} \;
 
+sudo yum install -y epel-release
 sudo yum install -y nload ncdu tmux python38 zsh git wget libarchive npm
 sudo yum install -y gcc gcc-c++ make cmake
 
