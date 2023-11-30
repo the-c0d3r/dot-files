@@ -8,7 +8,7 @@ export LC_ALL="en_US.UTF-8"
 # === oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
 # Themes = agnoster, abaykan
-# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_AUTO_UPDATE="true"
@@ -62,6 +62,7 @@ fi
 export MCFLY_FUZZY=2
 export MCFLY_DISABLE_MENU=FALSE
 export MCFLY_KEY_SCHEME=vim
-eval "$(mcfly init zsh)"
-
-eval "$(starship init zsh)"
+# eval "$(mcfly init zsh)"
+#
+# eval "$(starship init zsh)"
+# eval "$(pyenv init -)"
