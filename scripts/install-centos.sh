@@ -19,3 +19,7 @@ make install
 
 cd ~
 git clone https://github.com/the-c0d3r/dot-files
+cd dot-files
+./install-profile linux
+
+chsh -s /bin/zsh
