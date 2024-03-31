@@ -11,7 +11,6 @@ alias vim="nvim"
 alias l="ls -lah --color=auto"       # show all
 alias lh="ls -ld .* --color=auto"    # show all hidden files/dir
 alias lsd="ls -ld */ --color=auto"   # show all directories
-alias ex="exit"
 
 # Vagrant
 alias vg="vagrant"
@@ -26,7 +25,6 @@ alias scp='noglob scp'
 # Custom stuff
 alias vf="vi \$(fzf --preview 'bat --style=numbers --color=always {} || head -n 100 {}')"
 alias pg="ps -aux | grep -v 'grep' | grep "
-alias 7zc="7z a -t7z -m0=lzma2 -mx=9 -mfb=64 -md=1024m -ms=on" # destination.7z source
 alias lg="lazygit"
 
 # Custom tools

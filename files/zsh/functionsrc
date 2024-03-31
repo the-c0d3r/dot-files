@@ -46,36 +46,6 @@ function rst() {
     echo "Successfully restored to $1"
 }
 
-## Encryption & Decryption
-
-function encrypt() {
-    # encrypts the given file with password prompt
-    # parameters $1: input file, $2: output file
-    usage="Usage: encrypt infile outfile"
-    if [ -z "$1" ] && [ -z "$2" ]; then
-        echo "$usage"
-        return
-    fi
-
-    echo -n "Enter encryption password: "
-    read -s password
-    openssl enc -aes-256-cbc -a -salt -in $1 -out $2 -k $password
-}
-
-function decrypt() {
-    # decrypts the given file with password prompt
-    # parameters $1: input file, $2: output file
-    usage="Usage: decrypt infile outfile"
-    if [ -z "$1" ] && [ -z "$2" ]; then
-        echo "$usage"
-        return
-    fi
-
-    echo -n "Enter decryption password: "
-    read -s password
-    openssl enc -aes-256-cbc -a -d -salt -in $1 -out $2 -k $password
-}
-
 function s() {
     # shortname for "ssh", defaults username to root
     # parameters $1: host number, $2: (optional) username, default root

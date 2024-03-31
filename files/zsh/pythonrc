@@ -31,20 +31,6 @@ function lineprof() {
     fi;
 }
 
-function pyenv2() {
-    # setup python2 environment
-    if [ ! -z "$1" ]; then
-        echo "setting up python2 @ $1";
-        virtualenv -p python2 -q $1;
-    else
-        echo "setting up python2 @ .venv";
-        virtualenv -p python2 -q .venv
-    fi
-
-    sc $1
-    pipup
-}
-
 function pyenv3() {
     # setup python3 environment
     if [ ! -z "$1" ]; then

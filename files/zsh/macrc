@@ -2,8 +2,5 @@
 alias hidedesktop="defaults write com.apple.finder CreateDesktop false && killall Finder"
 alias unhidedesktop="defaults write com.apple.finder CreateDesktop true && killall Finder"
 
-# ctags
-alias ctags="`brew --prefix`/bin/ctags"
-
 # disables ._ files in tar file. https://superuser.com/a/260264/146350
 export COPYFILE_DISABLE=1
