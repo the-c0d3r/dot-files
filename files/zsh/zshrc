@@ -63,12 +63,6 @@ elif [ "$(uname -s)" = "Linux" ]; then
     source ~/.linuxrc
 fi
 
-# --- McFly's configuration
-export MCFLY_FUZZY=2
-export MCFLY_DISABLE_MENU=FALSE
-export MCFLY_KEY_SCHEME=vim
-eval "$(mcfly init zsh)"
-
 eval "$(starship init zsh)"
 # eval "$(pyenv init -)"
 
