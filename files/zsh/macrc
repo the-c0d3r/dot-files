@@ -4,3 +4,5 @@ alias unhidedesktop="defaults write com.apple.finder CreateDesktop true && killa
 
 # disables ._ files in tar file. https://superuser.com/a/260264/146350
 export COPYFILE_DISABLE=1
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
