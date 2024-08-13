@@ -1,5 +1,8 @@
-alacritty
-tmux
-nvim
-zsh
+atuin
+fonts
 karabiner
+kitty
+nvim
+starship
+tmux
+zsh
