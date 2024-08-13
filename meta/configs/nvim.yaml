@@ -1,5 +1,2 @@
-- shell:
-  - [git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1, Installing NvChad configuration]
-
 - link:
-    ~/.config/nvim/lua/custom: files/nvim/custom/
+    ~/.config/nvim: files/nvim/
