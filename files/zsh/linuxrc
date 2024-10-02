@@ -7,5 +7,7 @@
 
 # If the following is not at the end of the file, then it will show the annoying
 # xmodmap:  please release the following keys within 2 seconds:
-[ -x "$(command -v xmodmap)" ] && xmodmap -e 'clear Lock'
-[ -x "$(command -v xmodmap)" ] && xmodmap -e 'keycode 0x42=Escape'
+# this is no longer used, as I only use the keyboard settings to remap
+# [ -x "$(command -v xmodmap)" ] && xmodmap -e 'clear Lock'
+# [ -x "$(command -v xmodmap)" ] && xmodmap -e 'keycode 0x42=Escape'
+
