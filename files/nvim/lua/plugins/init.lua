@@ -327,4 +327,40 @@ return {
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = true,
   },
+
+  -- llm interface for autocompletion
+  {
+    "huggingface/llm.nvim",
+    lazy = false,
+    config = function()
+      require("llm").setup {
+        model = "starcoder2:3b",
+        backend = "ollama",
+        url = "http://localhost:11434/",
+        request_body = {
+          -- Modelfile options for the model you use
+          options = {
+            temperature = 0.2,
+            top_p = 0.95,
+          },
+        },
+      }
+    end,
+  },
+
+  -- nvchad's new UI framework
+  {
+    "nvchad/volt",
+    lazy = true,
+  },
+  -- UI based color picker
+  {
+    "nvchad/minty",
+    lazy = true,
+  },
+  -- UI based menu
+  {
+    "nvchad/menu",
+    lazy = true,
+  },
 }

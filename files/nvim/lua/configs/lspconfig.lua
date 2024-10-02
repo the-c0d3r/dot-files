@@ -5,15 +5,16 @@ local lspconfig = require "lspconfig"
 
 -- EXAMPLE
 local servers = {
-    "ansiblels",
-    "bashls",
-    "clangd",
-    "cssls",
-    "dockerls",
-    "html",
-    "jsonls",
-    "luau_lsp",
-    "pylsp",
+  "ansiblels",
+  "bashls",
+  "clangd",
+  "cssls",
+  "dockerls",
+  "html",
+  "jsonls",
+  "luau_lsp",
+  "pylsp",
+  "llm_ls",
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 
