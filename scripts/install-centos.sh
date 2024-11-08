@@ -16,6 +16,9 @@ git checkout stable
 make CMAKE_BUILD_TYPE=RelWithDebInfo -j 20
 make install
 
+# install pyenv
+curl https://pyenv.run | bash
+
 
 cd ~
 git clone https://github.com/the-c0d3r/dot-files
