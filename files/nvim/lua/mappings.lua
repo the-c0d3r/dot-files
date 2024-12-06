@@ -35,3 +35,18 @@ map("n", "<RightMouse>", function()
   local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
   require("menu").open(options, { mouse = true })
 end, {})
+
+
+-- this fixes the issue where the llm.nvim causes issue when inserting tab in a new line
+-- this is a workaround for the issue.
+map("i", "<Tab>", function ()
+    local llm = require('llm.completion')
+
+    if llm.shown_suggestion ~= nil then
+        llm.complete()
+    else 
+        local keys = vim.api.nvim_replace_termcodes('<Tab>', true, false, true)
+        vim.api.nvim_feedkeys(keys, 'n', false)
+    end
+end,
+{ noremap = true, silent = true})
