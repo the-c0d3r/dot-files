@@ -1,8 +1,8 @@
 # open terminal
-cmd - return : open -n -a "kitty"
+# cmd - return : open -n -a "kitty"
 
 # open chrome 
-cmd + shift - return : open -n -a "Google Chrome" 
+# cmd + shift - return : open -n -a "Google Chrome" 
 
 # moves focus between windows in the current focused display
 alt - h : yabai -m window --focus west
@@ -26,7 +26,8 @@ alt - 0  : yabai -m space --focus 10
 alt - q : yabai -m space --destroy
 
 # toggle window split type
-alt - e : yabai -m window --toggle split
+# alt - e : yabai -m window --toggle split
+alt - e : ~/.config/yabai/scripts/cycle_layouts.sh
 
 # close window
 alt - x : yabai -m window --close
@@ -49,7 +50,8 @@ alt - d : yabai -m window --focus mouse && \
 
 # float / unfloat window and center on screen
 alt - t : yabai -m window --toggle float;\
-          yabai -m window --grid 4:4:1:1:2:2
+          yabai -m window --grid 4:4:1:1:2:2; \
+          sketchybar --trigger window_focus
 
 # toggle window fullscreen zoom
 alt - f : yabai -m window --focus mouse && \
@@ -119,7 +121,29 @@ ctrl + alt + cmd - k : yabai -m window --resize top:0:40
 ctrl + alt + cmd - l : yabai -m window --resize right:-40:0
 
 # restart yabai
-ctrl + alt + cmd - r : yabai --restart-service
+ctrl + alt + cmd - r : yabai --restart-service; skhd --restart-service
 
-ctrl - left : yabai -m space --focus prev
-ctrl - right : yabai -m space --focus next
+# ctrl - left : yabai -m space --focus prev
+# ctrl - right : yabai -m space --focus next
+
+# only cycle through the spaces of current display
+# ctrl - left : if [[ $(yabai -m query --spaces --display | jq '.[0]."has-focus"') == "false" ]]; then yabai -m space --focus prev; fi
+# ctrl - right : if [[ $(yabai -m query --spaces --display | jq '.[-1]."has-focus"') == "false" ]]; then yabai -m space --focus next; fi
+
+ctrl - left : ~/.config/yabai/scripts/space_focus_prev.sh
+ctrl - right : ~/.config/yabai/scripts/space_focus_next.sh
+
+# ctrl - left : yabai -m query --spaces --display | jq -e 'first | ."is-visible"' || yabai -m space --focus prev
+# ctrl - next : yabai -m query --spaces --display | jq -e 'last | ."is-visible"' || yabai -m space --focus next
+
+
+# Focus window up/down in stack
+ctrl - k : yabai -m window --focus stack.next
+ctrl - j : yabai -m window --focus stack.prev
+
+# Add the active window  to the window or stack to the {direction}
+# Note that this only works when the active window does *not* already belong to a stack
+cmd + ctrl - left  : yabai -m window west --stack $(yabai -m query --windows --window | jq -r '.id')
+cmd + ctrl - down  : yabai -m window south --stack $(yabai -m query --windows --window | jq -r '.id')
+cmd + ctrl - up    : yabai -m window north --stack $(yabai -m query --windows --window | jq -r '.id')
+cmd + ctrl - right : yabai -m window east --stack $(yabai -m query --windows --window | jq -r '.id')
