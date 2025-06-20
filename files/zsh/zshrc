@@ -64,7 +64,6 @@ elif [ "$(uname -s)" = "Linux" ]; then
 fi
 
 eval "$(starship init zsh)"
-eval "$(pyenv init -)"
 
 export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
