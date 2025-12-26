@@ -209,26 +209,26 @@ return {
   },
 
   -- new UI stuff, like popup cmdline window, and notifications
-  {
-    "folke/noice.nvim",
-    lazy = false,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-    after = {
-      "nui.nvim",
-      "nvim-lspconfig",
-    },
-    config = function()
-      require("noice").setup {
-        presets = { inc_rename = true },
-        lsp = {
-          signature = { enabled = false },
-          hover = { enabled = false },
-        },
-      }
-    end,
-  },
+--  {
+--    "folke/noice.nvim",
+--    lazy = false,
+--    dependencies = {
+--      "MunifTanjim/nui.nvim",
+--    },
+--    after = {
+--      "nui.nvim",
+--      "nvim-lspconfig",
+--    },
+--    config = function()
+--      require("noice").setup {
+--        presets = { inc_rename = true },
+--        lsp = {
+--          signature = { enabled = false },
+--          hover = { enabled = false },
+--        },
+--      }
+--    end,
+--  },
 
   -- highlights for TODO: and stuff
   {
@@ -329,24 +329,24 @@ return {
   },
 
   -- llm interface for autocompletion
-  {
-    "huggingface/llm.nvim",
-    lazy = false,
-    config = function()
-      require("llm").setup {
-        model = "starcoder2:3b",
-        backend = "ollama",
-        url = "http://localhost:11434/",
-        request_body = {
-          -- Modelfile options for the model you use
-          options = {
-            temperature = 0.2,
-            top_p = 0.95,
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   "huggingface/llm.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("llm").setup {
+  --       model = "starcoder2:3b",
+  --       backend = "ollama",
+  --       url = "http://localhost:11434/",
+  --       request_body = {
+  --         -- Modelfile options for the model you use
+  --         options = {
+  --           temperature = 0.2,
+  --           top_p = 0.95,
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- nvchad's new UI framework
   {

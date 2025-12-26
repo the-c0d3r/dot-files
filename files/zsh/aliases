@@ -28,7 +28,7 @@ alias pg="ps -aux | grep -v 'grep' | grep "
 alias lg="lazygit"
 
 # Custom tools
-alias weather="curl http://wttr.in/singapore"
+alias weather="curl http://wttr.in"
 
 # Tmux Aliases
 alias tmls="tmux ls"

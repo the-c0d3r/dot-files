@@ -1,0 +1,39 @@
+# Use Ubuntu for reliable user management
+FROM ubuntu:latest
+
+# Define a generic username (can be overridden during build)
+ARG USERNAME=the-coder
+
+# 1. Install base tools
+RUN apt-get update && apt-get install -y curl xz-utils sudo git
+
+# 2. Setup the user first
+RUN useradd -m ${USERNAME} && \
+    echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# 3. Prepare /nix for the user
+RUN mkdir -m 0755 /nix && chown ${USERNAME} /nix
+
+# 4. Switch to the user and install Nix
+USER ${USERNAME}
+WORKDIR /home/${USERNAME}
+RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+
+# 5. Set environment for Nix
+ENV USER=${USERNAME}
+ENV PATH="/home/${USERNAME}/.nix-profile/bin:${PATH}"
+ENV NIX_PATH="nixpkgs=/home/${USERNAME}/.nix-defexpr/channels/nixpkgs"
+
+# 6. Configure Nix to allow flakes
+RUN mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+
+# 7. Copy the dotfiles and build
+COPY --chown=${USERNAME}:${USERNAME} . /home/${USERNAME}/dot-files
+WORKDIR /home/${USERNAME}/dot-files
+
+# Use --impure to bypass the path restriction during the test
+RUN nix build ./nix#homeConfigurations.linux.activationPackage --impure
+RUN ./result/activate
+
+# Use the Zsh that Nix just installed!
+CMD ["/bin/sh", "-c", "/home/${USER}/.nix-profile/bin/zsh"]

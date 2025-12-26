@@ -8,13 +8,13 @@ local servers = {
   "ansiblels",
   "bashls",
   "clangd",
-  "cssls",
+  -- "cssls",
   "dockerls",
   "html",
   "jsonls",
   "luau_lsp",
   "pylsp",
-  "llm_ls",
+  -- "llm_ls",
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 
