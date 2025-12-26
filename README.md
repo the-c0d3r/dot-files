@@ -2,13 +2,60 @@
 My dot-files repository which uses dotbot to deploy the dots.
 
 # Usage
-There are 2 ways to install the configurations. First way is to install with profiles. Profiles are under `meta/profiles`, every program inside the profile file will be installed.
+### The Quick Way (Linux)
+If you want to quickly bootstrap a fresh Linux system with Nix and these dotfiles, run:
+```bash
+curl -sSL https://raw.githubusercontent.com/the-c0d3r/dot-files/master/scripts/install-linux.sh | bash
+```
 
-`./install-profile mac`
+### Nix (The Modern Way)
+This repository also supports [Nix](https://nixos.org/) and [Home Manager](https://github.com/nix-community/home-manager) for fully declarative and reproducible dotfiles.
 
-Second way is to use `install-standalone` scrip to install individually. You can look at what configs/programs are available to install under `meta/configs`.
+### 1. Requirements
+#### Install Nix
+The recommended way to install Nix is via the [Determinate Systems Nix Installer](https://github.com/DeterminateSystems/nix-installer):
+```bash
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
 
-`./install-standalone zsh`
+#### Install Home Manager
+Once Nix is installed, install Home Manager standalone:
+```bash
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+```
+
+### 2. Activation
+Run the following command from the root folder depending on your platform:
+
+**Linux (Generic)**:
+```bash
+home-manager switch --flake ./nix#linux --impure
+```
+
+**Kali Linux**:
+```bash
+home-manager switch --flake ./nix#kali --impure
+```
+
+**macOS (Apple Silicon)**:
+```bash
+home-manager switch --flake ./nix#mac-arm --impure
+```
+
+**macOS (Intel)**:
+```bash
+home-manager switch --flake ./nix#mac-intel --impure
+```
+
+> [!TIP]
+> Use the `--impure` flag to automatically detect your current username from the environment.
+
+> [!NOTE]
+> If you don't have `home-manager` installed, you can build the activation package and run it manually:
+> `nix build ./nix#homeConfigurations.linux.activationPackage --impure && ./result/activate`
+`
 
 # OS installers
 
