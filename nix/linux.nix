@@ -18,4 +18,12 @@
     # From install-centos.sh
     nload
   ];
+
+  programs.zsh = {
+    initContent = ''
+      # Keyboard key repeat speed
+      # xset r rate [delay] [rate]
+      [ -x "$(command -v xset)" ] && xset r rate 300 15
+    '';
+  };
 }

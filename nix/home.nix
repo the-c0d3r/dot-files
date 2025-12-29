@@ -48,21 +48,13 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".aliases".source = ../files/zsh/aliases;
-    ".linuxrc".source = ../files/zsh/linuxrc;
-    ".dockerrc".source = ../files/zsh/dockerrc;
-    ".functionsrc".source = ../files/zsh/functionsrc;
-    ".gitrc".source = ../files/zsh/gitrc;
     ".pythonrc".source = ../files/zsh/pythonrc;
-    ".macrc".source = ../files/zsh/macrc;
-    ".gitignore_global".source = ../files/zsh/gitignore_global;
-    # ".p10k.zsh".source = ../files/zsh/p10k.zsh;
 
+    ".tmux.conf".source = ../files/tmux/tmux.conf;
     ".tmux.conf.local".source = ../files/tmux/tmux.conf.local;
 
     ".config/nvim".source = ../files/nvim;
     ".config/kitty/kitty.conf".source = ../files/kitty/kitty.conf;
-    # ".config/atuin/config.toml".source = ../files/atuin/config.toml;
   };
 
   # You can also manage environment variables
@@ -100,16 +92,34 @@
   };
 
   programs.tmux = {
+    # TODO: fix the import issues
     enable = true;
-    plugins = with pkgs.tmuxPlugins; [
-      sensible
-      pain-control
-      yank
-    ];
+    # plugins = with pkgs.tmuxPlugins; [
+    #   sensible
+    #   pain-control
+    #   yank
+    # ];
     extraConfig = ''
       # Source your existing tmux.conf content
       source-file ${../files/tmux/tmux.conf}
     '';
+  };
+
+  programs.git = {
+    enable = true;
+    ignores = [
+      ".idea"
+      "**/.idea"
+      "logs/*/"
+      "logs/*.log"
+      "logs/*.log.*"
+      "__pycache__"
+      "**/__pycache__"
+      "env/"
+      ".venv/"
+      ".DS_Store"
+      "**/.DS_Store"
+    ];
   };
 
   programs.starship = {
@@ -171,17 +181,24 @@
 
     initContent = ''
       # === Extra files to be sourced
-      source ~/.functionsrc
-      source ~/.dockerrc
-      source ~/.gitrc
       source ~/.pythonrc
       # file_source ~/.secrets
-      
-      # === OS related configs
-      # TODO: remove this after I move all configs to here
-      if [ "$(uname -s)" = "Linux" ]; then
-          source ~/.linuxrc
-      fi
+
+      function wsyncd() {
+          usage="Usage: wsyncd dirname sshpath"
+          if [ -z "$1" ] && [ -z "$2" ]; then
+              echo "$usage"
+              return
+          fi
+
+          dirname="$1"
+          sshpath="$2"
+
+          fswatch -o "$dirname" | while read f; do rsync -av "$dirname/" "$sshpath/"; done;
+      }
+
+      # Explicitly bind Ctrl-R to Atuin, in case vi-mode overwrites it
+      bindkey '^r' atuin-search
     '';
 
     oh-my-zsh = {
