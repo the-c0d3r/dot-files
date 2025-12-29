@@ -68,6 +68,19 @@
   # You can also manage environment variables
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERM = "xterm-256color";
+    LANG = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+    
+    # Oh-My-Zsh settings
+    DISABLE_UNTRACKED_FILES_DIRTY = "true";
+    DISABLE_UPDATE_PROMPT = "true";
+    DISABLE_AUTO_UPDATE = "true";
+    HIST_STAMPS = "%d/%m/%y %T";
+
+    # Ansible settings
+    ANSIBLE_FORCE_COLOR = "true";
+    ANSIBLE_STDOUT_CALLBACK = "yaml";
   };
 
   # Let Home Manager install and manage itself.
@@ -126,9 +139,49 @@
       # Dont write duplicate entries in the history file
       "HIST_SAVE_NO_DUPS"    
     ];
+    shellAliases = {
+      # system aliases
+      l = "ls -lah --color=auto";
+      ll = "ls -l";
 
-    initExtra = ''
-      source ${../files/zsh/zshrc}
+      # program aliases
+      lg = "lazygit";
+
+      # vim aliases
+      v = "nvim";
+      vi = "nvim";
+      vim = "nvim";
+
+      # tmux aliases
+      tmls = "tmux ls";
+      tmat = "tmux attach -t";
+      tmns = "tmux new -s";
+      tmkl = "tmux kill-session -t";
+
+      # git aliases
+      gs = "git status";
+      ga = "git add";
+      gdh = "git diff HEAD";     # see what's the uncommited changes
+      gdhp = "git diff HEAD^";   # see what's the previous commit changes
+      gdm = "git diff master";
+      gp = "git push";
+      gcan = "git commit --amend --no-edit";
+      gamd = "git commit --amend";
+    };
+
+    initContent = ''
+      # === Extra files to be sourced
+      source ~/.functionsrc
+      source ~/.dockerrc
+      source ~/.gitrc
+      source ~/.pythonrc
+      # file_source ~/.secrets
+      
+      # === OS related configs
+      # TODO: remove this after I move all configs to here
+      if [ "$(uname -s)" = "Linux" ]; then
+          source ~/.linuxrc
+      fi
     '';
 
     oh-my-zsh = {
