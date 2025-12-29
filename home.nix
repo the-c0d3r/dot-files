@@ -40,10 +40,23 @@
     tree
     watch
     wget
+
+    kitty     # if it "Failed to initialize EGL", do `sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup`
+    obsidian  # knowledge base
+    discord   # chat
+    keepassxc # password manager
+    ticktick  # task manager
+
+    # dev tools
+    antigravity
     vscodium
-    # kitty   # BUG: why when I use kitty installed by nix, it has segfault?
-    obsidian
+    lmstudio
+    sublime
+    # ollama-cuda
   ];
+
+  # Enable generic Linux target to allow symlinking desktop files
+  targets.genericLinux.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
