@@ -1,95 +1,74 @@
 # dot-files
-My dot-files repository which uses dotbot to deploy the dots.
+My dot-files repository which uses **Nix** (via Home Manager and nix-darwin) for fully declarative and reproducible configuration.
 
-# Usage
-### The Quick Way (Linux)
-If you want to quickly bootstrap a fresh Linux system with Nix and these dotfiles, run:
+# Installation
+
+## The Quick Way
+To bootstrap a fresh system (Linux or macOS) with Nix and these dotfiles, run:
 ```bash
-curl -sSL https://raw.githubusercontent.com/the-c0d3r/dot-files/master/scripts/install-linux.sh | bash
+curl -sSL https://raw.githubusercontent.com/the-c0d3r/dot-files/master/bootstrap.sh | bash
 ```
+This script will:
+- Install Nix (if not present)
+- Clone the repository
+- Detect your OS (Linux/macOS) and Architecture
+- Apply the correct configuration
 
-### Nix (The Modern Way)
-This repository also supports [Nix](https://nixos.org/) and [Home Manager](https://github.com/nix-community/home-manager) for fully declarative and reproducible dotfiles.
+## Manual Installation
+If you prefer to install manually or need to debug:
 
 ### 1. Requirements
-#### Install Nix
-The recommended way to install Nix is via the [Determinate Systems Nix Installer](https://github.com/DeterminateSystems/nix-installer):
+- **Nix**: [Install Nix](https://nixos.org/download.html) (Determinate Systems installer recommended).
+- **Flakes**: Ensure `experimental-features = nix-command flakes` is in your `nix.conf`.
+
+### 2. Apply Configuration
+
+**macOS (Apple Silicon & Intel)**
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+# First run (bootstrapping)
+nix run --impure nix-darwin -- switch --flake .
+
+# Subsequent updates
+darwin-rebuild switch --flake .
 ```
 
-#### Install Home Manager
-Once Nix is installed, install Home Manager standalone:
+**Linux (Generic & Kali)**
 ```bash
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-nix-shell '<home-manager>' -A install
+# Generic Linux
+nix run --impure ./nix#homeConfigurations.linux.activationPackage
+
+# Kali Linux
+nix run --impure ./nix#homeConfigurations.kali.activationPackage
 ```
-
-### 2. Activation
-Run the following command from the root folder depending on your platform:
-
-**Linux (Generic)**:
-```bash
-home-manager switch --flake ./nix#linux --impure
-```
-
-**Kali Linux**:
-```bash
-home-manager switch --flake ./nix#kali --impure
-```
-
-**macOS (Apple Silicon)**:
-```bash
-home-manager switch --flake ./nix#mac-arm --impure
-```
-
-**macOS (Intel)**:
-```bash
-home-manager switch --flake ./nix#mac-intel --impure
-```
-
-> [!TIP]
-> Use the `--impure` flag to automatically detect your current username from the environment.
 
 > [!NOTE]
-> If you don't have `home-manager` installed, you can build the activation package and run it manually:
-> `nix build ./nix#homeConfigurations.linux.activationPackage --impure && ./result/activate`
-`
+> Once installed, you can also use `home-manager switch --flake .` on Linux if you have `home-manager` in your path.
 
-# OS installers
+# Profiles defined in [`flake.nix`](nix/flake.nix)
 
-```
-curl -L https://raw.githubusercontent.com/the-c0d3r/dot-files/master/scripts/install-centos.sh | bash
-```
+- **linux**: Standard Linux setup with terminal tools + i3 window manager environment (i3, polybar, rofi).
+- **kali**: Build on top of `linux` profile, adding Kali-specific configurations.
+- **mac-arm / mac-intel**: macOS system settings (Dock, Finder, etc.) + terminal tools.
 
+# Programs & Configs
 
-# Programs & configs
+## Shared (Mac & Linux)
+- **Neovim**: Customized vim configuration.
+- **Tmux**: Terminal multiplexer.
+- **Zsh**: Shell config (replaces `oh-my-zsh` management) with Powerlevel10k.
+- **Kitty**: GPU-accelerated terminal.
+- **Starship**: Cross-shell prompt.
+- **Atuin**: Shell history sync.
+- **Ripgrep**, **FD**: Modern search tools.
+- **Htop**, **Ncdu**, **Jq**: System utilities.
 
-## Mac OS & Linux
-- neovim : vim but better
-- tmux : terminal multiplexer. Config from https://github.com/gpakosz/.tmux and customised
-- zsh : oh-my-zsh shell config (WARNING: this will remove your existing ~/.zshrc file) with powerlevel10k configuration.
-- kitty: fast terminal powered by CPU
-- starship : fast cross shell prompt
+## Linux Only (Desktop)
+- **i3**: Tiling window manager.
+- **Polybar**: Status bar.
+- **Rofi**: Application launcher.
+- **Dunst**: Notification daemon.
 
-## Linux
-- i3 : tiling window manager
-- rofi : spotlight app search thing for linux
-- polybar : the menu bar replacement for tiling window managers
-- dunst : simple, configurable notification daemon
-
-## Mac OS
-- karabiner : key remapping program
-
-# Profiles
-
-## arch
-- install all the archlinux i3 setup
-
-## linux
-- install only terminal apps like vim, zsh, tmux
-
-## mac
-- install linux tools + mac related tools
-
+## macOS Only
+- **Nix-Darwin**: System configuration management.
+- **Yabai**: Tiling window manager (service).
+- **Skhd**: Hotkey daemon (service).

@@ -24,7 +24,7 @@ COPY --chown=${USERNAME}:${USERNAME} . /home/${USERNAME}/dot-files
 # 5. Run the bootstrap script!
 # We set the TARGET_DIR to match where we copied the files so it doesn't try to clone
 WORKDIR /home/${USERNAME}/dot-files
-RUN bash scripts/install-linux.sh
+RUN bash bootstrap.sh
 
 # Use the Zsh that Nix just installed!
 CMD ["/bin/sh", "-c", "/home/${USER}/.nix-profile/bin/zsh"]
