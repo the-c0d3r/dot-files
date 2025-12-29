@@ -91,13 +91,7 @@
   };
 
   programs.tmux = {
-    # TODO: fix the import issues
     enable = true;
-    # plugins = with pkgs.tmuxPlugins; [
-    #   sensible
-    #   pain-control
-    #   yank
-    # ];
     extraConfig = ''
       # Source your existing tmux.conf content
       source-file ${./files/tmux/tmux.conf}
