@@ -173,7 +173,6 @@
     };
   };
 
-  # Specific program configurations can go here
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;

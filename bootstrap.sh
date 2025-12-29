@@ -93,12 +93,12 @@ if [ "$OS" == "Darwin" ]; then
 
     # Use nix to run nix-darwin if darwin-rebuild isn't in path yet
     if ! command -v darwin-rebuild &> /dev/null; then
-        echo "darwin-rebuild not found. Bootstrapping with nix run..."
+        echo -e "${BLUE}==>${NC} darwin-rebuild not found. Installing nix-darwin..."
         # We need to pass --impure because our flake uses builtins.getEnv
         nix run --impure nix-darwin -- switch --flake ".#$FLAKE_ATTR"
     else
-        echo "darwin-rebuild found. Switching configuration..."
-        darwin-rebuild switch --flake ".#$FLAKE_ATTR"
+        echo -e "${GREEN}==>${NC} darwin-rebuild found. Applying system configuration..."
+        darwin-rebuild switch --flake ".#$FLAKE_ATTR" --impure
     fi
 
 elif [ "$OS" == "Linux" ]; then

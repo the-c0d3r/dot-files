@@ -14,35 +14,24 @@ This script will:
 - Detect your OS (Linux/macOS) and Architecture
 - Apply the correct configuration
 
-## Manual Installation
-If you prefer to install manually or need to debug:
+## Installation
 
-### 1. Requirements
-- **Nix**: [Install Nix](https://nixos.org/download.html) (Determinate Systems installer recommended).
-- **Flakes**: Ensure `experimental-features = nix-command flakes` is in your `nix.conf`.
+### 1. First Run (Bootstrapping)
+For any fresh system (Linux, Kali, or macOS), run this to install Nix and bootstrap your dotfiles:
 
-### 2. Apply Configuration
-
-**macOS (Apple Silicon & Intel)**
 ```bash
-# First run (bootstrapping)
-nix run --impure nix-darwin -- switch --flake .
-
-# Subsequent updates
-darwin-rebuild switch --flake .
+./bootstrap.sh
 ```
 
-**Linux (Generic & Kali)**
-```bash
-# Generic Linux
-nix run --impure ./nix#homeConfigurations.linux.activationPackage
+### 2. Subsequent Updates
+To apply any changes to your configuration later, simply run:
 
-# Kali Linux
-nix run --impure ./nix#homeConfigurations.kali.activationPackage
+```bash
+./apply.sh
 ```
 
 > [!NOTE]
-> Once installed, you can also use `home-manager switch --flake .` on Linux if you have `home-manager` in your path.
+> `apply.sh` automatically detects your OS and distribution to apply the correct fragments (`#linux`, `#kali`, `#mac-arm`, etc.).
 
 # Profiles defined in [`flake.nix`](nix/flake.nix)
 
