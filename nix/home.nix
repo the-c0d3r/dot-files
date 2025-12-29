@@ -1,4 +1,4 @@
-{ config, pkgs, system, username, ... }:
+{ config, pkgs, lib, system, username, ... }:
 
 {
   home.username = username;
@@ -56,13 +56,13 @@
     ".pythonrc".source = ../files/zsh/pythonrc;
     ".macrc".source = ../files/zsh/macrc;
     ".gitignore_global".source = ../files/zsh/gitignore_global;
-    ".p10k.zsh".source = ../files/zsh/p10k.zsh;
+    # ".p10k.zsh".source = ../files/zsh/p10k.zsh;
 
     ".tmux.conf.local".source = ../files/tmux/tmux.conf.local;
 
     ".config/nvim".source = ../files/nvim;
     ".config/kitty/kitty.conf".source = ../files/kitty/kitty.conf;
-    ".config/atuin/config.toml".source = ../files/atuin/config.toml;
+    # ".config/atuin/config.toml".source = ../files/atuin/config.toml;
   };
 
   # You can also manage environment variables
@@ -73,29 +73,17 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Specific program configurations can go here
-  programs.zsh = {
-    enable = true;
-    # oh-my-zsh is handled better via Nix if we want it declarative
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ 
-        "git" "sudo" "docker" "python" "tmux" "vi-mode" "autojump" 
-        "colored-man-pages" "zsh-autosuggestions" "zsh-syntax-highlighting" 
-      ];
-      theme = "robbyrussell";
-    };
-    initContent = ''
-      # Source your existing zshrc content, but filter out the manual Oh-My-Zsh setup
-      # to avoid conflicts with Home Manager's management.
-      source <(sed -e 's|^source \$ZSH/oh-my-zsh.sh|: # OMZ handled by Nix|' \
-                   -e 's|^export ZSH=.*|: # Path handled by Nix|' \
-                   ${../files/zsh/zshrc})
+  # Force creation of Atuin config, as it would automatically create it
+  xdg.configFile."atuin/config.toml".force = lib.mkForce true;
 
-      # Source your local rc files if they aren't already sourced by zshrc
-      [ -f ~/.aliases ] && source ~/.aliases
-      [ -f ~/.functionsrc ] && source ~/.functionsrc
-    '';
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      enter_accept = true;
+      keymap_mode = "auto";
+    };
+    flags = [ "--disable-up-arrow" ]; 
   };
 
   programs.tmux = {
@@ -115,5 +103,41 @@
     enable = true;
     enableZshIntegration = true;
     settings = builtins.fromTOML (builtins.readFile ../files/starship/starship.toml);
+  };
+
+  # Specific program configurations can go here
+  programs.zsh = {
+    enable = true;
+    syntaxHighlighting.enable = true;
+
+    history = {
+      size = 999999999;
+      save = 999999999;
+      ignoreDups = true;
+      ignoreSpace = true;
+      expireDuplicatesFirst = true;
+      share = false;
+    };
+    setOptions = [
+      # ignore all the duplicated command consecutively
+      "HIST_IGNORE_ALL_DUPS" 
+      # Do not display a line previously found
+      "HIST_FIND_NO_DUPS"    
+      # Dont write duplicate entries in the history file
+      "HIST_SAVE_NO_DUPS"    
+    ];
+
+    initExtra = ''
+      source ${../files/zsh/zshrc}
+    '';
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ 
+        "git" "sudo" "docker" "python" "tmux" "vi-mode" "autojump" 
+        "colored-man-pages"
+      ];
+      theme = "robbyrussell";
+    };
   };
 }
