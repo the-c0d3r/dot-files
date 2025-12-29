@@ -48,12 +48,12 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".pythonrc".source = ../files/zsh/pythonrc;
+    ".pythonrc".source = ./files/zsh/pythonrc;
 
-    ".tmux.conf".source = ../files/tmux/tmux.conf;
-    ".tmux.conf.local".source = ../files/tmux/tmux.conf.local;
+    ".tmux.conf".source = ./files/tmux/tmux.conf;
+    ".tmux.conf.local".source = ./files/tmux/tmux.conf.local;
 
-    ".config/nvim".source = ../files/nvim;
+    ".config/nvim".source = ./files/nvim;
   };
 
   # You can also manage environment variables
@@ -100,7 +100,7 @@
     # ];
     extraConfig = ''
       # Source your existing tmux.conf content
-      source-file ${../files/tmux/tmux.conf}
+      source-file ${./files/tmux/tmux.conf}
     '';
   };
 
@@ -124,7 +124,7 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = builtins.fromTOML (builtins.readFile ../files/starship/starship.toml);
+    settings = builtins.fromTOML (builtins.readFile ./files/starship/starship.toml);
   };
 
   programs.kitty = {

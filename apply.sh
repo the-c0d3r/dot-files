@@ -31,19 +31,19 @@ if [ "$OS" == "Darwin" ]; then
     # Apply Home Manager (User settings)
     echo -e "${BLUE}==>${NC} Applying User Configuration (home-manager)..."
     if command -v home-manager &> /dev/null; then
-        home-manager switch --flake "./nix#$FLAKE_ATTR" --impure
+        home-manager switch --flake ".#$FLAKE_ATTR" --impure
     else
         echo -e "${BLUE}==>${NC} home-manager not found. Bootstrapping with nix run..."
-        nix run --impure home-manager -- switch --flake "./nix#$FLAKE_ATTR"
+        nix run --impure home-manager -- switch --flake ".#$FLAKE_ATTR"
     fi
 
     # Apply System Configuration (nix-darwin)
     echo -e "${BLUE}==>${NC} Applying System Configuration (nix-darwin)..."
     if command -v darwin-rebuild &> /dev/null; then
-        darwin-rebuild switch --flake "./nix" --impure
+        darwin-rebuild switch --flake "." --impure
     else
         echo -e "${BLUE}==>${NC} darwin-rebuild not found. Bootstrapping with nix run..."
-        nix run --impure nix-darwin -- switch --flake "./nix"
+        nix run --impure nix-darwin -- switch --flake "."
     fi
 
 elif [ "$OS" == "Linux" ]; then
@@ -55,10 +55,10 @@ elif [ "$OS" == "Linux" ]; then
     echo -e "${BLUE}==>${NC} Detected $FLAKE_ATTR. Applying User Configuration..."
     
     if command -v home-manager &> /dev/null; then
-        home-manager switch --flake "./nix#$FLAKE_ATTR" --impure
+        home-manager switch --flake ".#$FLAKE_ATTR" --impure
     else
         echo -e "${BLUE}==>${NC} home-manager not found. Bootstrapping with nix run..."
-        nix run --impure home-manager -- switch --flake "./nix#$FLAKE_ATTR"
+        nix run --impure home-manager -- switch --flake ".#$FLAKE_ATTR"
     fi
 else
     echo -e "${RED}Error:${NC} Unsupported OS: $OS"

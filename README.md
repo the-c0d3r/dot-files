@@ -33,7 +33,7 @@ To apply any changes to your configuration later, simply run:
 > [!NOTE]
 > `apply.sh` automatically detects your OS and distribution to apply the correct fragments (`#linux`, `#kali`, `#mac-arm`, etc.).
 
-# Profiles defined in [`flake.nix`](nix/flake.nix)
+# Profiles defined in [`flake.nix`](flake.nix)
 
 - **linux**: Standard Linux setup with terminal tools + i3 window manager environment (i3, polybar, rofi).
 - **kali**: Build on top of `linux` profile, adding Kali-specific configurations.

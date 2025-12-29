@@ -112,8 +112,8 @@ elif [ "$OS" == "Linux" ]; then
          FLAKE_ATTR="linux"
     fi
 
-    echo -e "${BLUE}==>${NC} Running: nix run --impure ./nix#homeConfigurations.$FLAKE_ATTR.activationPackage"
-    nix run --impure "./nix#homeConfigurations.$FLAKE_ATTR.activationPackage"
+    echo -e "${BLUE}==>${NC} Running: nix run --impure .#homeConfigurations.$FLAKE_ATTR.activationPackage"
+    nix run --impure ".#homeConfigurations.$FLAKE_ATTR.activationPackage"
 else
     echo -e "${RED}Error:${NC} Unsupported OS: $OS"
     exit 1
