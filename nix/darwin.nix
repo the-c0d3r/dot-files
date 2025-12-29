@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, system, ... }:
 
 {
   home.file = {
@@ -7,6 +7,11 @@
     ".config/yabai/yabairc".source = ../files/yabai/yabairc;
     ".config/yabai/scripts".source = ../files/yabai/scripts;
     ".config/skhd/skhdrc".source = ../files/skhd/skhdrc;
+  };
+
+  home.sessionVariables = {
+    # disables ._ files in tar file. https://superuser.com/a/260264/146350
+    COPYFILE_DISABLE = "1";
   };
 
   home.packages = with pkgs; [
@@ -22,4 +27,17 @@
     # Adding tools that was in Brewfile but are more Mac-centric in this context
     iproute2mac 
   ];
+
+  programs.zsh = {
+    shellAliases = {
+      # additional aliases for macOS
+      hidedesktop = "defaults write com.apple.finder CreateDesktop false && killall Finder";
+      unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
+
+    };
+    initContent = ''
+      # not sure if I need this yet
+      # eval "$(/opt/homebrew/bin/brew shellenv)"
+    '';
+  };
 }
