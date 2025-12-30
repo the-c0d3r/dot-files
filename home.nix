@@ -46,6 +46,10 @@ in
     watch
     wget
 
+    # utils
+    syncthing
+
+    # apps
     kitty     # if it "Failed to initialize EGL", do `sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup`
     customPkgs.obsidian  # Platform-aware Obsidian with Linux GPU/Wayland fixes
     discord   # chat
