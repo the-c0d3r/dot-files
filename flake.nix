@@ -19,9 +19,9 @@
 
   outputs = { self, nixpkgs, home-manager, darwin, ... }:
     let
-      # Runtime username detection (requires --impure)
-      # Fallback to "the-coder" if USER is not set
-      username = let envUser = builtins.getEnv "USER"; in if envUser != "" then envUser else "the-coder";
+      # Pure username detection from vars.nix
+      vars = import ./vars.nix;
+      username = vars.username;
 
       # Use a helper function for home configurations
       mkHome = system: extraModules: home-manager.lib.homeManagerConfiguration {

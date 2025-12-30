@@ -16,10 +16,58 @@ export USER="${USER:-$(whoami)}"
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
-# Navigate to the script directory
-cd "$(dirname "$0")"
+# --- 1. Ensure Nix is installed ---
+if ! command -v nix &> /dev/null; then
+    echo -e "${BLUE}==>${NC} Nix not found. Installing Nix..."
+    if [ "$OS" == "Darwin" ]; then
+        curl -L https://nixos.org/nix/install | sh -s -- --daemon
+    elif [ "$OS" == "Linux" ]; then
+        if [ -d /run/systemd/system ]; then
+            curl -L https://nixos.org/nix/install | sh -s -- --daemon
+        else
+            curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+        fi
+    fi
+    
+    # Source nix profile
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    elif [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    fi
+fi
 
-# 1. Detect Configuration Fragment
+# --- 2. Ensure Flakes are enabled ---
+mkdir -p ~/.config/nix
+if ! grep -q "experimental-features" ~/.config/nix/nix.conf 2>/dev/null; then
+    echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+fi
+
+# --- 3. Ensure Repository is cloned ---
+REPO_URL="https://github.com/the-c0d3r/dot-files.git"
+TARGET_DIR="$HOME/dot-files"
+
+if [ -d "$TARGET_DIR/.git" ]; then
+    echo -e "${GREEN}==>${NC} Repository already exists at $TARGET_DIR"
+    cd "$TARGET_DIR"
+elif [[ "${BASH_SOURCE[0]:-}" == *"apply.sh"* ]]; then
+    # We are running a local file, but maybe not in the right dir
+    REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    cd "$REPO_ROOT"
+else
+    # We are likely running via curl | bash
+    echo -e "${BLUE}==>${NC} Cloning dotfiles repository to $TARGET_DIR..."
+    git clone "$REPO_URL" "$TARGET_DIR"
+    cd "$TARGET_DIR"
+fi
+
+
+# --- 4. Generate vars.nix if missing (Pure & Private pattern) ---
+echo -e "${BLUE}==>${NC} Generating vars.nix for pure evaluation..."
+echo "{ username = \"$(whoami)\"; }" > vars.nix
+git add -N -f vars.nix 2>/dev/null || true
+
+# --- 5. Activate Configuration ---
 if [ "$OS" == "Darwin" ]; then
     if [ "$ARCH" == "arm64" ]; then
         FLAKE_ATTR="mac-arm"
@@ -28,22 +76,20 @@ if [ "$OS" == "Darwin" ]; then
     fi
     echo -e "${BLUE}==>${NC} Detected macOS ($ARCH). Using fragment: $FLAKE_ATTR"
 
-    # Apply Home Manager (User settings)
+    # Apply Home Manager
     echo -e "${BLUE}==>${NC} Applying User Configuration (home-manager)..."
     if command -v home-manager &> /dev/null; then
-        home-manager switch --flake ".#$FLAKE_ATTR" --impure
+        home-manager switch --flake ".#$FLAKE_ATTR"
     else
-        echo -e "${BLUE}==>${NC} home-manager not found. Bootstrapping with nix run..."
-        nix run --impure home-manager -- switch --flake ".#$FLAKE_ATTR"
+        nix run home-manager -- switch --flake ".#$FLAKE_ATTR"
     fi
 
     # Apply System Configuration (nix-darwin)
     echo -e "${BLUE}==>${NC} Applying System Configuration (nix-darwin)..."
     if command -v darwin-rebuild &> /dev/null; then
-        darwin-rebuild switch --flake "." --impure
+        darwin-rebuild switch --flake "."
     else
-        echo -e "${BLUE}==>${NC} darwin-rebuild not found. Bootstrapping with nix run..."
-        nix run --impure nix-darwin -- switch --flake "."
+        nix run nix-darwin -- switch --flake "."
     fi
 
 elif [ "$OS" == "Linux" ]; then
@@ -55,10 +101,10 @@ elif [ "$OS" == "Linux" ]; then
     echo -e "${BLUE}==>${NC} Detected $FLAKE_ATTR. Applying User Configuration..."
     
     if command -v home-manager &> /dev/null; then
-        home-manager switch --flake ".#$FLAKE_ATTR" --impure
+        home-manager switch --flake ".#$FLAKE_ATTR"
     else
-        echo -e "${BLUE}==>${NC} home-manager not found. Bootstrapping with nix run..."
-        nix run --impure home-manager -- switch --flake ".#$FLAKE_ATTR"
+        # Fallback to nix run if home-manager is not yet in path
+        nix run ".#homeConfigurations.$FLAKE_ATTR.activationPackage"
     fi
 else
     echo -e "${RED}Error:${NC} Unsupported OS: $OS"

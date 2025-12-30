@@ -2,11 +2,11 @@
 
 {
   home.file = {
-    "Library/Fonts".source = ../files/fonts;
-    ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
-    ".config/yabai/yabairc".source = ../files/yabai/yabairc;
-    ".config/yabai/scripts".source = ../files/yabai/scripts;
-    ".config/skhd/skhdrc".source = ../files/skhd/skhdrc;
+    "Library/Fonts".source = ./files/fonts;
+    ".config/karabiner/karabiner.json".source = ./files/karabiner/karabiner.json;
+    ".config/yabai/yabairc".source = ./files/yabai/yabairc;
+    ".config/yabai/scripts".source = ./files/yabai/scripts;
+    ".config/skhd/skhdrc".source = ./files/skhd/skhdrc;
   };
 
   home.sessionVariables = {

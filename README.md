@@ -4,24 +4,36 @@ My dot-files repository which uses **Nix** (via Home Manager and nix-darwin) for
 # Installation
 
 ## The Quick Way
-To bootstrap a fresh system (Linux or macOS) with Nix and these dotfiles, run:
-```bash
-curl -sSL https://raw.githubusercontent.com/the-c0d3r/dot-files/master/bootstrap.sh | bash
-```
-This script will:
-- Install Nix (if not present)
-- Clone the repository
-- Detect your OS (Linux/macOS) and Architecture
-- Apply the correct configuration
+### Linux & macOS
 
-## Installation
-
-### 1. First Run (Bootstrapping)
-For any fresh system (Linux, Kali, or macOS), run this to install Nix and bootstrap your dotfiles:
+Run the following command in your terminal to bootstrap your entire system:
 
 ```bash
-./bootstrap.sh
+curl -L https://raw.githubusercontent.com/the-c0d3r/dot-files/master/apply.sh | bash
 ```
+
+Alternatively, if you've already cloned the repo:
+
+```bash
+./apply.sh
+```
+
+## Uninstallation
+
+To remove the configurations and symlinks created by these dotfiles:
+
+```bash
+./uninstall.sh
+```
+
+To see what would be removed without actually deleting anything:
+
+```bash
+./uninstall.sh --dry-run
+```
+
+> [!NOTE]
+> This script cleans up the dotfiles configuration but does not uninstall Nix itself. Refer to the Nix documentation for full system uninstallation.
 
 ### 2. Subsequent Updates
 To apply any changes to your configuration later, simply run:
