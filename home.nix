@@ -60,6 +60,7 @@ in
     vscodium
     #lmstudio
     # ollama-cuda
+    uv
   ];
 
   # Enable generic Linux target to allow symlinking desktop files
