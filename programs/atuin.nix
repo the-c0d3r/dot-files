@@ -11,6 +11,6 @@
       enter_accept = true;
       keymap_mode = "auto";
     };
-    flags = [ "--disable-up-arrow" ]; 
+    flags = [ "--disable-up-arrow" ];
   };
 }

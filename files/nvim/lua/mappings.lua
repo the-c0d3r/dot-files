@@ -44,7 +44,7 @@ map("i", "<Tab>", function ()
 
     if llm.shown_suggestion ~= nil then
         llm.complete()
-    else 
+    else
         local keys = vim.api.nvim_replace_termcodes('<Tab>', true, false, true)
         vim.api.nvim_feedkeys(keys, 'n', false)
     end

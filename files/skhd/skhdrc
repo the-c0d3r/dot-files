@@ -1,8 +1,8 @@
 # open terminal
 # cmd - return : open -n -a "kitty"
 
-# open chrome 
-# cmd + shift - return : open -n -a "Google Chrome" 
+# open chrome
+# cmd + shift - return : open -n -a "Google Chrome"
 
 # moves focus between windows in the current focused display
 alt - h : yabai -m window --focus west
@@ -10,7 +10,7 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
-# moves focus between spaces 
+# moves focus between spaces
 alt - 1 : yabai -m space --focus 1
 alt - 2 : yabai -m space --focus 2
 alt - 3 : yabai -m space --focus 3
@@ -92,7 +92,7 @@ shift + cmd - j : yabai -m window --warp south
 shift + cmd - k : yabai -m window --warp north
 shift + cmd - l : yabai -m window --warp east
 
-# send window to a space 
+# send window to a space
 shift + alt - 1 : yabai -m window --space 1
 shift + alt - 2 : yabai -m window --space 2
 shift + alt - 3 : yabai -m window --space 3

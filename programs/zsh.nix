@@ -17,11 +17,11 @@
     };
     setOptions = [
       # ignore all the duplicated command consecutively
-      "HIST_IGNORE_ALL_DUPS" 
+      "HIST_IGNORE_ALL_DUPS"
       # Do not display a line previously found
-      "HIST_FIND_NO_DUPS"    
+      "HIST_FIND_NO_DUPS"
       # Dont write duplicate entries in the history file
-      "HIST_SAVE_NO_DUPS"    
+      "HIST_SAVE_NO_DUPS"
     ];
     shellAliases = {
       # system aliases
@@ -86,8 +86,8 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ 
-        "git" "sudo" "docker" "python" "vi-mode" "autojump" 
+      plugins = [
+        "git" "sudo" "docker" "python" "vi-mode" "autojump"
         "colored-man-pages"
       ];
       theme = "robbyrussell";

@@ -54,13 +54,11 @@ in
     customPkgs.obsidian  # Platform-aware Obsidian with Linux GPU/Wayland fixes
     discord   # chat
     keepassxc # password manager
-    #ticktick  # task manager
 
     # dev tools
     antigravity
     vscodium
     #lmstudio
-    #sublime
     # ollama-cuda
   ];
 
@@ -77,7 +75,7 @@ in
     TERM = "xterm-256color";
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
-    
+
     # Oh-My-Zsh settings
     DISABLE_UNTRACKED_FILES_DIRTY = "true";
     DISABLE_UPDATE_PROMPT = "true";

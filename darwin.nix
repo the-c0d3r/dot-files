@@ -28,7 +28,7 @@
     gnutar
     gnugrep
     # Adding tools that was in Brewfile but are more Mac-centric in this context
-    iproute2mac 
+    iproute2mac
   ];
 
   programs.zsh = {

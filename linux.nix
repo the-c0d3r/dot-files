@@ -14,7 +14,8 @@
     polybar
     rofi
     xclip # Linux-specific clipboard tool
-    
+    ticktick  # task manager
+
     # From install-centos.sh
     nload
   ];

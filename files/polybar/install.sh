@@ -8,4 +8,3 @@ mkdir -p $HOME/programming/programs/
 if [ ! -d "$HOME/programming/programs/polybar-spotify" ]; then
     git clone https://github.com/Jvanrhijn/polybar-spotify ~/programming/programs/polybar-spotify
 fi
-

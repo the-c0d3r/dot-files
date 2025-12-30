@@ -17,7 +17,7 @@ RUN mkdir -m 0755 /nix && chown ${USERNAME} /nix
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
-# 4. Copy local dotfiles into the container 
+# 4. Copy local dotfiles into the container
 # This ensures we test our LOCAL changes, not just what's on GitHub
 COPY --chown=${USERNAME}:${USERNAME} . /home/${USERNAME}/dot-files
 

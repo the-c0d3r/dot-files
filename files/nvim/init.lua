@@ -44,4 +44,3 @@ vim.opt.shiftwidth = 4
 -- show invisible characters
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', extends = '›', precedes = '‹', trail = '·' }
-

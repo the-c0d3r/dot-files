@@ -23,4 +23,3 @@ hs -c "hs.alert.show('Yabai Layout: $next_layout')"
 
 # Apply the next layout mode
 yabai -m space --layout "$next_layout"
-

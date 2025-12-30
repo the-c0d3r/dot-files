@@ -26,7 +26,7 @@ yabai -m config                                 \
     window_placement             second_child   \
     window_zoom_persist          on             \
     window_shadow                on             \
-    window_animation_duration    1              \
+    window_animation_duration    0              \
     window_animation_easing      ease_out_circ  \
     window_opacity_duration      0.0            \
     active_window_opacity        1.0            \

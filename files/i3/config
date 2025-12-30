@@ -184,4 +184,3 @@ for_window [instance="Mail"] move to workspace 2
 
 # execute my work related scripts if it exists
 exec_always --no-startup-id "/bin/bash -c 'test -f $HOME/work/scripts/start-work.sh && ~/work/scripts/start-work.sh'"
-

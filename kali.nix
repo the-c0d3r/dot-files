@@ -18,7 +18,7 @@
     whatweb
     wkhtmltopdf
     samba # provides smbclient
-    
+
     python3
     python3Packages.pip
   ];

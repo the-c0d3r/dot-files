@@ -13,7 +13,7 @@
         plugin = pkgs.tmuxPlugins.yank;
         extraConfig = ''
           # or 'copy-pipe-and-cancel' for the default
-          set -g @yank_action 'copy-pipe' 
+          set -g @yank_action 'copy-pipe'
         '';
       }
       {
@@ -23,8 +23,8 @@
         plugin = pkgs.tmuxPlugins.tmux-nova;
         extraConfig = ''
           set -g @nova-nerdfonts true
-          set -g @nova-nerdfonts-left 
-          set -g @nova-nerdfonts-right 
+          set -g @nova-nerdfonts-left
+          set -g @nova-nerdfonts-right
           set -g @nova-segment-mode "#{?client_prefix,Ω,ω}"
           set -g @nova-segment-mode-colors "#50fa7b #282a36"
           set -g @nova-segment-whoami "#(whoami)@#h"
