@@ -1,4 +1,5 @@
 return {
+  lockfile = vim.fn.stdpath "data" .. "/lazy-lock.json", -- Move lockfile out of the read-only Nix store
   defaults = { lazy = true },
   install = { colorscheme = { "nvchad" } },
 

@@ -1,0 +1,30 @@
+# Use Ubuntu for reliable user management
+FROM ubuntu:latest
+
+ARG USERNAME=the-coder
+ENV USER=${USERNAME}
+
+# 1. Install base tools required to run the bootstrap script
+RUN apt-get update && apt-get install -y curl xz-utils sudo git
+
+# 2. Setup the test user
+RUN useradd -m ${USERNAME} && \
+    echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# 3. Prepare /nix for the user (The Nix installer needs this even for single-user)
+RUN mkdir -m 0755 /nix && chown ${USERNAME} /nix
+
+USER ${USERNAME}
+WORKDIR /home/${USERNAME}
+
+# 4. Copy local dotfiles into the container 
+# This ensures we test our LOCAL changes, not just what's on GitHub
+COPY --chown=${USERNAME}:${USERNAME} . /home/${USERNAME}/dot-files
+
+# 5. Run the bootstrap script!
+# We set the TARGET_DIR to match where we copied the files so it doesn't try to clone
+WORKDIR /home/${USERNAME}/dot-files
+RUN bash apply.sh
+
+# Use the Zsh that Nix just installed!
+CMD ["/bin/sh", "-c", "/home/${USER}/.nix-profile/bin/zsh"]
