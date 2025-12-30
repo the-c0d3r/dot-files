@@ -72,6 +72,14 @@
           fswatch -o "$dirname" | while read f; do rsync -av "$dirname/" "$sshpath/"; done;
       }
 
+      function lineprof() {
+          if [  -z "$1" ]; then
+              echo "Usage: lineprof test.py"
+          else
+              kernprof -l "$1" && python -m line_profiler "$1.lprof"
+          fi;
+      }
+
       # Explicitly bind Ctrl-R to Atuin, in case vi-mode overwrites it
       bindkey '^r' atuin-search
     '';

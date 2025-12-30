@@ -77,7 +77,6 @@
   targets.genericLinux.enable = true;
 
   home.file = {
-    ".pythonrc".source = ./files/zsh/pythonrc;
     ".config/nvim".source = ./files/nvim;
   };
 
