@@ -16,8 +16,7 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  # install packages
   home.packages = with pkgs; [
     atuin
     autojump
@@ -45,7 +44,23 @@
     wget
 
     kitty     # if it "Failed to initialize EGL", do `sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup`
-    # obsidian  # knowledge base
+    
+    # Obsidian - with Linux-specific fixes for GPU/Wayland issues
+    (if pkgs.stdenv.isLinux then
+      pkgs.obsidian.overrideAttrs (oldAttrs: {
+        installPhase = oldAttrs.installPhase + ''
+          wrapProgram $out/bin/obsidian \
+            --add-flags "--disable-gpu-sandbox" \
+            --add-flags "--disable-software-rasterizer" \
+            --add-flags "--enable-features=UseOzonePlatform" \
+            --add-flags "--ozone-platform=wayland" \
+            --add-flags "--enable-wayland-ime"
+        '';
+      })
+    else
+      obsidian  # macOS uses plain version
+    )
+    
     discord   # chat
     keepassxc # password manager
     ticktick  # task manager
@@ -61,18 +76,12 @@
   # Enable generic Linux target to allow symlinking desktop files
   targets.genericLinux.enable = true;
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
     ".pythonrc".source = ./files/zsh/pythonrc;
-
-    # ".tmux.conf".source = ./files/tmux/tmux.conf;
-    # ".tmux.conf.local".source = ./files/tmux/tmux.conf.local;
-
     ".config/nvim".source = ./files/nvim;
   };
 
-  # You can also manage environment variables
+  # manage env variables
   home.sessionVariables = {
     EDITOR = "nvim";
     TERM = "xterm-256color";
