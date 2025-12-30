@@ -73,3 +73,21 @@ To apply any changes to your configuration later, simply run:
 - **Nix-Darwin**: System configuration management.
 - **Yabai**: Tiling window manager (service).
 - **Skhd**: Hotkey daemon (service).
+
+# macOS Manual Commands
+
+If you prefer to run home-manager and darwin-rebuild separately (darwin-rebuild requires `sudo`, while home-manager should NOT use `sudo`):
+
+**Step 1: Apply User Configuration (Home Manager)** - no sudo
+```bash
+home-manager switch --flake ".#mac-arm"  # or .#mac-intel
+```
+
+**Step 2: Apply System Configuration (nix-darwin)** - requires sudo
+```bash
+sudo darwin-rebuild switch --flake ".#mac-arm"  # or .#mac-intel
+```
+
+> [!NOTE]
+> - Always run home-manager WITHOUT sudo
+> - First-time setup will automatically backup `/etc/bashrc` and `/etc/zshrc` to `.before-nix-darwin`

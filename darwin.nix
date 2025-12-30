@@ -2,7 +2,10 @@
 
 {
   home.file = {
-    "Library/Fonts".source = ./files/fonts;
+    "Library/Fonts" = {
+      source = ./files/fonts;
+      recursive = true;
+    };
     ".config/karabiner/karabiner.json".source = ./files/karabiner/karabiner.json;
     ".config/yabai/yabairc".source = ./files/yabai/yabairc;
     ".config/yabai/scripts".source = ./files/yabai/scripts;

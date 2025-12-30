@@ -39,15 +39,6 @@
         inherit system;
         modules = [
           ./darwin-configuration.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${username} = {
-              imports = [ ./home.nix ./darwin.nix ];
-            };
-            home-manager.extraSpecialArgs = { inherit system username; };
-          }
         ];
         specialArgs = { inherit self username; };
       };
@@ -57,8 +48,5 @@
       homeConfigurations."kali" = mkHome "x86_64-linux" [ ./linux.nix ./kali.nix ];
       homeConfigurations."mac-intel" = mkHome "x86_64-darwin" [ ./darwin.nix ];
       homeConfigurations."mac-arm" = mkHome "aarch64-darwin" [ ./darwin.nix ];
-
-      darwinConfigurations."mac-arm" = mkDarwin "aarch64-darwin";
-      darwinConfigurations."mac-intel" = mkDarwin "x86_64-darwin";
     };
 }

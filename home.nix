@@ -54,13 +54,13 @@ in
     customPkgs.obsidian  # Platform-aware Obsidian with Linux GPU/Wayland fixes
     discord   # chat
     keepassxc # password manager
-    ticktick  # task manager
+    #ticktick  # task manager
 
     # dev tools
     antigravity
     vscodium
-    lmstudio
-    sublime
+    #lmstudio
+    #sublime
     # ollama-cuda
   ];
 

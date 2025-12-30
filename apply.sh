@@ -68,47 +68,24 @@ echo "{ username = \"$(whoami)\"; }" > vars.nix
 git add -N -f vars.nix 2>/dev/null || true
 
 # --- 5. Activate Configuration ---
+
+# Determine Flake Attribute based on OS/Arch
 if [ "$OS" == "Darwin" ]; then
-    if [ "$ARCH" == "arm64" ]; then
-        FLAKE_ATTR="mac-arm"
-    else
-        FLAKE_ATTR="mac-intel"
-    fi
-    echo -e "${BLUE}==>${NC} Detected macOS ($ARCH). Using fragment: $FLAKE_ATTR"
-
-    # Apply Home Manager
-    echo -e "${BLUE}==>${NC} Applying User Configuration (home-manager)..."
-    if command -v home-manager &> /dev/null; then
-        home-manager switch --flake ".#$FLAKE_ATTR"
-    else
-        nix run home-manager -- switch --flake ".#$FLAKE_ATTR"
-    fi
-
-    # Apply System Configuration (nix-darwin)
-    echo -e "${BLUE}==>${NC} Applying System Configuration (nix-darwin)..."
-    if command -v darwin-rebuild &> /dev/null; then
-        darwin-rebuild switch --flake "."
-    else
-        nix run nix-darwin -- switch --flake "."
-    fi
-
+    [[ "$ARCH" == "arm64" ]] && FLAKE_ATTR="mac-arm" || FLAKE_ATTR="mac-intel"
 elif [ "$OS" == "Linux" ]; then
-    if grep -q "Kali" /etc/os-release 2>/dev/null; then
-         FLAKE_ATTR="kali"
-    else
-         FLAKE_ATTR="linux"
-    fi
-    echo -e "${BLUE}==>${NC} Detected $FLAKE_ATTR. Applying User Configuration..."
-    
-    if command -v home-manager &> /dev/null; then
-        home-manager switch --flake ".#$FLAKE_ATTR"
-    else
-        # Fallback to nix run if home-manager is not yet in path
-        nix run ".#homeConfigurations.$FLAKE_ATTR.activationPackage"
-    fi
+    grep -q "Kali" /etc/os-release 2>/dev/null && FLAKE_ATTR="kali" || FLAKE_ATTR="linux"
 else
     echo -e "${RED}Error:${NC} Unsupported OS: $OS"
     exit 1
+fi
+
+echo -e "${BLUE}==>${NC} Detected $OS ($ARCH). Applying User Configuration ($FLAKE_ATTR)..."
+
+# Apply Configuration
+if command -v home-manager &> /dev/null; then
+    home-manager switch --flake ".#$FLAKE_ATTR"
+else
+    nix run home-manager -- switch --flake ".#$FLAKE_ATTR"
 fi
 
 echo -e "${GREEN}==>${NC} Configuration applied successfully!"
