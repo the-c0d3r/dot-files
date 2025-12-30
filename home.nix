@@ -1,20 +1,6 @@
 { config, pkgs, lib, system, username, ... }:
 
-let 
-  tmuxPluginsLocal = {
-    dotbar = pkgs.tmuxPlugins.mkTmuxPlugin {
-      pluginName = "tmux-dotbar";
-      version = "unstable-2024-01-01";
-
-      src = pkgs.fetchFromGitHub {
-        owner = "vaaleyard";
-        repo = "tmux-dotbar";
-        rev = "HEAD"; # or pin a commit
-        sha256 = "sha256-/ksMkDHW0n1sbWrJlUZU4YKTD8NFo8caQWbknguXMHk=";
-      };
-    };
-  };
-in {
+{
   home.username = username;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
 
@@ -125,9 +111,6 @@ in {
     mouse = true;
     prefix = "C-a";
     plugins = [
-      {
-        plugin = tmuxPluginsLocal.dotbar;
-      }
       {
         plugin = pkgs.tmuxPlugins.yank;
         extraConfig = ''
