@@ -57,6 +57,7 @@ fi
 # --- 4. Generate vars.nix if missing (Pure & Private pattern) ---
 echo -e "${BLUE}==>${NC} Generating vars.nix for pure evaluation..."
 echo "{ username = \"$(whoami)\"; }" > vars.nix
+git add -N -f vars.nix 2>/dev/null || true
 
 # --- 5. Activate Configuration ---
 
