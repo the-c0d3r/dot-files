@@ -56,7 +56,6 @@
 
     initContent = ''
       # === Extra files to be sourced
-      source ~/.pythonrc
       # file_source ~/.secrets
 
       function wsyncd() {
