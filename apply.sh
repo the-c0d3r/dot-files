@@ -19,15 +19,7 @@ ARCH="$(uname -m)"
 # --- 1. Ensure Nix is installed ---
 if ! command -v nix &> /dev/null; then
     echo -e "${BLUE}==>${NC} Nix not found. Installing Nix..."
-    if [ "$OS" == "Darwin" ]; then
-        curl -L https://nixos.org/nix/install | sh -s -- --daemon
-    elif [ "$OS" == "Linux" ]; then
-        if [ -d /run/systemd/system ]; then
-            curl -L https://nixos.org/nix/install | sh -s -- --daemon
-        else
-            curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
-        fi
-    fi
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
     # Source nix profile
     if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
@@ -65,7 +57,6 @@ fi
 # --- 4. Generate vars.nix if missing (Pure & Private pattern) ---
 echo -e "${BLUE}==>${NC} Generating vars.nix for pure evaluation..."
 echo "{ username = \"$(whoami)\"; }" > vars.nix
-git add -N -f vars.nix 2>/dev/null || true
 
 # --- 5. Activate Configuration ---
 
