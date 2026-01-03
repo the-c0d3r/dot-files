@@ -8,7 +8,7 @@
                 "rules": [
                     {
                         "description": "Replace window switch with yabai",
-                        "enabled": false,
+                        "enabled": true,
                         "manipulators": [
                             {
                                 "from": {
@@ -46,7 +46,7 @@
                     },
                     {
                         "description": "Ctrl+Left Click => Cmd+Left Click",
-                        "enabled": false,
+                        "enabled": true,
                         "manipulators": [
                             {
                                 "from": {
