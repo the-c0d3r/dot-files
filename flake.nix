@@ -46,6 +46,7 @@
           ./darwin-configuration.nix
           home-manager.darwinModules.home-manager
           {
+            nixpkgs.config.allowUnfree = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./darwin.nix;
@@ -55,6 +56,16 @@
         specialArgs = { inherit self username inputs; };
       };
     in {
+      determinate = {
+        customSettings = {
+          experimental-features = "nix-command flakes";
+          extra-experimental-features = "parallel-eval";
+          lazy-trees = true;
+          eval-cores = 0; # Enable parallel evaluation across all cores
+          warn-dirty = false;
+        };
+      };
+
       # Configs named by OS (generic)
       homeConfigurations."linux" = mkHome "x86_64-linux" [ ./linux.nix ];
       homeConfigurations."kali" = mkHome "x86_64-linux" [ ./linux.nix ./kali.nix ];
