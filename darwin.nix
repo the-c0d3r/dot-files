@@ -33,6 +33,12 @@
     gnugrep
     # Adding tools that was in Brewfile but are more Mac-centric in this context
     iproute2mac
+
+    # gui apps
+    raycast    # productivity app, spotlight alternative
+    itsycal    # menubar mini calendar
+    tailscale  # SDN software
+    slack      # chat
   ];
 
   programs.zsh = {

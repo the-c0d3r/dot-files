@@ -33,6 +33,8 @@
     primaryUser = username;
 
     defaults = {
+      controlcenter.BatteryShowPercentage = true;
+
       dock = {
         autohide = true;
         orientation = "left";
@@ -46,15 +48,30 @@
       };
 
       finder = {
-        AppleShowAllExtensions = true;   # Shows file extensions
-        _FXShowPosixPathInTitle = true;  # Shows path in title
+        AppleShowAllExtensions = true;  # Shows file extensions
         FXPreferredViewStyle = "Nlsv";  # List View default
+        _FXShowPosixPathInTitle = true; # Shows path in title
+        _FXSortFoldersFirst = true;     # Sort folders first
+      };
+
+      menuExtraClock = {
+        ShowAMPM = false;
+        ShowDate = 2; # Never
+        ShowSeconds = true;
       };
 
       NSGlobalDomain = {
-        AppleInterfaceStyle = "Dark";    # Dark mode
-        InitialKeyRepeat = 15;           # Key repeat rate
-        KeyRepeat = 2;                   # Key repeat delay
+        AppleInterfaceStyle = "Dark";                 # Dark mode
+        InitialKeyRepeat = 15;                        # Key repeat rate
+        KeyRepeat = 2;                                # Key repeat delay
+        AppleMeasurementUnits = "Centimeters";        # Metric units
+        AppleMetricUnits = 1;
+        AppleTemperatureUnit = "Celsius";             # Metric temperature
+        NSAutomaticCapitalizationEnabled = false;     # Disable autocapitalization
+        NSAutomaticDashSubstitutionEnabled = false;   # Disable autodashes
+        NSAutomaticPeriodSubstitutionEnabled = false; # Disable autoperiods
+        NSAutomaticQuoteSubstitutionEnabled = false;  # Disable autoquotes
+        NSAutomaticSpellingCorrectionEnabled = false; # Disable spellchecking
       };
 
       CustomUserPreferences = {
@@ -68,6 +85,7 @@
       trackpad = {
         Clicking = true;                   # Clicking enabled
         TrackpadThreeFingerDrag = true;    # Three-finger drag enabled
+        TrackpadRightClick = true;         # enable two finger right click
       };
     };
     keyboard = {
