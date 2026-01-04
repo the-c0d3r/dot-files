@@ -96,12 +96,90 @@
 
   # Services
   services.yabai = {
-    enable = true;
     # configuration is handled by home-manager
+    enable = true;
+    enableScriptingAddition = true;
+    extraConfig = ''
+      yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+      yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+      yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+      yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+      yabai -m config --space 1 layout bsp
+      # laptop display to use stack to maximise space and for stackline
+      yabai -m config --space 3 layout stack
+
+      yabai -m rule --add app="^FortiClient$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^System Information$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Activity Monitor$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^KeyCastr$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^System Settings$" manage=off
+      yabai -m rule --add app="^Archive Utility$" manage=off
+      yabai -m rule --add app="^Calculator$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Hammerspoon" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Raycast" sticky=on layer=above manage=off
+      yabai -m rule --add app="^superwhisper" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Music$" manage=off
+      yabai -m rule --add app="^Docker" manage=off
+
+      # External monitor (index 1): fullscreen targets
+      yabai -m rule --add app="^Obsidian$" display=1 manage=on
+      yabai -m rule --add app="^Zen Browser$" display=1 manage=on
+      yabai -m rule --add app="^kitty$" display=1 manage=on
+
+      # Slack to laptop screen (index 2)
+      yabai -m rule --add app="^Slack$" display=2 manage=on
+
+      # borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &
+    '';
+
+    config = {
+      external_bar                 = "off:40:0";
+      menubar_opacity              = 0.7;
+      mouse_follows_focus          = "off";
+      focus_follows_mouse          = "off";
+      display_arrangement_order    = "default";
+      window_origin_display        = "default";
+      window_placement             = "second_child";
+      window_zoom_persist          = "on";
+      window_shadow                = "on";
+      window_animation_duration    = 0;
+      window_animation_easing      = "ease_out_circ";
+      window_opacity_duration      = 0.0;
+      active_window_opacity        = 1.0;
+      normal_window_opacity        = 0.90;
+      window_opacity               = "on";
+      insert_feedback_color        = "0xffd75f5f";
+      split_ratio                  = 0.50;
+      split_type                   = "auto";
+      auto_balance                 = "off";
+      top_padding                  = 10;
+      bottom_padding               = 5;
+      left_padding                 = 10;
+      right_padding                = 10;
+      window_gap                   = 15;
+      layout                       = "bsp";
+      mouse_modifier               = "fn";
+      mouse_action1                = "move";
+      mouse_action2                = "resize";
+      mouse_drop_action            = "swap";
+    };
   };
+
   services.skhd = {
     enable = true;
     # configuration is handled by home-manager
+  };
+
+  services.jankyborders = {
+    enable = true;
+    active_color = "0xffe1e3e4";
+    inactive_color = "0xff494d64";
+    width = 5.0;
   };
 
   fonts.packages = with pkgs; [
