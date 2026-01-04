@@ -51,6 +51,9 @@ To apply any changes to your configuration later, simply run:
 - **kali**: Build on top of `linux` profile, adding Kali-specific configurations.
 - **mac-arm / mac-intel**: macOS system settings (Dock, Finder, etc.) + terminal tools.
 
+> [!WARNING]
+> Applying the macOS configuration **WILL** modify your system settings. This includes Dock arrangement, Finder preferences, keyboard remappings (Caps Lock -> Escape), and trackpad settings. Review `darwin-configuration.nix` before applying if you are unsure.
+
 # Programs & Configs
 
 ## Shared (Mac & Linux)
@@ -73,3 +76,34 @@ To apply any changes to your configuration later, simply run:
 - **Nix-Darwin**: System configuration management.
 - **Yabai**: Tiling window manager (service).
 - **Skhd**: Hotkey daemon (service).
+
+### Managed System Settings
+The following macOS defaults are declaratively managed via `darwin-configuration.nix`:
+
+- **General**:
+    - Dark Mode enabled.
+    - Metric units (Celsius, cm).
+    - Fast key repeat rate (Initial: 15, Repeat: 2).
+    - Auto-capitalization/correction/dashes/periods/quotes **DISABLED**.
+- **Dock**:
+    - Auto-hide enabled.
+    - Positioned on the **Left**.
+    - Recent apps hidden.
+    - Static-only (shows only running apps).
+    - **Hot Corners**:
+        - Top-Left: Mission Control.
+        - Bottom-Left: Lock Screen.
+        - Bottom-Right: Desktop.
+- **Finder**:
+    - Show all file extensions.
+    - Show POSIX path in title bar.
+    - Default view style: List View (`Nlsv`).
+    - Folders sorted first.
+- **Trackpad**:
+    - Tap to click enabled.
+    - Three-finger drag enabled.
+    - Two-finger right click enabled.
+- **Keyboard**:
+    - Remap **Caps Lock** to **Escape**.
+- **Control Center**:
+    - Battery percentage shown.

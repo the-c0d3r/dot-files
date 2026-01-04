@@ -21,46 +21,46 @@ in
 
   # install packages
   home.packages = with pkgs; [
-    atuin
-    autojump
-    dos2unix
-    fd
-    ffmpeg
-    fswatch
-    htop
-    jq
-    lazygit
-    ncdu
-    neovim
-    netcat
-    nmap
-    gcc
-    gnumake
-    cmake
-    pre-commit
-    pv
-    ripgrep
-    starship
-    tmux
-    tree
-    watch
-    wget
+    atuin        # command-line history navigator
+    autojump     # jump to directories by 'j'
+    dos2unix     # convert files from DOS to UNIX format
+    fd           # find files
+    ffmpeg       # video processing
+    fswatch      # watch file system
+    htop         # interactive process viewer
+    jq           # command-line JSON processor
+    lazygit      # git repository viewer
+    ncdu         # ncurses disk usage analyzer
+    neovim       # text editor
+    netcat       # network utility
+    nmap         # network scanner
+    gcc          # C compiler
+    gnumake      # make utility
+    cmake        # cross-platform build system generator
+    pre-commit   # pre-commit hooks
+    pv           # pipe viewer
+    ripgrep      # command-line search tool
+    starship     # prompt
+    tmux         # terminal multiplexer
+    tree         # directory tree viewer
+    watch        # watch files
+    wget         # download files
 
     # utils
-    syncthing
+    syncthing    # continuous file synchronization
 
     # apps
-    kitty     # if it "Failed to initialize EGL", do `sudo /nix/store/HASH-non-nixos-gpu/bin/non-nixos-gpu-setup`
+    kitty        # terminal emulator
     customPkgs.obsidian  # Platform-aware Obsidian with Linux GPU/Wayland fixes
-    discord   # chat
+    discord      # chat
     keepassxc # password manager
 
     # dev tools
-    antigravity
-    vscodium
+    antigravity  # AI text editor
+    vscodium     # code editor
     #lmstudio
     # ollama-cuda
-    uv
+    uv           # python virtual environment manager
   ];
 
   # Enable generic Linux target to allow symlinking desktop files

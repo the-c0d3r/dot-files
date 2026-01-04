@@ -1,6 +1,8 @@
 { config, pkgs, username, system, ... }:
 
 {
+  imports = [ ./home.nix ];
+
   home.file = {
     # "Library/Fonts" = {
     #   source = ./files/fonts;
@@ -11,6 +13,8 @@
     ".config/yabai/scripts".source = ./files/yabai/scripts;
     ".config/skhd/skhdrc".source = ./files/skhd/skhdrc;
   };
+  home.homeDirectory = "/Users/${username}";
+  home.stateVersion = "23.11";
 
   home.sessionVariables = {
     # disables ._ files in tar file. https://superuser.com/a/260264/146350
@@ -29,6 +33,12 @@
     gnugrep
     # Adding tools that was in Brewfile but are more Mac-centric in this context
     iproute2mac
+
+    # gui apps
+    raycast    # productivity app, spotlight alternative
+    itsycal    # menubar mini calendar
+    tailscale  # SDN software
+    slack      # chat
   ];
 
   programs.zsh = {
@@ -39,8 +49,7 @@
 
     };
     initContent = ''
-      # not sure if I need this yet
-      # eval "$(/opt/homebrew/bin/brew shellenv)"
+      eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
   };
 }

@@ -54,8 +54,12 @@ echo -e "${BLUE}==>${NC} Cleaning up common symlink targets..."
 
 if [ "$DRY_RUN" = false ]; then
     echo -e "${GREEN}==>${NC} Uninstallation complete!"
-    echo -e "${YELLOW}Note:${NC} This script does NOT uninstall Nix itself."
-    echo -e "To uninstall Nix, follow instructions at: https://nixos.org/manual/nix/stable/installation/uninstall.html"
+    if [ -x "/nix/nix-installer" ]; then
+        echo -e "${BLUE}==>${NC} Running Determinate Nix Uninstaller..."
+        /nix/nix-installer uninstall
+    else
+        echo -e "${YELLOW}Note:${NC} /nix/nix-installer not found. Use standard uninstall procedures if needed."
+    fi
 else
     echo -e "${BLUE}==>${NC} Dry run complete. No changes were made."
 fi
