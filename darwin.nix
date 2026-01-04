@@ -4,12 +4,7 @@
   imports = [ ./home.nix ];
 
   home.file = {
-    # "Library/Fonts" = {
-    #   source = ./files/fonts;
-    #   recursive = true;
-    # };
     ".config/karabiner/karabiner.json".source = ./files/karabiner/karabiner.json;
-    ".config/yabai/yabairc".source = ./files/yabai/yabairc;
     ".config/yabai/scripts".source = ./files/yabai/scripts;
     ".config/skhd/skhdrc".source = ./files/skhd/skhdrc;
   };
@@ -22,23 +17,24 @@
   };
 
   home.packages = with pkgs; [
-    # Yabai and skhd are usually better managed via nix-darwin services
-    # but we can add them here as packages if needed.
-    yabai
-    skhd
-    coreutils
-    gnutls
-    gnused
-    gnutar
-    gnugrep
-    # Adding tools that was in Brewfile but are more Mac-centric in this context
-    iproute2mac
+    # wm management
+    jankyborders  # border management
+    yabai         # window management
+    skhd          # hotkey management
+
+    # utils
+    coreutils     # utils for bash
+    gnutls        # ls utils
+    gnused        # sed utils
+    gnutar        # tar utils
+    gnugrep       # grep utils
+    iproute2mac   # utils for bash
 
     # gui apps
-    raycast    # productivity app, spotlight alternative
-    itsycal    # menubar mini calendar
-    tailscale  # SDN software
-    slack      # chat
+    raycast       # productivity app, spotlight alternative
+    itsycal       # menubar mini calendar
+    tailscale     # SDN software
+    slack         # chat
   ];
 
   programs.zsh = {
@@ -46,7 +42,6 @@
       # additional aliases for macOS
       hidedesktop = "defaults write com.apple.finder CreateDesktop false && killall Finder";
       unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
-
     };
     initContent = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
