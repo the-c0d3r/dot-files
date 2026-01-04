@@ -1,8 +1,6 @@
 { pkgs, username, ... }:
 
 {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   environment.systemPackages = [
     pkgs.vim
     pkgs.git
@@ -11,11 +9,12 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
-
-  # Don't let nix-darwin manage Nix - use existing installation
-  nix.enable = false;
+  nix = {
+    # Necessary for using flakes on this system.
+    settings.experimental-features = "nix-command flakes";
+    # Don't let nix-darwin manage Nix - use existing installation
+    enable = false;
+  }
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
@@ -23,48 +22,59 @@
   # Set your time zone.
   time.timeZone = "Asia/Singapore";
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-
   users.users.${username} = {
     name = username;
     home = "/Users/${username}";
+    shell = pkgs.zsh;
   };
 
   # macOS System Settings
   system = {
+    # Used for backwards compatibility, please read the changelog before changing.
     stateVersion = "4";
     primaryUser = username;
+
     defaults = {
       dock = {
         autohide = true;
         orientation = "left";
-        show-recents = false;
+        show-recents = false; # don't show recent apps
+        static-only = false; # show only running apps
+
+        wvous-tl-corner = 2; # top-left - Mission Control
+        wvous-tr-corner = 1; # top-right - Disabled
+        wvous-bl-corner = 13; # bottom-left - Lock Screen
+        wvous-br-corner = 4; # bottom-right - Desktop
       };
+
       finder = {
-        AppleShowAllExtensions = true;
-        _FXShowPosixPathInTitle = true;
+        AppleShowAllExtensions = true;   # Shows file extensions
+        _FXShowPosixPathInTitle = true;  # Shows path in title
+        FXPreferredViewStyle = "Nlsv";  # List View default
       };
+
       NSGlobalDomain = {
-        AppleInterfaceStyle = "Dark";
-        InitialKeyRepeat = 15;
-        KeyRepeat = 2;
+        AppleInterfaceStyle = "Dark";    # Dark mode
+        InitialKeyRepeat = 15;           # Key repeat rate
+        KeyRepeat = 2;                   # Key repeat delay
       };
+
       CustomUserPreferences = {
         "com.apple.desktopservices" = {
           # Avoid creating .DS_Store files on network or USB volumes
-          DSDontWriteNetworkStores = true;
-          DSDontWriteUSBStores = true;
+          DSDontWriteNetworkStores = true;  # Avoid creating .DS_Store files on network volumes
+          DSDontWriteUSBStores = true;      # Avoid creating .DS_Store files on USB volumes
         };
       };
+
       trackpad = {
-        Clicking = true;
-        TrackpadThreeFingerDrag = true;
+        Clicking = true;                   # Clicking enabled
+        TrackpadThreeFingerDrag = true;    # Three-finger drag enabled
       };
     };
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToEscape = true;
+      remapCapsLockToEscape = true;       # Remap Caps Lock to Escape
     };
   };
 
