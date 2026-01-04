@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   home.file = {
     ".local/share/fonts".source = ./files/fonts;
     ".config/i3/config".source = ./files/i3/config;

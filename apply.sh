@@ -74,10 +74,32 @@ fi
 echo -e "${BLUE}==>${NC} Detected $OS ($ARCH). Applying User Configuration ($FLAKE_ATTR)..."
 
 # Apply Configuration
-if command -v home-manager &> /dev/null; then
-    home-manager switch --flake ".#$FLAKE_ATTR"
+# Apply Configuration
+if [ "$OS" == "Darwin" ]; then
+    DARWIN_REBUILD_CMD="darwin-rebuild"
+
+    # Check for standard nix-darwin location (works best with sudo)
+    if [ -x "/run/current-system/sw/bin/darwin-rebuild" ]; then
+         DARWIN_REBUILD_CMD="/run/current-system/sw/bin/darwin-rebuild"
+    elif ! command -v darwin-rebuild &> /dev/null; then
+        echo -e "${BLUE}==>${NC} darwin-rebuild not found in PATH. Bootstrapping..."
+        # Build darwin-rebuild from the nix-darwin flake
+        DR_PATH=$(nix build --no-link --print-out-paths --extra-experimental-features "nix-command flakes" "github:LnL7/nix-darwin#darwin-rebuild")
+        DARWIN_REBUILD_CMD="$DR_PATH/bin/darwin-rebuild"
+        echo -e "${GREEN}==>${NC} Using bootstrapped darwin-rebuild at $DARWIN_REBUILD_CMD"
+    fi
+
+    echo "> Running darwin-rebuild switch as root..."
+    # Execute directly - sudo allows absolute paths even with secure_path enabled
+    sudo "$DARWIN_REBUILD_CMD" switch --flake ".#$FLAKE_ATTR"
+
 else
-    nix run home-manager -- switch --flake ".#$FLAKE_ATTR"
+    # Linux / Home Manager Standalone
+    if command -v home-manager &> /dev/null; then
+        home-manager switch --flake ".#$FLAKE_ATTR"
+    else
+        nix run home-manager -- switch --flake ".#$FLAKE_ATTR"
+    fi
 fi
 
 echo -e "${GREEN}==>${NC} Configuration applied successfully!"

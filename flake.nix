@@ -11,13 +11,17 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    determinate = {
+      url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-system-graphics = {
       url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }:
+  outputs = { self, nixpkgs, home-manager, darwin, determinate, ... }@inputs:
     let
       # Pure username detection from vars.nix
       vars = import ./vars.nix;
@@ -38,15 +42,53 @@
       mkDarwin = system: darwin.lib.darwinSystem {
         inherit system;
         modules = [
+          determinate.darwinModules.default
           ./darwin-configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./darwin.nix;
+            home-manager.extraSpecialArgs = { inherit system username; };
+          }
         ];
-        specialArgs = { inherit self username; };
+        specialArgs = { inherit self username inputs; };
       };
     in {
       # Configs named by OS (generic)
       homeConfigurations."linux" = mkHome "x86_64-linux" [ ./linux.nix ];
       homeConfigurations."kali" = mkHome "x86_64-linux" [ ./linux.nix ./kali.nix ];
-      homeConfigurations."mac-intel" = mkHome "x86_64-darwin" [ ./darwin.nix ];
-      homeConfigurations."mac-arm" = mkHome "aarch64-darwin" [ ./darwin.nix ];
+      # homeConfigurations."mac-intel" = mkHome "x86_64-darwin" [ ./darwin.nix ];
+      # homeConfigurations."mac-arm" = mkHome "aarch64-darwin" [ ./darwin.nix ];
+
+      # Expose the configuration matching the username/hostname
+      darwinConfigurations."mac-arm" = mkDarwin "aarch64-darwin";
+      darwinConfigurations."mac-intel" = mkDarwin "x86_64-darwin";
+
+      devShells = let
+        mkDevShell = system: let
+          pkgs = import nixpkgs { inherit system; };
+          darwinConfig = if system == "aarch64-darwin" then "mac-arm" else "mac-intel";
+        in {
+          default = pkgs.mkShellNoCC {
+            packages = with pkgs; [
+              (writeShellApplication {
+                name = "apply-nix-darwin-configuration";
+                runtimeInputs = [ inputs.darwin.packages.${system}.darwin-rebuild ];
+                text = ''
+                  echo "> Applying nix-darwin configuration..."
+                  echo "> Running darwin-rebuild switch as root..."
+                  sudo darwin-rebuild switch --flake ".#${darwinConfig}"
+                  echo "> darwin-rebuild switch was successful ✅"
+                  echo "> macOS config was successfully applied 🚀"
+                '';
+              })
+            ];
+          };
+        };
+      in {
+        "x86_64-darwin" = mkDevShell "x86_64-darwin";
+        "aarch64-darwin" = mkDevShell "aarch64-darwin";
+      };
     };
 }
