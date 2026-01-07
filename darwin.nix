@@ -18,23 +18,24 @@
 
   home.packages = with pkgs; [
     # wm management
-    jankyborders  # border management
-    yabai         # window management
-    skhd          # hotkey management
+    jankyborders      # border management
+    yabai             # window management
+    skhd              # hotkey management
 
     # utils
-    coreutils     # utils for bash
-    gnutls        # ls utils
-    gnused        # sed utils
-    gnutar        # tar utils
-    gnugrep       # grep utils
-    iproute2mac   # utils for bash
+    coreutils         # utils for bash
+    gnutls            # ls utils
+    gnused            # sed utils
+    gnutar            # tar utils
+    gnugrep           # grep utils
+    iproute2mac       # utils for bash
 
     # gui apps
-    raycast       # productivity app, spotlight alternative
-    itsycal       # menubar mini calendar
-    tailscale     # SDN software
-    slack         # chat
+    raycast           # productivity app, spotlight alternative
+    itsycal           # menubar mini calendar
+    tailscale         # SDN software
+    slack             # chat
+    mos               # reverse mouse scroll and smoothens it
   ];
 
   programs.zsh = {
