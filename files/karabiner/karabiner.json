@@ -21,7 +21,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/opt/homebrew/bin/yabai -m space --focus prev"
+                                        "shell_command": "/etc/profiles/per-user/thuyein/bin/yabai -m space --focus prev"
                                     }
                                 ],
                                 "type": "basic"
@@ -37,7 +37,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/opt/homebrew/bin/yabai -m space --focus next"
+                                        "shell_command": "/etc/profiles/per-user/thuyein/bin/yabai -m space --focus next"
                                     }
                                 ],
                                 "type": "basic"
