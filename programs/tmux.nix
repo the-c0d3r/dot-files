@@ -46,9 +46,9 @@
       bind < swap-pane -U       # swap current pane with the previous one
 
       # split current window horizontally
-      bind - split-window -v
+      bind - split-window -v -c "#{pane_current_path}"
       # split current window vertically
-      bind _ split-window -h
+      bind _ split-window -h -c "#{pane_current_path}"
 
       # pane resizing
       bind -r H resize-pane -L 2
