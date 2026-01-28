@@ -100,48 +100,53 @@
     enable = true;
     enableScriptingAddition = true;
     extraConfig = ''
+      sudo yabai --load-sa
       yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
       yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
       yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
       yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
       yabai -m config --space 1 layout bsp
+
       # laptop display to use stack to maximise space and for stackline
       yabai -m config --space 3 layout stack
 
-      yabai -m rule --add app="^FortiClient$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^System Information$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Activity Monitor$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^KeyCastr$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^FortiClient$" manage=off sub-layer=above
+      yabai -m rule --add app="^System Preferences$" sub-layer=above manage=off
+      yabai -m rule --add app="^Karabiner-Elements$" sub-layer=above manage=off
+      yabai -m rule --add app="^Karabiner-EventViewer$" sub-layer=above manage=off
+      yabai -m rule --add app="^Finder$" sub-layer=above manage=off
+      yabai -m rule --add app="^Disk Utility$" sub-layer=above manage=off
+      yabai -m rule --add app="^System Information$" sub-layer=above manage=off
+      yabai -m rule --add app="^Activity Monitor$" manage=off sub-layer=above
+      yabai -m rule --add app="^KeyCastr$" sub-layer=above manage=off
       yabai -m rule --add app="^System Settings$" manage=off
       yabai -m rule --add app="^Archive Utility$" manage=off
-      yabai -m rule --add app="^Calculator$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Hammerspoon" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Raycast" sticky=on layer=above manage=off
-      yabai -m rule --add app="^superwhisper" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Calculator$" sub-layer=above manage=off
+      yabai -m rule --add app="^Hammerspoon" sub-layer=above manage=off
+      yabai -m rule --add app="^Raycast" sub-layer=above manage=off
+      yabai -m rule --add app="^superwhisper" sub-layer=above manage=off
       yabai -m rule --add app="^Music$" manage=off
       yabai -m rule --add app="^Docker" manage=off
 
       # External monitor (index 1): fullscreen targets
-      yabai -m rule --add app="^Obsidian$" display=1 manage=on
-      yabai -m rule --add app="^Zen Browser$" display=1 manage=on
-      yabai -m rule --add app="^kitty$" display=1 manage=on
+      yabai -m rule --add app="^Obsidian$" display=1 manage=on opacity=0.85
+      yabai -m rule --add app="^Zen$" display=1 manage=on native-fullscreen=on
+      yabai -m rule --add app="^kitty$" display=1 manage=on native-fullscreen=on
+      yabai -m rule --add app="^VSCodium$" display=1 manage=on native-fullscreen=on
 
-      # Slack to laptop screen (index 2)
-      yabai -m rule --add app="^Slack$" display=2 manage=on
+      # Laptop monitor (index 2)
+      yabai -m rule --add app="^Slack$" display=2 manage=on opacity=0.95
 
-      # borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &
+      # yabai -m signal --add event=window_focused app="^Obsidian$" action="yabai -m config normal_window_opacity 0.60"
+      # When any other app gains focus, reset both active and background window opacity to fully visible
+      # yabai -m signal --add event=window_focused app!="^Obsidian" action="yabai -m config active_window_opacity 1.0"
     '';
 
     config = {
       external_bar                 = "off:40:0";
       menubar_opacity              = 0.7;
       mouse_follows_focus          = "off";
-      focus_follows_mouse          = "off";
+      focus_follows_mouse          = "autofocus";
       display_arrangement_order    = "default";
       window_origin_display        = "default";
       window_placement             = "second_child";
@@ -150,8 +155,8 @@
       window_animation_duration    = 0;
       window_animation_easing      = "ease_out_circ";
       window_opacity_duration      = 0.0;
-      active_window_opacity        = 1.0;
-      normal_window_opacity        = 0.90;
+      active_window_opacity        = 0.9;
+      normal_window_opacity        = 0.70;
       window_opacity               = "on";
       insert_feedback_color        = "0xffd75f5f";
       split_ratio                  = 0.50;
