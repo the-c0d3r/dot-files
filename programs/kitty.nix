@@ -18,6 +18,7 @@
       window_logo_position = "bottom-right";
       window_logo_alpha = "0.5";
       hide_window_decorations = "yes"; # Kept as it might be preferred
+      background_opacity = "0.7";
 
       # Tab Bar
       tab_bar_style = "fade";
