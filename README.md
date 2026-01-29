@@ -52,7 +52,7 @@ To apply any changes to your configuration later, simply run:
 # Profiles defined in [`flake.nix`](flake.nix)
 
 - **server**: Minimal, headless configuration. Essentials only (Neovim, Tmux, Zsh, Git).
-- **linux**: Standard Linux Desktop setup. Extends `server` with GUI tools (Kitty, VSCodium, Discord) and multimedia tools.
+- **desktop**: Standard Linux Desktop setup. Extends `server` with GUI tools (Kitty, VSCodium, Discord) and multimedia tools.
 - **kali**: Build on top of `server` profile, adding Kali-specific configurations.
 - **mac-arm / mac-intel**: macOS system settings (Dock, Finder, etc.) + terminal tools.
 

@@ -67,7 +67,13 @@ if [ -n "${1:-}" ]; then
 elif [ "$OS" == "Darwin" ]; then
     [[ "$ARCH" == "arm64" ]] && FLAKE_ATTR="mac-arm" || FLAKE_ATTR="mac-intel"
 elif [ "$OS" == "Linux" ]; then
-    grep -q "Kali" /etc/os-release 2>/dev/null && FLAKE_ATTR="kali" || FLAKE_ATTR="linux"
+    if grep -q "Kali" /etc/os-release 2>/dev/null; then
+        FLAKE_ATTR="kali"
+    elif grep -Ei "Ubuntu.*Server|Rocky|CentOS|Red Hat|rhel" /etc/os-release 2>/dev/null; then
+        FLAKE_ATTR="server"
+    else
+        FLAKE_ATTR="desktop"
+    fi
 else
     echo -e "${RED}Error:${NC} Unsupported OS: $OS"
     exit 1

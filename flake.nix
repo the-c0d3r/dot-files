@@ -1,6 +1,11 @@
 {
   description = "A Modern Nix-based Dotfiles Flake";
 
+  nixConfig = {
+    extra-substituters = [ "https://vicinae.cachix.org" ];
+    extra-trusted-public-keys = [ "vicinae.cachix.org-1:99Xf+79SjN/8D2o6oV2tJgYt6Yt6Yt6Yt6Yt6Yt6Yt6Y=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -19,6 +24,14 @@
       url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, darwin, determinate, ... }@inputs:
@@ -34,7 +47,7 @@
           config.allowUnfree = true;
         };
         inherit modules;
-        extraSpecialArgs = { inherit system username; };
+        extraSpecialArgs = { inherit system username inputs; };
       };
 
       mkDarwin = system: darwin.lib.darwinSystem {
@@ -65,7 +78,7 @@
       };
 
       # Configs named by OS (generic)
-      homeConfigurations."linux" = mkHome "x86_64-linux" [ ./desktop.nix ];
+      homeConfigurations."desktop" = mkHome "x86_64-linux" [ ./desktop.nix ];
       homeConfigurations."kali" = mkHome "x86_64-linux" [ ./linux.nix ./kali.nix ];
       homeConfigurations."server" = mkHome "x86_64-linux" [ ./linux.nix ];
 
