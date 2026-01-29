@@ -8,6 +8,8 @@
     keyMode = "vi";
     mouse = true;
     prefix = "C-a";
+    baseIndex = 1;
+    escapeTime = 10;
     plugins = [
       {
         plugin = pkgs.tmuxPlugins.yank;
@@ -37,11 +39,17 @@
       }
     ];
     extraConfig = ''
+      setw -g pane-base-index 1
+      set -g renumber-windows on
+      setw -g monitor-activity on
+      set -g visual-activity off
+
       bind h select-pane -L  # move left
       bind j select-pane -D  # move down
       bind k select-pane -U  # move up
       bind l select-pane -R  # move right
       bind C-c new-session
+      bind Enter copy-mode      # enter copy mode
       bind > swap-pane -D       # swap current pane with the next one
       bind < swap-pane -U       # swap current pane with the previous one
 

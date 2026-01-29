@@ -28,14 +28,12 @@
       username = vars.username;
 
       # Use a helper function for home configurations
-      mkHome = system: extraModules: home-manager.lib.homeManagerConfiguration {
+      mkHome = system: modules: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
-        modules = [
-          ./home.nix
-        ] ++ extraModules;
+        inherit modules;
         extraSpecialArgs = { inherit system username; };
       };
 
@@ -67,10 +65,9 @@
       };
 
       # Configs named by OS (generic)
-      homeConfigurations."linux" = mkHome "x86_64-linux" [ ./linux.nix ];
+      homeConfigurations."linux" = mkHome "x86_64-linux" [ ./desktop.nix ];
       homeConfigurations."kali" = mkHome "x86_64-linux" [ ./linux.nix ./kali.nix ];
-      # homeConfigurations."mac-intel" = mkHome "x86_64-darwin" [ ./darwin.nix ];
-      # homeConfigurations."mac-arm" = mkHome "aarch64-darwin" [ ./darwin.nix ];
+      homeConfigurations."server" = mkHome "x86_64-linux" [ ./linux.nix ];
 
       # Expose the configuration matching the username/hostname
       darwinConfigurations."mac-arm" = mkDarwin "aarch64-darwin";

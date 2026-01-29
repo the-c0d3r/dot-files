@@ -39,16 +39,21 @@ To see what would be removed without actually deleting anything:
 To apply any changes to your configuration later, simply run:
 
 ```bash
+# Auto-detect OS/Distro (Desktop/Mac)
 ./apply.sh
+
+# Force Server Configuration (Headless)
+./apply.sh server
 ```
 
 > [!NOTE]
-> `apply.sh` automatically detects your OS and distribution to apply the correct fragments (`#linux`, `#kali`, `#mac-arm`, etc.).
+> `apply.sh` automatically detects your OS and distribution to apply the correct fragments (`#linux`, `#kali`, `#mac-arm`, etc.). You can override this by passing the flake name as an argument.
 
 # Profiles defined in [`flake.nix`](flake.nix)
 
-- **linux**: Standard Linux setup with terminal tools + i3 window manager environment (i3, polybar, rofi).
-- **kali**: Build on top of `linux` profile, adding Kali-specific configurations.
+- **server**: Minimal, headless configuration. Essentials only (Neovim, Tmux, Zsh, Git).
+- **linux**: Standard Linux Desktop setup. Extends `server` with GUI tools (Kitty, VSCodium, Discord) and multimedia tools.
+- **kali**: Build on top of `server` profile, adding Kali-specific configurations.
 - **mac-arm / mac-intel**: macOS system settings (Dock, Finder, etc.) + terminal tools.
 
 > [!WARNING]
@@ -56,21 +61,21 @@ To apply any changes to your configuration later, simply run:
 
 # Programs & Configs
 
-## Shared (Mac & Linux)
+## Shared (Common)
 - **Neovim**: Customized vim configuration.
-- **Tmux**: Terminal multiplexer.
-- **Zsh**: Shell config (replaces `oh-my-zsh` management) with Powerlevel10k.
-- **Kitty**: GPU-accelerated terminal.
+- **Tmux**: Terminal multiplexer (starts indexes at 1).
+- **Zsh**: Shell config with Powerlevel10k.
 - **Starship**: Cross-shell prompt.
 - **Atuin**: Shell history sync.
 - **Ripgrep**, **FD**: Modern search tools.
-- **Htop**, **Ncdu**, **Jq**: System utilities.
+- **Htop**, **Ncdu**, **Nload**, **Jq**: System utilities.
 
 ## Linux Only (Desktop)
-- **i3**: Tiling window manager.
-- **Polybar**: Status bar.
-- **Rofi**: Application launcher.
-- **Dunst**: Notification daemon.
+- **Kitty**: GPU-accelerated terminal.
+- **Build Tools**: gcc, gnumake, cmake.
+- **Network**: nmap.
+- **Multimedia**: ffmpeg, pv, syncthing.
+- **GUI Apps**: Discord, KeepassXC, VSCodium, TickTick.
 
 ## macOS Only
 - **Nix-Darwin**: System configuration management.

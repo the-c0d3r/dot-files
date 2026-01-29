@@ -62,7 +62,9 @@ git add -N -f vars.nix 2>/dev/null || true
 # --- 5. Activate Configuration ---
 
 # Determine Flake Attribute based on OS/Arch
-if [ "$OS" == "Darwin" ]; then
+if [ -n "${1:-}" ]; then
+    FLAKE_ATTR="$1"
+elif [ "$OS" == "Darwin" ]; then
     [[ "$ARCH" == "arm64" ]] && FLAKE_ATTR="mac-arm" || FLAKE_ATTR="mac-intel"
 elif [ "$OS" == "Linux" ]; then
     grep -q "Kali" /etc/os-release 2>/dev/null && FLAKE_ATTR="kali" || FLAKE_ATTR="linux"
