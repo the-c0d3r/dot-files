@@ -39,6 +39,8 @@ in
     ".local/share/fonts".source = ./files/fonts;
   };
 
+  xdg.configFile."vicinae/settings.json".force = true;
+
   programs.zsh = {
     initContent = ''
       # Keyboard key repeat speed
@@ -48,6 +50,7 @@ in
   };
 
   services.vicinae = {
+    package = pkgs.vicinae;
     enable = true;
     systemd = {
       enable = true;
