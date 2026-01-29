@@ -3,7 +3,7 @@
 
   nixConfig = {
     extra-substituters = [ "https://vicinae.cachix.org" ];
-    extra-trusted-public-keys = [ "vicinae.cachix.org-1:99Xf+79SjN/8D2o6oV2tJgYt6Yt6Yt6Yt6Yt6Yt6Yt6Y=" ];
+    extra-trusted-public-keys = [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
   };
 
   inputs = {
@@ -26,11 +26,9 @@
     };
     vicinae = {
       url = "github:vicinaehq/vicinae";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
