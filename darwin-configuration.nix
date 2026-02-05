@@ -108,21 +108,21 @@
       # laptop display to use stack to maximise space and for stackline
       yabai -m config --space 3 layout stack
 
-      yabai -m rule --add app="^FortiClient$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^System Information$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Activity Monitor$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^KeyCastr$" sticky=on layer=above manage=off
+      yabai -m rule --add app="^FortiClient$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^System Preferences$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^Karabiner-Elements$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^Finder$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^Disk Utility$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^System Information$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^Activity Monitor$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^KeyCastr$" sticky=on sub-layer=above manage=off
       yabai -m rule --add app="^System Settings$" manage=off
       yabai -m rule --add app="^Archive Utility$" manage=off
-      yabai -m rule --add app="^Calculator$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Hammerspoon" sticky=on layer=above manage=off
-      yabai -m rule --add app="^Raycast" sticky=on layer=above manage=off
-      yabai -m rule --add app="^superwhisper" sticky=on layer=above manage=off
+      yabai -m rule --add app="^Calculator$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^Hammerspoon" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^Raycast" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^superwhisper" sticky=on sub-layer=above manage=off
       yabai -m rule --add app="^Music$" manage=off
       yabai -m rule --add app="^Docker" manage=off
 
@@ -151,7 +151,7 @@
       window_animation_easing      = "ease_out_circ";
       window_opacity_duration      = 0.0;
       active_window_opacity        = 1.0;
-      normal_window_opacity        = 0.90;
+      normal_window_opacity        = 0.99;
       window_opacity               = "on";
       insert_feedback_color        = "0xffd75f5f";
       split_ratio                  = 0.50;
