@@ -109,6 +109,7 @@
       yabai -m config --space 3 layout stack
 
       yabai -m rule --add app="^FortiClient$" sticky=on sub-layer=above manage=off
+      yabai -m rule --add app="^KeePassXC$" sticky=on sub-layer=above manage=off
       yabai -m rule --add app="^System Preferences$" sticky=on sub-layer=above manage=off
       yabai -m rule --add app="^Karabiner-Elements$" sticky=on sub-layer=above manage=off
       yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on sub-layer=above manage=off
@@ -128,7 +129,8 @@
 
       # External monitor (index 1): fullscreen targets
       yabai -m rule --add app="^Obsidian$" display=1 manage=on
-      yabai -m rule --add app="^Zen Browser$" display=1 manage=on
+      yabai -m rule --add app="^Zen Browser$" display=1 manage=on native-fullscreen=on
+      yabai -m rule --add app="^TickTick$" display=1 manage=on native-fullscreen=on
       yabai -m rule --add app="^kitty$" display=1 manage=on
 
       # Slack to laptop screen (index 2)
@@ -177,7 +179,7 @@
 
   services.jankyborders = {
     enable = true;
-    active_color = "0xffe1e3e4";
+    active_color = "glow(0xffe1e3e4)";
     inactive_color = "0xff494d64";
     width = 5.0;
   };
