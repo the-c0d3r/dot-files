@@ -1,31 +1,26 @@
+# home/linux.nix — Generic (non-NixOS) Linux home-manager config
+#
+# Used for distros like Ubuntu, Arch, etc. that run home-manager standalone.
+# Imports linux-common.nix for shared Linux packages, then adds a tiling WM setup.
+#
+# Applied via: homeConfigurations."linux" in flake.nix
+
 { config, pkgs, ... }:
 
 {
+  imports = [ ./linux-common.nix ];
+
   nixpkgs.config.allowUnfree = true;
+
+  # Tiling WM dotfiles
   home.file = {
-    ".local/share/fonts".source = ../files/fonts;
-    ".config/i3/config".source = ../files/i3/config;
-    ".config/polybar".source = ../files/polybar;
-    ".config/rofi/config".source = ../files/rofi/config;
-    ".local/share/rofi/themes".source = ../files/rofi/themes;
+    ".local/share/fonts".source    = ../files/fonts;
+    ".config/i3/config".source     = ../files/i3/config;
+    ".config/polybar".source       = ../files/polybar;
   };
 
   home.packages = with pkgs; [
-    i3
-    polybar
-    rofi
-    xclip # Linux-specific clipboard tool
-    ticktick  # task manager
-
-    # From install-centos.sh
-    nload
+    i3       # tiling window manager
+    polybar  # status bar
   ];
-
-  programs.zsh = {
-    initContent = ''
-      # Keyboard key repeat speed
-      # xset r rate [delay] [rate]
-      [ -x "$(command -v xset)" ] && xset r rate 300 15
-    '';
-  };
 }

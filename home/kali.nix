@@ -1,25 +1,39 @@
+# home/kali.nix — Kali Linux-specific home-manager config
+#
+# Adds pentesting tools on top of the generic Linux config.
+# Applied via: homeConfigurations."kali" in flake.nix
+# (which also imports home/linux.nix → home/linux-common.nix → home/default.nix)
+
 { config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
-    # Pentesting tools from install-kali.sh
+    # Network enumeration
     enum4linux
-    feroxbuster
     nbtscan
-    nikto
     onesixtyone
-    # oscanner # Might not be in nixpkgs, commenting out for safety
     smbmap
-    smtp-user-enum
-    net-snmp # provides snmp tools
-    sslscan
-    sipvicious
-    # tnscmd10g # Might not be in nixpkgs
+    net-snmp        # provides snmpwalk, snmpget, etc.
+    nmap            # (also in default.nix, deduped by nix)
+
+    # Web
+    feroxbuster
+    nikto
     whatweb
     wkhtmltopdf
-    samba # provides smbclient
 
+    # Protocols
+    smtp-user-enum
+    sslscan
+    sipvicious
+    samba           # provides smbclient
+
+    # Scripting
     python3
     python3Packages.pip
+
+    # Commented out — not in nixpkgs:
+    # oscanner
+    # tnscmd10g
   ];
 }

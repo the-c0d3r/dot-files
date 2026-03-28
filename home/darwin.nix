@@ -1,47 +1,56 @@
+# home/darwin.nix — macOS-specific home-manager config
+#
+# Imports home/default.nix for the shared base, then adds macOS-specific
+# packages, dotfiles, and shell config.
+#
+# Applied via: darwinConfigurations."mac-arm" / "mac-intel" in flake.nix
+
 { config, pkgs, username, system, ... }:
 
 {
   imports = [ ./default.nix ];
 
-  home.file = {
-    ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
-    ".config/yabai/scripts".source = ../files/yabai/scripts;
-    ".config/skhd/skhdrc".source = ../files/skhd/skhdrc;
-  };
   home.homeDirectory = "/Users/${username}";
   home.stateVersion = "23.11";
 
+  # macOS-specific dotfiles (WM, hotkeys, keyboard remapping)
+  home.file = {
+    ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
+    ".config/yabai/scripts".source            = ../files/yabai/scripts;
+    ".config/skhd/skhdrc".source              = ../files/skhd/skhdrc;
+  };
+
   home.sessionVariables = {
-    # disables ._ files in tar file. https://superuser.com/a/260264/146350
+    # Prevent tar from creating ._ metadata files on network/USB volumes
+    # https://superuser.com/a/260264/146350
     COPYFILE_DISABLE = "1";
   };
 
   home.packages = with pkgs; [
-    # wm management
-    jankyborders      # border management
-    yabai             # window management
-    skhd              # hotkey management
+    # Window management
+    jankyborders      # window border highlights
+    yabai             # tiling window manager
+    skhd              # hotkey daemon
 
-    # utils
-    coreutils         # utils for bash
-    gnutls            # ls utils
-    gnused            # sed utils
-    gnutar            # tar utils
-    gnugrep           # grep utils
-    iproute2mac       # utils for bash
+    # GNU utils (macOS ships BSD variants)
+    coreutils         # gnu coreutils
+    gnutls            # gnu tls
+    gnused            # gnu sed
+    gnutar            # gnu tar
+    gnugrep           # gnu grep
+    iproute2mac       # ip command shim
 
-    # gui apps
-    raycast           # productivity app, spotlight alternative
-    itsycal           # menubar mini calendar
-    tailscale         # SDN software
+    # GUI apps
+    raycast           # spotlight replacement
+    itsycal           # menubar calendar
+    tailscale         # SDN / VPN
     slack             # chat
-    mos               # reverse mouse scroll and smoothens it
+    mos               # smooth scroll + reverse direction
   ];
 
   programs.zsh = {
     shellAliases = {
-      # additional aliases for macOS
-      hidedesktop = "defaults write com.apple.finder CreateDesktop false && killall Finder";
+      hidedesktop   = "defaults write com.apple.finder CreateDesktop false && killall Finder";
       unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
     };
     initContent = ''

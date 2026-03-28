@@ -1,3 +1,14 @@
+# home/default.nix — Shared home-manager config for all platforms
+#
+# Imported by every platform config. Contains packages, dotfiles, env vars,
+# and programs that are universal (NixOS, macOS, generic Linux).
+#
+# Platform-specific additions:
+#   NixOS        → flake.nix also imports home/linux-common.nix
+#   macOS        → home/darwin.nix imports this file
+#   Generic Linux→ home/linux.nix imports home/linux-common.nix (WM + shared Linux packages)
+#   Kali         → home/kali.nix adds pentesting tools on top
+
 { config, pkgs, lib, system, username, isNixOS ? false, ... }:
 
 let
@@ -5,22 +16,18 @@ let
 in
 {
   imports = [
-    ../programs
+    ../programs  # shared program configs (zsh, git, tmux, kitty, etc.)
   ];
+
   home.username = username;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  # Do not change this value — it pins home-manager behaviour, not the NixOS version.
+  home.stateVersion = "23.11";
 
-  # install packages
-  # Note: atuin, tmux, kitty, starship are managed via programs.* in programs/
+  # Packages installed to the user profile.
+  # Programs with dedicated modules (atuin, tmux, kitty, starship, vscodium)
+  # are omitted here — their modules handle installation.
   home.packages = with pkgs; [
     # CLI tools
     autojump     # jump to directories by 'j'
@@ -46,25 +53,24 @@ in
     wget         # download files
 
     # apps
-    customPkgs.obsidian  # Platform-aware Obsidian with Linux GPU/Wayland fixes
+    customPkgs.obsidian  # platform-aware Obsidian (Wayland fixes on Linux)
     discord      # chat
     keepassxc    # password manager
 
     # dev tools
     antigravity  # AI text editor
-    vscodium     # code editor
     uv           # python virtual environment manager
   ];
 
-  # Enable generic Linux target to allow symlinking desktop files
-  # Not needed on NixOS — it's only for non-NixOS Linux systems
+  # Only needed on non-NixOS Linux to enable desktop file symlinking, session
+  # variable sourcing, etc. NixOS handles this natively via the HM module.
   targets.genericLinux.enable = pkgs.stdenv.isLinux && !isNixOS;
 
+  # Dotfiles managed by home-manager
   home.file = {
     ".config/nvim".source = ../files/nvim;
   };
 
-  # manage env variables
   home.sessionVariables = {
     EDITOR = "nvim";
     TERM = "xterm-256color";
@@ -82,7 +88,7 @@ in
     ANSIBLE_STDOUT_CALLBACK = "yaml";
   };
 
-  # Syncthing — unified across NixOS, Linux, and macOS
+  # Syncthing runs as a user service on all platforms (systemd on Linux, launchd on macOS)
   services.syncthing = {
     enable = true;
     settings = {
@@ -106,6 +112,26 @@ in
     };
   };
 
-  # Let Home Manager install and manage itself.
+  # VSCodium with extensions and settings (shared across all platforms)
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium;
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        anthropic.claude-code
+        vscodevim.vim
+      ];
+      userSettings = {
+        "workbench.colorTheme" = "Default Light Modern";
+        "claudeCode.preferredLocation" = "panel";
+        "workbench.list.openMode" = "doubleClick";
+        "claudeCode.claudeProcessWrapper" = "${pkgs.claude-code}/bin/claude";
+        "files.autoSave" = "afterDelay";
+        "terminal.integrated.stickyScroll.enabled" = false;
+        "editor.wordWrap" = "on";
+      };
+    };
+  };
+
   programs.home-manager.enable = true;
 }
