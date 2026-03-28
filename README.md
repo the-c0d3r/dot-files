@@ -1,5 +1,34 @@
 # dot-files
-My dot-files repository which uses **Nix** (via Home Manager and nix-darwin) for fully declarative and reproducible configuration.
+My dot-files repository which uses **Nix** (via Home Manager and nix-darwin) for fully declarative and reproducible configuration across NixOS, macOS, and generic Linux distributions.
+
+## Repository Structure
+
+```
+dot-files/
+├── flake.nix              # Main flake defining all configurations
+├── apply.sh               # Automatic installation script
+├── home/                  # Home-manager configurations
+│   ├── default.nix        # Shared config for all platforms
+│   ├── darwin.nix         # macOS-specific config
+│   ├── linux.nix          # Linux-specific config
+│   └── kali.nix           # Kali Linux pentesting additions
+├── hosts/                 # System-level configurations
+│   ├── darwin/            # macOS system settings (nix-darwin)
+│   └── nixos/             # NixOS system configuration
+├── programs/              # Program-specific configurations
+│   ├── atuin.nix          # Shell history sync
+│   ├── git.nix            # Git configuration
+│   ├── i3.nix             # i3 window manager (Linux)
+│   ├── kitty.nix          # Terminal emulator
+│   ├── obsidian.nix       # Note-taking app
+│   ├── starship.nix       # Shell prompt
+│   ├── syncthing.nix      # File synchronization (Linux only)
+│   ├── tmux.nix           # Terminal multiplexer
+│   ├── vscode.nix         # VSCodium with extensions
+│   └── zsh.nix            # Shell configuration
+├── fonts/                 # Shared font configuration
+└── files/                 # Dotfiles and configuration files
+```
 
 # Installation
 
@@ -18,6 +47,9 @@ Alternatively, if you've already cloned the repo:
 ./apply.sh
 ```
 
+> [!IMPORTANT]
+> The script automatically generates `vars.nix` with your username before running with sudo. This file is gitignored but must be present for the configuration to build.
+
 ## Uninstallation
 
 To remove the configurations and symlinks created by these dotfiles:
@@ -35,7 +67,7 @@ To see what would be removed without actually deleting anything:
 > [!NOTE]
 > This script cleans up the dotfiles configuration but does not uninstall Nix itself. Refer to the Nix documentation for full system uninstallation.
 
-### 2. Subsequent Updates
+## Subsequent Updates
 To apply any changes to your configuration later, simply run:
 
 ```bash
@@ -43,67 +75,134 @@ To apply any changes to your configuration later, simply run:
 ```
 
 > [!NOTE]
-> `apply.sh` automatically detects your OS and distribution to apply the correct fragments (`#linux`, `#kali`, `#mac-arm`, etc.).
+> `apply.sh` automatically detects your OS and distribution to apply the correct configuration (`#linux`, `#kali`, `#codelab-nix`, `#mac-arm`, etc.).
 
-# Profiles defined in [`flake.nix`](flake.nix)
+## Manual Build (Advanced)
 
-- **linux**: Standard Linux setup with terminal tools + i3 window manager environment (i3, polybar, rofi).
-- **kali**: Build on top of `linux` profile, adding Kali-specific configurations.
-- **mac-arm / mac-intel**: macOS system settings (Dock, Finder, etc.) + terminal tools.
+For NixOS:
+```bash
+echo "{ username = \"yourusername\"; }" > vars.nix
+git add -f vars.nix  # Required for flakes
+sudo nixos-rebuild switch --flake .#codelab-nix
+```
+
+For generic Linux:
+```bash
+echo "{ username = \"yourusername\"; }" > vars.nix
+git add -f vars.nix
+home-manager switch --flake .#linux
+```
+
+For macOS:
+```bash
+echo "{ username = \"yourusername\"; }" > vars.nix
+git add -f vars.nix
+sudo darwin-rebuild switch --flake .#mac-arm
+```
+
+# Profiles
+
+## `linux` - Standalone Linux (home-manager only)
+- Terminal tools + i3 window manager environment
+- Fonts (Nerd Fonts + CartographCF)
+- Zen Browser
+- Suitable for: Arch, Ubuntu, Fedora, etc.
+
+## `kali` - Kali Linux
+- Builds on `linux` profile
+- Adds pentesting tools: nmap, enum4linux, sqlmap, etc.
+- Python environment for security scripts
+
+## `codelab-nix` - NixOS
+- Full system configuration
+- All Linux packages + i3 WM
+- System-level services and settings
+- Home-manager integrated
+
+## `mac-arm` / `mac-intel` - macOS
+- System settings (Dock, Finder, keyboard, trackpad)
+- Yabai + skhd for tiling window management
+- Homebrew integration
+- Fonts at system level
 
 > [!WARNING]
-> Applying the macOS configuration **WILL** modify your system settings. This includes Dock arrangement, Finder preferences, keyboard remappings (Caps Lock -> Escape), and trackpad settings. Review `darwin-configuration.nix` before applying if you are unsure.
+> Applying the macOS configuration **WILL** modify your system settings. This includes Dock arrangement, Finder preferences, keyboard remappings (Caps Lock -> Escape), and trackpad settings. Review [hosts/darwin/configuration.nix](hosts/darwin/configuration.nix) before applying.
 
 # Programs & Configs
 
-## Shared (Mac & Linux)
-- **Neovim**: Customized vim configuration.
-- **Tmux**: Terminal multiplexer.
-- **Zsh**: Shell config (replaces `oh-my-zsh` management) with Powerlevel10k.
-- **Kitty**: GPU-accelerated terminal.
-- **Starship**: Cross-shell prompt.
-- **Atuin**: Shell history sync.
-- **Ripgrep**, **FD**: Modern search tools.
-- **Htop**, **Ncdu**, **Jq**: System utilities.
+## Shared (All Platforms)
+- **Neovim**: Customized vim configuration
+- **Tmux**: Terminal multiplexer with custom keybindings
+- **Zsh**: Shell with oh-my-zsh integration
+- **Kitty**: GPU-accelerated terminal
+- **Starship**: Cross-shell prompt
+- **Atuin**: Shell history sync and search
+- **Git**: Version control with custom config
+- **VSCodium**: VS Code with vim extension and Claude Code integration
+- **Obsidian**: Note-taking app
+- **Ripgrep**, **FD**: Modern search tools
+- **Htop**, **Ncdu**, **Jq**: System utilities
+- **Discord**, **KeePassXC**: Desktop applications
+- **Development Tools**: GCC, Make, CMake, pre-commit, uv (Python env manager), antigravity
 
-## Linux Only (Desktop)
-- **i3**: Tiling window manager.
-- **Polybar**: Status bar.
-- **Rofi**: Application launcher.
-- **Dunst**: Notification daemon.
+## Linux Only
+- **i3**: Tiling window manager
+- **Polybar**: Status bar
+- **Vicinae**: Application launcher (rofi replacement)
+- **Syncthing**: File synchronization service
+- **Zen Browser**: Privacy-focused browser
+- **Fonts**: Nerd Fonts + CartographCF (via home-manager)
 
 ## macOS Only
-- **Nix-Darwin**: System configuration management.
-- **Yabai**: Tiling window manager (service).
-- **Skhd**: Hotkey daemon (service).
+- **Yabai**: Tiling window manager (system service)
+- **Skhd**: Hotkey daemon (system service)
+- **JankyBorders**: Window border highlights
+- **Raycast**: Spotlight replacement
+- **Itsycal**: Menubar calendar
+- **Fonts**: Nerd Fonts + CartographCF (system-wide)
+- **GNU Utils**: coreutils, gnutls, gnused, gnutar, gnugrep (replaces BSD variants)
 
-### Managed System Settings
-The following macOS defaults are declaratively managed via `darwin-configuration.nix`:
+## macOS System Settings
+The following macOS defaults are declaratively managed via [hosts/darwin/configuration.nix](hosts/darwin/configuration.nix):
 
 - **General**:
-    - Dark Mode enabled.
-    - Metric units (Celsius, cm).
-    - Fast key repeat rate (Initial: 15, Repeat: 2).
-    - Auto-capitalization/correction/dashes/periods/quotes **DISABLED**.
+    - Dark Mode enabled
+    - Metric units (Celsius, cm)
+    - Fast key repeat rate (Initial: 15, Repeat: 2)
+    - Auto-capitalization/correction/dashes/periods/quotes **DISABLED**
 - **Dock**:
-    - Auto-hide enabled.
-    - Positioned on the **Left**.
-    - Recent apps hidden.
-    - Static-only (shows only running apps).
+    - Auto-hide enabled
+    - Positioned on the **Left**
+    - Recent apps hidden
     - **Hot Corners**:
-        - Top-Left: Mission Control.
-        - Bottom-Left: Lock Screen.
-        - Bottom-Right: Desktop.
+        - Top-Left: Mission Control
+        - Bottom-Left: Lock Screen
+        - Bottom-Right: Desktop
 - **Finder**:
-    - Show all file extensions.
-    - Show POSIX path in title bar.
-    - Default view style: List View (`Nlsv`).
-    - Folders sorted first.
+    - Show all file extensions
+    - Show POSIX path in title bar
+    - Default view style: List View
+    - Folders sorted first
 - **Trackpad**:
-    - Tap to click enabled.
-    - Three-finger drag enabled.
-    - Two-finger right click enabled.
+    - Tap to click enabled
+    - Three-finger drag enabled
+    - Two-finger right click enabled
 - **Keyboard**:
-    - Remap **Caps Lock** to **Escape**.
+    - Remap **Caps Lock** to **Escape**
 - **Control Center**:
-    - Battery percentage shown.
+    - Battery percentage shown
+
+## Fonts
+
+All platforms include:
+- JetBrains Mono Nerd Font
+- Symbols Only Nerd Font
+- Fira Code Nerd Font
+- Inconsolata Nerd Font
+- Iosevka Nerd Font
+- Karla
+- CartographCF (custom fonts from `files/fonts/`)
+
+Fonts are installed:
+- **Linux/NixOS**: via home-manager (`home.packages`)
+- **macOS**: system-wide (`fonts.packages` in nix-darwin)
