@@ -52,6 +52,10 @@
       gp = "git push";
       gcan = "git commit --amend --no-edit";
       gamd = "git commit --amend";
+    } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+      # macOS-specific aliases
+      hidedesktop = "defaults write com.apple.finder CreateDesktop false && killall Finder";
+      unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
     };
 
     initContent = ''

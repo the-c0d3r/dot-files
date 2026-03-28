@@ -47,12 +47,4 @@
     slack             # chat
     mos               # smooth scroll + reverse direction
   ];
-
-  programs.zsh = {
-    shellAliases = {
-      hidedesktop   = "defaults write com.apple.finder CreateDesktop false && killall Finder";
-      unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
-    };
-    # Homebrew init moved to programs/zsh.nix (platform-specific)
-  };
 }
