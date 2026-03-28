@@ -26,10 +26,6 @@
   };
 
   home.packages = with pkgs; [
-    # Window management
-    jankyborders      # window border highlights
-    yabai             # tiling window manager
-
     # GNU utils (macOS ships BSD variants)
     coreutils         # gnu coreutils
     gnutls            # gnu tls
