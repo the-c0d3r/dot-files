@@ -8,6 +8,7 @@
     ./kitty.nix
     ./obsidian.nix
     ./starship.nix
+    ./syncthing.nix
     ./tmux.nix
     ./vscode.nix
     ./zsh.nix
