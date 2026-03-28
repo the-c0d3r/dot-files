@@ -54,12 +54,10 @@ else
 fi
 
 
-# --- 4. Verify USER is set ---
-if [ -z "$USER" ]; then
-    echo -e "${RED}Error:${NC} \$USER environment variable is not set"
-    exit 1
-fi
-echo -e "${GREEN}==>${NC} Using username: $USER"
+# --- 4. Generate vars.nix (captures username before sudo) ---
+ACTUAL_USER="${SUDO_USER:-$USER}"
+echo -e "${BLUE}==>${NC} Generating vars.nix for user: $ACTUAL_USER"
+echo "{ username = \"$ACTUAL_USER\"; }" > vars.nix
 
 # --- 5. Activate Configuration ---
 
@@ -99,19 +97,19 @@ if [ "$OS" == "Darwin" ]; then
     fi
 
     echo "> Running darwin-rebuild switch as root..."
-    sudo "$DARWIN_REBUILD_CMD" switch --impure --flake ".#$FLAKE_ATTR"
+    sudo "$DARWIN_REBUILD_CMD" switch --flake ".#$FLAKE_ATTR"
 
 elif [ "$NIXOS" == "true" ]; then
     # NixOS — full system + home-manager via nixos-rebuild
     echo "> Running nixos-rebuild switch as root..."
-    sudo nixos-rebuild switch --impure --flake ".#$FLAKE_ATTR"
+    sudo nixos-rebuild switch --flake ".#$FLAKE_ATTR"
 
 else
     # Generic Linux / Home Manager Standalone
     if command -v home-manager &> /dev/null; then
-        home-manager switch --impure --flake ".#$FLAKE_ATTR"
+        home-manager switch --flake ".#$FLAKE_ATTR"
     else
-        nix run home-manager -- switch --impure --flake ".#$FLAKE_ATTR"
+        nix run home-manager -- switch --flake ".#$FLAKE_ATTR"
     fi
 fi
 
