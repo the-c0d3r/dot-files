@@ -77,8 +77,8 @@
       CustomUserPreferences = {
         "com.apple.desktopservices" = {
           # Avoid creating .DS_Store files on network or USB volumes
-          DSDontWriteNetworkStores = true;  # Avoid creating .DS_Store files on network volumes
-          DSDontWriteUSBStores = true;      # Avoid creating .DS_Store files on USB volumes
+          DSDontWriteNetworkStores = true;
+          DSDontWriteUSBStores = true;
         };
       };
 
@@ -136,10 +136,6 @@
 
       # Laptop monitor (index 2)
       yabai -m rule --add app="^Slack$" display=2 manage=on opacity=0.95
-
-      # yabai -m signal --add event=window_focused app="^Obsidian$" action="yabai -m config normal_window_opacity 0.60"
-      # When any other app gains focus, reset both active and background window opacity to fully visible
-      # yabai -m signal --add event=window_focused app!="^Obsidian" action="yabai -m config active_window_opacity 1.0"
     '';
 
     config = {
@@ -196,7 +192,7 @@
     karla
     (stdenvNoCC.mkDerivation {
       name = "custom-fonts";
-      src = ./files/fonts;
+      src = ../../files/fonts;
       dontConfigure = true;
       dontBuild = true;
       installPhase = ''

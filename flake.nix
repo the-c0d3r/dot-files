@@ -19,9 +19,13 @@
       url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, determinate, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, darwin, determinate, zen-browser, ... }@inputs:
     let
       # Pure username detection from vars.nix
       vars = import ./vars.nix;
@@ -34,22 +38,38 @@
           config.allowUnfree = true;
         };
         modules = [
-          ./home.nix
+          ./home
         ] ++ extraModules;
         extraSpecialArgs = { inherit system username; };
+      };
+
+      mkNixos = system: nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs username; };
+        modules = [
+          ./hosts/nixos/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            nixpkgs.config.allowUnfree = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./home/nixos.nix;
+            home-manager.extraSpecialArgs = { inherit system username; isNixOS = true; };
+          }
+        ];
       };
 
       mkDarwin = system: darwin.lib.darwinSystem {
         inherit system;
         modules = [
           determinate.darwinModules.default
-          ./darwin-configuration.nix
+          ./hosts/darwin/configuration.nix
           home-manager.darwinModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./darwin.nix;
+            home-manager.users.${username} = import ./home/darwin.nix;
             home-manager.extraSpecialArgs = { inherit system username; };
           }
         ];
@@ -67,10 +87,13 @@
       };
 
       # Configs named by OS (generic)
-      homeConfigurations."linux" = mkHome "x86_64-linux" [ ./linux.nix ];
-      homeConfigurations."kali" = mkHome "x86_64-linux" [ ./linux.nix ./kali.nix ];
+      homeConfigurations."linux" = mkHome "x86_64-linux" [ ./home/linux.nix ];
+      homeConfigurations."kali" = mkHome "x86_64-linux" [ ./home/linux.nix ./home/kali.nix ];
       # homeConfigurations."mac-intel" = mkHome "x86_64-darwin" [ ./darwin.nix ];
       # homeConfigurations."mac-arm" = mkHome "aarch64-darwin" [ ./darwin.nix ];
+
+      # NixOS configurations
+      nixosConfigurations."codelab-nix" = mkNixos "x86_64-linux";
 
       # Expose the configuration matching the username/hostname
       darwinConfigurations."mac-arm" = mkDarwin "aarch64-darwin";

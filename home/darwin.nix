@@ -1,12 +1,12 @@
 { config, pkgs, username, system, ... }:
 
 {
-  imports = [ ./home.nix ];
+  imports = [ ./default.nix ];
 
   home.file = {
-    ".config/karabiner/karabiner.json".source = ./files/karabiner/karabiner.json;
-    ".config/yabai/scripts".source = ./files/yabai/scripts;
-    ".config/skhd/skhdrc".source = ./files/skhd/skhdrc;
+    ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
+    ".config/yabai/scripts".source = ../files/yabai/scripts;
+    ".config/skhd/skhdrc".source = ../files/skhd/skhdrc;
   };
   home.homeDirectory = "/Users/${username}";
   home.stateVersion = "23.11";

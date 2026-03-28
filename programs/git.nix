@@ -3,8 +3,8 @@
 {
   programs.git = {
     enable = true;
-    userName = "the-c0d3r";
-    userEmail = "4526565+the-c0d3r@users.noreply.github.com";
+    settings.user.name = "the-c0d3r";
+    settings.user.email = "4526565+the-c0d3r@users.noreply.github.com";
     ignores = [
       ".idea"
       "**/.idea"

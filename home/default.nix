@@ -1,11 +1,11 @@
-{ config, pkgs, lib, system, username, ... }:
+{ config, pkgs, lib, system, username, isNixOS ? false, ... }:
 
 let
-  customPkgs = import ./packages { inherit pkgs; };
+  customPkgs = import ../packages { inherit pkgs; };
 in
 {
   imports = [
-    ./programs
+    ../programs
   ];
   home.username = username;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
@@ -20,8 +20,9 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # install packages
+  # Note: atuin, tmux, kitty, starship are managed via programs.* in programs/
   home.packages = with pkgs; [
-    atuin        # command-line history navigator
+    # CLI tools
     autojump     # jump to directories by 'j'
     dos2unix     # convert files from DOS to UNIX format
     fd           # find files
@@ -40,34 +41,27 @@ in
     pre-commit   # pre-commit hooks
     pv           # pipe viewer
     ripgrep      # command-line search tool
-    starship     # prompt
-    tmux         # terminal multiplexer
     tree         # directory tree viewer
     watch        # watch files
     wget         # download files
 
-    # utils
-    syncthing    # continuous file synchronization
-
     # apps
-    kitty        # terminal emulator
     customPkgs.obsidian  # Platform-aware Obsidian with Linux GPU/Wayland fixes
     discord      # chat
-    keepassxc # password manager
+    keepassxc    # password manager
 
     # dev tools
     antigravity  # AI text editor
     vscodium     # code editor
-    #lmstudio
-    # ollama-cuda
     uv           # python virtual environment manager
   ];
 
   # Enable generic Linux target to allow symlinking desktop files
-  targets.genericLinux.enable = pkgs.stdenv.isLinux;
+  # Not needed on NixOS — it's only for non-NixOS Linux systems
+  targets.genericLinux.enable = pkgs.stdenv.isLinux && !isNixOS;
 
   home.file = {
-    ".config/nvim".source = ./files/nvim;
+    ".config/nvim".source = ../files/nvim;
   };
 
   # manage env variables
@@ -86,6 +80,30 @@ in
     # Ansible settings
     ANSIBLE_FORCE_COLOR = "true";
     ANSIBLE_STDOUT_CALLBACK = "yaml";
+  };
+
+  # Syncthing — unified across NixOS, Linux, and macOS
+  services.syncthing = {
+    enable = true;
+    settings = {
+      devices = {
+        "Thus-MacBook-Pro.local" = { id = "6DQWVMC-AUX6QMC-2EV6OWS-RU67KYA-BZCFJMD-O3BHL7H-CXPDRMF-H3BLSQB"; };
+        "codelab-nas"            = { id = "HAHND7O-I7PP2PI-NOVCINC-BJHJHKA-EYGNI4E-AIC3AXI-H7ENVWL-LPLXZAK"; };
+        "Z Fold 6"               = { id = "66PF7CU-2XJTPGA-YPI2HPD-TLZH25H-NNI7C5V-JV37Y3X-OMLIXEJ-3AZRLAG"; };
+      };
+      folders = {
+        "Documents" = {
+          id = "pcibl-josuz";
+          path = "${config.home.homeDirectory}/syncthing/Documents";
+          devices = [ "codelab-nas" "Z Fold 6" "Thus-MacBook-Pro.local" ];
+        };
+        "shared" = {
+          id = "jotgl-p9lwk";
+          path = "${config.home.homeDirectory}/syncthing/shared";
+          devices = [ "codelab-nas" "Z Fold 6" "Thus-MacBook-Pro.local" ];
+        };
+      };
+    };
   };
 
   # Let Home Manager install and manage itself.
