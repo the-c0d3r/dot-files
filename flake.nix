@@ -47,7 +47,7 @@
         modules = [
           ./home  # shared base config (home/default.nix)
         ] ++ extraModules;
-        extraSpecialArgs = { inherit system username; isNixOS = false; };
+        extraSpecialArgs = { inherit system username inputs; isNixOS = false; };
       };
 
       # mkNixos: full NixOS system config with home-manager integrated as a module
@@ -64,7 +64,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = { imports = [ ./home ./home/linux.nix ]; };
-            home-manager.extraSpecialArgs = { inherit system username; isNixOS = true; };
+            home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; };
           }
         ];
       };

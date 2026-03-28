@@ -7,7 +7,7 @@
 #
 # Note: allowUnfree is handled at the flake level, not here
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, system, ... }:
 
 let
   sharedFonts = import ../fonts { inherit pkgs; };
@@ -19,6 +19,9 @@ in
     xclip     # clipboard tool
     ticktick  # task manager
     nload     # network monitor
+
+    # Browser
+    inputs.zen-browser.packages.${system}.default
   ] ++ sharedFonts;
 
   # Enable fontconfig to ensure fonts are properly recognized
