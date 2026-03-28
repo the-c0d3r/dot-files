@@ -110,14 +110,16 @@
       # laptop display to use stack to maximise space and for stackline
       yabai -m config --space 3 layout stack
 
-      yabai -m rule --add app="^FortiClient$" manage=off sub-layer=above
+      yabai -m rule --add app="^FortiClient$" sub-layer=above manage=off
+      yabai -m rule --add app="^KeePassXC$" sub-layer=above manage=off
       yabai -m rule --add app="^System Preferences$" sub-layer=above manage=off
       yabai -m rule --add app="^Karabiner-Elements$" sub-layer=above manage=off
       yabai -m rule --add app="^Karabiner-EventViewer$" sub-layer=above manage=off
       yabai -m rule --add app="^Finder$" sub-layer=above manage=off
       yabai -m rule --add app="^Disk Utility$" sub-layer=above manage=off
       yabai -m rule --add app="^System Information$" sub-layer=above manage=off
-      yabai -m rule --add app="^Activity Monitor$" manage=off sub-layer=above
+      yabai -m rule --add app="^Activity Monitor$" sub-layer=above manage=off
+
       yabai -m rule --add app="^KeyCastr$" sub-layer=above manage=off
       yabai -m rule --add app="^System Settings$" manage=off
       yabai -m rule --add app="^Archive Utility$" manage=off
