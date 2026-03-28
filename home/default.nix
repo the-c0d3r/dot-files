@@ -117,14 +117,16 @@
     package = pkgs.vscodium;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
-        anthropic.claude-code
         vscodevim.vim
       ];
       userSettings = {
+
         "workbench.colorTheme" = "Default Light Modern";
-        "claudeCode.preferredLocation" = "panel";
         "workbench.list.openMode" = "doubleClick";
+
+        "claudeCode.preferredLocation" = "sidebar";
         "claudeCode.claudeProcessWrapper" = "${pkgs.claude-code}/bin/claude";
+
         "files.autoSave" = "afterDelay";
         "terminal.integrated.stickyScroll.enabled" = false;
         "editor.wordWrap" = "on";

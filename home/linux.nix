@@ -4,6 +4,8 @@
 #   - homeConfigurations."linux" in flake.nix
 #   - homeConfigurations."kali" in flake.nix
 #   - nixosConfigurations (alongside home/default.nix)
+#
+# Note: allowUnfree is handled at the flake level, not here
 
 { config, pkgs, ... }:
 
@@ -11,8 +13,6 @@ let
   sharedFonts = import ../fonts { inherit pkgs; };
 in
 {
-  nixpkgs.config.allowUnfree = true;
-
   home.packages = with pkgs; [
     # Linux utilities
     vicinae   # app launcher (rofi replacement)
