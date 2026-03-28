@@ -1,27 +1,32 @@
-{ config, pkgs, lib, system, username, ... }:
+# home/default.nix — Shared home-manager config for all platforms
+#
+# Imported by every platform config. Contains packages, dotfiles, env vars,
+# and programs that are universal (NixOS, macOS, generic Linux).
+#
+# Platform-specific additions:
+#   NixOS        → flake.nix also imports home/linux.nix
+#   macOS        → home/darwin.nix imports this file
+#   Generic Linux→ home/linux.nix imports home/linux-common.nix (WM + shared Linux packages)
+#   Kali         → home/kali.nix adds pentesting tools on top
 
-let
-  customPkgs = import ./packages { inherit pkgs; };
-in
+{ config, pkgs, lib, system, username, isNixOS ? false, ... }:
+
 {
   imports = [
-    ./programs
+    ../programs  # shared program configs (zsh, git, tmux, kitty, obsidian, etc.)
   ];
+
   home.username = username;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  # Do not change this value — it pins home-manager behaviour, not the NixOS version.
+  home.stateVersion = "23.11";
 
-  # install packages
+  # Packages installed to the user profile.
+  # Programs with dedicated modules (atuin, tmux, kitty, starship, vscodium)
+  # are omitted here — their modules handle installation.
   home.packages = with pkgs; [
-    atuin        # command-line history navigator
+    # CLI tools
     autojump     # jump to directories by 'j'
     dos2unix     # convert files from DOS to UNIX format
     fd           # find files
@@ -40,54 +45,47 @@ in
     pre-commit   # pre-commit hooks
     pv           # pipe viewer
     ripgrep      # command-line search tool
-    starship     # prompt
-    tmux         # terminal multiplexer
     tree         # directory tree viewer
     watch        # watch files
     wget         # download files
 
-    # utils
-    syncthing    # continuous file synchronization
-
     # apps
-    kitty        # terminal emulator
-    customPkgs.obsidian  # Platform-aware Obsidian with Linux GPU/Wayland fixes
     discord      # chat
-    keepassxc # password manager
+    keepassxc    # password manager
 
     # dev tools
     antigravity  # AI text editor
-    vscodium     # code editor
-    #lmstudio
-    # ollama-cuda
     uv           # python virtual environment manager
   ];
 
-  # Enable generic Linux target to allow symlinking desktop files
-  targets.genericLinux.enable = pkgs.stdenv.isLinux;
+  # Only needed on non-NixOS Linux to enable desktop file symlinking, session
+  # variable sourcing, etc. NixOS handles this natively via the HM module.
+  targets.genericLinux.enable = pkgs.stdenv.isLinux && !isNixOS;
 
+  # Dotfiles managed by home-manager
   home.file = {
-    ".config/nvim".source = ./files/nvim;
+    ".config/nvim".source = ../files/nvim;
   };
 
-  # manage env variables
   home.sessionVariables = {
+    # Editor & Terminal
     EDITOR = "nvim";
     TERM = "xterm-256color";
+
+    # Locale
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
 
-    # Oh-My-Zsh settings
+    # Oh-My-Zsh
     DISABLE_UNTRACKED_FILES_DIRTY = "true";
     DISABLE_UPDATE_PROMPT = "true";
     DISABLE_AUTO_UPDATE = "true";
     HIST_STAMPS = "%d/%m/%y %T";
 
-    # Ansible settings
+    # Ansible
     ANSIBLE_FORCE_COLOR = "true";
     ANSIBLE_STDOUT_CALLBACK = "yaml";
   };
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

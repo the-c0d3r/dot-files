@@ -182,31 +182,31 @@ return {
     end,
   },
   -- lsp references/definitions navigator
-  {
-    "ray-x/navigator.lua",
-    lazy = false,
-    after = "nvim-lspconfig",
-    config = function()
-      require("navigator").setup {
-        lsp = {
-          -- need to disable lsp here, as mason will install and handle it
-          disable_lsp = { "all" },
-          -- format on save will cause issues if the code is not compatible, like windows c programs
-          format_on_save = false,
-          document_highlight = false, -- LSP reference highlight
-          disply_diagnostic_qf = false,
-          tsserver = {
-            filetypes = { "json", "yaml" }, -- Disable for Json as the lsp does not have codelens
-          },
-          diagnostic = {
-            underline = true,
-            virtual_text = true, -- show virtual for diagnostic message
-            update_in_insert = false, -- update diagnostic message in insert mode
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   "ray-x/navigator.lua",
+  --   lazy = false,
+  --   after = "nvim-lspconfig",
+  --   config = function()
+  --     require("navigator").setup {
+  --       lsp = {
+  --         -- need to disable lsp here, as mason will install and handle it
+  --         disable_lsp = { "all" },
+  --         -- format on save will cause issues if the code is not compatible, like windows c programs
+  --         format_on_save = false,
+  --         document_highlight = false, -- LSP reference highlight
+  --         disply_diagnostic_qf = false,
+  --         tsserver = {
+  --           filetypes = { "json", "yaml" }, -- Disable for Json as the lsp does not have codelens
+  --         },
+  --         diagnostic = {
+  --           underline = true,
+  --           virtual_text = true, -- show virtual for diagnostic message
+  --           update_in_insert = false, -- update diagnostic message in insert mode
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- new UI stuff, like popup cmdline window, and notifications
 --  {

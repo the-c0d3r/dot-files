@@ -168,7 +168,9 @@
                                             "^net\\.kovidgoyal\\.kitty$",
                                             "^tv\\.parsec\\.www$",
                                             "^com\\.utmapp\\.UTM$",
-                                            "^md\\.obsidian$"
+                                            "^md\\.obsidian$",
+                                            "^com\\.vscodium$",
+                                            "^com\\.microsoft.VSCode$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }

@@ -54,26 +54,33 @@ else
 fi
 
 
-# --- 4. Generate vars.nix if missing (Pure & Private pattern) ---
-echo -e "${BLUE}==>${NC} Generating vars.nix for pure evaluation..."
-echo "{ username = \"$(whoami)\"; }" > vars.nix
-git add -N -f vars.nix 2>/dev/null || true
+# --- 4. Generate vars.nix (captures username before sudo) ---
+ACTUAL_USER="${SUDO_USER:-$USER}"
+echo -e "${BLUE}==>${NC} Generating vars.nix for user: $ACTUAL_USER"
+echo "{ username = \"$ACTUAL_USER\"; }" > vars.nix
 
 # --- 5. Activate Configuration ---
 
-# Determine Flake Attribute based on OS/Arch
+# Determine OS variant and flake attribute
+NIXOS=false
 if [ "$OS" == "Darwin" ]; then
     [[ "$ARCH" == "arm64" ]] && FLAKE_ATTR="mac-arm" || FLAKE_ATTR="mac-intel"
 elif [ "$OS" == "Linux" ]; then
-    grep -q "Kali" /etc/os-release 2>/dev/null && FLAKE_ATTR="kali" || FLAKE_ATTR="linux"
+    if grep -q "ID=nixos" /etc/os-release 2>/dev/null; then
+        NIXOS=true
+        FLAKE_ATTR="$(hostname)"
+    elif grep -q "Kali" /etc/os-release 2>/dev/null; then
+        FLAKE_ATTR="kali"
+    else
+        FLAKE_ATTR="linux"
+    fi
 else
     echo -e "${RED}Error:${NC} Unsupported OS: $OS"
     exit 1
 fi
 
-echo -e "${BLUE}==>${NC} Detected $OS ($ARCH). Applying User Configuration ($FLAKE_ATTR)..."
+echo -e "${BLUE}==>${NC} Detected $OS ($ARCH). Applying configuration ($FLAKE_ATTR)..."
 
-# Apply Configuration
 # Apply Configuration
 if [ "$OS" == "Darwin" ]; then
     DARWIN_REBUILD_CMD="darwin-rebuild"
@@ -90,11 +97,15 @@ if [ "$OS" == "Darwin" ]; then
     fi
 
     echo "> Running darwin-rebuild switch as root..."
-    # Execute directly - sudo allows absolute paths even with secure_path enabled
     sudo "$DARWIN_REBUILD_CMD" switch --flake ".#$FLAKE_ATTR"
 
+elif [ "$NIXOS" == "true" ]; then
+    # NixOS — full system + home-manager via nixos-rebuild
+    echo "> Running nixos-rebuild switch as root..."
+    sudo nixos-rebuild switch --flake ".#$FLAKE_ATTR"
+
 else
-    # Linux / Home Manager Standalone
+    # Generic Linux / Home Manager Standalone
     if command -v home-manager &> /dev/null; then
         home-manager switch --flake ".#$FLAKE_ATTR"
     else
