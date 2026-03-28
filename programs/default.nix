@@ -9,6 +9,7 @@
     ./obsidian.nix
     ./starship.nix
     ./tmux.nix
+    ./vscode.nix
     ./zsh.nix
   ];
 }
