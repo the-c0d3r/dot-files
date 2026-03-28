@@ -2,7 +2,7 @@
 #
 # Adds pentesting tools on top of the generic Linux config.
 # Applied via: homeConfigurations."kali" in flake.nix
-# (which also imports home/linux.nix → home/linux-common.nix → home/default.nix)
+# (which also imports home/linux.nix → home/default.nix)
 
 { config, pkgs, ... }:
 

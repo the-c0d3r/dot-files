@@ -68,18 +68,21 @@
   };
 
   home.sessionVariables = {
+    # Editor & Terminal
     EDITOR = "nvim";
     TERM = "xterm-256color";
+
+    # Locale
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
 
-    # Oh-My-Zsh settings
+    # Oh-My-Zsh
     DISABLE_UNTRACKED_FILES_DIRTY = "true";
     DISABLE_UPDATE_PROMPT = "true";
     DISABLE_AUTO_UPDATE = "true";
     HIST_STAMPS = "%d/%m/%y %T";
 
-    # Ansible settings
+    # Ansible
     ANSIBLE_FORCE_COLOR = "true";
     ANSIBLE_STDOUT_CALLBACK = "yaml";
   };

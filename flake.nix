@@ -52,7 +52,7 @@
 
       # mkNixos: full NixOS system config with home-manager integrated as a module
       # Usage: mkNixos "x86_64-linux"
-      # Home config: home/default.nix + home/linux-common.nix
+      # Home config: home/default.nix + home/linux.nix
       mkNixos = system: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs username; };
@@ -63,7 +63,7 @@
             nixpkgs.config.allowUnfree = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = { imports = [ ./home ./home/linux-common.nix ]; };
+            home-manager.users.${username} = { imports = [ ./home ./home/linux.nix ]; };
             home-manager.extraSpecialArgs = { inherit system username; isNixOS = true; };
           }
         ];

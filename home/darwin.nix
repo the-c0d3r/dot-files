@@ -53,8 +53,6 @@
       hidedesktop   = "defaults write com.apple.finder CreateDesktop false && killall Finder";
       unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
     };
-    initContent = ''
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-    '';
+    # Homebrew init moved to programs/zsh.nix (platform-specific)
   };
 }
