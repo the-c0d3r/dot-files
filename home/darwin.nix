@@ -17,7 +17,6 @@
   home.file = {
     ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
     ".config/yabai/scripts".source            = ../files/yabai/scripts;
-    ".config/skhd/skhdrc".source              = ../files/skhd/skhdrc;
   };
 
   home.sessionVariables = {
@@ -30,7 +29,6 @@
     # Window management
     jankyborders      # window border highlights
     yabai             # tiling window manager
-    skhd              # hotkey daemon
 
     # GNU utils (macOS ships BSD variants)
     coreutils         # gnu coreutils
