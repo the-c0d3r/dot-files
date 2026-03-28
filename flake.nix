@@ -47,7 +47,7 @@
         modules = [
           ./home  # shared base config (home/default.nix)
         ] ++ extraModules;
-        extraSpecialArgs = { inherit system username; };
+        extraSpecialArgs = { inherit system username; isNixOS = false; };
       };
 
       # mkNixos: full NixOS system config with home-manager integrated as a module

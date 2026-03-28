@@ -11,12 +11,9 @@
 
 { config, pkgs, lib, system, username, isNixOS ? false, ... }:
 
-let
-  customPkgs = import ../packages { inherit pkgs; };
-in
 {
   imports = [
-    ../programs  # shared program configs (zsh, git, tmux, kitty, etc.)
+    ../programs  # shared program configs (zsh, git, tmux, kitty, obsidian, etc.)
   ];
 
   home.username = username;
@@ -53,7 +50,6 @@ in
     wget         # download files
 
     # apps
-    customPkgs.obsidian  # platform-aware Obsidian (Wayland fixes on Linux)
     discord      # chat
     keepassxc    # password manager
 
