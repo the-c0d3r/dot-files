@@ -14,14 +14,14 @@
     enable = false;
 
     # Automatic garbage collection (runs weekly, deletes generations older than 30 days)
-    gc = {
-      automatic = true;
-      interval = { Weekday = 0; Hour = 3; Minute = 0; }; # Sunday 3am
-      options = "--delete-older-than 30d";
-    };
+    # gc = {
+    #   automatic = true;
+    #   interval = { Weekday = 0; Hour = 3; Minute = 0; }; # Sunday 3am
+    #   options = "--delete-older-than 30d";
+    # };
 
     # Automatic store optimization
-    optimise.automatic = true;
+    # optimise.automatic = true;
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
