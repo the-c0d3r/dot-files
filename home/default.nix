@@ -26,6 +26,9 @@
   # Programs with dedicated modules (atuin, tmux, kitty, starship, vscodium)
   # are omitted here — their modules handle installation.
   home.packages = with pkgs; [
+    # Nix tools
+    nvd          # Nix Version Diff - shows what changed between rebuilds
+
     # CLI tools
     autojump     # jump to directories by 'j'
     dos2unix     # convert files from DOS to UNIX format

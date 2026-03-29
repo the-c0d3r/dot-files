@@ -81,6 +81,15 @@ fi
 
 echo -e "${BLUE}==>${NC} Detected $OS ($ARCH). Applying configuration ($FLAKE_ATTR)..."
 
+# Save current state for diff
+OLD_SYSTEM=""
+OLD_HM_GEN=""
+if [ "$OS" == "Darwin" ] || [ "$NIXOS" == "true" ]; then
+    OLD_SYSTEM="$(readlink -f /run/current-system 2>/dev/null || true)"
+else
+    OLD_HM_GEN="$(readlink -f ~/.local/state/nix/profiles/home-manager 2>/dev/null || true)"
+fi
+
 # Apply Configuration
 if [ "$OS" == "Darwin" ]; then
     DARWIN_REBUILD_CMD="darwin-rebuild"
@@ -114,3 +123,21 @@ else
 fi
 
 echo -e "${GREEN}==>${NC} Configuration applied successfully!"
+
+# Show diff of what changed
+echo -e "${BLUE}==>${NC} Changes applied:"
+if [ "$OS" == "Darwin" ] || [ "$NIXOS" == "true" ]; then
+    NEW_SYSTEM="$(readlink -f /run/current-system)"
+    if [ -n "$OLD_SYSTEM" ] && [ "$OLD_SYSTEM" != "$NEW_SYSTEM" ]; then
+        nvd diff "$OLD_SYSTEM" "$NEW_SYSTEM" 2>/dev/null || echo "  (nvd not available yet - will work after next rebuild)"
+    else
+        echo "  No system changes (same generation)"
+    fi
+else
+    NEW_HM_GEN="$(readlink -f ~/.local/state/nix/profiles/home-manager)"
+    if [ -n "$OLD_HM_GEN" ] && [ "$OLD_HM_GEN" != "$NEW_HM_GEN" ]; then
+        nvd diff "$OLD_HM_GEN" "$NEW_HM_GEN" 2>/dev/null || echo "  (nvd not available yet - will work after next rebuild)"
+    else
+        echo "  No home-manager changes (same generation)"
+    fi
+fi
