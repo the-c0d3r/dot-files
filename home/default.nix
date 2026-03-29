@@ -58,9 +58,6 @@
     # dev tools
     antigravity  # AI text editor
     uv           # python virtual environment manager
-
-    # communication tools
-    signal-desktop
   ];
 
   # Only needed on non-NixOS Linux to enable desktop file symlinking, session

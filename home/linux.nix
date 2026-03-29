@@ -21,6 +21,9 @@ in
 
     # Browser
     inputs.zen-browser.packages.${system}.default
+
+    # communication tools
+    signal-desktop
   ] ++ sharedFonts;
 
   # Enable fontconfig to ensure fonts are properly recognized
