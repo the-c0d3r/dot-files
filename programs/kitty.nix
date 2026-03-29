@@ -3,6 +3,7 @@
 {
   programs.kitty = {
     enable = true;
+    themeFile = "Catppuccin-Mocha";
     settings = {
       # Fonts
       font_family = "Cartograph CF Regular";
