@@ -8,6 +8,7 @@
     keyMode = "vi";
     mouse = true;
     prefix = "C-a";
+    baseIndex = 1;  # start windows numbering at 1
     plugins = [
       {
         plugin = pkgs.tmuxPlugins.yank;
@@ -18,6 +19,18 @@
       }
       {
         plugin = pkgs.tmuxPlugins.better-mouse-mode;
+      }
+      {
+        plugin = pkgs.tmuxPlugins.resurrect;
+        extraConfig = ''
+          set -g @resurrect-processes 'ssh psql sqlite3'
+        '';
+      }
+      {
+        plugin = pkgs.tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+        '';
       }
       {
         plugin = pkgs.tmuxPlugins.tmux-nova;
@@ -37,6 +50,21 @@
       }
     ];
     extraConfig = ''
+      # Window numbering
+      setw -g pane-base-index 1     # make pane numbering consistent with windows
+      set -g renumber-windows on    # renumber windows when a window is closed
+
+      # Status bar position
+      set -g status-position bottom
+
+      # Copy to OS clipboard
+      set -g set-clipboard on
+
+      # Pane navigation (unbind first to remove -r flag from defaults)
+      unbind h
+      unbind j
+      unbind k
+      unbind l
       bind h select-pane -L  # move left
       bind j select-pane -D  # move down
       bind k select-pane -U  # move up
@@ -62,6 +90,15 @@
       bind -r C-h previous-window # select previous window
       bind -r C-l next-window     # select next window
       bind Tab last-window        # move to last active window
+
+      # copy mode
+      bind Enter copy-mode                                # enter copy mode
+      bind -T copy-mode-vi v send -X begin-selection      # start selection
+      bind -T copy-mode-vi C-v send -X rectangle-toggle   # toggle rectangle selection
+      bind -T copy-mode-vi y send -X copy-selection-and-cancel
+      bind -T copy-mode-vi Escape send -X cancel
+      bind -T copy-mode-vi H send -X start-of-line
+      bind -T copy-mode-vi L send -X end-of-line
     '';
   };
 }
