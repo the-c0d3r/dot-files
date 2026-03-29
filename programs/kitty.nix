@@ -10,14 +10,14 @@
       italic_font = "Cartograph CF Regular Italic";
       bold_italic_font = "Cartograph CF Bold Italic";
       font_features = "FiraCodeNerdFontComplete-Retina +zero +ss06";
-      font_size = "13.0";
+      font_size = "11.0";
 
       # Window
       initial_window_width = 640;
       initial_window_height = 400;
       window_logo_position = "bottom-right";
       window_logo_alpha = "0.5";
-      hide_window_decorations = "yes"; # Kept as it might be preferred
+      hide_window_decorations = "no";
       background_opacity = "0.7";
 
       # Tab Bar
