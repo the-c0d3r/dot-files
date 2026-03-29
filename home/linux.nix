@@ -15,7 +15,6 @@ in
 {
   home.packages = with pkgs; [
     # Linux utilities
-    vicinae   # app launcher (rofi replacement)
     xclip     # clipboard tool
     ticktick  # task manager
     nload     # network monitor

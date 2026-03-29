@@ -46,6 +46,8 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = false;
+  services.displayManager.defaultSession = "plasmax11";
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -75,7 +77,6 @@
     shell = pkgs.zsh;
   };
 
-  programs.firefox.enable = true;
   programs.zsh.enable = true;
 
   # Allow unfree packages
@@ -83,7 +84,8 @@
 
   # System-level packages only (user packages managed by home-manager)
   environment.systemPackages = with pkgs; [
-    claude-code
+    git
+    curl
   ];
 
   # This value determines the NixOS release from which the default

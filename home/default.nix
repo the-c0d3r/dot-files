@@ -36,7 +36,6 @@
     jq           # command-line JSON processor
     lazygit      # git repository viewer
     ncdu         # ncurses disk usage analyzer
-    neovim       # text editor
     netcat       # network utility
     nmap         # network scanner
     gcc          # C compiler
@@ -64,11 +63,6 @@
   # Only needed on non-NixOS Linux to enable desktop file symlinking, session
   # variable sourcing, etc. NixOS handles this natively via the HM module.
   targets.genericLinux.enable = pkgs.stdenv.isLinux && !isNixOS;
-
-  # Dotfiles managed by home-manager
-  home.file = {
-    ".config/nvim".source = ../files/nvim;
-  };
 
   home.sessionVariables = {
     # Editor & Terminal
