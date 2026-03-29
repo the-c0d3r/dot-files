@@ -40,6 +40,9 @@
         orientation = "left";
         show-recents = false; # don't show recent apps
         static-only = false; # show only running apps
+        expose-group-apps = true; # group windows by app in Mission Control
+        minimize-to-application = true; # minimize into app icon
+        mru-spaces = false; # don't reorder Spaces based on recent use
 
         wvous-tl-corner = 2; # top-left - Mission Control
         wvous-tr-corner = 1; # top-right - Disabled
@@ -49,7 +52,9 @@
 
       finder = {
         AppleShowAllExtensions = true;  # Shows file extensions
+        AppleShowAllFiles = true;       # Show hidden files
         FXPreferredViewStyle = "Nlsv";  # List View default
+        ShowStatusBar = true;           # Show status bar
         _FXShowPosixPathInTitle = true; # Shows path in title
         _FXSortFoldersFirst = true;     # Sort folders first
       };
@@ -62,8 +67,10 @@
 
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";                 # Dark mode
-        InitialKeyRepeat = 15;                        # Key repeat rate
-        KeyRepeat = 2;                                # Key repeat delay
+        ApplePressAndHoldEnabled = false;             # Disable press-and-hold for accents (better for vim)
+        AppleShowAllExtensions = true;                # Show file extensions globally
+        InitialKeyRepeat = 25;                        # Initial key repeat delay
+        KeyRepeat = 2;                                # Key repeat rate
         AppleMeasurementUnits = "Centimeters";        # Metric units
         AppleMetricUnits = 1;
         AppleTemperatureUnit = "Celsius";             # Metric temperature
