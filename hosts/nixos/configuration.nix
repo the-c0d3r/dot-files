@@ -5,79 +5,94 @@
 { config, pkgs, username, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ ./hardware-configuration.nix ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  # Automatic garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+  nix = {
+    settings.experimental-features = ["nix-command" "flakes"];
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    optimise.automatic = true;
   };
 
-  # Automatic store optimization (hardlinks duplicate files)
-  nix.optimise.automatic = true;
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "codelab-nix"; # Define your hostname.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Asia/Singapore";
-  time.hardwareClockInLocalTime = true;
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_SG.UTF-8";
-    LC_IDENTIFICATION = "en_SG.UTF-8";
-    LC_MEASUREMENT = "en_SG.UTF-8";
-    LC_MONETARY = "en_SG.UTF-8";
-    LC_NAME = "en_SG.UTF-8";
-    LC_NUMERIC = "en_SG.UTF-8";
-    LC_PAPER = "en_SG.UTF-8";
-    LC_TELEPHONE = "en_SG.UTF-8";
-    LC_TIME = "en_SG.UTF-8";
+  boot = {
+    # GRUB with os-prober for Windows dual-boot
+    loader = {
+      systemd-boot.enable = false;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+    # Disable Intel watchdog (fixes slow shutdown)
+    kernelParams = [ "nowatchdog" ];
+    blacklistedKernelModules = [ "iTCO_wdt" ];
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # Reduce service stop timeout (90s -> 10s)
+  systemd.settings.Manager.DefaultTimeoutStopSec = "10s";
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = false;
-  services.displayManager.defaultSession = "plasmax11";
-  services.desktopManager.plasma6.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  networking = {
+    hostName = "codelab-nix";
+    networkmanager.enable = true;
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = false;
+  time = {
+    timeZone = "Asia/Singapore";
+    hardwareClockInLocalTime = true;
+  };
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_SG.UTF-8";
+      LC_IDENTIFICATION = "en_SG.UTF-8";
+      LC_MEASUREMENT = "en_SG.UTF-8";
+      LC_MONETARY = "en_SG.UTF-8";
+      LC_NAME = "en_SG.UTF-8";
+      LC_NUMERIC = "en_SG.UTF-8";
+      LC_PAPER = "en_SG.UTF-8";
+      LC_TELEPHONE = "en_SG.UTF-8";
+      LC_TIME = "en_SG.UTF-8";
+    };
+  };
+
+  services = {
+    # Enable the X11 windowing system.
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
+    # KDE Plasma Desktop Environment
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = false;
+      };
+      defaultSession = "plasmax11";
+    };
+    desktopManager.plasma6.enable = true;
+
+    printing.enable = false;
+    pulseaudio.enable = false;
+    # Sound with pipewire
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+  };
+
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.${username} = {
@@ -89,13 +104,13 @@
 
   programs.zsh.enable = true;
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # System-level packages only (user packages managed by home-manager)
   environment.systemPackages = with pkgs; [
     git
     curl
+    efibootmgr
   ];
 
   # This value determines the NixOS release from which the default
@@ -104,6 +119,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
-
+  system.stateVersion = "25.11"; 
 }
