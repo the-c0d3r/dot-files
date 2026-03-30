@@ -91,6 +91,8 @@
           lazy-trees = true;
           eval-cores = 0; # use all cores for parallel evaluation
           warn-dirty = false;
+          min-free = 10737418240;  # 10GB - trigger GC during builds when below this
+          max-free = 32212254720;  # 30GB - stop GC when this much is free
         };
       };
 

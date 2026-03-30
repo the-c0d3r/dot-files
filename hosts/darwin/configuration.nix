@@ -8,20 +8,21 @@
   ];
 
   nix = {
-    # Necessary for using flakes on this system.
     settings.experimental-features = "nix-command flakes";
-    # Don't let nix-darwin manage Nix - use existing installation
-    enable = false;
+    enable = false; # Determinate manages Nix daemon
+  };
 
-    # Automatic garbage collection (runs weekly, deletes generations older than 30 days)
-    # gc = {
-    #   automatic = true;
-    #   interval = { Weekday = 0; Hour = 3; Minute = 0; }; # Sunday 3am
-    #   options = "--delete-older-than 30d";
-    # };
-
-    # Automatic store optimization
-    # optimise.automatic = true;
+  # Scheduled GC (weekly, Sunday 3am) - separate from nix module since Determinate manages Nix
+  launchd.daemons.nix-gc = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/nix/var/nix/profiles/default/bin/nix-collect-garbage"
+        "--delete-older-than" "30d"
+      ];
+      StartCalendarInterval = [{ Weekday = 0; Hour = 3; Minute = 0; }];
+      StandardOutPath = "/var/log/nix-gc.log";
+      StandardErrorPath = "/var/log/nix-gc.err";
+    };
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
