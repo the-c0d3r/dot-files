@@ -60,8 +60,8 @@
       window_animation_duration    = 0;
       window_animation_easing      = "ease_out_circ";
       window_opacity_duration      = 0.0;
-      active_window_opacity        = 0.9;
-      normal_window_opacity        = 0.70;
+      active_window_opacity        = 0.95;
+      normal_window_opacity        = 0.8;
       window_opacity               = "on";
       insert_feedback_color        = "0xffd75f5f";
       split_ratio                  = 0.50;
