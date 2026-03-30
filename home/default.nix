@@ -27,37 +27,42 @@
   # are omitted here — their modules handle installation.
   home.packages = with pkgs; [
     # Nix tools
-    nvd          # Nix Version Diff - shows what changed between rebuilds
+    nvd            # Nix Version Diff - shows what changed between rebuilds
 
     # CLI tools
-    autojump     # jump to directories by 'j'
-    dos2unix     # convert files from DOS to UNIX format
-    fd           # find files
-    ffmpeg       # video processing
-    fswatch      # watch file system
-    htop         # interactive process viewer
-    jq           # command-line JSON processor
-    lazygit      # git repository viewer
-    ncdu         # ncurses disk usage analyzer
-    netcat       # network utility
-    nmap         # network scanner
-    gcc          # C compiler
-    gnumake      # make utility
-    cmake        # cross-platform build system generator
-    pre-commit   # pre-commit hooks
-    pv           # pipe viewer
-    ripgrep      # command-line search tool
-    tree         # directory tree viewer
-    watch        # watch files
-    wget         # download files
+    autojump       # jump to directories by 'j'
+    dos2unix       # convert files from DOS to UNIX format
+    fd             # find files
+    ffmpeg         # video processing
+    fswatch        # watch file system
+    htop           # interactive process viewer
+    jq             # command-line JSON processor
+    lazygit        # git repository viewer
+    ncdu           # ncurses disk usage analyzer
+    netcat         # network utility
+    nmap           # network scanner
+    gcc            # C compiler
+    gnumake        # make utility
+    cmake          # cross-platform build system generator
+    pre-commit     # pre-commit hooks
+    pv             # pipe viewer
+    ripgrep        # command-line search tool
+    tree           # directory tree viewer
+    watch          # watch files
+    wget           # download files
+    lsd            # ls replacement
+    bat            # cat replacement
+    nnn            # cli file explorer
 
     # apps
-    discord      # chat
-    keepassxc    # password manager
+    discord        # chat
+    keepassxc      # password manager
 
     # dev tools
-    antigravity  # AI text editor
-    uv           # python virtual environment manager
+    antigravity    # AI text editor
+    uv             # python virtual environment manager
+    docker         # container
+    docker-compose # container compose
   ];
 
   # Only needed on non-NixOS Linux to enable desktop file symlinking, session
