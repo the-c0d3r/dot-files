@@ -40,5 +40,6 @@
     tailscale         # SDN / VPN
     slack             # chat
     mos               # smooth scroll + reverse direction
+    shortcat          # shortcut everything
   ];
 }
