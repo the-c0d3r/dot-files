@@ -62,9 +62,15 @@
     };
   };
 
+  hardware = {
+    graphics.enable = true;
+    nvidia.open = false;  # allow nonfree nvidia driver
+  };
+
   services = {
     # Enable the X11 windowing system.
     xserver = {
+      videoDrivers = [ "nvidia" ];
       enable = true;
       xkb = {
         layout = "us";
