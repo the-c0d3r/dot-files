@@ -15,13 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     determinate = {
-      # Determinate Systems Nix installer and settings manager
       url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-system-graphics = {
-      # GPU/graphics support for non-NixOS Linux systems
-      url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -110,32 +104,5 @@
       # macOS system configs
       darwinConfigurations."mac-arm"   = mkDarwin "aarch64-darwin";
       darwinConfigurations."mac-intel" = mkDarwin "x86_64-darwin";
-
-      # Dev shell for applying nix-darwin configs (macOS only)
-      devShells = let
-        mkDevShell = system: let
-          pkgs = import nixpkgs { inherit system; };
-          darwinConfig = if system == "aarch64-darwin" then "mac-arm" else "mac-intel";
-        in {
-          default = pkgs.mkShellNoCC {
-            packages = with pkgs; [
-              (writeShellApplication {
-                name = "apply-nix-darwin-configuration";
-                runtimeInputs = [ inputs.darwin.packages.${system}.darwin-rebuild ];
-                text = ''
-                  echo "> Applying nix-darwin configuration..."
-                  echo "> Running darwin-rebuild switch as root..."
-                  sudo darwin-rebuild switch --flake ".#${darwinConfig}"
-                  echo "> darwin-rebuild switch was successful"
-                  echo "> macOS config was successfully applied"
-                '';
-              })
-            ];
-          };
-        };
-      in {
-        "x86_64-darwin"  = mkDevShell "x86_64-darwin";
-        "aarch64-darwin" = mkDevShell "aarch64-darwin";
-      };
     };
 }
