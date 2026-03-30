@@ -77,7 +77,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./home/darwin.nix;
-            home-manager.extraSpecialArgs = { inherit system username; };
+            home-manager.extraSpecialArgs = { inherit system username inputs; };
           }
         ];
         specialArgs = { inherit self username inputs; };

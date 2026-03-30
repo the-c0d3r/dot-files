@@ -61,7 +61,6 @@
 
     initContent = ''
       # === Extra files to be sourced
-      # file_source ~/.secrets
 
       function wsyncd() {
           usage="Usage: wsyncd dirname sshpath"

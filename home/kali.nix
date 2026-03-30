@@ -14,7 +14,6 @@
     onesixtyone
     smbmap
     net-snmp        # provides snmpwalk, snmpget, etc.
-    nmap            # (also in default.nix, deduped by nix)
 
     # Web
     feroxbuster
@@ -31,9 +30,5 @@
     # Scripting
     python3
     python3Packages.pip
-
-    # Commented out — not in nixpkgs:
-    # oscanner
-    # tnscmd10g
   ];
 }

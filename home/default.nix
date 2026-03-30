@@ -9,7 +9,7 @@
 #   Generic Linux→ home/linux.nix imports home/linux-common.nix (WM + shared Linux packages)
 #   Kali         → home/kali.nix adds pentesting tools on top
 
-{ config, pkgs, lib, system, username, isNixOS ? false, ... }:
+{ config, pkgs, lib, username, isNixOS ? false, ... }:
 
 {
   imports = [

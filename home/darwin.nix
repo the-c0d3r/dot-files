@@ -10,9 +10,6 @@
 {
   imports = [ ./default.nix ];
 
-  home.homeDirectory = "/Users/${username}";
-  home.stateVersion = "23.11";
-
   # macOS-specific dotfiles (WM, hotkeys, keyboard remapping)
   home.file = {
     ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
