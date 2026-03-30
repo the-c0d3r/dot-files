@@ -25,8 +25,9 @@
     ];
     shellAliases = {
       # system aliases
-      l = "ls -lah --color=auto";
-      ll = "ls -l";
+      l = "lsd -la";
+      ll = "lsd -l";
+      cat = "bat -p";
       ip = "ip --color=auto";
 
       # program aliases
