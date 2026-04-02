@@ -60,7 +60,7 @@
       window_logo_alpha = "0.5";
       hide_window_decorations = "no";
       background_opacity = "0.7";
-      confirm_os_window_close = false;
+      confirm_os_window_close = 0;
 
       # Tab Bar
       tab_bar_style = "fade";
