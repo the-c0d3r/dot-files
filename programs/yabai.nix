@@ -1,9 +1,13 @@
 # programs/yabai.nix — Yabai tiling window manager (macOS only)
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
+let
+  pkgs-yabai = import inputs.nixpkgs-yabai { inherit (pkgs) system; config.allowUnfree = true; };
+in
 {
   services.yabai = {
+    package = pkgs-yabai.yabai;
     enable = true;
     enableScriptingAddition = true;
     extraConfig = ''
