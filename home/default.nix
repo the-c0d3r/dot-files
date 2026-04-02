@@ -56,6 +56,7 @@
 
     # apps
     discord        # chat
+    telegram-desktop
     keepassxc      # password manager
 
     # dev tools
