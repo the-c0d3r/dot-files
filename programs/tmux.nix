@@ -91,6 +91,9 @@
       bind -r C-l next-window     # select next window
       bind Tab last-window        # move to last active window
 
+      # Send prefix to inner tmux session (nested tmux)
+      bind-key C-a send-prefix
+
       # copy mode
       bind Enter copy-mode                                # enter copy mode
       bind -T copy-mode-vi v send -X begin-selection      # start selection
