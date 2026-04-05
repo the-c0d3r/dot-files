@@ -36,6 +36,9 @@
 
   # Reduce service stop timeout (90s -> 10s)
   systemd.settings.Manager.DefaultTimeoutStopSec = "10s";
+  # Also applies to user manager (the "User Manager for UID 1000" on shutdown)
+  systemd.user.extraConfig = "DefaultTimeoutStopSec=10s";
+  # VSCodium and other electron processes will take too long to stop
 
   networking = {
     hostName = "codelab-nix";
