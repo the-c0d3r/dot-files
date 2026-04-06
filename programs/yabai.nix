@@ -49,6 +49,9 @@ in
 
       # Laptop monitor (index 2)
       yabai -m rule --add app="^Slack$" display=2 manage=on opacity=0.95
+
+      # apply rule for existing windows
+      yabai -m rule --apply
     '';
 
     config = {
