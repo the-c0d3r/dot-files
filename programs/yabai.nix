@@ -42,9 +42,9 @@ in
       yabai -m rule --add app="^Docker" manage=off
 
       # External monitor (index 1): fullscreen targets
-      yabai -m rule --add app="^Obsidian$" display=1 manage=on opacity=0.85
+      yabai -m rule --add app="^Obsidian$" display=1 manage=on
       yabai -m rule --add app="^Zen$" display=1 manage=on native-fullscreen=on
-      yabai -m rule --add app="^kitty$" display=1 manage=on native-fullscreen=on
+      yabai -m rule --add app="^kitty$" display=1 manage=on native-fullscreen=on opacity=0.85
       yabai -m rule --add app="^VSCodium$" display=1 manage=on native-fullscreen=on
 
       # Laptop monitor (index 2)
@@ -64,16 +64,16 @@ in
       window_animation_duration    = 0;
       window_animation_easing      = "ease_out_circ";
       window_opacity_duration      = 0.0;
-      active_window_opacity        = 0.95;
-      normal_window_opacity        = 0.8;
+      active_window_opacity        = 0.99;
+      normal_window_opacity        = 0.9;
       window_opacity               = "on";
       insert_feedback_color        = "0xffd75f5f";
       split_ratio                  = 0.50;
       split_type                   = "auto";
       auto_balance                 = "off";
-      top_padding                  = 10;
+      top_padding                  = 5;
       bottom_padding               = 5;
-      left_padding                 = 10;
+      left_padding                 = 35;
       right_padding                = 10;
       window_gap                   = 15;
       layout                       = "bsp";
