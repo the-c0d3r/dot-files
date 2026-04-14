@@ -7,6 +7,7 @@ My dot-files repository which uses **Nix** (via Home Manager and nix-darwin) for
 dot-files/
 ├── flake.nix              # Main flake defining all configurations
 ├── apply.sh               # Automatic installation script
+├── Vagrantfile            # Rocky Linux 9 VM for testing server config
 ├── home/                  # Home-manager configurations
 │   ├── default.nix        # Shared config for all platforms
 │   ├── darwin.nix         # macOS-specific config
@@ -20,10 +21,12 @@ dot-files/
 │   ├── git.nix            # Git configuration
 │   ├── i3.nix             # i3 window manager (Linux)
 │   ├── kitty.nix          # Terminal emulator
-│   ├── obsidian.nix       # Note-taking app
+│   ├── neovim.nix         # Neovim configuration
+│   ├── obsidian.nix       # Note-taking app (runtime X11/Wayland detection)
 │   ├── starship.nix       # Shell prompt
 │   ├── syncthing.nix      # File synchronization (Linux only)
 │   ├── tmux.nix           # Terminal multiplexer
+│   ├── vicinae.nix        # App launcher + systemd service
 │   ├── vscode.nix         # VSCodium with extensions
 │   └── zsh.nix            # Shell configuration
 ├── fonts/                 # Shared font configuration
@@ -44,11 +47,16 @@ curl -L https://raw.githubusercontent.com/the-c0d3r/dot-files/master/apply.sh | 
 Alternatively, if you've already cloned the repo:
 
 ```bash
-./apply.sh
+./apply.sh                  # auto-detects OS and profile
+./apply.sh --server         # server mode (CLI tools only, no GUI)
+./apply.sh --vm             # build and launch NixOS QEMU test VM
 ```
 
 > [!IMPORTANT]
 > The script automatically generates `vars.nix` with your username before running with sudo. This file is gitignored but must be present for the configuration to build.
+
+> [!NOTE]
+> Supported platforms: x86_64 Linux, x86_64 macOS, Apple Silicon macOS. aarch64 Linux is not supported.
 
 ## Uninstallation
 
@@ -103,10 +111,16 @@ sudo darwin-rebuild switch --flake .#mac-arm
 # Profiles
 
 ## `linux` - Standalone Linux (home-manager only)
-- Terminal tools + i3 window manager environment
+- Terminal tools + desktop environment
+- Vicinae app launcher, Syncthing, Zen Browser, Signal, TickTick
+- Vagrant + VirtualBox
 - Fonts (Nerd Fonts + CartographCF)
-- Zen Browser
 - Suitable for: Arch, Ubuntu, Fedora, etc.
+
+## `server` - Headless Linux (home-manager only)
+- CLI tools only: Neovim, Tmux, Zsh, Git, Atuin, Starship
+- No GUI packages or desktop environment
+- Suitable for layering on top of any existing Linux server
 
 ## `kali` - Kali Linux
 - Builds on `linux` profile
@@ -114,8 +128,8 @@ sudo darwin-rebuild switch --flake .#mac-arm
 - Python environment for security scripts
 
 ## `codelab-nix` - NixOS
-- Full system configuration
-- All Linux packages + i3 WM
+- Full NixOS system configuration (KDE Plasma 6, X11, NVIDIA)
+- VirtualBox at system level (kernel modules via `virtualisation.virtualbox.host`)
 - System-level services and settings
 - Home-manager integrated
 
@@ -127,6 +141,23 @@ sudo darwin-rebuild switch --flake .#mac-arm
 
 > [!WARNING]
 > Applying the macOS configuration **WILL** modify your system settings. This includes Dock arrangement, Finder preferences, keyboard remappings (Caps Lock -> Escape), and trackpad settings. Review [hosts/darwin/configuration.nix](hosts/darwin/configuration.nix) before applying.
+
+# Testing
+
+## NixOS VM (QEMU)
+Build and launch a QEMU VM with your full NixOS config applied:
+```bash
+./apply.sh --vm
+```
+Login with your username, password: `test`
+
+## Server Config (Vagrant + Rocky Linux 9)
+Test the `--server` profile on a Rocky Linux VM:
+```bash
+vagrant up        # provision and apply --server
+vagrant provision # re-run apply.sh after changes
+vagrant ssh       # SSH in to test manually
+```
 
 # Programs & Configs
 
@@ -148,9 +179,10 @@ sudo darwin-rebuild switch --flake .#mac-arm
 ## Linux Only
 - **i3**: Tiling window manager
 - **Polybar**: Status bar
-- **Vicinae**: Application launcher (rofi replacement)
+- **Vicinae**: Application launcher with systemd daemon (rofi replacement)
 - **Syncthing**: File synchronization service
 - **Zen Browser**: Privacy-focused browser
+- **Vagrant** + **VirtualBox**: Virtualisation (VirtualBox via kernel module on NixOS)
 - **Fonts**: Nerd Fonts + CartographCF (via home-manager)
 
 ## macOS Only
