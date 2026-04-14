@@ -10,7 +10,9 @@ die()  { echo -e "${RED}Error:${NC} $*"; exit 1; }
 info "Applying Dotfiles Configuration..."
 
 SERVER_MODE=false
+VM_MODE=false
 [ "${1:-}" = "--server" ] && SERVER_MODE=true
+[ "${1:-}" = "--vm" ]     && VM_MODE=true
 
 export USER="${USER:-$(whoami)}"
 OS="$(uname -s)"
@@ -45,6 +47,15 @@ fi
 ACTUAL_USER="${SUDO_USER:-$USER}"
 info "Generating vars.nix for user: $ACTUAL_USER"
 echo "{ username = \"$ACTUAL_USER\"; }" > vars.nix
+
+# --- VM mode ---
+if [ "$VM_MODE" = "true" ]; then
+    [ "$OS" != "Linux" ] && die "--vm is only supported on Linux"
+    info "Building VM..."
+    nix build .#nixosConfigurations.vm.config.system.build.vm
+    ok "VM built. Launching..."
+    exec ./result/bin/run-*-vm
+fi
 
 # --- Detect target ---
 NIXOS=false
