@@ -107,9 +107,11 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "vboxusers" ];
     shell = pkgs.zsh;
   };
+
+  virtualisation.virtualbox.host.enable = true;
 
   programs.zsh.enable = true;
 
