@@ -58,9 +58,9 @@
       };
 
       # mkNixos: full NixOS system config with home-manager integrated as a module
-      # Usage: mkNixos "x86_64-linux"
+      # Usage: mkNixos "x86_64-linux" []
       # Home config: home/default.nix + home/linux.nix
-      mkNixos = system: nixpkgs.lib.nixosSystem {
+      mkNixos = system: extraModules: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs username; };
         modules = [
@@ -73,7 +73,7 @@
             home-manager.users.${username} = { imports = [ ./home ./home/linux.nix ]; };
             home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; isServer = false; };
           }
-        ];
+        ] ++ extraModules;
       };
 
       # mkDarwin: nix-darwin system config with home-manager integrated
@@ -115,7 +115,21 @@
       homeConfigurations."server" = mkServer system;
 
       # NixOS system configs — hostname must match nixosConfigurations key
-      nixosConfigurations."codelab-nix" = mkNixos "x86_64-linux";
+      nixosConfigurations."codelab-nix" = mkNixos "x86_64-linux" [];
+
+      # QEMU VM for testing dotfiles — run with:
+      #   nix build .#nixosConfigurations.vm.config.system.build.vm && ./result/bin/run-nixos-vm
+      nixosConfigurations."vm" = mkNixos "x86_64-linux" [
+        {
+          virtualisation.vmVariant = {
+            virtualisation.memorySize = 4096;
+            virtualisation.cores = 3;
+            virtualisation.graphics = true;
+          };
+          # Simple password for VM login — not for production use
+          users.users.${username}.initialPassword = "test";
+        }
+      ];
 
       # macOS system configs
       darwinConfigurations."mac-arm"   = mkDarwin "aarch64-darwin";
