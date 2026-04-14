@@ -17,7 +17,7 @@
   ];
 
   home.username = username;
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else if username == "root" then "/root" else "/home/${username}";
 
   # Do not change this value — it pins home-manager behaviour, not the NixOS version.
   home.stateVersion = "23.11";
