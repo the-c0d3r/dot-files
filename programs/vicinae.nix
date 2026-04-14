@@ -28,7 +28,6 @@
     };
     Service = {
       ExecStart = "${pkgs.vicinae}/bin/vicinae";
-      Environment = [ "USE_LAYER_SHELL=1" ];
       Restart = "on-failure";
     };
     Install = {
