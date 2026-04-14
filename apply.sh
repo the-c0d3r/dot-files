@@ -11,6 +11,14 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}==>${NC} Applying Dotfiles Configuration..."
 
+# Parse flags
+SERVER_MODE=false
+for arg in "$@"; do
+    case "$arg" in
+        --server) SERVER_MODE=true ;;
+    esac
+done
+
 # Set USER if not set
 export USER="${USER:-$(whoami)}"
 OS="$(uname -s)"
@@ -63,7 +71,13 @@ echo "{ username = \"$ACTUAL_USER\"; }" > vars.nix
 
 # Determine OS variant and flake attribute
 NIXOS=false
-if [ "$OS" == "Darwin" ]; then
+if [ "$SERVER_MODE" == "true" ]; then
+    if [ "$OS" != "Linux" ]; then
+        echo -e "${RED}Error:${NC} --server mode is only supported on Linux"
+        exit 1
+    fi
+    FLAKE_ATTR="server"
+elif [ "$OS" == "Darwin" ]; then
     [[ "$ARCH" == "arm64" ]] && FLAKE_ATTR="mac-arm" || FLAKE_ATTR="mac-intel"
 elif [ "$OS" == "Linux" ]; then
     if grep -q "ID=nixos" /etc/os-release 2>/dev/null; then
