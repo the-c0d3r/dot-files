@@ -38,8 +38,10 @@
         "terminal.integrated.stickyScroll.enabled" = false;
         "editor.wordWrap" = "on";
         "editor.stickyScroll.enabled" = false;
+        "editor.fontFamily" = "JetBrainsMono Nerd Font";
         "editor.fontSize" = 13;
         "editor.minimap.autohide" = "mouseover";      # hide minimap until hovered
+        "editor.accessibilitySupport" = "off";
 
         "diffEditor.ignoreTrimWhitespace" = false;    # show whitespace diffs
         "explorer.confirmDragAndDrop" = false;        # no confirmation on drag-drop

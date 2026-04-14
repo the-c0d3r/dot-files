@@ -1,18 +1,21 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, isServer ? false, ... }:
 
 {
   imports = [
+    # CLI programs — always included
     ./atuin.nix
     ./git.nix
+    ./neovim.nix
+    ./starship.nix
+    ./tmux.nix
+    ./zsh.nix
+  ] ++ lib.optionals (!isServer) [
+    # GUI / desktop programs — excluded in server mode
     ./i3.nix
     ./kitty.nix
-    ./neovim.nix
     ./obsidian.nix
-    ./starship.nix
     ./syncthing.nix
-    ./tmux.nix
     ./vicinae.nix
     ./vscode.nix
-    ./zsh.nix
   ];
 }

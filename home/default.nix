@@ -9,7 +9,7 @@
 #   Generic Linux→ home/linux.nix imports home/linux-common.nix (WM + shared Linux packages)
 #   Kali         → home/kali.nix adds pentesting tools on top
 
-{ config, pkgs, lib, username, isNixOS ? false, ... }:
+{ config, pkgs, lib, username, isNixOS ? false, isServer ? false, ... }:
 
 {
   imports = [
@@ -33,17 +33,10 @@
     autojump       # jump to directories by 'j'
     dos2unix       # convert files from DOS to UNIX format
     fd             # find files
-    ffmpeg         # video processing
-    fswatch        # watch file system
     htop           # interactive process viewer
     jq             # command-line JSON processor
     lazygit        # git repository viewer
     ncdu           # ncurses disk usage analyzer
-    netcat         # network utility
-    nmap           # network scanner
-    gcc            # C compiler
-    gnumake        # make utility
-    cmake          # cross-platform build system generator
     pre-commit     # pre-commit hooks
     pv             # pipe viewer
     ripgrep        # command-line search tool
@@ -54,16 +47,30 @@
     bat            # cat replacement
     nnn            # cli file explorer
 
-    # apps
-    discord        # chat
-    telegram-desktop
-    keepassxc      # password manager
-
     # dev tools
-    antigravity    # AI text editor
     uv             # python virtual environment manager
     docker         # container
     docker-compose # container compose
+  ] ++ lib.optionals (!isServer) [
+    # CIS L2 violations — prohibited on hardened servers
+    # Network recon / raw socket tools (CIS L2: "remove network scanning tools")
+    nmap           # network scanner
+    netcat         # raw network utility / exfil vector
+    # Compilers / build tools (CIS L2: "remove development tools from production")
+    # NOTE: installed via Nix these are invisible to dpkg/rpm scans — extra risk
+    gcc
+    gnumake
+    cmake
+
+    # Unnecessary on servers (no violation, just bloat)
+    ffmpeg
+    fswatch
+
+    # Desktop apps — no GUI on servers
+    discord
+    telegram-desktop
+    keepassxc
+    antigravity
   ];
 
   # Only needed on non-NixOS Linux to enable desktop file symlinking, session

@@ -42,7 +42,18 @@
         modules = [
           ./home  # shared base config (home/default.nix)
         ] ++ extraModules;
-        extraSpecialArgs = { inherit system username inputs; isNixOS = false; };
+        extraSpecialArgs = { inherit system username inputs; isNixOS = false; isServer = false; };
+      };
+
+      # mkServer: same as mkHome but passes isServer = true to suppress all GUI packages/programs.
+      # Usage: mkServer "x86_64-linux"
+      mkServer = system: home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        modules = [ ./home ];
+        extraSpecialArgs = { inherit system username inputs; isNixOS = false; isServer = true; };
       };
 
       # mkNixos: full NixOS system config with home-manager integrated as a module
@@ -59,7 +70,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = { imports = [ ./home ./home/linux.nix ]; };
-            home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; };
+            home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; isServer = false; };
           }
         ];
       };
@@ -78,7 +89,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./home/darwin.nix;
-            home-manager.extraSpecialArgs = { inherit system username inputs; };
+            home-manager.extraSpecialArgs = { inherit system username inputs; isServer = false; };
           }
         ];
         specialArgs = { inherit self username inputs; };
@@ -98,8 +109,9 @@
       };
 
       # Standalone home-manager configs (non-NixOS Linux)
-      homeConfigurations."linux" = mkHome "x86_64-linux" [ ./home/linux.nix ];
-      homeConfigurations."kali"  = mkHome "x86_64-linux" [ ./home/linux.nix ./home/kali.nix ];
+      homeConfigurations."linux"  = mkHome "x86_64-linux" [ ./home/linux.nix ];
+      homeConfigurations."kali"   = mkHome "x86_64-linux" [ ./home/linux.nix ./home/kali.nix ];
+      homeConfigurations."server" = mkServer "x86_64-linux";
 
       # NixOS system configs — hostname must match nixosConfigurations key
       nixosConfigurations."codelab-nix" = mkNixos "x86_64-linux";
