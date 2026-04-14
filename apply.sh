@@ -18,10 +18,14 @@ export USER="${USER:-$(whoami)}"
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
+# Supported: x86_64 (Linux/macOS), aarch64 (macOS/Apple Silicon only)
+[ "$OS" = "Linux" ] && [ "$ARCH" = "aarch64" ] && die "aarch64 Linux is not supported"
+[ "$OS" != "Linux" ] && [ "$OS" != "Darwin" ]  && die "Unsupported OS: $OS"
+
 # --- Nix ---
 if ! command -v nix &>/dev/null; then
     info "Nix not found. Installing..."
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
     . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' 2>/dev/null || \
     . "$HOME/.nix-profile/etc/profile.d/nix.sh" 2>/dev/null || true
 fi
