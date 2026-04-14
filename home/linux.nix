@@ -7,7 +7,7 @@
 #
 # Note: allowUnfree is handled at the flake level, not here
 
-{ config, pkgs, inputs, system, ... }:
+{ config, pkgs, lib, inputs, system, isNixOS ? false, ... }:
 
 let
   sharedFonts = import ../fonts { inherit pkgs; };
@@ -24,6 +24,12 @@ in
 
     # communication tools
     signal-desktop
+
+    # virtualisation
+    vagrant
+  ] ++ lib.optionals (!isNixOS) [
+    # on NixOS, VirtualBox is provided by virtualisation.virtualbox.host in configuration.nix
+    virtualbox
   ] ++ sharedFonts;
 
   # Enable fontconfig to ensure fonts are properly recognized
