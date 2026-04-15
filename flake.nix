@@ -46,14 +46,14 @@
       };
 
       # mkServer: same as mkHome but passes isServer = true to suppress all GUI packages/programs.
-      # Usage: mkServer "x86_64-linux"
-      mkServer = system: home-manager.lib.homeManagerConfiguration {
+      # Usage: mkServer "x86_64-linux" true/false  (isNixOS)
+      mkServer = system: isNixOS: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
         modules = [ ./home ];
-        extraSpecialArgs = { inherit system username inputs; isNixOS = false; isServer = true; };
+        extraSpecialArgs = { inherit system username inputs isNixOS; isServer = true; };
       };
 
       # mkNixos: full NixOS system config with home-manager integrated as a module
@@ -111,7 +111,8 @@
       # Standalone home-manager configs (x86_64 Linux only — aarch64 Linux unsupported)
       homeConfigurations."linux"  = mkHome "x86_64-linux" [ ./home/linux.nix ];
       homeConfigurations."kali"   = mkHome "x86_64-linux" [ ./home/linux.nix ./home/kali.nix ];
-      homeConfigurations."server" = mkServer "x86_64-linux";
+      homeConfigurations."server"       = mkServer "x86_64-linux" false;
+      homeConfigurations."server-nixos" = mkServer "x86_64-linux" true;
 
       # NixOS system configs — hostname must match nixosConfigurations key
       nixosConfigurations."codelab-nix" = mkNixos "x86_64-linux" [];
@@ -126,7 +127,7 @@
             virtualisation.graphics = true;
           };
           # Simple password for VM login — not for production use
-          users.users.${username}.initialPassword = "test";
+          users.users.${username}.initialPassword = "test";  # pragma: allowlist secret
         }
       ];
 

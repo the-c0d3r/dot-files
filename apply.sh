@@ -65,7 +65,11 @@ fi
 NIXOS=false
 if [ "$SERVER_MODE" = "true" ]; then
     [ "$OS" != "Linux" ] && die "--server is only supported on Linux"
-    FLAKE_ATTR="server"
+    if grep -q "ID=nixos" /etc/os-release 2>/dev/null; then
+        FLAKE_ATTR="server-nixos"
+    else
+        FLAKE_ATTR="server"
+    fi
 elif [ "$OS" = "Darwin" ]; then
     [ "$ARCH" = "arm64" ] && FLAKE_ATTR="mac-arm" || FLAKE_ATTR="mac-intel"
 elif [ "$OS" = "Linux" ]; then
