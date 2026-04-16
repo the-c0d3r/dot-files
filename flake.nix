@@ -82,6 +82,20 @@
         inherit system;
         modules = [
           determinate.darwinModules.default
+          ({ ... }: {
+            determinate-nix = {
+              customSettings = {
+                experimental-features = "nix-command flakes";
+                extra-experimental-features = "parallel-eval external-builders";
+                external-builders = ''[{"systems":["aarch64-linux","x86_64-linux"],"program":"/usr/local/bin/determinate-nixd","args":["builder"]}]'';
+                lazy-trees = true;
+                eval-cores = 0;
+                warn-dirty = false;
+                min-free = 10737418240;
+                max-free = 32212254720;
+              };
+            };
+          })
           ./hosts/darwin/configuration.nix
           home-manager.darwinModules.home-manager
           {
@@ -95,19 +109,6 @@
         specialArgs = { inherit self username inputs; };
       };
     in {
-      # Determinate Systems Nix daemon settings (applies on all platforms)
-      determinate = {
-        customSettings = {
-          experimental-features = "nix-command flakes";
-          extra-experimental-features = "parallel-eval";
-          lazy-trees = true;
-          eval-cores = 0; # use all cores for parallel evaluation
-          warn-dirty = false;
-          min-free = 10737418240;  # 10GB - trigger GC during builds when below this
-          max-free = 32212254720;  # 30GB - stop GC when this much is free
-        };
-      };
-
       # Standalone home-manager configs (x86_64 Linux only — aarch64 Linux unsupported)
       homeConfigurations."linux"  = mkHome "x86_64-linux" [ ./home/linux.nix ];
       homeConfigurations."kali"   = mkHome "x86_64-linux" [ ./home/linux.nix ./home/kali.nix ];
