@@ -20,7 +20,6 @@ dot-files/
 │       ├── fonts.nix      # Nerd fonts
 │       ├── atuin.nix      # Shell history sync
 │       ├── git.nix        # Git configuration
-│       ├── i3.nix         # i3 window manager (Linux)
 │       ├── kitty.nix      # Terminal emulator
 │       ├── neovim.nix     # Neovim configuration
 │       ├── obsidian.nix   # Note-taking app
@@ -36,7 +35,10 @@ dot-files/
 │   │   ├── skhd.nix       # Hotkey daemon (system service)
 │   │   └── jankyborders.nix # Window border highlights (system service)
 │   └── nixos/             # NixOS system configuration
-└── files/                 # Dotfiles and configuration files
+├── wallpaper/             # Wallpaper images
+└── files/                 # Dotfiles managed via home.file
+    ├── karabiner/         # Karabiner-Elements keyboard config
+    └── nvim/              # Neovim lua config
 ```
 
 # Installation
@@ -184,8 +186,6 @@ vagrant ssh       # SSH in to test manually
 - **Development Tools**: GCC, Make, CMake, pre-commit, uv (Python env manager), antigravity
 
 ## Linux Only
-- **i3**: Tiling window manager
-- **Polybar**: Status bar
 - **Vicinae**: Application launcher with systemd daemon (rofi replacement)
 - **Syncthing**: File synchronization service
 - **Zen Browser**: Privacy-focused browser
@@ -193,7 +193,7 @@ vagrant ssh       # SSH in to test manually
 - **LibreOffice**: Office suite
 - **VLC**: Media player
 - **Node.js**: JavaScript runtime (nodejs_24)
-- **Fonts**: Nerd Fonts + CartographCF (via home-manager)
+- **Fonts**: Nerd Fonts (via home-manager)
 
 ## macOS Only
 - **Yabai**: Tiling window manager (system service)
