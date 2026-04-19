@@ -26,6 +26,7 @@
 
     libreoffice  # office
     vlc          # media player
+    ticktick     # task manager
   ] ++ lib.optionals (!isNixOS) [
     # on NixOS, VirtualBox is provided by virtualisation.virtualbox.host in configuration.nix
     virtualbox

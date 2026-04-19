@@ -19,7 +19,6 @@
 
     # Desktop apps
     keepassxc         # password manager
-    ticktick          # task manager
 
     # communication tools
     discord
