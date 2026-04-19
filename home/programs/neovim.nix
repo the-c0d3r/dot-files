@@ -7,5 +7,5 @@
     pkgs.neovim
   ];
 
-  home.file.".config/nvim".source = ../files/nvim;
+  home.file.".config/nvim".source = ../../files/nvim;
 }

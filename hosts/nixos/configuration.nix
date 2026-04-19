@@ -115,8 +115,6 @@
 
   programs.zsh.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
-
   # System-level packages only (user packages managed by home-manager)
   environment.systemPackages = with pkgs; [
     git

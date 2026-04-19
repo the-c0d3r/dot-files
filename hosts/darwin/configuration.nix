@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../../home/programs/yabai.nix
-    ../../home/programs/skhd.nix
-    ../../home/programs/jankyborders.nix
+    ./yabai.nix
+    ./skhd.nix
+    ./jankyborders.nix
   ];
 
   nix = {

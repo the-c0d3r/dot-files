@@ -6,7 +6,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # override for yabai version 7.1.15
-    nixpkgs-yabai.url = "github:nixos/nixpkgs/e6f23dc08d3624daab7094b701aa3954923c6bbb";  
+    nixpkgs-yabai.url = "github:nixos/nixpkgs/e6f23dc08d3624daab7094b701aa3954923c6bbb";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,31 +33,20 @@
       vars = import ./vars.nix;
       username = vars.username;
 
-      # mkHome: standalone home-manager for non-NixOS Linux systems (e.g. Kali)
-      # Usage: mkHome "x86_64-linux" [ ./home/linux.nix ]
-      mkHome = system: module: home-manager.lib.homeManagerConfiguration {
+      # mkHome: standalone home-manager config (non-system-managed).
+      # isNixOS controls whether genericLinux targets are enabled.
+      # Usage: mkHome "x86_64-linux" ./home/linux.nix false
+      mkHome = system: module: isNixOS: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
         modules = [ module ];
-        extraSpecialArgs = { inherit system username inputs; isNixOS = false; };
-      };
-
-      # mkServer: same as mkHome but passes isServer = true to suppress all GUI packages/programs.
-      # Usage: mkServer "x86_64-linux" true/false  (isNixOS)
-      mkServer = system: isNixOS: home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        modules = [ ./home/server.nix ];
         extraSpecialArgs = { inherit system username inputs isNixOS; };
       };
 
-      # mkNixos: full NixOS system config with home-manager integrated as a module
+      # mkNixos: full NixOS system config with home-manager integrated as a module.
       # Usage: mkNixos "x86_64-linux" []
-      # Home config: home/default.nix + home/linux.nix
       mkNixos = system: extraModules: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs username; };
@@ -68,15 +57,14 @@
             nixpkgs.config.allowUnfree = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = { imports = [ ./home/linux.nix ]; };
+            home-manager.users.${username} = import ./home/linux.nix;
             home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; };
           }
         ] ++ extraModules;
       };
 
-      # mkDarwin: nix-darwin system config with home-manager integrated
+      # mkDarwin: nix-darwin system config with home-manager integrated.
       # Usage: mkDarwin "aarch64-darwin"
-      # Home config: home/darwin.nix (which imports home/default.nix)
       mkDarwin = system: darwin.lib.darwinSystem {
         inherit system;
         modules = [
@@ -109,10 +97,10 @@
       };
     in {
       # Standalone home-manager configs (x86_64 Linux only — aarch64 Linux unsupported)
-      homeConfigurations."linux"  = mkHome "x86_64-linux" ./home/linux.nix;
-      homeConfigurations."kali"   = mkHome "x86_64-linux" ./home/kali.nix;
-      homeConfigurations."server"       = mkServer "x86_64-linux" false;
-      homeConfigurations."server-nixos" = mkServer "x86_64-linux" true;
+      homeConfigurations."linux"        = mkHome "x86_64-linux" ./home/linux.nix  false;
+      homeConfigurations."kali"         = mkHome "x86_64-linux" ./home/kali.nix   false;
+      homeConfigurations."server"       = mkHome "x86_64-linux" ./home/server.nix false;
+      homeConfigurations."server-nixos" = mkHome "x86_64-linux" ./home/server.nix true;
 
       # NixOS system configs — hostname must match nixosConfigurations key
       nixosConfigurations."codelab-nix" = mkNixos "x86_64-linux" [];

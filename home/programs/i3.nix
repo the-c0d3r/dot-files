@@ -14,7 +14,7 @@
 
   # Dotfiles for i3 and polybar
   home.file = lib.mkIf pkgs.stdenv.isLinux {
-    ".config/i3/config".source = ../files/i3/config;
-    ".config/polybar".source   = ../files/polybar;
+    ".config/i3/config".source = ../../files/i3/config;
+    ".config/polybar".source   = ../../files/polybar;
   };
 }

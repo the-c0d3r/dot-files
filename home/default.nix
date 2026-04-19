@@ -1,15 +1,8 @@
 # home/default.nix — Shared home-manager base for all platforms
 #
 # Sets up the user environment: username, paths, session variables.
-# Does not include packages or program configs — those live in:
-#   home/programs/cli.nix     — CLI tools + program modules (all profiles)
-#   home/programs/desktop.nix — GUI tools + program modules (desktop only)
-#
-# Platform-specific additions:
-#   NixOS        → flake.nix also imports home/linux.nix
-#   macOS        → home/darwin.nix imports this file + programs/desktop.nix
-#   Generic Linux→ flake.nix imports home/linux.nix
-#   Kali         → home/kali.nix adds pentesting tools on top
+# Imported by every platform entry point (linux.nix, darwin.nix, server.nix, kali.nix).
+# Does not include packages or program configs — those live in home/programs/.
 
 { config, pkgs, lib, username, isNixOS ? false, ... }:
 

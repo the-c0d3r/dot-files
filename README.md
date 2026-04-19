@@ -9,27 +9,33 @@ dot-files/
 ├── apply.sh               # Automatic installation script
 ├── Vagrantfile            # Rocky Linux 9 VM for testing server config
 ├── home/                  # Home-manager configurations
-│   ├── default.nix        # Shared config for all platforms
-│   ├── darwin.nix         # macOS-specific config
-│   ├── linux.nix          # Linux-specific config
-│   └── kali.nix           # Kali Linux pentesting additions
+│   ├── default.nix        # Shared base for all platforms (session vars, stateVersion)
+│   ├── linux.nix          # Linux desktop entry point (imports default + programs/desktop)
+│   ├── darwin.nix         # macOS entry point (imports default + programs/desktop)
+│   ├── server.nix         # Server entry point (imports default + programs/cli)
+│   ├── kali.nix           # Kali entry point (imports linux + pentesting tools)
+│   └── programs/          # Program-specific configurations
+│       ├── cli.nix        # CLI programs + packages (server profile)
+│       ├── desktop.nix    # Desktop programs + packages (imports cli)
+│       ├── fonts.nix      # Nerd fonts
+│       ├── atuin.nix      # Shell history sync
+│       ├── git.nix        # Git configuration
+│       ├── i3.nix         # i3 window manager (Linux)
+│       ├── kitty.nix      # Terminal emulator
+│       ├── neovim.nix     # Neovim configuration
+│       ├── obsidian.nix   # Note-taking app
+│       ├── starship.nix   # Shell prompt
+│       ├── syncthing.nix  # File synchronization (Linux only)
+│       ├── tmux.nix       # Terminal multiplexer
+│       ├── vicinae.nix    # App launcher + systemd service
+│       ├── vscode.nix     # VSCodium with extensions
+│       └── zsh.nix        # Shell configuration
 ├── hosts/                 # System-level configurations
 │   ├── darwin/            # macOS system settings (nix-darwin)
+│   │   ├── yabai.nix      # Tiling window manager (system service)
+│   │   ├── skhd.nix       # Hotkey daemon (system service)
+│   │   └── jankyborders.nix # Window border highlights (system service)
 │   └── nixos/             # NixOS system configuration
-├── programs/              # Program-specific configurations
-│   ├── atuin.nix          # Shell history sync
-│   ├── git.nix            # Git configuration
-│   ├── i3.nix             # i3 window manager (Linux)
-│   ├── kitty.nix          # Terminal emulator
-│   ├── neovim.nix         # Neovim configuration
-│   ├── obsidian.nix       # Note-taking app (runtime X11/Wayland detection)
-│   ├── starship.nix       # Shell prompt
-│   ├── syncthing.nix      # File synchronization (Linux only)
-│   ├── tmux.nix           # Terminal multiplexer
-│   ├── vicinae.nix        # App launcher + systemd service
-│   ├── vscode.nix         # VSCodium with extensions
-│   └── zsh.nix            # Shell configuration
-├── fonts/                 # Shared font configuration
 └── files/                 # Dotfiles and configuration files
 ```
 
@@ -115,7 +121,7 @@ sudo darwin-rebuild switch --flake .#mac-arm
 - Vicinae app launcher, Syncthing, Zen Browser, Signal, TickTick
 - Vagrant + VirtualBox
 - LibreOffice, VLC, Node.js
-- Fonts (Nerd Fonts + CartographCF)
+- Fonts (Nerd Fonts)
 - Suitable for: Arch, Ubuntu, Fedora, etc.
 
 ## `server` - Headless Linux (home-manager only)
@@ -138,7 +144,7 @@ sudo darwin-rebuild switch --flake .#mac-arm
 - System settings (Dock, Finder, keyboard, trackpad)
 - Yabai + skhd for tiling window management
 - Homebrew integration
-- Fonts at system level
+- Fonts via home-manager
 
 > [!WARNING]
 > Applying the macOS configuration **WILL** modify your system settings. This includes Dock arrangement, Finder preferences, keyboard remappings (Caps Lock -> Escape), and trackpad settings. Review [hosts/darwin/configuration.nix](hosts/darwin/configuration.nix) before applying.
@@ -230,15 +236,10 @@ The following macOS defaults are declaratively managed via [hosts/darwin/configu
 
 ## Fonts
 
-All platforms include:
+All desktop platforms include (via `home/programs/fonts.nix`):
 - JetBrains Mono Nerd Font
 - Symbols Only Nerd Font
 - Fira Code Nerd Font
 - Inconsolata Nerd Font
 - Iosevka Nerd Font
 - Karla
-- CartographCF (custom fonts from `files/fonts/`)
-
-Fonts are installed:
-- **Linux/NixOS**: via home-manager (`home.packages`)
-- **macOS**: system-wide (`fonts.packages` in nix-darwin)

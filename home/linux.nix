@@ -1,11 +1,7 @@
-# home/linux.nix — Shared config for all Linux environments (NixOS + generic)
+# home/linux.nix — Linux desktop entry point (NixOS + generic Linux)
 #
-# Imported by:
-#   - homeConfigurations."linux" in flake.nix
-#   - homeConfigurations."kali" in flake.nix
-#   - nixosConfigurations (alongside home/default.nix)
-#
-# Note: allowUnfree is handled at the flake level, not here
+# Used by: homeConfigurations."linux", nixosConfigurations.*
+# kali.nix extends this with pentesting tools.
 
 { config, pkgs, lib, inputs, system, isNixOS ? false, ... }:
 
