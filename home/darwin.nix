@@ -24,19 +24,19 @@
 
   home.packages = with pkgs; [
     # GNU utils (macOS ships BSD variants)
-    coreutils         # gnu coreutils
-    gnutls            # gnu tls
-    gnused            # gnu sed
-    gnutar            # gnu tar
-    gnugrep           # gnu grep
-    iproute2mac       # ip command shim
+    coreutils          # gnu coreutils
+    gnused             # gnu sed
+    gnutar             # gnu tar
+    gnugrep            # gnu grep
+    iproute2mac        # ip command shim
 
     # GUI apps
-    raycast           # spotlight replacement
-    itsycal           # menubar calendar
-    tailscale         # SDN / VPN
-    slack             # chat
-    mos               # smooth scroll + reverse direction
-    shortcat          # shortcut everything
+    raycast            # spotlight replacement
+    itsycal            # menubar calendar
+    tailscale          # SDN / VPN
+    slack              # chat
+    mos                # smooth scroll + reverse direction
+    shortcat           # shortcut everything
+    karabiner-elements # keyboard shortcut editor
   ];
 }
