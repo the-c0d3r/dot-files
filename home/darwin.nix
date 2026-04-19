@@ -7,13 +7,26 @@
 
 { config, pkgs, username, system, ... }:
 
+let
+  cycleLayouts = pkgs.writeShellScript "cycle_layouts" ''
+    current_layout=$(yabai -m query --spaces --space | jq -r '.type')
+    case "$current_layout" in
+      bsp)   next_layout="stack" ;;
+      stack) next_layout="float" ;;
+      float) next_layout="bsp"   ;;
+      *)     next_layout="bsp"   ;;
+    esac
+    hs -c "hs.alert.show('Yabai Layout: $next_layout')"
+    yabai -m space --layout "$next_layout"
+  '';
+
+in
 {
   imports = [ ./default.nix ./programs/desktop.nix ];
 
-  # macOS-specific dotfiles (WM, hotkeys, keyboard remapping)
   home.file = {
-    ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
-    ".config/yabai/scripts".source            = ../files/yabai/scripts;
+    ".config/karabiner/karabiner.json".source        = ../files/karabiner/karabiner.json;
+    ".config/yabai/scripts/cycle_layouts.sh".source = cycleLayouts;
   };
 
   home.sessionVariables = {
