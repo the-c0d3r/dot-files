@@ -10,6 +10,11 @@
 { config, pkgs, lib, inputs, system, isNixOS ? false, ... }:
 
 {
+  imports = [
+    ./default.nix
+    ./programs/desktop.nix
+  ];
+
   home.packages = with pkgs; [
     # Linux utilities
     xclip     # clipboard tool

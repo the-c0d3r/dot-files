@@ -35,15 +35,12 @@
 
       # mkHome: standalone home-manager for non-NixOS Linux systems (e.g. Kali)
       # Usage: mkHome "x86_64-linux" [ ./home/linux.nix ]
-      mkHome = system: extraModules: home-manager.lib.homeManagerConfiguration {
+      mkHome = system: module: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
-        modules = [
-          ./home  # shared base config (home/default.nix)
-          ./home/programs/desktop.nix
-        ] ++ extraModules;
+        modules = [ module ];
         extraSpecialArgs = { inherit system username inputs; isNixOS = false; };
       };
 
@@ -54,7 +51,7 @@
           inherit system;
           config.allowUnfree = true;
         };
-        modules = [ ./home ./home/programs/cli.nix ];
+        modules = [ ./home/server.nix ];
         extraSpecialArgs = { inherit system username inputs isNixOS; };
       };
 
@@ -71,7 +68,7 @@
             nixpkgs.config.allowUnfree = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = { imports = [ ./home ./home/programs/desktop.nix ./home/linux.nix ]; };
+            home-manager.users.${username} = { imports = [ ./home/linux.nix ]; };
             home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; };
           }
         ] ++ extraModules;
@@ -112,8 +109,8 @@
       };
     in {
       # Standalone home-manager configs (x86_64 Linux only — aarch64 Linux unsupported)
-      homeConfigurations."linux"  = mkHome "x86_64-linux" [ ./home/linux.nix ];
-      homeConfigurations."kali"   = mkHome "x86_64-linux" [ ./home/linux.nix ./home/kali.nix ];
+      homeConfigurations."linux"  = mkHome "x86_64-linux" ./home/linux.nix;
+      homeConfigurations."kali"   = mkHome "x86_64-linux" ./home/kali.nix;
       homeConfigurations."server"       = mkServer "x86_64-linux" false;
       homeConfigurations."server-nixos" = mkServer "x86_64-linux" true;
 

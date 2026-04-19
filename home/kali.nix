@@ -7,6 +7,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./linux.nix ];
+
   home.packages = with pkgs; [
     # Network enumeration
     enum4linux
