@@ -5,7 +5,8 @@
   # All inputs pin to the same nixpkgs to avoid duplicate dependencies.
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-yabai.url = "github:nixos/nixpkgs/e6f23dc08d3624daab7094b701aa3954923c6bbb";
+    # override for yabai version 7.1.15
+    nixpkgs-yabai.url = "github:nixos/nixpkgs/e6f23dc08d3624daab7094b701aa3954923c6bbb";  
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
