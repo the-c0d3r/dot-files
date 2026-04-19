@@ -114,11 +114,12 @@ sudo darwin-rebuild switch --flake .#mac-arm
 - Terminal tools + desktop environment
 - Vicinae app launcher, Syncthing, Zen Browser, Signal, TickTick
 - Vagrant + VirtualBox
+- LibreOffice, VLC, Node.js
 - Fonts (Nerd Fonts + CartographCF)
 - Suitable for: Arch, Ubuntu, Fedora, etc.
 
 ## `server` - Headless Linux (home-manager only)
-- CLI tools only: Neovim, Tmux, Zsh, Git, Atuin, Starship
+- CLI tools only: Neovim, Tmux, Zsh, Atuin, Starship
 - No GUI packages or desktop environment
 - Suitable for layering on top of any existing Linux server
 
@@ -183,6 +184,9 @@ vagrant ssh       # SSH in to test manually
 - **Syncthing**: File synchronization service
 - **Zen Browser**: Privacy-focused browser
 - **Vagrant** + **VirtualBox**: Virtualisation (VirtualBox via kernel module on NixOS)
+- **LibreOffice**: Office suite
+- **VLC**: Media player
+- **Node.js**: JavaScript runtime (nodejs_24)
 - **Fonts**: Nerd Fonts + CartographCF (via home-manager)
 
 ## macOS Only
