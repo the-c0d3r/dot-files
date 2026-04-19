@@ -122,6 +122,9 @@
     git
     curl
     efibootmgr
+    nodejs_24
+    libreoffice
+    vlc
   ];
 
   # This value determines the NixOS release from which the default
