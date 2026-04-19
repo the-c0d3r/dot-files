@@ -27,6 +27,15 @@ in
 
     # virtualisation
     vagrant
+
+    # development
+    nodejs_24
+
+    # office
+    libreoffice
+
+    # multimedia
+    vlc
   ] ++ lib.optionals (!isNixOS) [
     # on NixOS, VirtualBox is provided by virtualisation.virtualbox.host in configuration.nix
     virtualbox
