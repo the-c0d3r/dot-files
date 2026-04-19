@@ -42,8 +42,9 @@
         };
         modules = [
           ./home  # shared base config (home/default.nix)
+          ./home/programs/desktop.nix
         ] ++ extraModules;
-        extraSpecialArgs = { inherit system username inputs; isNixOS = false; isServer = false; };
+        extraSpecialArgs = { inherit system username inputs; isNixOS = false; };
       };
 
       # mkServer: same as mkHome but passes isServer = true to suppress all GUI packages/programs.
@@ -53,8 +54,8 @@
           inherit system;
           config.allowUnfree = true;
         };
-        modules = [ ./home ];
-        extraSpecialArgs = { inherit system username inputs isNixOS; isServer = true; };
+        modules = [ ./home ./home/programs/cli.nix ];
+        extraSpecialArgs = { inherit system username inputs isNixOS; };
       };
 
       # mkNixos: full NixOS system config with home-manager integrated as a module
@@ -70,8 +71,8 @@
             nixpkgs.config.allowUnfree = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = { imports = [ ./home ./home/linux.nix ]; };
-            home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; isServer = false; };
+            home-manager.users.${username} = { imports = [ ./home ./home/programs/desktop.nix ./home/linux.nix ]; };
+            home-manager.extraSpecialArgs = { inherit system username inputs; isNixOS = true; };
           }
         ] ++ extraModules;
       };
@@ -104,7 +105,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./home/darwin.nix;
-            home-manager.extraSpecialArgs = { inherit system username inputs; isServer = false; };
+            home-manager.extraSpecialArgs = { inherit system username inputs; };
           }
         ];
         specialArgs = { inherit self username inputs; };

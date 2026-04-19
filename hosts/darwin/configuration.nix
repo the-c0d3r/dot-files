@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../../programs/yabai.nix
-    ../../programs/skhd.nix
-    ../../programs/jankyborders.nix
+    ../../home/programs/yabai.nix
+    ../../home/programs/skhd.nix
+    ../../home/programs/jankyborders.nix
   ];
 
   nix = {
@@ -112,5 +112,4 @@
     };
   };
 
-  fonts.packages = import ../../fonts { inherit pkgs; };
 }

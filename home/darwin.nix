@@ -8,7 +8,7 @@
 { config, pkgs, username, system, ... }:
 
 {
-  imports = [ ./default.nix ];
+  imports = [ ./default.nix ./programs/desktop.nix ];
 
   # macOS-specific dotfiles (WM, hotkeys, keyboard remapping)
   home.file = {

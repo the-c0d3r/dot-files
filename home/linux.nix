@@ -9,9 +9,6 @@
 
 { config, pkgs, lib, inputs, system, isNixOS ? false, ... }:
 
-let
-  sharedFonts = import ../fonts { inherit pkgs; };
-in
 {
   home.packages = with pkgs; [
     # Linux utilities
@@ -31,8 +28,5 @@ in
   ] ++ lib.optionals (!isNixOS) [
     # on NixOS, VirtualBox is provided by virtualisation.virtualbox.host in configuration.nix
     virtualbox
-  ] ++ sharedFonts;
-
-  # Enable fontconfig to ensure fonts are properly recognized
-  fonts.fontconfig.enable = true;
+  ];
 }
