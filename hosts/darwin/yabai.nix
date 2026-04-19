@@ -40,6 +40,7 @@ in
       yabai -m rule --add app="^superwhisper" sub-layer=above manage=off
       yabai -m rule --add app="^Music$" manage=off
       yabai -m rule --add app="^Docker" manage=off
+      yabai -m rule --add app="^TickTick" sub-layer=above focus_follows_mouse=off manage=off
 
       # External monitor (index 1): fullscreen targets
       yabai -m rule --add app="^Obsidian$" display=1 manage=on
