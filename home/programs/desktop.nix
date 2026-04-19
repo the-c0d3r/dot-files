@@ -5,7 +5,6 @@
     ./cli.nix
     ./fonts.nix
     ./git.nix
-    ./i3.nix
     ./kitty.nix
     ./obsidian.nix
     ./syncthing.nix
