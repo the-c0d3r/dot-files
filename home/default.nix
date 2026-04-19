@@ -31,46 +31,37 @@
 
     # CLI tools
     autojump       # jump to directories by 'j'
-    dos2unix       # convert files from DOS to UNIX format
     fd             # find files
     htop           # interactive process viewer
     jq             # command-line JSON processor
     lazygit        # git repository viewer
     ncdu           # ncurses disk usage analyzer
     pre-commit     # pre-commit hooks
-    pv             # pipe viewer
     ripgrep        # command-line search tool
-    tree           # directory tree viewer
     watch          # watch files
-    wget           # download files
     lsd            # ls replacement
     bat            # cat replacement
     nnn            # cli file explorer
+    nload          # network utilisation chart
+    sd             # sed alternative
 
     # dev tools
     uv             # python virtual environment manager
     docker         # container
     docker-compose # container compose
   ] ++ lib.optionals (!isServer) [
-    # CIS L2 violations — prohibited on hardened servers
-    # Network recon / raw socket tools (CIS L2: "remove network scanning tools")
     nmap           # network scanner
     netcat         # raw network utility / exfil vector
-    # Compilers / build tools (CIS L2: "remove development tools from production")
-    # NOTE: installed via Nix these are invisible to dpkg/rpm scans — extra risk
-    gcc
-    gnumake
-    cmake
-
-    # Unnecessary on servers (no violation, just bloat)
-    ffmpeg
     fswatch
 
-    # Desktop apps — no GUI on servers
+    # Desktop apps
+    keepassxc         # password manager
+    ticktick          # task manager
+
+    # communication tools
     discord
+    signal-desktop
     telegram-desktop
-    keepassxc
-    antigravity
   ];
 
   # Only needed on non-NixOS Linux to enable desktop file symlinking, session
@@ -81,20 +72,11 @@
     # Editor & Terminal
     EDITOR = "nvim";
     TERM = "xterm-256color";
+    HIST_STAMPS = "%d/%m/%y %T";
 
     # Locale
     LANG = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
-
-    # Oh-My-Zsh
-    DISABLE_UNTRACKED_FILES_DIRTY = "true";
-    DISABLE_UPDATE_PROMPT = "true";
-    DISABLE_AUTO_UPDATE = "true";
-    HIST_STAMPS = "%d/%m/%y %T";
-
-    # Ansible
-    ANSIBLE_FORCE_COLOR = "true";
-    ANSIBLE_STDOUT_CALLBACK = "yaml";
   };
 
   programs.home-manager.enable = true;

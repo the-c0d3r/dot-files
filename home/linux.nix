@@ -16,14 +16,9 @@ in
   home.packages = with pkgs; [
     # Linux utilities
     xclip     # clipboard tool
-    ticktick  # task manager
-    nload     # network monitor
 
     # Browser
     inputs.zen-browser.packages.${system}.default
-
-    # communication tools
-    signal-desktop
 
     # virtualisation
     vagrant
@@ -31,11 +26,8 @@ in
     # development
     nodejs_24
 
-    # office
-    libreoffice
-
-    # multimedia
-    vlc
+    libreoffice  # office
+    vlc          # media player
   ] ++ lib.optionals (!isNixOS) [
     # on NixOS, VirtualBox is provided by virtualisation.virtualbox.host in configuration.nix
     virtualbox
