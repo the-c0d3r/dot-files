@@ -119,6 +119,7 @@
   environment.systemPackages = with pkgs; [
     git
     curl
+    unzip
     efibootmgr
   ];
 
