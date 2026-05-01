@@ -125,26 +125,6 @@ return {
     end,
   },
 
-  -- tabnine AI assisted code completion
-  {
-    "tzachar/cmp-tabnine",
-    lazy = false,
-    after = "nvim-cmp",
-    dependencies = {
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-calc" },
-      { "hrsh7th/cmp-path" },
-      { "f3fora/cmp-spell" },
-      { "hrsh7th/cmp-emoji" },
-      { "octaltree/cmp-look" },
-      { "hrsh7th/nvim-cmp" },
-    },
-    build = "./install.sh",
-    config = function()
-      require "configs.tabnine"
-    end,
-  },
-
   -- auto session
   {
     "rmagatti/auto-session",
@@ -270,15 +250,15 @@ return {
   },
 
   -- sidebar cursor animation
-  {
-    "gen740/SmoothCursor.nvim",
-    lazy = false,
-    config = function()
-      require("smoothcursor").setup {
-        fancy = { enable = true },
-      }
-    end,
-  },
+  -- {
+  --   "gen740/SmoothCursor.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("smoothcursor").setup {
+  --       fancy = { enable = true },
+  --     }
+  --   end,
+  -- },
 
   -- hex editor
   {
@@ -328,25 +308,30 @@ return {
     config = true,
   },
 
-  -- llm interface for autocompletion
-  -- {
-  --   "huggingface/llm.nvim",
-  --   lazy = false,
-  --   config = function()
-  --     require("llm").setup {
-  --       model = "starcoder2:3b",
-  --       backend = "ollama",
-  --       url = "http://localhost:11434/",
-  --       request_body = {
-  --         -- Modelfile options for the model you use
-  --         options = {
-  --           temperature = 0.2,
-  --           top_p = 0.95,
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
+  -- smooth cursor
+  {
+    "sphamba/smear-cursor.nvim",
+    lazy = false,
+    opts = {
+      -- Smear cursor when switching buffers or windows.
+      smear_between_buffers = true,
+
+      -- Smear cursor when moving within line or to neighbor lines.
+      -- Use `min_horizontal_distance_smear` and `min_vertical_distance_smear` for finer control
+      smear_between_neighbor_lines = true,
+
+      -- Draw the smear in buffer space instead of screen space when scrolling
+      scroll_buffer_space = true,
+
+      -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
+      -- Smears and particles will look a lot less blocky.
+      legacy_computing_symbols_support = false,
+
+      -- Smear cursor in insert mode.
+      -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
+      smear_insert_mode = true,
+    },
+  },
 
   -- nvchad's new UI framework
   {
