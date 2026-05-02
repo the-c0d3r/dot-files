@@ -115,6 +115,9 @@
 
   programs.zsh.enable = true;
 
+  # allow running binaries that require static libraries
+  programs.nix-ld.enable = true;
+
   # System-level packages only (user packages managed by home-manager)
   environment.systemPackages = with pkgs; [
     git
