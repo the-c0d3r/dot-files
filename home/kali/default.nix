@@ -6,6 +6,13 @@
 { ... }:
 
 {
+  programs.zsh.initContent = ''
+    # Source nix on non-NixOS (needed for tmux and other non-login shells)
+    if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+      source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    fi
+  '';
+
   imports = [
     ../default.nix
     ../programs/cli.nix
