@@ -19,6 +19,7 @@
 
     # Desktop apps
     keepassxc         # password manager
+    calbire           # ebook manager
 
     # communication tools
     discord
