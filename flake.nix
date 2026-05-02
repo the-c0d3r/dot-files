@@ -98,7 +98,7 @@
     in {
       # Standalone home-manager configs (x86_64 Linux only — aarch64 Linux unsupported)
       homeConfigurations."linux"        = mkHome "x86_64-linux" ./home/linux.nix  false;
-      homeConfigurations."kali"         = mkHome "x86_64-linux" ./home/kali.nix   false;
+      homeConfigurations."kali"         = mkHome "x86_64-linux" ./home/kali       false;
       homeConfigurations."server"       = mkHome "x86_64-linux" ./home/server.nix false;
       homeConfigurations."server-nixos" = mkHome "x86_64-linux" ./home/server.nix true;
 

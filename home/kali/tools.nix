@@ -1,13 +1,17 @@
-# home/kali.nix — Kali Linux-specific home-manager config
+# home/kali/tools.nix — Pentest tools
 #
-# Adds pentesting tools on top of the generic Linux config.
-# Applied via: homeConfigurations."kali" in flake.nix
-# (which also imports home/linux.nix → home/default.nix)
+# Add/remove tools here without touching anything else.
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
+let
+  htbScripts = builtins.fetchGit {
+    url = "https://github.com/the-c0d3r/htb-scripts";
+    rev = "b44aa149c31d6d9ddc67120714429beb3a922d49";
+  };
+in
 {
-  imports = [ ./linux.nix ];
+  home.sessionPath = [ "${htbScripts}" ];
 
   home.packages = with pkgs; [
     # Network enumeration
@@ -28,9 +32,5 @@
     sslscan
     sipvicious
     samba           # provides smbclient
-
-    # Scripting
-    python3
-    python3Packages.pip
   ];
 }
