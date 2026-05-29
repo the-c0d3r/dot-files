@@ -24,6 +24,11 @@
           path = "${config.home.homeDirectory}/syncthing/shared";
           devices = [ "codelab-nas" "Z Fold 6" "Thus-MacBook-Pro.local" ];
         };
+        "claude-config" = {
+          id = "claude-config";
+          path = "${config.home.homeDirectory}/.claude";
+          devices = [ "codelab-nas" "Thus-MacBook-Pro.local" ];
+        };
       };
     };
   };
