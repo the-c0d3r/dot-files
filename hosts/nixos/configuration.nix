@@ -43,6 +43,13 @@
   networking = {
     hostName = "codelab-nix";
     networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 22000 ];
+      allowedUDPPorts = [ 22000 21027 ];
+      # 22000/tcp/udp = syncthing port
+      # 21027/udp = syncthing port
+    };
   };
 
   time = {
@@ -107,7 +114,8 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    extraGroups = [ "networkmanager" "wheel" "vboxusers" ];
+    extraGroups = [ "networkmanager" "wheel" "vboxusers" "dialout" ];
+    # dialout for interacting with the usb /dev/ttyACM* files
     shell = pkgs.zsh;
   };
 
