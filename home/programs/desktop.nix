@@ -16,14 +16,19 @@
     nmap              # network scanner
     netcat            # raw network utility
     fswatch
+    gdb
 
     # Desktop apps
     keepassxc         # password manager
-    calbire           # ebook manager
 
     # communication tools
     discord
     signal-desktop
     telegram-desktop
+
+    # AI coding
+    claude-code
+    python3
+    google-chrome
   ];
 }
