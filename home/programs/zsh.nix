@@ -59,7 +59,20 @@
       unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
     };
 
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git" "sudo" "docker" "python" "vi-mode" "autojump"
+        "colored-man-pages"
+      ];
+    };
+
     initContent = ''
+      # disable the omz magic paste
+      DISABLE_MAGIC_FUNCTIONS=true
+      # disable the autosuggest until first keystroke
+      ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
       # === Extra files to be sourced
 
       function wsyncd() {
@@ -86,6 +99,7 @@
       # Explicitly bind Ctrl-R to Atuin, in case vi-mode overwrites it
       bindkey '^r' atuin-search
 
+
       # Platform-specific configs
       ${lib.optionalString pkgs.stdenv.isLinux ''
         # Set keyboard key repeat speed (delay=300ms, rate=15 repeats/sec)
@@ -97,14 +111,5 @@
         eval "$(/opt/homebrew/bin/brew shellenv)"
       ''}
     '';
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git" "sudo" "docker" "python" "vi-mode" "autojump"
-        "colored-man-pages"
-      ];
-      theme = "robbyrussell";
-    };
   };
 }
