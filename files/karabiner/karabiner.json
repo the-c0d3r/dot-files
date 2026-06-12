@@ -8,7 +8,7 @@
                 "rules": [
                     {
                         "description": "Replace window switch with yabai",
-                        "enabled": true,
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -46,7 +46,6 @@
                     },
                     {
                         "description": "Ctrl+Left Click => Cmd+Left Click",
-                        "enabled": true,
                         "manipulators": [
                             {
                                 "from": {
@@ -130,6 +129,7 @@
                     },
                     {
                         "description": "Ctrl+C, Ctrl+V, Ctrl+X => Command+C (Copy), Command+V (Paste), Command+X (Cut)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [

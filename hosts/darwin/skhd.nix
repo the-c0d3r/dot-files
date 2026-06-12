@@ -125,8 +125,8 @@
       ctrl + alt + cmd - r : yabai --restart-service; skhd --restart-service
 
       # cycle through spaces (skip if already at boundary)
-      ctrl - left  : [ "$(yabai -m query --spaces --display | jq '.[0]."has-focus"')" = "false" ] && yabai -m space --focus prev
-      ctrl - right : [ "$(yabai -m query --spaces --display | jq '.[-1]."has-focus"')" = "false" ] && yabai -m space --focus next
+      #ctrl - left  : [ "$(yabai -m query --spaces --display | jq '.[0]."has-focus"')" = "false" ] && yabai -m space --focus prev
+      #ctrl - right : [ "$(yabai -m query --spaces --display | jq '.[-1]."has-focus"')" = "false" ] && yabai -m space --focus next
 
       # Focus window up/down in stack
       ctrl - k : yabai -m window --focus stack.next
