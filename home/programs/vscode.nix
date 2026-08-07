@@ -17,13 +17,19 @@
         myriad-dreamin.tinymist   # typst plugin
       ];
       userSettings = {
-        "workbench.colorTheme" = "Default Light Modern";
+        "workbench.colorTheme" = "Light Modern";
         "workbench.list.openMode" = "doubleClick";
         "workbench.startupEditor" = "none";           # skip welcome tab on launch
 
         # claude code configs
         "claudeCode.preferredLocation" = "sidebar";
         "claudeCode.claudeProcessWrapper" = "${pkgs.claude-code}/bin/claude";
+        "claudeCode.mcpServers" = {
+          "nixos" = {
+            "command" = "uvx";
+            "args" = [ "mcp-nixos" ];
+          };
+        };
 
         # tinymist configs
         "tinymist.serverPath" = "${pkgs.tinymist}/bin/tinymist";
@@ -38,13 +44,13 @@
         "terminal.integrated.stickyScroll.enabled" = false;
         "editor.wordWrap" = "on";
         "editor.stickyScroll.enabled" = false;
-        "editor.fontFamily" = "JetBrainsMono Nerd Font";
+        "editor.fontFamily" = "FiraCode Nerd Font";
         "editor.fontSize" = 13;
         "editor.minimap.autohide" = "mouseover";      # hide minimap until hovered
         "editor.accessibilitySupport" = "off";
+        "explorer.confirmDragAndDrop" = false;        # no confirmation on drag-drop
 
         "diffEditor.ignoreTrimWhitespace" = false;    # show whitespace diffs
-        "explorer.confirmDragAndDrop" = false;        # no confirmation on drag-drop
       };
     };
   };
