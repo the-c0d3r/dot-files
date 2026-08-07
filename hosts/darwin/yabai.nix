@@ -2,12 +2,9 @@
 
 { config, pkgs, lib, inputs, ... }:
 
-let
-  pkgs-yabai = import inputs.nixpkgs-yabai { inherit (pkgs) system; config.allowUnfree = true; };
-in
 {
   services.yabai = {
-    package = pkgs-yabai.yabai;
+    # package = pkgs-yabai.yabai;
     enable = true;
     enableScriptingAddition = true;
     extraConfig = ''
@@ -16,10 +13,10 @@ in
       yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
       yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
       yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
-      yabai -m config --space 1 layout bsp
+      # yabai -m config --space 1 layout bsp
 
       # laptop display to use stack to maximise space and for stackline
-      yabai -m config --space 3 layout stack
+      # yabai -m config --space 3 layout stack
 
       yabai -m rule --add app="^FortiClient$" sub-layer=above manage=off
       yabai -m rule --add app="^KeePassXC$" sub-layer=above manage=off
@@ -42,6 +39,12 @@ in
       yabai -m rule --add app="^Docker" manage=off
       yabai -m rule --add app="^TickTick" sub-layer=above focus_follows_mouse=off manage=off
       yabai -m rule --add app="^TickTick" subrole="^AXSystemDialog$" focus_follows_mouse=off manage=off
+      yabai -m rule --add app="^TickTick$" subrole="^AXDialog$" mouse_follows_focus=off
+      yabai -m rule --add app="^TickTick$" subrole="^AXDialog$" manage=off
+      yabai -m rule --add app="^TickTick$" subrole="^AXDialog$" focus_follows_mouse=off
+      yabai -m rule --add app="^TickTick$" mouse_follows_focus=off
+      yabai -m rule --add app="^TickTick$" manage=off
+      yabai -m rule --add app="^TickTick$" focus_follows_mouse=off
 
       # External monitor (index 1): fullscreen targets
       yabai -m rule --add app="^Obsidian$" display=1 manage=on
