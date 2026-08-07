@@ -21,7 +21,6 @@
         "[](fg:sapphire bg:lavender)"
         "$time"
         "[ ](fg:lavender)"
-        "$cmd_duration"
         "$line_break"
         "$character"
       ];
@@ -173,15 +172,6 @@
         vimcmd_replace_one_symbol = "[❮](bold fg:lavender)";
         vimcmd_replace_symbol = "[❮](bold fg:lavender)";
         vimcmd_visual_symbol = "[❮](bold fg:yellow)";
-      };
-
-      cmd_duration = {
-        show_milliseconds = true;
-        format = " in $duration ";
-        style = "bg:lavender";
-        disabled = false;
-        show_notifications = true;
-        min_time_to_notify = 45000;
       };
 
       palettes = {
