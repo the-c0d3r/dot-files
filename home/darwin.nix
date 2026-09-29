@@ -35,6 +35,11 @@ in
     COPYFILE_DISABLE = "1";
   };
 
+  programs.zsh.profileExtra = ''
+    # Added by Obsidian
+    export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+  '';
+
   home.packages = with pkgs; [
     # GNU utils (macOS ships BSD variants)
     coreutils          # gnu coreutils
