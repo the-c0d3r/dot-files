@@ -8,14 +8,14 @@
 
 {
   home.username = username;
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else if username == "root" then "/root" else "/home/${username}";
+  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else if username == "root" then "/root" else "/home/${username}";
 
   # Do not change this value — it pins home-manager behaviour, not the NixOS version.
   home.stateVersion = "23.11";
 
   # Only needed on non-NixOS Linux to enable desktop file symlinking, session
   # variable sourcing, etc. NixOS handles this natively via the HM module.
-  targets.genericLinux.enable = pkgs.stdenv.isLinux && !isNixOS;
+  targets.genericLinux.enable = pkgs.stdenv.hostPlatform.isLinux && !isNixOS;
 
   home.sessionVariables = {
     # Editor & Terminal

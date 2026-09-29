@@ -68,11 +68,10 @@
         modules = [
           determinate.darwinModules.default
           ({ ... }: {
-            determinate-nix = {
+            determinateNix = {
               customSettings = {
                 experimental-features = "nix-command flakes";
                 extra-experimental-features = "parallel-eval external-builders";
-                external-builders = ''[{"systems":["aarch64-linux","x86_64-linux"],"program":"/usr/local/bin/determinate-nixd","args":["builder"]}]'';
                 lazy-trees = true;
                 eval-cores = 0;
                 warn-dirty = false;
