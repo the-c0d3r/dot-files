@@ -13,7 +13,7 @@
       yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
       yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
       yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
-      # yabai -m config --space 1 layout bsp
+      yabai -m config --space 1 layout bsp
 
       # laptop display to use stack to maximise space and for stackline
       # yabai -m config --space 3 layout stack
@@ -63,7 +63,8 @@
       external_bar                 = "off:40:0";
       menubar_opacity              = 0.7;
       mouse_follows_focus          = "off";
-      focus_follows_mouse          = "autofocus";
+      # focus_follows_mouse is disabled to work with TickTick, where the dialog box is unclickable
+      focus_follows_mouse          = "off";
       display_arrangement_order    = "default";
       window_origin_display        = "default";
       window_placement             = "second_child";
@@ -81,7 +82,7 @@
       auto_balance                 = "off";
       top_padding                  = 5;
       bottom_padding               = 5;
-      left_padding                 = 35;
+      left_padding                 = 10;
       right_padding                = 10;
       window_gap                   = 15;
       layout                       = "bsp";
