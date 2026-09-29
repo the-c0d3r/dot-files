@@ -4,7 +4,7 @@
 
 {
   home.packages = [
-    (if pkgs.stdenv.isLinux then
+    (if pkgs.stdenv.hostPlatform.isLinux then
       # Linux: override with GPU sandbox fixes
       pkgs.obsidian.overrideAttrs (oldAttrs: {
         installPhase = oldAttrs.installPhase + ''

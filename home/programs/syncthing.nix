@@ -6,7 +6,7 @@
   # Syncthing runs as a user service (systemd on Linux, launchd on macOS)
   # Currently only enabled on Linux
   services.syncthing = {
-    enable = pkgs.stdenv.isLinux;
+    enable = pkgs.stdenv.hostPlatform.isLinux;
     settings = {
       devices = {
         "Thus-MacBook-Pro.local" = { id = "6DQWVMC-AUX6QMC-2EV6OWS-RU67KYA-BZCFJMD-O3BHL7H-CXPDRMF-H3BLSQB"; };

@@ -4,12 +4,12 @@
 { config, pkgs, lib, ... }:
 
 {
-  home.packages = lib.mkIf pkgs.stdenv.isLinux [
+  home.packages = lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
     pkgs.vicinae
   ];
 
   # Vicinae config file
-  xdg.configFile."vicinae/config.toml" = lib.mkIf pkgs.stdenv.isLinux {
+  xdg.configFile."vicinae/config.toml" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     text = ''
       close_on_focus_loss = true
       consider_preedit = true
@@ -20,7 +20,7 @@
   };
 
   # Autostart vicinae on Linux
-  systemd.user.services.vicinae = lib.mkIf pkgs.stdenv.isLinux {
+  systemd.user.services.vicinae = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     Unit = {
       Description = "Vicinae app launcher";
       After = [ "graphical-session.target" ];

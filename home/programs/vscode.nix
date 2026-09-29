@@ -8,7 +8,7 @@
     tinymist
   ];
 
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
     package = pkgs.vscodium;
     profiles.default = {
