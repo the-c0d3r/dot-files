@@ -12,6 +12,5 @@ local servers = {
   "jsonls",
   "luau_lsp",
   "pylsp",
-  -- "llm_ls",
 }
 vim.lsp.enable(servers)

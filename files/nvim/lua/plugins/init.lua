@@ -65,24 +65,15 @@ return {
   },
 
   -- outline for symbols
-  {
-    "simrat39/symbols-outline.nvim",
-    lazy = false,
-    config = function()
-      require("symbols-outline").setup {
-        lsp_blacklist = { "jsonls", "yamlls" },
-      }
-    end,
-  },
-
-  -- jump between lines
-  {
-    "phaazon/hop.nvim",
-    lazy = false,
-    config = function()
-      require("hop").setup()
-    end,
-  },
+  -- {
+  --   "simrat39/symbols-outline.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("symbols-outline").setup {
+  --       lsp_blacklist = { "jsonls", "yamlls" },
+  --     }
+  --   end,
+  -- },
 
   -- smooth scrolling
   {
