@@ -17,7 +17,10 @@
         myriad-dreamin.tinymist   # typst plugin
       ];
       userSettings = {
-        "workbench.colorTheme" = "Light Modern";
+        "workbench.colorTheme" = "Light Modern";       # fallback before OS theme is detected
+        "window.autoDetectColorScheme" = true;         # follow macOS light/dark appearance
+        "workbench.preferredDarkColorTheme" = "Dark Modern";
+        "workbench.preferredLightColorTheme" = "Light Modern";
         "workbench.list.openMode" = "doubleClick";
         "workbench.startupEditor" = "none";           # skip welcome tab on launch
 
@@ -35,6 +38,7 @@
         "tinymist.serverPath" = "${pkgs.tinymist}/bin/tinymist";
         "tinymist.formatterMode" = "typstfmt";        # use typstfmt for formatting
         "tinymist.preview.scrollSync" = "onSelectionChange"; # sync preview to cursor
+        "tinymist.preview.invertColors" = "auto";      # preview follows system/browser dark mode
 
         # typst word boundaries: excludes - and _ so identifiers select as whole words
         "[typst]"."editor.wordSeparators" = "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?";
