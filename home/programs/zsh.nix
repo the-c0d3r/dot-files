@@ -85,7 +85,7 @@
           dirname="$1"
           sshpath="$2"
 
-          fswatch -o "$dirname" | while read f; do rsync -av "$dirname/" "$sshpath/"; done;
+          fswatch -o "$dirname" -e ".venv" -e "*venv" | while read f; do rsync --exclude=".venv" --exclude="venv" -av "$dirname/" "$sshpath/"; done;
       }
 
       function lineprof() {
