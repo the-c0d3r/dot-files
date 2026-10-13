@@ -48,7 +48,7 @@
         "terminal.integrated.stickyScroll.enabled" = false;
         "editor.wordWrap" = "on";
         "editor.stickyScroll.enabled" = false;
-        "editor.fontFamily" = "FiraCode Nerd Font";
+        "editor.fontFamily" = "SFMono Nerd Font";
         "editor.fontSize" = 13;
         "editor.minimap.autohide" = "mouseover";      # hide minimap until hovered
         "editor.accessibilitySupport" = "off";
