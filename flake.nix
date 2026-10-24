@@ -20,7 +20,8 @@
     };
     zen-browser = {
       # Zen Browser — not yet in nixpkgs
-      url = "github:youwen5/zen-browser-flake";
+      # Pinned to last good commit; master bumped to 1.23.3b which doesn't exist upstream
+      url = "github:youwen5/zen-browser-flake/458cd16";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
