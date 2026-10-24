@@ -30,5 +30,6 @@
     claude-code
     python3
     google-chrome
+    docker-sbx
   ];
 }
