@@ -91,7 +91,7 @@
         enable = true;
         wayland.enable = false;
       };
-      defaultSession = "plasmax11";
+      defaultSession = "plasma";
     };
     desktopManager.plasma6.enable = true;
 
@@ -112,12 +112,10 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    extraGroups = [ "networkmanager" "wheel" "vboxusers" "dialout" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" ];
     # dialout for interacting with the usb /dev/ttyACM* files
     shell = pkgs.zsh;
   };
-
-  virtualisation.virtualbox.host.enable = true;
 
   programs.zsh.enable = true;
 
