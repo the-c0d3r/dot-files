@@ -46,6 +46,7 @@
 
         "files.autoSave" = "afterDelay";
         "terminal.integrated.stickyScroll.enabled" = false;
+        "terminal.integrated.fontFamily" = "FiraCode Nerd Font";
         "editor.wordWrap" = "on";
         "editor.stickyScroll.enabled" = false;
         "editor.fontFamily" = "SFMono Nerd Font";
@@ -55,6 +56,8 @@
         "explorer.confirmDragAndDrop" = false;        # no confirmation on drag-drop
 
         "diffEditor.ignoreTrimWhitespace" = false;    # show whitespace diffs
+
+        "vim.useSystemClipboard" = true;              # vim to copy to system clipboard
       };
     };
   };
