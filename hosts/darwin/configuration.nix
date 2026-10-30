@@ -47,7 +47,7 @@
       controlcenter.BatteryShowPercentage = true;
 
       dock = {
-        autohide = true;
+        autohide = false;
         orientation = "left";
         show-recents = false; # don't show recent apps
         static-only = false; # show only running apps
