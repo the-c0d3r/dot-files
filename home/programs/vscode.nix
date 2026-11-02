@@ -15,12 +15,33 @@
       extensions = with pkgs.vscode-extensions; [
         vscodevim.vim             # vim emulation plugin
         myriad-dreamin.tinymist   # typst plugin
+        jnoortheen.nix-ide        # nix language support
+        ms-python.python          # python
+        ms-python.debugpy         # python debugger
+        redhat.vscode-yaml        # yaml
+        tamasfe.even-better-toml  # toml
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          # rpm spec syntax, not in nixpkgs
+          publisher = "laurenttreguier";
+          name = "rpm-spec";
+          version = "0.3.2";
+          hash = "sha256-akDVmN+nL70wVx4u3wVAUwkkoP+r2uPaPq8MsmL5bBY=";
+        }
+        {
+          # everforest theme, matching kitty and nvim
+          # theme files are read-only in the store, so its contrast settings can't apply
+          publisher = "sainnhe";
+          name = "everforest";
+          version = "0.3.0";
+          hash = "sha256-nZirzVvM160ZTpBLTimL2X35sIGy5j2LQOok7a2Yc7U=";
+        }
       ];
       userSettings = {
-        "workbench.colorTheme" = "Light Modern";       # fallback before OS theme is detected
+        "workbench.colorTheme" = "Everforest Light";   # fallback before OS theme is detected
         "window.autoDetectColorScheme" = true;         # follow macOS light/dark appearance
-        "workbench.preferredDarkColorTheme" = "Dark Modern";
-        "workbench.preferredLightColorTheme" = "Light Modern";
+        "workbench.preferredDarkColorTheme" = "Everforest Dark";
+        "workbench.preferredLightColorTheme" = "Everforest Light";
         "workbench.list.openMode" = "doubleClick";
         "workbench.startupEditor" = "none";           # skip welcome tab on launch
 

@@ -171,14 +171,14 @@ vagrant ssh       # SSH in to test manually
 # Programs & Configs
 
 ## Shared (All Platforms)
-- **Neovim**: Customized vim configuration
+- **Neovim**: Customized vim configuration (NvChad, Everforest Light; Cmd+L toggles dark)
 - **Tmux**: Terminal multiplexer with custom keybindings
 - **Zsh**: Shell with oh-my-zsh integration
-- **Kitty**: GPU-accelerated terminal
+- **Kitty**: GPU-accelerated terminal (Everforest Light Soft, colors inlined in `kitty.nix`)
 - **Starship**: Cross-shell prompt
 - **Atuin**: Shell history sync and search
 - **Git**: Version control with custom config
-- **VSCodium**: VS Code with vim extension and Claude Code integration
+- **VSCodium**: VS Code with everyday extensions in Nix (vim, typst, nix, python, yaml, toml, rpm spec), Everforest theme following macOS light/dark; others (e.g. Claude Code) are installed manually. Quit VSCodium before rebuilding when the extension list changes.
 - **Obsidian**: Note-taking app
 - **Ripgrep**, **FD**: Modern search tools
 - **Htop**, **Ncdu**, **Jq**: System utilities
