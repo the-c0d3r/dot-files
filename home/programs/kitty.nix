@@ -5,44 +5,47 @@
     enable = true;
     # Using extraConfig to inline theme colors (themeFile include wasn't working)
     extraConfig = ''
-      # Catppuccin Mocha
-      foreground              #CDD6F4
-      background              #1E1E2E
-      selection_foreground    #1E1E2E
-      selection_background    #F5E0DC
-      cursor                  #F5E0DC
-      cursor_text_color       #1E1E2E
-      url_color               #F5E0DC
-      active_border_color     #B4BEFE
-      inactive_border_color   #6C7086
-      bell_border_color       #F9E2AF
-      active_tab_foreground   #11111B
-      active_tab_background   #CBA6F7
-      inactive_tab_foreground #CDD6F4
-      inactive_tab_background #181825
-      tab_bar_background      #11111B
-      mark1_foreground        #1E1E2E
-      mark1_background        #B4BEFE
-      mark2_foreground        #1E1E2E
-      mark2_background        #CBA6F7
-      mark3_foreground        #1E1E2E
-      mark3_background        #74C7EC
-      color0                  #45475A
-      color8                  #585B70
-      color1                  #F38BA8
-      color9                  #F38BA8
-      color2                  #A6E3A1
-      color10                 #A6E3A1
-      color3                  #F9E2AF
-      color11                 #F9E2AF
-      color4                  #89B4FA
-      color12                 #89B4FA
-      color5                  #F5C2E7
-      color13                 #F5C2E7
-      color6                  #94E2D5
-      color14                 #94E2D5
-      color7                  #BAC2DE
-      color15                 #A6ADC8
+      # Everforest Light Soft
+      foreground              #5C6A72
+      background              #F3EAD3
+      selection_foreground    #829181
+      selection_background    #E1E4BD
+      cursor                  #5C6A72
+      cursor_text_color       #EAE4CA
+      url_color               #3A94C5
+      active_border_color     #8DA101
+      inactive_border_color   #B9C0AB
+      bell_border_color       #F57D26
+      active_tab_foreground   #5C6A72
+      active_tab_background   #F3EAD3
+      inactive_tab_foreground #939F91
+      inactive_tab_background #E5DFC5
+      tab_bar_background      #EAE4CA
+      mark1_foreground        #F3EAD3
+      mark1_background        #3A94C5
+      mark2_foreground        #F3EAD3
+      mark2_background        #D3C6AA
+      mark3_foreground        #F3EAD3
+      mark3_background        #DF69BA
+      color0                  #708089
+      color8                  #829181
+      color1                  #F85552
+      color9                  #E66868
+      color2                  #8DA101
+      color10                 #93B259
+      color3                  #DFA000
+      color11                 #DFA000
+      color4                  #3A94C5
+      color12                 #3A94C5
+      color5                  #DF69BA
+      color13                 #DF69BA
+      color6                  #35A77C
+      color14                 #35A77C
+      color7                  #939F91
+      color15                 #A6B0A0
+
+      # Pass cmd+l (light/dark toggle) to nvim; elsewhere kitty keeps it, as unmapped it sends junk to the shell
+      map --when-focus-on var:in_editor cmd+l
     '';
     settings = {
       # Fonts

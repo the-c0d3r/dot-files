@@ -8,8 +8,6 @@ local M = {}
 local highlights = require "highlights"
 
 M.ui = {
-  theme = "doomchad",
-  theme_toggle = { "doomchad", "one_light" },
   hl_override = highlights.override,
   hl_add = highlights.add,
   statusline = {
@@ -54,7 +52,8 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "onedark",
+  theme = "everforest_light",
+  theme_toggle = { "everforest_light", "everforest" },
 
   hl_override = {
     Comment = { italic = true },
