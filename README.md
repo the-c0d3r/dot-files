@@ -145,7 +145,7 @@ sudo darwin-rebuild switch --flake .#mac-arm
 ## `mac-arm` / `mac-intel` - macOS
 - System settings (Dock, Finder, keyboard, trackpad)
 - Yabai + skhd for tiling window management
-- Homebrew integration
+- Homebrew integration: self-updating macOS-only apps are declared as casks in `homebrew.casks`; other Homebrew installs are left alone
 - Fonts via home-manager
 
 > [!WARNING]
@@ -199,8 +199,9 @@ vagrant ssh       # SSH in to test manually
 - **Yabai**: Tiling window manager (system service)
 - **Skhd**: Hotkey daemon (system service)
 - **JankyBorders**: Window border highlights
-- **Raycast**: Spotlight replacement
-- **Itsycal**: Menubar calendar
+- **Raycast**: Spotlight replacement (Homebrew cask)
+- **Itsycal**: Menubar calendar (Homebrew cask)
+- **Slack, Mos, Shortcat**: chat, smooth scrolling, keyboard navigation (Homebrew casks)
 - **Fonts**: Nerd Fonts + CartographCF (system-wide)
 - **GNU Utils**: coreutils, gnutls, gnused, gnutar, gnugrep (replaces BSD variants)
 

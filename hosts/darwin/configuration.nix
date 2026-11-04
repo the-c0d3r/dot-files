@@ -28,6 +28,19 @@
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
 
+  # macOS-only apps as Homebrew casks so they can self-update.
+  # cleanup stays "none": installs not listed here are left alone.
+  homebrew = {
+    enable = true;
+    casks = [
+      "raycast"  # spotlight replacement
+      "itsycal"  # menubar calendar
+      "slack"    # chat
+      "mos"      # smooth scroll + reverse direction
+      "shortcat" # shortcut everything
+    ];
+  };
+
   # Set your time zone.
   time.timeZone = "Asia/Singapore";
 

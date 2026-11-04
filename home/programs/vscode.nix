@@ -47,7 +47,8 @@
 
         # claude code configs
         "claudeCode.preferredLocation" = "sidebar";
-        "claudeCode.claudeProcessWrapper" = "${pkgs.claude-code}/bin/claude";
+        # no claudeCode.claudeProcessWrapper: pinning the Nix CLI breaks the extension's
+        # auth check once the manually updated extension gets ahead of it (2026-11)
         "claudeCode.mcpServers" = {
           "nixos" = {
             "command" = "uvx";

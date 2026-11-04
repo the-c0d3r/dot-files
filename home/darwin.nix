@@ -48,13 +48,8 @@ in
     gnugrep            # gnu grep
     iproute2mac        # ip command shim
 
-    # GUI apps
-    raycast            # spotlight replacement
-    itsycal            # menubar calendar
+    # GUI apps (self-updating ones are Homebrew casks, see hosts/darwin/configuration.nix)
     tailscale          # SDN / VPN
-    slack              # chat
-    mos                # smooth scroll + reverse direction
-    shortcat           # shortcut everything
     karabiner-elements # keyboard shortcut editor
   ];
 }

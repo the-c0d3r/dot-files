@@ -5,6 +5,7 @@
     enable = true;
     settings.user.name = "the-c0d3r";
     settings.user.email = "4526565+the-c0d3r@users.noreply.github.com";
+    settings.credential.helper = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin "osxkeychain";
     ignores = [
       ".idea"
       "**/.idea"
