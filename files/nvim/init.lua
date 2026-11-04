@@ -67,3 +67,7 @@ vim.api.nvim_create_autocmd("TermResponse", {
   end,
 })
 follow_background(term_bg)
+-- tabufline toggle button: switch without saving to chadrc.lua (read-only in the Nix store)
+require("base46").toggle_theme = function()
+  follow_background(vim.o.background == "light" and "dark" or "light")
+end
