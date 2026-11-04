@@ -170,6 +170,24 @@ vagrant ssh       # SSH in to test manually
 
 # Programs & Configs
 
+## Where to install an app
+
+```mermaid
+flowchart TD
+  OS{"Which OS?"}
+  OS -->|Linux only| NIX
+  OS -->|Both| U{"Updates often?"}
+  OS -->|macOS only| M{"Nix config module<br/>or pinning needed?"}
+  U -->|No| NIX["Nix"]
+  U -->|Yes| SPLIT["Linux: Nix<br/>macOS: Homebrew cask"]
+  M -->|Yes| NIX
+  M -->|No| CASK["Homebrew cask"]
+```
+
+- Nix copies can't self-update; they move only when nixpkgs does.
+- Casks self-update and handle drivers, installers and macOS permissions.
+- Casks are declared in `homebrew.casks` ([hosts/darwin/configuration.nix](hosts/darwin/configuration.nix)), so `./apply.sh` installs them. Homebrew installs not listed there are left alone.
+
 ## Shared (All Platforms)
 - **Neovim**: Customized vim configuration (NvChad, Everforest Light; Cmd+L toggles dark)
 - **Tmux**: Terminal multiplexer with custom keybindings
