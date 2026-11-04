@@ -28,11 +28,12 @@
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
 
-  # macOS-only apps as Homebrew casks so they can self-update.
+  # Self-updating apps as Homebrew casks; Linux gets obsidian from Nix.
   # cleanup stays "none": installs not listed here are left alone.
   homebrew = {
     enable = true;
     casks = [
+      "obsidian" # notes
       "raycast"  # spotlight replacement
       "itsycal"  # menubar calendar
       "slack"    # chat

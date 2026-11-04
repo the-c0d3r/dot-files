@@ -179,7 +179,7 @@ vagrant ssh       # SSH in to test manually
 - **Atuin**: Shell history sync and search
 - **Git**: Version control with custom config
 - **VSCodium**: VS Code with everyday extensions in Nix (vim, typst, nix, python, yaml, toml, rpm spec), Everforest theme following macOS light/dark; others (e.g. Claude Code) are installed manually. Quit VSCodium before rebuilding when the extension list changes.
-- **Obsidian**: Note-taking app
+- **Obsidian**: Note-taking app (Nix on Linux, Homebrew cask on macOS; installer updates: `brew upgrade --cask --greedy obsidian`)
 - **Ripgrep**, **FD**: Modern search tools
 - **Htop**, **Ncdu**, **Jq**: System utilities
 - **Discord**, **KeePassXC**: Desktop applications
@@ -201,8 +201,7 @@ vagrant ssh       # SSH in to test manually
 - **JankyBorders**: Window border highlights
 - **Raycast**: Spotlight replacement (Homebrew cask)
 - **Itsycal**: Menubar calendar (Homebrew cask)
-- **Slack, Mos, Shortcat**: chat, smooth scrolling, keyboard navigation (Homebrew casks)
-- **Fonts**: Nerd Fonts + CartographCF (system-wide)
+- **Slack, Mos, Shortcat**: chat, smooth scrolling, keyboard navigation (Homebrew casks)- **Fonts**: Nerd Fonts + CartographCF (system-wide)
 - **GNU Utils**: coreutils, gnutls, gnused, gnutar, gnugrep (replaces BSD variants)
 
 ## macOS System Settings
