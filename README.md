@@ -199,6 +199,7 @@ The system appearance (macOS, or the Linux desktop's dark style) is the single s
 - **Kitty**: `light-theme.auto.conf` / `dark-theme.auto.conf` (`kitty.nix`)
 - **Tmux**: the nova bar's palette is picked by tmux's theme hooks (`tmux.nix`)
 - **Neovim**: switches when kitty reports its new background (`files/nvim/init.lua`); the NvChad toggle button overrides it until the next switch
+- **Starship**, **bat**, **btop**, **lsd** (`ls`): use the terminal's 16 colours, so they follow kitty's palette (`starship.nix`, `cli.nix`)
 - **VSCodium**, **Obsidian**: built-in
 
 ## Shared (All Platforms)

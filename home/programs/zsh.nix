@@ -31,7 +31,6 @@
     shellAliases = {
       # system aliases
       l = "lsd -la";
-      ll = "lsd -l";
       cat = "bat -p";
       ip = "ip --color=auto";
 
