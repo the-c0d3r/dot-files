@@ -1,10 +1,10 @@
-# programs/obsidian.nix — Obsidian installation with Linux GPU fixes
+# programs/obsidian.nix — Obsidian with Linux GPU fixes (Linux only, imported by home/linux.nix)
 # macOS gets Obsidian as a Homebrew cask (hosts/darwin/configuration.nix) so it can self-update.
 
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
-  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+  home.packages = [
     # override with GPU sandbox fixes
     (pkgs.obsidian.overrideAttrs (oldAttrs: {
       installPhase = oldAttrs.installPhase + ''

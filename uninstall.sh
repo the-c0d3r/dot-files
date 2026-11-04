@@ -47,11 +47,6 @@ remove_path "$HOME/.local/state/nix"
 echo -e "${BLUE}==>${NC} Cleaning up local flake variables..."
 remove_path "$(dirname "$0")/vars.nix"
 
-# 4. Attempt to remove Home Manager managed symlinks in HOME
-# This is tricky without the list, but we can target common areas
-echo -e "${BLUE}==>${NC} Cleaning up common symlink targets..."
-# (This section could be expanded if a specific list of managed files is known)
-
 if [ "$DRY_RUN" = false ]; then
     echo -e "${GREEN}==>${NC} Uninstallation complete!"
     if [ -x "/nix/nix-installer" ]; then

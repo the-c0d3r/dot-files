@@ -10,10 +10,12 @@ dot-files/
 ├── Vagrantfile            # Rocky Linux 9 VM for testing server config
 ├── home/                  # Home-manager configurations
 │   ├── default.nix        # Shared base for all platforms (session vars, stateVersion)
-│   ├── linux.nix          # Linux desktop entry point (imports default + programs/desktop)
+│   ├── linux.nix          # Linux desktop entry point (imports default + programs/desktop + Linux-only programs)
 │   ├── darwin.nix         # macOS entry point (imports default + programs/desktop)
 │   ├── server.nix         # Server entry point (imports default + programs/cli)
-│   ├── kali.nix           # Kali entry point (imports linux + pentesting tools)
+│   ├── kali/              # Kali entry point
+│   │   ├── default.nix    # Imports default + programs/cli + tools
+│   │   └── tools.nix      # Pentesting tools
 │   └── programs/          # Program-specific configurations
 │       ├── cli.nix        # CLI programs + packages (server profile)
 │       ├── desktop.nix    # Desktop programs + packages (imports cli)
@@ -22,15 +24,16 @@ dot-files/
 │       ├── git.nix        # Git configuration
 │       ├── kitty.nix      # Terminal emulator
 │       ├── neovim.nix     # Neovim configuration
-│       ├── obsidian.nix   # Note-taking app
+│       ├── obsidian.nix   # Note-taking app (Linux only)
 │       ├── starship.nix   # Shell prompt
 │       ├── syncthing.nix  # File synchronization (Linux only)
 │       ├── tmux.nix       # Terminal multiplexer
-│       ├── vicinae.nix    # App launcher + systemd service
+│       ├── vicinae.nix    # App launcher + systemd service (Linux only)
 │       ├── vscode.nix     # VSCodium with extensions
 │       └── zsh.nix        # Shell configuration
 ├── hosts/                 # System-level configurations
 │   ├── darwin/            # macOS system settings (nix-darwin)
+│   │   ├── configuration.nix # System defaults, Homebrew casks, Tailscale, PATH
 │   │   ├── yabai.nix      # Tiling window manager (system service)
 │   │   ├── skhd.nix       # Hotkey daemon (system service)
 │   │   └── jankyborders.nix # Window border highlights (system service)
@@ -81,7 +84,7 @@ To see what would be removed without actually deleting anything:
 ```
 
 > [!NOTE]
-> This script cleans up the dotfiles configuration but does not uninstall Nix itself. Refer to the Nix documentation for full system uninstallation.
+> After cleaning up the dotfiles configuration, the script also runs the Determinate Nix uninstaller (`/nix/nix-installer uninstall`) when present, which removes Nix itself.
 
 ## Subsequent Updates
 To apply any changes to your configuration later, simply run:
@@ -132,9 +135,8 @@ sudo darwin-rebuild switch --flake .#mac-arm
 - Suitable for layering on top of any existing Linux server
 
 ## `kali` - Kali Linux
-- Builds on `linux` profile
-- Adds pentesting tools: nmap, enum4linux, sqlmap, etc.
-- Python environment for security scripts
+- CLI tools from the `server` profile, without the desktop stack
+- Adds pentesting tools: enum4linux, smbmap, feroxbuster, nikto, sslscan, etc. (`home/kali/tools.nix`)
 
 ## `codelab-nix` - NixOS
 - Full NixOS system configuration (KDE Plasma 6, X11, NVIDIA)
@@ -192,7 +194,7 @@ flowchart TD
 - **Neovim**: Customized vim configuration (NvChad, Everforest Light; Cmd+L toggles dark)
 - **Tmux**: Terminal multiplexer with custom keybindings
 - **Zsh**: Shell with oh-my-zsh integration
-- **Kitty**: GPU-accelerated terminal (Everforest Light Soft, colors inlined in `kitty.nix`)
+- **Kitty**: GPU-accelerated terminal (JetBrainsMono Nerd Font, Everforest Light Soft, colors inlined in `kitty.nix`)
 - **Starship**: Cross-shell prompt
 - **Atuin**: Shell history sync and search
 - **Git**: Version control with custom config
@@ -201,7 +203,7 @@ flowchart TD
 - **Ripgrep**, **FD**: Modern search tools
 - **Htop**, **Ncdu**, **Jq**: System utilities
 - **Discord**, **KeePassXC**: Desktop applications
-- **Development Tools**: GCC, Make, CMake, pre-commit, uv (Python env manager), antigravity
+- **Development Tools**: pre-commit, uv (Python env manager)
 
 ## Linux Only
 - **Vicinae**: Application launcher with systemd daemon (rofi replacement)
@@ -219,8 +221,9 @@ flowchart TD
 - **JankyBorders**: Window border highlights
 - **Raycast**: Spotlight replacement (Homebrew cask)
 - **Itsycal**: Menubar calendar (Homebrew cask)
-- **Slack, Mos, Shortcat**: chat, smooth scrolling, keyboard navigation (Homebrew casks)- **Fonts**: Nerd Fonts + CartographCF (system-wide)
-- **GNU Utils**: coreutils, gnutls, gnused, gnutar, gnugrep (replaces BSD variants)
+- **Slack, Mos, Shortcat**: chat, smooth scrolling, keyboard navigation (Homebrew casks)
+- **Tailscale**: VPN daemon via nix-darwin's `services.tailscale` (launchd)
+- **GNU Utils**: coreutils, gnused, gnutar, gnugrep (replaces BSD variants)
 
 ## macOS System Settings
 The following macOS defaults are declaratively managed via [hosts/darwin/configuration.nix](hosts/darwin/configuration.nix):
@@ -228,10 +231,10 @@ The following macOS defaults are declaratively managed via [hosts/darwin/configu
 - **General**:
     - Dark Mode enabled
     - Metric units (Celsius, cm)
-    - Fast key repeat rate (Initial: 15, Repeat: 2)
+    - Fast key repeat rate (Initial: 25, Repeat: 2)
     - Auto-capitalization/correction/dashes/periods/quotes **DISABLED**
 - **Dock**:
-    - Auto-hide enabled
+    - Auto-hide disabled
     - Positioned on the **Left**
     - Recent apps hidden
     - **Hot Corners**:

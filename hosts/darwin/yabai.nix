@@ -1,10 +1,9 @@
-# programs/yabai.nix — Yabai tiling window manager (macOS only)
+# hosts/darwin/yabai.nix — Yabai tiling window manager (macOS only)
 
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   services.yabai = {
-    # package = pkgs-yabai.yabai;
     enable = true;
     enableScriptingAddition = true;
     extraConfig = ''
@@ -37,14 +36,7 @@
       yabai -m rule --add app="^superwhisper" sub-layer=above manage=off
       yabai -m rule --add app="^Music$" manage=off
       yabai -m rule --add app="^Docker" manage=off
-      yabai -m rule --add app="^TickTick" sub-layer=above focus_follows_mouse=off manage=off
-      yabai -m rule --add app="^TickTick" subrole="^AXSystemDialog$" focus_follows_mouse=off manage=off
-      yabai -m rule --add app="^TickTick$" subrole="^AXDialog$" mouse_follows_focus=off
-      yabai -m rule --add app="^TickTick$" subrole="^AXDialog$" manage=off
-      yabai -m rule --add app="^TickTick$" subrole="^AXDialog$" focus_follows_mouse=off
-      yabai -m rule --add app="^TickTick$" mouse_follows_focus=off
-      yabai -m rule --add app="^TickTick$" manage=off
-      yabai -m rule --add app="^TickTick$" focus_follows_mouse=off
+      yabai -m rule --add app="^TickTick" sub-layer=above manage=off mouse_follows_focus=off
 
       # External monitor (index 1): fullscreen targets
       yabai -m rule --add app="^Obsidian$" display=1 manage=on

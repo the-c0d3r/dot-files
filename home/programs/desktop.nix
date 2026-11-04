@@ -6,20 +6,20 @@
     ./fonts.nix
     ./git.nix
     ./kitty.nix
-    ./obsidian.nix
-    ./syncthing.nix
-    ./vicinae.nix
     ./vscode.nix
   ];
 
   home.packages = with pkgs; [
+    # CLI tools
     nmap              # network scanner
     netcat            # raw network utility
-    fswatch
-    gdb
+    fswatch           # file change watcher
+    gdb               # debugger
+    python3
 
     # Desktop apps
     keepassxc         # password manager
+    google-chrome     # browser
 
     # communication tools
     discord
@@ -28,8 +28,6 @@
 
     # AI coding
     claude-code
-    python3
-    google-chrome
-    docker-sbx
+    docker-sbx        # sandboxed agents
   ];
 }

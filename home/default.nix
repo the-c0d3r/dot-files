@@ -1,7 +1,7 @@
 # home/default.nix — Shared home-manager base for all platforms
 #
 # Sets up the user environment: username, paths, session variables.
-# Imported by every platform entry point (linux.nix, darwin.nix, server.nix, kali.nix).
+# Imported by every platform entry point (linux.nix, darwin.nix, server.nix, kali/default.nix).
 # Does not include packages or program configs — those live in home/programs/.
 
 { config, pkgs, lib, username, isNixOS ? false, ... }:

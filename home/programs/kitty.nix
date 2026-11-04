@@ -49,11 +49,7 @@
     '';
     settings = {
       # Fonts
-      font_family = "Cartograph CF Regular";
-      bold_font = "Cartograph CF Bold";
-      italic_font = "Cartograph CF Regular Italic";
-      bold_italic_font = "Cartograph CF Bold Italic";
-      font_features = "FiraCodeNerdFontComplete-Retina +zero +ss06";
+      font_family = "JetBrainsMono Nerd Font"; # installed by fonts.nix
       font_size = "11.0";
 
       # Window

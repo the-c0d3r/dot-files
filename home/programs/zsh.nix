@@ -105,11 +105,6 @@
         # Set keyboard key repeat speed (delay=300ms, rate=15 repeats/sec)
         [ -x "$(command -v xset)" ] && xset r rate 300 15
       ''}
-
-      ${lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
-        # Load Homebrew environment
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-      ''}
     '';
   };
 }

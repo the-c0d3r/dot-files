@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ pkgs, lib, username, ... }:
 
 {
   imports = [
@@ -7,10 +7,7 @@
     ./jankyborders.nix
   ];
 
-  nix = {
-    settings.experimental-features = "nix-command flakes";
-    enable = false; # Determinate manages Nix daemon
-  };
+  nix.enable = false; # Determinate manages Nix daemon and settings (flake.nix)
 
   # Scheduled GC (weekly, Sunday 3am) - separate from nix module since Determinate manages Nix
   launchd.daemons.nix-gc = {
@@ -27,6 +24,12 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
+
+  # Homebrew on PATH after the Nix profiles so Nix copies win; static, no `brew shellenv` eval
+  environment.systemPath = lib.mkOrder 1100 [ "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
+
+  # Tailscale daemon (open-source tailscaled) as a launchd service
+  services.tailscale.enable = true;
 
   # Self-updating apps as Homebrew casks; Linux gets obsidian from Nix.
   # cleanup stays "none": installs not listed here are left alone.

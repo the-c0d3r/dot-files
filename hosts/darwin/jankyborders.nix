@@ -1,4 +1,4 @@
-# programs/jankyborders.nix — Window border highlights (macOS only)
+# hosts/darwin/jankyborders.nix — Window border highlights (macOS only)
 
 { config, pkgs, lib, ... }:
 

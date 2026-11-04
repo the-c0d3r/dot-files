@@ -44,7 +44,6 @@ in
     iproute2mac        # ip command shim
 
     # GUI apps (self-updating ones are Homebrew casks, see hosts/darwin/configuration.nix)
-    tailscale          # SDN / VPN
     karabiner-elements # keyboard shortcut editor
   ];
 }

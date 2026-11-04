@@ -1,4 +1,4 @@
-# programs/skhd.nix — Simple hotkey daemon (macOS only)
+# hosts/darwin/skhd.nix — Simple hotkey daemon (macOS only)
 
 { config, pkgs, lib, ... }:
 
