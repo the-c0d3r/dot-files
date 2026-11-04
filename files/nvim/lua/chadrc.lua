@@ -53,7 +53,7 @@ M.ui = {
 
 M.base46 = {
   theme = "everforest_light",
-  theme_toggle = { "everforest_light", "everforest" },
+  theme_toggle = { "everforest_light", "everforest" }, -- light, dark: picked by the terminal's background (init.lua)
 
   hl_override = {
     Comment = { italic = true },

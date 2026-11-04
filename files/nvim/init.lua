@@ -25,7 +25,8 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
--- load theme
+-- load theme (the cached theme overwrites the 'background' nvim detected from the terminal)
+local term_bg = vim.o.background
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
@@ -45,17 +46,17 @@ vim.opt.shiftwidth = 4
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', extends = '›', precedes = '‹', trail = '·' }
 
--- tell kitty we're in an editor so it passes cmd+l through (see kitty.nix)
-local function kitty_set_var(seq)
-  if vim.api.nvim_ui_send then
-    vim.api.nvim_ui_send(seq)
-  else
-    io.stdout:write(seq)
+-- follow the terminal's light/dark (macOS appearance via kitty); nvim updates 'background' on its reports
+local function follow_background(bg)
+  local opts = require("nvconfig").base46
+  local theme = bg == "light" and opts.theme_toggle[1] or opts.theme_toggle[2]
+  if opts.theme ~= theme then
+    opts.theme = theme
+    require("base46").load_all_highlights()
   end
 end
-vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
-  callback = function() kitty_set_var "\x1b]1337;SetUserVar=in_editor=MQ==\007" end,
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "background",
+  callback = function() follow_background(vim.v.option_new) end,
 })
-vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
-  callback = function() kitty_set_var "\x1b]1337;SetUserVar=in_editor\007" end,
-})
+follow_background(term_bg)

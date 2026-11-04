@@ -94,7 +94,6 @@
       };
 
       NSGlobalDomain = {
-        AppleInterfaceStyle = "Dark";                 # Dark mode
         ApplePressAndHoldEnabled = false;             # Disable press-and-hold for accents (better for vim)
         AppleShowAllExtensions = true;                # Show file extensions globally
         InitialKeyRepeat = 25;                        # Initial key repeat delay

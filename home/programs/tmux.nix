@@ -1,5 +1,52 @@
 { config, pkgs, lib, ... }:
 
+let
+  nova = "${pkgs.tmuxPlugins.tmux-nova}/share/tmux-plugins/tmux-nova/nova.tmux";
+  palettes = {
+    # Everforest Light Soft
+    light = {
+      bg = "#EAE4CA";
+      fg = "#5C6A72";
+      base = "#F3EAD3";
+      dim = "#E5DFC5";
+      sel = "#E1E4BD";
+      border = "#D3C6AA";
+      green = "#8DA101";
+      purple = "#DF69BA";
+      blue = "#3A94C5";
+    };
+    # Everforest Dark Medium
+    dark = {
+      bg = "#343F44";
+      fg = "#D3C6AA";
+      base = "#2D353B";
+      dim = "#3D484D";
+      sel = "#475258";
+      border = "#475258";
+      green = "#A7C080";
+      purple = "#D699B6";
+      blue = "#7FBBB3";
+    };
+  };
+  novaTheme = name:
+    let p = palettes.${name}; in
+    pkgs.writeText "nova-${name}.conf" ''
+      set -g @nova-status-style-bg "${p.bg}"
+      set -g @nova-status-style-fg "${p.fg}"
+      set -g @nova-status-style-active-bg "${p.green}"
+      set -g @nova-status-style-active-fg "${p.base}"
+      set -g @nova-segment-mode-colors "${p.purple} ${p.base}"
+      set -g @nova-segment-whoami-colors "${p.blue} ${p.base}"
+      set -g @nova-pane-border-style "${p.border}"
+      set -g @nova-pane-active-border-style "${p.green}"
+      set -g @nova-message-style-bg "${p.dim}"
+      set -g @nova-message-style-fg "${p.fg}"
+      set -g @nova-message-command-style-bg "${p.dim}"
+      set -g @nova-message-command-style-fg "${p.fg}"
+      set -g @nova-mode-style-bg "${p.sel}"
+      set -g @nova-mode-style-fg "${p.fg}"
+    '';
+in
 {
   programs.tmux = {
     enable = true;
@@ -39,13 +86,17 @@
           set -g @nova-nerdfonts-left 
           set -g @nova-nerdfonts-right 
           set -g @nova-segment-mode "#{?client_prefix,Ω,ω}"
-          set -g @nova-segment-mode-colors "##ff7da4 #282a36"
           set -g @nova-segment-whoami "#(whoami)@#h"
-          set -g @nova-segment-whoami-colors "##a1a7fa #282a36"
           set -g @nova-pane "#I#{?pane_in_mode,  #{pane_mode},}  #W"
           set -g @nova-rows 0
           set -g @nova-segments-0-left "mode"
           set -g @nova-segments-0-right "whoami"
+
+          # Everforest colors following the terminal's light/dark report; nova only reads them when it runs
+          set-hook -g client-light-theme 'source-file ${novaTheme "light"} ; run-shell ${nova}'
+          set-hook -g client-dark-theme 'source-file ${novaTheme "dark"} ; run-shell ${nova}'
+          set-hook -g client-attached 'if -F "#{==:#{client_theme},dark}" "source-file ${novaTheme "dark"}" "source-file ${novaTheme "light"}" ; run-shell ${nova}'
+          source-file ${novaTheme "light"}
         '';
       }
     ];

@@ -16,16 +16,6 @@ map("n", "<C-/>", "<cmd>nohl<cr>")
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
--- theme toggle without saving to chadrc.lua (read-only in the Nix store)
-local base46 = require "base46"
-base46.toggle_theme = function()
-  local opts = require("nvconfig").base46
-  opts.theme = opts.theme == opts.theme_toggle[1] and opts.theme_toggle[2] or opts.theme_toggle[1]
-  base46.load_all_highlights()
-end
--- cmd+l, passed through by kitty while in nvim (see kitty.nix)
-map({ "n", "i", "v" }, "<D-l>", base46.toggle_theme)
-
 map("n", "<leader>re", ":IncRename")
 map("n", "<leader>o", "<cmd>Telescope find_files<cr>")
 map("n", "<leader>fn", "<cmd>enew<cr>")

@@ -191,10 +191,10 @@ flowchart TD
 - Casks are declared in `homebrew.casks` ([hosts/darwin/configuration.nix](hosts/darwin/configuration.nix)), so `./apply.sh` installs them. Homebrew installs not listed there are left alone.
 
 ## Shared (All Platforms)
-- **Neovim**: Customized vim configuration (NvChad, Everforest Light; Cmd+L toggles dark)
-- **Tmux**: Terminal multiplexer with custom keybindings
+- **Neovim**: Customized vim configuration (NvChad, Everforest light/dark following the system appearance)
+- **Tmux**: Terminal multiplexer with custom keybindings; nova status bar in Everforest light/dark following the terminal
 - **Zsh**: Shell with oh-my-zsh integration
-- **Kitty**: GPU-accelerated terminal (JetBrainsMono Nerd Font, Everforest Light Soft, colors inlined in `kitty.nix`)
+- **Kitty**: GPU-accelerated terminal (JetBrainsMono Nerd Font, Everforest light/dark auto themes following the system appearance)
 - **Starship**: Cross-shell prompt
 - **Atuin**: Shell history sync and search
 - **Git**: Version control with custom config
@@ -229,7 +229,7 @@ flowchart TD
 The following macOS defaults are declaratively managed via [hosts/darwin/configuration.nix](hosts/darwin/configuration.nix):
 
 - **General**:
-    - Dark Mode enabled
+    - Appearance unmanaged (toggled manually; kitty, tmux and nvim follow it)
     - Metric units (Celsius, cm)
     - Fast key repeat rate (Initial: 25, Repeat: 2)
     - Auto-capitalization/correction/dashes/periods/quotes **DISABLED**
