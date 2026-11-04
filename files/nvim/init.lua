@@ -47,13 +47,24 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '» ', extends = '›', precedes = '‹', trail = '·' }
 
 -- follow the terminal's light/dark (macOS appearance via kitty)
+local follow_background
+
+-- tabufline toggle button: switch without saving to chadrc.lua (read-only in the Nix store).
+-- load_all_highlights reloads the base46 module, so this is reapplied after every load.
+local function override_toggle()
+  require("base46").toggle_theme = function()
+    follow_background(vim.o.background == "light" and "dark" or "light")
+  end
+end
+
 -- 'background' tracks the loaded theme: the cache sets it, and so does this function
-local function follow_background(bg)
+follow_background = function(bg)
   if vim.o.background == bg then return end
   local opts = require("nvconfig").base46
   opts.theme = bg == "light" and opts.theme_toggle[1] or opts.theme_toggle[2]
   require("base46").load_all_highlights()
   vim.o.background = bg
+  override_toggle()
 end
 -- nvim's own 'background' tracking turns off because the theme cache sets it from init.lua,
 -- so read the terminal's color reports (sent on theme change via DEC mode 2031) directly
@@ -67,7 +78,4 @@ vim.api.nvim_create_autocmd("TermResponse", {
   end,
 })
 follow_background(term_bg)
--- tabufline toggle button: switch without saving to chadrc.lua (read-only in the Nix store)
-require("base46").toggle_theme = function()
-  follow_background(vim.o.background == "light" and "dark" or "light")
-end
+override_toggle()
