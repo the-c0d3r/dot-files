@@ -14,7 +14,6 @@ let
       fg = "#5C6A72";
       base = "#F3EAD3";
       dim = "#E5DFC5";
-      sel = "#E1E4BD";
       border = "#D3C6AA";
       green = "#8DA101";
       purple = "#DF69BA";
@@ -26,7 +25,6 @@ let
       fg = "#D3C6AA";
       base = "#2D353B";
       dim = "#3D484D";
-      sel = "#475258";
       border = "#475258";
       green = "#A7C080";
       purple = "#D699B6";
@@ -51,8 +49,8 @@ let
       set -g @nova-message-style-fg "${p.fg}"
       set -g @nova-message-command-style-bg "${p.dim}"
       set -g @nova-message-command-style-fg "${p.fg}"
-      set -g @nova-mode-style-bg "${p.sel}"
-      set -g @nova-mode-style-fg "${p.fg}"
+      set -g @nova-mode-style-bg "${p.blue}"
+      set -g @nova-mode-style-fg "${p.base}"
     '';
 in
 {
@@ -118,6 +116,9 @@ in
 
       # Copy to OS clipboard
       set -g set-clipboard on
+
+      # Refresh kitty's path on attach; the tmux server outlives kitty updates (new store path)
+      set -ga update-environment "KITTY_INSTALLATION_DIR"
 
       # Pane navigation (unbind first to remove -r flag from defaults)
       unbind h
