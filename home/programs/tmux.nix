@@ -52,6 +52,8 @@ let
       set -g @nova-mode-style-bg "${p.blue}"
       set -g @nova-mode-style-fg "${p.base}"
     '';
+  # palette for the current client's theme (no client yet at server start: light)
+  pickNova = ''if -F "#{==:#{client_theme},dark}" "source-file ${novaTheme "dark"}" "source-file ${novaTheme "light"}"'';
 in
 {
   programs.tmux = {
@@ -101,8 +103,8 @@ in
           # Everforest colors following the terminal's light/dark report; nova only reads them when it runs
           set-hook -g client-light-theme 'source-file ${novaTheme "light"} ; run-shell ${nova}'
           set-hook -g client-dark-theme 'source-file ${novaTheme "dark"} ; run-shell ${nova}'
-          set-hook -g client-attached 'if -F "#{==:#{client_theme},dark}" "source-file ${novaTheme "dark"}" "source-file ${novaTheme "light"}" ; run-shell ${nova}'
-          source-file ${novaTheme "light"}
+          set-hook -g client-attached '${pickNova} ; run-shell ${nova}'
+          ${pickNova}
         '';
       }
     ];
