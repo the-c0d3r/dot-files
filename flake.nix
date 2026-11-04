@@ -119,6 +119,5 @@
 
       # macOS system configs
       darwinConfigurations."mac-arm"   = mkDarwin "aarch64-darwin";
-      darwinConfigurations."mac-intel" = mkDarwin "x86_64-darwin";
     };
 }

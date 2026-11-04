@@ -71,7 +71,8 @@ if [ "$SERVER_MODE" = "true" ]; then
         FLAKE_ATTR="server"
     fi
 elif [ "$OS" = "Darwin" ]; then
-    [ "$ARCH" = "arm64" ] && FLAKE_ATTR="mac-arm" || FLAKE_ATTR="mac-intel"
+    [ "$ARCH" = "arm64" ] || die "Intel macOS is not supported (nixpkgs dropped x86_64-darwin)"
+    FLAKE_ATTR="mac-arm"
 elif [ "$OS" = "Linux" ]; then
     if   grep -q "ID=nixos" /etc/os-release 2>/dev/null; then NIXOS=true; FLAKE_ATTR="$(hostname)"
     elif grep -q "Kali"     /etc/os-release 2>/dev/null; then FLAKE_ATTR="kali"

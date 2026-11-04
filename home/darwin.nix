@@ -3,7 +3,7 @@
 # Imports home/default.nix for the shared base, then adds macOS-specific
 # packages, dotfiles, and shell config.
 #
-# Applied via: darwinConfigurations."mac-arm" / "mac-intel" in flake.nix
+# Applied via: darwinConfigurations."mac-arm" in flake.nix
 
 { config, pkgs, username, system, ... }:
 

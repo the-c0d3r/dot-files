@@ -67,7 +67,7 @@ Alternatively, if you've already cloned the repo:
 > The script automatically generates `vars.nix` with your username before running with sudo. This file is gitignored but must be present for the configuration to build.
 
 > [!NOTE]
-> Supported platforms: x86_64 Linux, x86_64 macOS, Apple Silicon macOS. aarch64 Linux is not supported.
+> Supported platforms: x86_64 Linux, Apple Silicon macOS. aarch64 Linux and Intel macOS are not supported.
 
 ## Uninstallation
 
@@ -144,7 +144,7 @@ sudo darwin-rebuild switch --flake .#mac-arm
 - System-level services and settings
 - Home-manager integrated
 
-## `mac-arm` / `mac-intel` - macOS
+## `mac-arm` - macOS (Apple Silicon)
 - System settings (Dock, Finder, keyboard, trackpad)
 - Yabai + skhd for tiling window management
 - Homebrew integration: self-updating macOS-only apps are declared as casks in `homebrew.casks`; other Homebrew installs are left alone
