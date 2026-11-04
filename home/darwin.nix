@@ -5,7 +5,13 @@
 #
 # Applied via: darwinConfigurations."mac-arm" in flake.nix
 
-{ config, pkgs, username, system, ... }:
+{
+  config,
+  pkgs,
+  username,
+  system,
+  ...
+}:
 
 let
   cycleLayouts = pkgs.writeShellScript "cycle_layouts" ''
@@ -22,10 +28,13 @@ let
 
 in
 {
-  imports = [ ./default.nix ./programs/desktop.nix ];
+  imports = [
+    ./default.nix
+    ./programs/desktop.nix
+  ];
 
   home.file = {
-    ".config/karabiner/karabiner.json".source        = ../files/karabiner/karabiner.json;
+    ".config/karabiner/karabiner.json".source = ../files/karabiner/karabiner.json;
     ".config/yabai/scripts/cycle_layouts.sh".source = cycleLayouts;
   };
 
@@ -37,11 +46,11 @@ in
 
   home.packages = with pkgs; [
     # GNU utils (macOS ships BSD variants)
-    coreutils          # gnu coreutils
-    gnused             # gnu sed
-    gnutar             # gnu tar
-    gnugrep            # gnu grep
-    iproute2mac        # ip command shim
+    coreutils # gnu coreutils
+    gnused # gnu sed
+    gnutar # gnu tar
+    gnugrep # gnu grep
+    iproute2mac # ip command shim
 
     # GUI apps (self-updating ones are Homebrew casks, see hosts/darwin/configuration.nix)
     karabiner-elements # keyboard shortcut editor

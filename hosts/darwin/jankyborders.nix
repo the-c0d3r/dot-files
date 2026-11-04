@@ -1,6 +1,11 @@
 # hosts/darwin/jankyborders.nix — Window border highlights (macOS only)
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   services.jankyborders = {

@@ -2,13 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
   imports = [ ./hardware-configuration.nix ];
 
   nix = {
-    settings.experimental-features = ["nix-command" "flakes"];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     gc = {
       automatic = true;
       dates = "weekly";
@@ -44,7 +52,10 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [ 22000 ];
-      allowedUDPPorts = [ 22000 21027 ];
+      allowedUDPPorts = [
+        22000
+        21027
+      ];
       # 22000/tcp/udp = syncthing port
       # 21027/udp = syncthing port
     };
@@ -72,7 +83,7 @@
 
   hardware = {
     graphics.enable = true;
-    nvidia.open = false;  # allow nonfree nvidia driver
+    nvidia.open = false; # allow nonfree nvidia driver
   };
 
   services = {
@@ -112,7 +123,11 @@
   users.users.${username} = {
     isNormalUser = true;
     description = username;
-    extraGroups = [ "networkmanager" "wheel" "dialout" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "dialout"
+    ];
     # dialout for interacting with the usb /dev/ttyACM* files
     shell = pkgs.zsh;
   };
@@ -136,5 +151,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; 
+  system.stateVersion = "25.11";
 }

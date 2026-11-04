@@ -11,15 +11,15 @@
 
   home.packages = with pkgs; [
     # CLI tools
-    nmap              # network scanner
-    netcat            # raw network utility
-    fswatch           # file change watcher
-    gdb               # debugger
+    nmap # network scanner
+    netcat # raw network utility
+    fswatch # file change watcher
+    gdb # debugger
     python3
 
     # Desktop apps
-    keepassxc         # password manager
-    google-chrome     # browser
+    keepassxc # password manager
+    google-chrome # browser
 
     # communication tools
     discord
@@ -28,6 +28,6 @@
 
     # AI coding
     claude-code
-    docker-sbx        # sandboxed agents
+    docker-sbx # sandboxed agents
   ];
 }

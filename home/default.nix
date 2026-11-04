@@ -4,11 +4,24 @@
 # Imported by every platform entry point (linux.nix, darwin.nix, server.nix, kali/default.nix).
 # Does not include packages or program configs — those live in home/programs/.
 
-{ config, pkgs, lib, username, isNixOS ? false, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  isNixOS ? false,
+  ...
+}:
 
 {
   home.username = username;
-  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else if username == "root" then "/root" else "/home/${username}";
+  home.homeDirectory =
+    if pkgs.stdenv.hostPlatform.isDarwin then
+      "/Users/${username}"
+    else if username == "root" then
+      "/root"
+    else
+      "/home/${username}";
 
   # Do not change this value — it pins home-manager behaviour, not the NixOS version.
   home.stateVersion = "23.11";

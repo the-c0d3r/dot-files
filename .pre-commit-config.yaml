@@ -14,3 +14,18 @@ repos:
       - id: check-yaml
       - id: pretty-format-json
         args: [--indent=4, --no-sort-keys, --autofix]
+
+  # nix hooks (nixfmt comes from home/programs/cli.nix)
+  - repo: local
+    hooks:
+      - id: nixfmt
+        name: nixfmt
+        entry: nixfmt
+        language: system
+        files: \.nix$
+      - id: nix-eval
+        name: nix eval all configurations
+        entry: scripts/check-eval.sh
+        language: system
+        files: (\.nix|flake\.lock)$
+        pass_filenames: false

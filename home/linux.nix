@@ -2,7 +2,15 @@
 #
 # Used by: homeConfigurations."linux", nixosConfigurations.*
 
-{ config, pkgs, lib, inputs, system, isNixOS ? false, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  system,
+  isNixOS ? false,
+  ...
+}:
 
 {
   imports = [
@@ -13,24 +21,27 @@
     ./programs/vicinae.nix
   ];
 
-  home.packages = with pkgs; [
-    # Linux utilities
-    xclip     # clipboard tool
+  home.packages =
+    with pkgs;
+    [
+      # Linux utilities
+      xclip # clipboard tool
 
-    # Browser
-    inputs.zen-browser.packages.${system}.default
+      # Browser
+      inputs.zen-browser.packages.${system}.default
 
-    # virtualisation
-    vagrant
+      # virtualisation
+      vagrant
 
-    # development
-    nodejs_24
+      # development
+      nodejs_24
 
-    libreoffice  # office
-    vlc          # media player
-    ticktick     # task manager
-  ] ++ lib.optionals (!isNixOS) [
-    # on NixOS, VirtualBox is provided by virtualisation.virtualbox.host in configuration.nix
-    virtualbox
-  ];
+      libreoffice # office
+      vlc # media player
+      ticktick # task manager
+    ]
+    ++ lib.optionals (!isNixOS) [
+      # on NixOS, VirtualBox is provided by virtualisation.virtualbox.host in configuration.nix
+      virtualbox
+    ];
 }

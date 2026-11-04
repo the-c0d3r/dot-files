@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   programs.zsh = {
@@ -47,13 +52,14 @@
       # git aliases
       gs = "git status";
       ga = "git add";
-      gdh = "git diff HEAD";     # see what's the uncommited changes
-      gdhp = "git diff HEAD^";   # see what's the previous commit changes
+      gdh = "git diff HEAD"; # see what's the uncommited changes
+      gdhp = "git diff HEAD^"; # see what's the previous commit changes
       gdm = "git diff master";
       gp = "git push";
       gcan = "git commit --amend --no-edit";
       gamd = "git commit --amend";
-    } // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+    }
+    // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
       # macOS-specific aliases
       hidedesktop = "defaults write com.apple.finder CreateDesktop false && killall Finder";
       unhidedesktop = "defaults write com.apple.finder CreateDesktop true && killall Finder";
@@ -62,7 +68,12 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "git" "sudo" "docker" "python" "vi-mode" "autojump"
+        "git"
+        "sudo"
+        "docker"
+        "python"
+        "vi-mode"
+        "autojump"
         "colored-man-pages"
       ];
     };

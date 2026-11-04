@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   nova = "${pkgs.tmuxPlugins.tmux-nova}/share/tmux-plugins/tmux-nova/nova.tmux";
@@ -28,8 +33,11 @@ let
       blue = "#7FBBB3";
     };
   };
-  novaTheme = name:
-    let p = palettes.${name}; in
+  novaTheme =
+    name:
+    let
+      p = palettes.${name};
+    in
     pkgs.writeText "nova-${name}.conf" ''
       set -g @nova-status-style-bg "${p.bg}"
       set -g @nova-status-style-fg "${p.fg}"
@@ -55,7 +63,7 @@ in
     keyMode = "vi";
     mouse = true;
     prefix = "C-a";
-    baseIndex = 1;  # start windows numbering at 1
+    baseIndex = 1; # start windows numbering at 1
     plugins = [
       {
         plugin = pkgs.tmuxPlugins.yank;

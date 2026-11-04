@@ -1,6 +1,11 @@
 # hosts/darwin/skhd.nix — Simple hotkey daemon (macOS only)
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   services.skhd = {

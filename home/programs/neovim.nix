@@ -1,6 +1,11 @@
 # programs/neovim.nix — Neovim text editor
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   home.packages = [

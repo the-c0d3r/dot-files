@@ -19,7 +19,7 @@ in
     nbtscan
     onesixtyone
     smbmap
-    net-snmp        # provides snmpwalk, snmpget, etc.
+    net-snmp # provides snmpwalk, snmpget, etc.
 
     # Web
     feroxbuster
@@ -31,6 +31,6 @@ in
     smtp-user-enum
     sslscan
     sipvicious
-    samba           # provides smbclient
+    samba # provides smbclient
   ];
 }

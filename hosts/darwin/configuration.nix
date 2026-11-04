@@ -1,4 +1,9 @@
-{ pkgs, lib, username, ... }:
+{
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 
 {
   imports = [
@@ -14,9 +19,16 @@
     serviceConfig = {
       ProgramArguments = [
         "/nix/var/nix/profiles/default/bin/nix-collect-garbage"
-        "--delete-older-than" "30d"
+        "--delete-older-than"
+        "30d"
       ];
-      StartCalendarInterval = [{ Weekday = 0; Hour = 3; Minute = 0; }];
+      StartCalendarInterval = [
+        {
+          Weekday = 0;
+          Hour = 3;
+          Minute = 0;
+        }
+      ];
       StandardOutPath = "/var/log/nix-gc.log";
       StandardErrorPath = "/var/log/nix-gc.err";
     };
@@ -26,7 +38,10 @@
   programs.zsh.enable = true;
 
   # Homebrew on PATH after the Nix profiles so Nix copies win; static, no `brew shellenv` eval
-  environment.systemPath = lib.mkOrder 1100 [ "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
+  environment.systemPath = lib.mkOrder 1100 [
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+  ];
 
   # Tailscale daemon (open-source tailscaled) as a launchd service
   services.tailscale.enable = true;
@@ -37,10 +52,10 @@
     enable = true;
     casks = [
       "obsidian" # notes
-      "raycast"  # spotlight replacement
-      "itsycal"  # menubar calendar
-      "slack"    # chat
-      "mos"      # smooth scroll + reverse direction
+      "raycast" # spotlight replacement
+      "itsycal" # menubar calendar
+      "slack" # chat
+      "mos" # smooth scroll + reverse direction
       "shortcat" # shortcut everything
     ];
   };
@@ -79,12 +94,12 @@
       };
 
       finder = {
-        AppleShowAllExtensions = true;  # Shows file extensions
-        AppleShowAllFiles = true;       # Show hidden files
-        FXPreferredViewStyle = "Nlsv";  # List View default
-        ShowStatusBar = true;           # Show status bar
+        AppleShowAllExtensions = true; # Shows file extensions
+        AppleShowAllFiles = true; # Show hidden files
+        FXPreferredViewStyle = "Nlsv"; # List View default
+        ShowStatusBar = true; # Show status bar
         _FXShowPosixPathInTitle = true; # Shows path in title
-        _FXSortFoldersFirst = true;     # Sort folders first
+        _FXSortFoldersFirst = true; # Sort folders first
       };
 
       menuExtraClock = {
@@ -94,17 +109,17 @@
       };
 
       NSGlobalDomain = {
-        ApplePressAndHoldEnabled = false;             # Disable press-and-hold for accents (better for vim)
-        AppleShowAllExtensions = true;                # Show file extensions globally
-        InitialKeyRepeat = 25;                        # Initial key repeat delay
-        KeyRepeat = 2;                                # Key repeat rate
-        AppleMeasurementUnits = "Centimeters";        # Metric units
+        ApplePressAndHoldEnabled = false; # Disable press-and-hold for accents (better for vim)
+        AppleShowAllExtensions = true; # Show file extensions globally
+        InitialKeyRepeat = 25; # Initial key repeat delay
+        KeyRepeat = 2; # Key repeat rate
+        AppleMeasurementUnits = "Centimeters"; # Metric units
         AppleMetricUnits = 1;
-        AppleTemperatureUnit = "Celsius";             # Metric temperature
-        NSAutomaticCapitalizationEnabled = false;     # Disable autocapitalization
-        NSAutomaticDashSubstitutionEnabled = false;   # Disable autodashes
+        AppleTemperatureUnit = "Celsius"; # Metric temperature
+        NSAutomaticCapitalizationEnabled = false; # Disable autocapitalization
+        NSAutomaticDashSubstitutionEnabled = false; # Disable autodashes
         NSAutomaticPeriodSubstitutionEnabled = false; # Disable autoperiods
-        NSAutomaticQuoteSubstitutionEnabled = false;  # Disable autoquotes
+        NSAutomaticQuoteSubstitutionEnabled = false; # Disable autoquotes
         NSAutomaticSpellingCorrectionEnabled = false; # Disable spellchecking
       };
 
@@ -117,14 +132,14 @@
       };
 
       trackpad = {
-        Clicking = true;                   # Clicking enabled
-        TrackpadThreeFingerDrag = true;    # Three-finger drag enabled
-        TrackpadRightClick = true;         # enable two finger right click
+        Clicking = true; # Clicking enabled
+        TrackpadThreeFingerDrag = true; # Three-finger drag enabled
+        TrackpadRightClick = true; # enable two finger right click
       };
     };
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToEscape = true;       # Remap Caps Lock to Escape
+      remapCapsLockToEscape = true; # Remap Caps Lock to Escape
     };
   };
 

@@ -38,6 +38,8 @@ dot-files/
 │   │   ├── skhd.nix       # Hotkey daemon (system service)
 │   │   └── jankyborders.nix # Window border highlights (system service)
 │   └── nixos/             # NixOS system configuration
+├── scripts/
+│   └── check-eval.sh      # Evaluates every configuration (pre-commit hook, with nixfmt)
 ├── wallpaper/             # Wallpaper images
 └── files/                 # Dotfiles managed via home.file
     ├── karabiner/         # Karabiner-Elements keyboard config

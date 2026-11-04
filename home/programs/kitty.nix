@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # kitty loads these by macOS / desktop appearance and switches live (kitty >= 0.38)
@@ -110,21 +115,23 @@
       macos_option_as_alt = "no";
       linux_display_server = "auto";
 
-      symbol_map = let
-        mappings = [
-          "U+E5FA-U+E62B" # Seti-UI + Custom
-          "U+E700-U+E7C5" # Devicons
-          "U+F000-U+F2E0" # Font Awesome
-          "U+E200-U+E2A9" # Font Awesome Extension
-          "U+F500-U+FD46" # Material Design Icons
-          "U+E300-U+E3EB" # Weather
-          "U+F400-U+F4A8,U+2665,U+26A1,U+F27C" # Octicons
-          "U+E0A3,U+E0B4-U+E0C8,U+E0CC-U+E0D2,U+E0D4" # Powerline Extra Symbols
-          "U+23FB-U+23FE,U+2b58" # IEC Power Symbols
-          "U+F300-U+F313" # Font Logos
-          "U+E000-U+E00D" # Pomicons
-        ];
-      in (builtins.concatStringsSep "," mappings) + " Symbols Nerd Font";
+      symbol_map =
+        let
+          mappings = [
+            "U+E5FA-U+E62B" # Seti-UI + Custom
+            "U+E700-U+E7C5" # Devicons
+            "U+F000-U+F2E0" # Font Awesome
+            "U+E200-U+E2A9" # Font Awesome Extension
+            "U+F500-U+FD46" # Material Design Icons
+            "U+E300-U+E3EB" # Weather
+            "U+F400-U+F4A8,U+2665,U+26A1,U+F27C" # Octicons
+            "U+E0A3,U+E0B4-U+E0C8,U+E0CC-U+E0D2,U+E0D4" # Powerline Extra Symbols
+            "U+23FB-U+23FE,U+2b58" # IEC Power Symbols
+            "U+F300-U+F313" # Font Logos
+            "U+E000-U+E00D" # Pomicons
+          ];
+        in
+        (builtins.concatStringsSep "," mappings) + " Symbols Nerd Font";
     };
   };
 }
