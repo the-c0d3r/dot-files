@@ -192,15 +192,24 @@ flowchart TD
 - Casks self-update and handle drivers, installers and macOS permissions.
 - Casks are declared in `homebrew.casks` ([hosts/darwin/configuration.nix](hosts/darwin/configuration.nix)), so `./apply.sh` installs them. Homebrew installs not listed there are left alone.
 
+## Light/dark theme
+
+The system appearance (macOS, or the Linux desktop's dark style) is the single switch. Everything below follows it live, in Everforest light/dark:
+
+- **Kitty**: `light-theme.auto.conf` / `dark-theme.auto.conf` (`kitty.nix`)
+- **Tmux**: the nova bar's palette is picked by tmux's theme hooks (`tmux.nix`)
+- **Neovim**: switches when kitty reports its new background (`files/nvim/init.lua`); the NvChad toggle button overrides it until the next switch
+- **VSCodium**, **Obsidian**: built-in
+
 ## Shared (All Platforms)
-- **Neovim**: Customized vim configuration (NvChad, Everforest light/dark following the system appearance)
-- **Tmux**: Terminal multiplexer with custom keybindings; nova status bar in Everforest light/dark following the terminal
+- **Neovim**: Customized vim configuration (NvChad, Everforest light/dark, see [Light/dark theme](#lightdark-theme))
+- **Tmux**: Terminal multiplexer with custom keybindings
 - **Zsh**: Shell with oh-my-zsh integration
-- **Kitty**: GPU-accelerated terminal (JetBrainsMono Nerd Font, Everforest light/dark auto themes following the system appearance)
+- **Kitty**: GPU-accelerated terminal (JetBrainsMono Nerd Font, Everforest light/dark)
 - **Starship**: Cross-shell prompt
 - **Atuin**: Shell history sync and search
 - **Git**: Version control with custom config
-- **VSCodium**: VS Code with everyday extensions in Nix (vim, typst, nix, python, yaml, toml, rpm spec), Everforest theme following macOS light/dark; others (e.g. Claude Code) are installed manually. Quit VSCodium before rebuilding when the extension list changes.
+- **VSCodium**: VS Code with everyday extensions in Nix (vim, typst, nix, python, yaml, toml, rpm spec), Everforest light/dark; others (e.g. Claude Code) are installed manually. Quit VSCodium before rebuilding when the extension list changes.
 - **Obsidian**: Note-taking app (Nix on Linux, Homebrew cask on macOS; installer updates: `brew upgrade --cask --greedy obsidian`)
 - **Ripgrep**, **FD**: Modern search tools
 - **Htop**, **Ncdu**, **Jq**: System utilities
@@ -231,7 +240,7 @@ flowchart TD
 The following macOS defaults are declaratively managed via [hosts/darwin/configuration.nix](hosts/darwin/configuration.nix):
 
 - **General**:
-    - Appearance unmanaged (toggled manually; kitty, tmux and nvim follow it)
+    - Appearance unmanaged (toggled manually, see [Light/dark theme](#lightdark-theme))
     - Metric units (Celsius, cm)
     - Fast key repeat rate (Initial: 25, Repeat: 2)
     - Auto-capitalization/correction/dashes/periods/quotes **DISABLED**
